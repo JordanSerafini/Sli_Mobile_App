@@ -5,7 +5,7 @@ import tw from 'twrnc';
 
 export default function App() {
   return (
-    <View style={tw`flex-1 items-center justify-center bg-blue-500`}>
+    <View style={tw`flex-1 items-center justify-center bg-red-500`}>
       <Text style={tw`text-white text-lg`}>Hello, Tailwind CSS with Expo!</Text>
     </View>
   );
