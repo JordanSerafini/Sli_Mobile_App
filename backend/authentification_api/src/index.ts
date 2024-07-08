@@ -3,14 +3,18 @@ import router from "./routes/router";
 import dotenv from "dotenv";
 import cors from 'cors';
 
-
 //config
 dotenv.config();
 
 const app = express();
 const PORT = parseInt(process.env.PORT || '5002', 10); 
 
-app.use(cors());
+const corsOptions = {
+  origin: "*",  
+  optionsSuccessStatus: 200,
+};
+
+app.use(cors(corsOptions));
 
 app.use(express.static("public"));
 app.use(express.static("node_modules"));
