@@ -8,7 +8,6 @@ export default function App() {
   return (
     <View >
       <NavigationContainer />
-      <StatusBar style="auto" />
     </View>
   );
 }

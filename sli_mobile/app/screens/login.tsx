@@ -22,8 +22,7 @@ const LoginScreen: React.FC<LoginProps> = ({ navigation }) => {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    backgroundColor: '#FF6347', // Example background color
+    backgroundColor: '#FF6347',
     justifyContent: 'center',
     alignItems: 'center',
   },
