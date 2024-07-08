@@ -1,12 +1,16 @@
+// App.tsx
+import React from 'react';
 import { StatusBar } from 'expo-status-bar';
-import {  Text, View } from 'react-native';
+import {  View } from 'react-native';
+import NavigationContainer from './NavigationContainer';
 
 export default function App() {
   return (
-    <View className=''>
-      <Text>Open up App.tsx to start working on your app!</Text>
+    <View >
+      <NavigationContainer />
       <StatusBar style="auto" />
     </View>
   );
 }
+
 

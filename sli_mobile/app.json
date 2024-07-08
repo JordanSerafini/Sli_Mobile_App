@@ -4,7 +4,7 @@
     "slug": "sli_mobile",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./app/assets/sli.png",
+    "icon": "./app/assets/sli.jpg",
     "userInterfaceStyle": "light",
     
     "ios": {
@@ -12,12 +12,12 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./app/assets/sli.png",
+        "foregroundImage": "./app/assets/sli.jpg",
         "backgroundColor": "#ffffff"
       }
     },
     "web": {
-      "favicon": "./assets/sli.png",
+      "favicon": "./assets/sli.jpg",
       "bundler": "metro"
     }
   }
