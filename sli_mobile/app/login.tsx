@@ -43,7 +43,7 @@ const LoginScreen: React.FC = () => {
 
       await AsyncStorage.setItem('userToken', token);
       //console.log("Logged in successfully! Token set in AsyncStorage.");
-      router.push("/(tabs)");
+      router.push("/home");
 
     } catch (error) {
       console.error("Login failed:", error);

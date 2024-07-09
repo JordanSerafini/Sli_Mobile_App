@@ -14,18 +14,24 @@ export default function TabLayout() {
       <Tabs.Screen
         name="client_item"
         options={{
-          title: 'client/article',
+          title: 'Client/Article',
           tabBarIcon: ({ color }) => <FontAwesome size={28} name="user" color={color} />,
         }}
       />
       <Tabs.Screen
         name="planning"
         options={{
-          title: 'planning',
+          title: 'Planning',
           tabBarIcon: ({ color }) => <FontAwesome size={28} name="calendar" color={color} />,
         }}
       />
-      
+      <Tabs.Screen
+        name="chantier"
+        options={{
+          title: 'Chantier',
+          tabBarIcon: ({ color }) => <FontAwesome size={28} name="building" color={color} />,
+        }}
+      />
     </Tabs>
   );
 }

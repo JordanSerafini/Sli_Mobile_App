@@ -2,7 +2,6 @@
   "expo": {
     "name": "sli_mobile",
     "slug": "sli_mobile",
-    "entryPoint": "./node_modules/expo/AppEntry.js",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./app/assets/sli.jpg",
@@ -23,6 +22,6 @@
     "plugins": [
       "expo-router"
     ],
-    "scheme": "sli_mobile_scheme"
+    "scheme": "sli-mobile-scheme"
   }
 }

@@ -1,13 +1,10 @@
 import React from 'react';
-import { View, Text, Button, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet } from 'react-native';
 
-const ClientScreen: React.FC = () => {
-
-
+const CreerChantier: React.FC = () => {
   return (
     <View style={styles.container}>
-      <Text>client Screen</Text>
-      
+      <Text>Créer Chantier</Text>
     </View>
   );
 };
@@ -20,4 +17,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default ClientScreen;
+export default CreerChantier;
