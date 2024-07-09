@@ -17,9 +17,9 @@ export const getCustomersPaginated = async (searchQuery = '', limit = 25, offset
     }
   };
 
-  export const getCustomerById = async (id: string): Promise<Customer> => {
+  export const getCustomerById = async (id: number | string): Promise<Customer> => {
     try {
-      const response = await fetch(`${url.client}/customers/${id}`);
+      const response = await fetch(`${url.client}/customer/${id}`);
       if (!response.ok) {
         throw new Error('Network response was not ok');
       }
@@ -30,4 +30,18 @@ export const getCustomersPaginated = async (searchQuery = '', limit = 25, offset
       throw error;
     }
   };
+
+  export const getCustomerByName = async (name: string): Promise<Customer> => {
+    try {
+      const response = await fetch(`${url.client}/customer/${name}`);
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      const data = await response.json();
+      return data;
+    } catch (error) {
+      console.error('Error fetching customer:', error);
+      throw error;
+    }
+  }
   

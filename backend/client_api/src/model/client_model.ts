@@ -31,6 +31,21 @@ const client_model = {
     }
   },
 
+  async getCustomerByName(req: Request, res: Response) {
+    const name = req.params.name;
+    const query = `SELECT * FROM "Customer" WHERE "Name" = $1;`;
+    try {
+      const result = await pgClient.query(query, [name]);
+      if (result.rows.length === 0) {
+        return res.status(404).json({ message: "Customer not found" });
+      }
+      res.json(result.rows[0]);
+    } catch (err) {
+      console.error('Error fetching customer by name:', err);
+      res.status(500).json({ message: "Internal server error" });
+    }
+  },
+
   async getCustomersPaginated(req: Request, res: Response) {
     try {
       const limit = parseInt(req.query.limit as string, 10) || 25;

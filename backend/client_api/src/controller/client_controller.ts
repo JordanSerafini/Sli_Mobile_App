@@ -21,6 +21,15 @@ const customer_controller = {
     }
   },
 
+  async getCustomerByName(req: Request, res: Response) {
+    try {
+      await client_model.getCustomerByName(req, res);
+    } catch (err) {
+      console.error('Error in getCustomerByName:', err);
+      res.status(500).json({ message: 'Internal server error' });
+    }
+  },
+
   async getCustomersPaginated(req: Request, res: Response) {
     try {
       await client_model.getCustomersPaginated(req, res);

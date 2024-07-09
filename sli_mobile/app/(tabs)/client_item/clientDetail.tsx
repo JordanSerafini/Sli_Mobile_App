@@ -9,6 +9,9 @@ const CustomerDetailScreen: React.FC = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<any>(null);
   const { id } = useLocalSearchParams();
+  console.log('id:', typeof id);
+
+  
 
   useEffect(() => {
     const fetchCustomer = async () => {
@@ -16,8 +19,10 @@ const CustomerDetailScreen: React.FC = () => {
       try {
         const data = await getCustomerById(id as string);
         setCustomer(data);
+        console.log('Customer data:', data);
         setLoading(false);
       } catch (error) {
+        console.error('Error fetching customer:', error);
         setError(error);
         setLoading(false);
       }

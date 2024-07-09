@@ -10,7 +10,12 @@ dotenv.config();
 const app = express();
 const PORT = parseInt(process.env.PORT || '5003', 10); 
 
-app.use(cors());
+const corsOptions = {
+  origin: "*",  
+  optionsSuccessStatus: 200,
+};
+
+app.use(cors(corsOptions));
 
 app.use(express.static("public"));
 app.use(express.static("node_modules"));

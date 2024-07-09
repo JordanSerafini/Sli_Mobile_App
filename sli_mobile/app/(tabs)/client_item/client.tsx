@@ -16,6 +16,7 @@ const ClientScreen: React.FC = () => {
 
   const router = useRouter();
 
+
   useEffect(() => {
     const fetchCustomers = async () => {
       setLoading(true);
@@ -46,8 +47,10 @@ const ClientScreen: React.FC = () => {
     setOffset((prevOffset) => Math.max(prevOffset - limit, 0));
   };
 
-  const handleCustomerPress = (id: string) => {
-    router.push(`/clientDetail?id=${id}`);
+  const handleCustomerPress = (id: string | null) => {
+    if (id) {
+      router.push(`/client_item/clientDetail?id=${id}`);
+    }
   };
 
   return (
@@ -68,7 +71,7 @@ const ClientScreen: React.FC = () => {
           data={customers}
           keyExtractor={(item) => (item.Id ? item.Id.toString() : Math.random().toString())}
           renderItem={({ item }) => (
-            <TouchableOpacity onPress={() => handleCustomerPress(item.Id)}>
+            <TouchableOpacity onPress={() => handleCustomerPress(item.id as string)}>
               <View className="p-4 border-b border-gray-200">
                 <Text>{item.Name ?? 'Unknown'}</Text>
               </View>

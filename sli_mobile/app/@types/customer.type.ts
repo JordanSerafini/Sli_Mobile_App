@@ -170,6 +170,7 @@ export interface Customer {
     MainDeliveryContact_ExternalId_OutlookId: string | null; 
     Lat: string | GLfloat | null;
     Lon: string | GLfloat | null;
+    id: string | number | null;
   }
   
 
