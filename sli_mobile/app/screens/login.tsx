@@ -1,31 +1,22 @@
 // screens/Login.tsx
-import { NavigationProp } from '@react-navigation/native';
 import React from 'react';
-import { View, Text, Button, StyleSheet } from 'react-native';
+import { View, Text, Button } from 'react-native';
 
-interface LoginProps {
-  navigation: NavigationProp<any>;
-}
 
-const LoginScreen: React.FC<LoginProps> = ({ navigation }) => {
+
+const LoginScreen = () => {
   const handleLogin = () => {
-    navigation.navigate('Home');
+    console.log('Login button pressed');
   };
 
   return (
-    <View style={styles.container}>
+    <View className=''>
       <Text>Login Screen</Text>
       <Button title="Login" onPress={handleLogin} />
     </View>
   );
 };
 
-const styles = StyleSheet.create({
-  container: {
-    backgroundColor: '#FF6347',
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-});
+
 
 export default LoginScreen;
