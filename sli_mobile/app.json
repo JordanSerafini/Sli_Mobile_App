@@ -13,14 +13,24 @@
       "adaptiveIcon": {
         "foregroundImage": "./app/assets/sli.jpg",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "permissions": [
+        "READ_CALENDAR",
+        "WRITE_CALENDAR"
+      ]
     },
     "web": {
       "favicon": "./app/assets/sli.jpg",
       "bundler": "metro"
     },
     "plugins": [
-      "expo-router"
+      "expo-router",
+      [
+        "expo-calendar",
+        {
+          "calendarPermission": "The app needs to access your calendar."
+        }
+      ]
     ],
     "scheme": "sli-mobile-scheme"
   }
