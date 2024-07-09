@@ -1,17 +1,16 @@
 import React, { useEffect, useState } from 'react';
 import { View, Text, ActivityIndicator } from 'react-native';
-import { useLocalSearchParams } from 'expo-router';
+import { useLocalSearchParams, useNavigation } from 'expo-router';
 import { getCustomerById } from '../../utils/functions';
 import { Customer } from '../../@types/customer.type';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 const CustomerDetailScreen: React.FC = () => {
   const [customer, setCustomer] = useState<Customer | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<any>(null);
-  const { id } = useLocalSearchParams();
-  console.log('id:', typeof id);
-
-  
+  const { id, name } = useLocalSearchParams();
+  const navigation = useNavigation();
 
   useEffect(() => {
     const fetchCustomer = async () => {
@@ -31,23 +30,27 @@ const CustomerDetailScreen: React.FC = () => {
     fetchCustomer();
   }, [id]);
 
+  useEffect(() => {
+    if (name) {
+      navigation.setOptions({ title: name as string });
+    }
+  }, [name]);
+
   return (
-    <View className="flex items-center justify-center w-full h-full">
+    <SafeAreaView className="w-full h-full">
       {loading ? (
         <ActivityIndicator size="large" color="#0000ff" />
       ) : error ? (
         <Text className="text-red-500">Error: {error.message}</Text>
       ) : customer ? (
         <View>
-          <Text className="text-lg font-bold mb-2">Customer Details</Text>
           <Text>ID: {customer.Id}</Text>
           <Text>Name: {customer.Name}</Text>
-          {/* Add other customer fields here */}
         </View>
       ) : (
         <Text>No customer found</Text>
       )}
-    </View>
+    </SafeAreaView>
   );
 };
 

@@ -48,9 +48,9 @@ const ClientScreen: React.FC = () => {
     setOffset((prevOffset) => Math.max(prevOffset - limit, 0));
   };
 
-  const handleCustomerPress = (id: string | null) => {
-    if (id) {
-      router.push(`/client_item/clientDetail?id=${id}`);
+  const handleCustomerPress = (customer: Customer) => {
+    if (customer.id) {
+      router.push(`/client_item/clientDetail?id=${customer.id}&name=${customer.Name}`);
     }
   };
 
@@ -71,7 +71,7 @@ const ClientScreen: React.FC = () => {
           data={customers}
           keyExtractor={(item) => (item.Id ? item.Id.toString() : Math.random().toString())}
           renderItem={({ item }) => (
-            <TouchableOpacity onPress={() => handleCustomerPress(item.id as string)}>
+            <TouchableOpacity onPress={() => handleCustomerPress(item)}>
               <View className="p-4 border-b border-gray-200">
                 <Text>{item.Name ?? 'Unknown'}</Text>
               </View>
