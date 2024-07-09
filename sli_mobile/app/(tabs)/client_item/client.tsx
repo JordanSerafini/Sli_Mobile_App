@@ -83,20 +83,9 @@ const ClientScreen: React.FC = () => {
     }
   };
 
-  const getUniquePhones = (customer: Customer): string[] => {
-    const phones = [
-      customer.MainDeliveryContact_Phone,
-      customer.MainInvoicingContact_Phone,
-      customer.MainInvoicingContact_Cellphone,
-      customer.MainDeliveryContact_CellPhone,
-    ].filter(phone => phone !== null) as string[];
-  
-    return Array.from(new Set(phones));
-  };
-
   return (
     <Provider>
-      <SafeAreaView className="flex-1 p-4">
+      <SafeAreaView className="flex-1 p-4 gap-2">
         <TextInput
           className="h-10 border border-gray-300 mb-4 px-2"
           value={searchQuery}
@@ -111,17 +100,28 @@ const ClientScreen: React.FC = () => {
           <FlatList
             data={customers}
             keyExtractor={(item) =>
-              item.id ? item.id.toString() : Math.random().toString()
+              item.Id ? item.Id.toString() : Math.random().toString()
             }
             renderItem={({ item }) => (
               <View className="p-4 border-b border-gray-200 flex flex-row justify-between">
                 <TouchableOpacity onPress={() => handleCustomerPress(item)}>
                   <Text>{item.Name ?? "Unknown"}</Text>
                 </TouchableOpacity>
-                {getUniquePhones(item).length > 0 && (
+                {(item.MainDeliveryContact_Phone ||
+                  item.MainInvoicingContact_Phone ||
+                  item.MainInvoicingContact_Cellphone ||
+                  item.MainDeliveryContact_CellPhone) && (
                   <TouchableOpacity
                     onPress={(event) =>
-                      handlePhonePress(getUniquePhones(item), event)
+                      handlePhonePress(
+                        [
+                          item.MainDeliveryContact_Phone,
+                          item.MainInvoicingContact_Phone,
+                          item.MainInvoicingContact_Cellphone,
+                          item.MainDeliveryContact_CellPhone,
+                        ].filter(Boolean) as string[],
+                        event
+                      )
                     }
                   >
                     <Icon name="phone" size={24} color="blue" />
@@ -131,20 +131,37 @@ const ClientScreen: React.FC = () => {
             )}
           />
         )}
-        <View className="flex-row justify-between items-center mt-4">
-          <Button
-            title="Previous"
+        {/*----------------------------------------------------------------------- NAV ------------------------------------------------------------------*/}
+        <View className="flex-row justify-between items-center border-t-2 border-gray-700 pt-4">
+          <TouchableOpacity
             onPress={handlePreviousPage}
             disabled={offset === 0}
-          />
+            style={{ opacity: offset === 0 ? 0.5 : 1 }}
+          >
+            <View className="bg-blue-700 rounded-full p-">
+              <Icon
+                name="arrow-left"
+                size={30}
+                color={offset === 0 ? "gray" : "white"}
+              />
+            </View>
+          </TouchableOpacity>
           <Text>
-            Page {offset / limit + 1} of {totalPages}
+            Page {offset / limit + 1} / {totalPages}
           </Text>
-          <Button
-            title="Next"
+          <TouchableOpacity
             onPress={handleNextPage}
             disabled={offset + limit >= totalCustomers}
-          />
+            style={{ opacity: offset + limit >= totalCustomers ? 0.5 : 1 }}
+          >
+            <View className="bg-blue-700 rounded-full p-">
+              <Icon
+                name="arrow-right"
+                size={30}
+                color={offset + limit >= totalCustomers ? "gray" : "white"}
+              />
+            </View>
+          </TouchableOpacity>
         </View>
         <Menu
           visible={menuVisible}
