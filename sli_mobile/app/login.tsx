@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
-import { View, Text, Button, StyleSheet } from 'react-native';
+import { View, Text, Button, TextInput, Image, StyleSheet } from 'react-native';
 import { useRouter } from 'expo-router';
+
+const sli = require('./assets/sli.jpg');
 
 const LoginScreen: React.FC = () => {
   const [email, setEmail] = useState('jordan@solution-logique.fr');
@@ -14,7 +16,20 @@ const LoginScreen: React.FC = () => {
 
   return (
     <View >
-      <Text>Login Screen</Text>
+      <Image source={sli} className='' />
+      <TextInput
+        value={email}
+        onChangeText={setEmail}
+        placeholder="Email"
+        keyboardType="email-address"
+        autoCapitalize="none"
+      />
+      <TextInput
+        value={password}
+        onChangeText={setPassword}
+        placeholder="Password"
+        secureTextEntry
+      />
       <Button title="Login" onPress={handleLogin} />
     </View>
   );
