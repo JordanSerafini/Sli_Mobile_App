@@ -1,8 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { View, Text, Button, StyleSheet } from 'react-native';
 import { useRouter } from 'expo-router';
 
 const LoginScreen: React.FC = () => {
+  const [email, setEmail] = useState('jordan@solution-logique.fr');
+  const [password, setPassword] = useState('pass123');
+
   const router = useRouter();
 
   const handleLogin = () => {
@@ -10,19 +13,13 @@ const LoginScreen: React.FC = () => {
   };
 
   return (
-    <View style={styles.container}>
+    <View >
       <Text>Login Screen</Text>
       <Button title="Login" onPress={handleLogin} />
     </View>
   );
 };
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-});
+
 
 export default LoginScreen;
