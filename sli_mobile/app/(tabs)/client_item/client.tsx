@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, ActivityIndicator, Button, FlatList, TextInput } from 'react-native';
-
+import { View, Text, ActivityIndicator, FlatList, TextInput, TouchableOpacity, Button } from 'react-native';
+import { useRouter } from 'expo-router';
 import { getCustomersPaginated } from '../../utils/functions';
 import { Customer } from '../../@types/customer.type';
 
@@ -13,6 +13,8 @@ const ClientScreen: React.FC = () => {
   const [offset, setOffset] = useState(0);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<any>(null);
+
+  const router = useRouter();
 
   useEffect(() => {
     const fetchCustomers = async () => {
@@ -44,6 +46,10 @@ const ClientScreen: React.FC = () => {
     setOffset((prevOffset) => Math.max(prevOffset - limit, 0));
   };
 
+  const handleCustomerPress = (id: string) => {
+    router.push(`/clientDetail?id=${id}`);
+  };
+
   return (
     <View className="flex-1 p-4">
       <Text className="text-lg font-bold mb-4">Client Screen</Text>
@@ -62,9 +68,11 @@ const ClientScreen: React.FC = () => {
           data={customers}
           keyExtractor={(item) => (item.Id ? item.Id.toString() : Math.random().toString())}
           renderItem={({ item }) => (
-            <View className="p-4 border-b border-gray-200">
-              <Text>{item.Name ?? 'Unknown'}</Text>
-            </View>
+            <TouchableOpacity onPress={() => handleCustomerPress(item.Id)}>
+              <View className="p-4 border-b border-gray-200">
+                <Text>{item.Name ?? 'Unknown'}</Text>
+              </View>
+            </TouchableOpacity>
           )}
         />
       )}

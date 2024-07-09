@@ -5,7 +5,7 @@ export default function ChantierLayout() {
     <Stack>
       <Stack.Screen name="index" options={{ headerShown: false, title: 'article / client' }} />
       <Stack.Screen name="client" options={{ headerShown: false }} />
-      
+      <Stack.Screen name="clientDetail" options={{ headerShown: false }} />
     </Stack>
   );
 }
