@@ -3,6 +3,7 @@ import { View, Text, ActivityIndicator, FlatList, TextInput, TouchableOpacity, B
 import { useRouter } from 'expo-router';
 import { getCustomersPaginated } from '../../utils/functions';
 import { Customer } from '../../@types/customer.type';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 const ClientScreen: React.FC = () => {
   const [customers, setCustomers] = useState<Customer[]>([]);
@@ -36,7 +37,7 @@ const ClientScreen: React.FC = () => {
 
   const handleSearch = (text: string) => {
     setSearchQuery(text);
-    setOffset(0); // Reset offset when a new search is performed
+    setOffset(0);
   };
 
   const handleNextPage = () => {
@@ -54,8 +55,7 @@ const ClientScreen: React.FC = () => {
   };
 
   return (
-    <View className="flex-1 p-4">
-      <Text className="text-lg font-bold mb-4">Client Screen</Text>
+    <SafeAreaView className="flex-1 p-4">
       <TextInput
         className="h-10 border border-gray-300 mb-4 px-2"
         value={searchQuery}
@@ -86,7 +86,7 @@ const ClientScreen: React.FC = () => {
         </Text>
         <Button title="Next" onPress={handleNextPage} disabled={offset + limit >= totalCustomers} />
       </View>
-    </View>
+    </SafeAreaView>
   );
 };
 

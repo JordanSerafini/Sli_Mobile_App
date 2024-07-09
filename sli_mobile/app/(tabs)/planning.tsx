@@ -1,23 +1,17 @@
 import React from 'react';
 import { View, Text, Button, StyleSheet } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 const PlanningScreen: React.FC = () => {
 
 
   return (
-    <View style={styles.container}>
+    <SafeAreaView >
       <Text>PlanningScreen </Text>
       
-    </View>
+    </SafeAreaView>
   );
 };
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-});
 
 export default PlanningScreen;

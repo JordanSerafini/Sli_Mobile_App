@@ -1,6 +1,6 @@
 import { router } from 'expo-router';
 import React from 'react';
-import { View, Text, Button, StyleSheet, TouchableOpacity } from 'react-native';
+import { SafeAreaView, Text, TouchableOpacity } from 'react-native';
 
 const IndexScreen: React.FC = () => {
 
@@ -9,11 +9,11 @@ const IndexScreen: React.FC = () => {
   }
 
   return (
-    <View className='flex items-center justify-center w-full h-full'>
+    <SafeAreaView className='flex items-center justify-center w-full h-full'>
       <TouchableOpacity onPress={clientClick}>
         <Text>Client</Text>
       </TouchableOpacity>
-    </View>
+    </SafeAreaView>
   );
 };
 
