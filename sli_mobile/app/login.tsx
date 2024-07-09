@@ -2,14 +2,14 @@ import React, { useState } from "react";
 import {
   View,
   Text,
-  Button,
   TextInput,
   Image,
-  StyleSheet,
   ImageBackground,
   TouchableOpacity,
 } from "react-native";
 import { useRouter } from "expo-router";
+import { url } from "./utils/url";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const sli = require("./assets/sli.jpg");
 const bg = require("./assets/loginBg.png");
@@ -20,7 +20,27 @@ const LoginScreen: React.FC = () => {
 
   const router = useRouter();
 
-  const handleLogin = () => {
+  const handleLogin = async () => {
+
+    try {
+      const response = await fetch(`${url.auth}/login`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email, password }),
+      });
+      if (!response.ok) {
+        throw new Error("Error logging in");
+      }
+
+      const data = await response.json();
+      await AsyncStorage.setItem('userToken', data.accesToken);
+
+    } catch (error) {
+      console.log(error);
+    }
+
     router.push("/home");
   };
 
@@ -31,7 +51,7 @@ const LoginScreen: React.FC = () => {
     >
       <View className="h-5/10 w-full flex items-center justify-center">
         <View className="w-9/10 h-10/10 flex items-center justify-center">
-          <Image source={sli} className=" rounded-full h-5/10 w-9/10" />
+          <Image source={sli} className=" rounded-full h-5/10 w-10/10" />
         </View>
         <View className="h-5/10 w-9.5/10 items-center justify-center flex gap-6">
           <View className="items-center justify-center flex w-full gap-2">
