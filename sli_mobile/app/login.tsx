@@ -11,6 +11,7 @@ import { useRouter } from "expo-router";
 import { url } from "./utils/url";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
+
 const sli = require("./assets/sli.jpg");
 const bg = require("./assets/loginBg.png");
 
@@ -21,7 +22,6 @@ const LoginScreen: React.FC = () => {
   const router = useRouter();
 
   const handleLogin = async () => {
-
     try {
       const response = await fetch(`${url.auth}/login`, {
         method: "POST",
@@ -30,23 +30,30 @@ const LoginScreen: React.FC = () => {
         },
         body: JSON.stringify({ email, password }),
       });
+
       if (!response.ok) {
         throw new Error("Error logging in");
       }
 
       const data = await response.json();
-      await AsyncStorage.setItem('userToken', data.accesToken);
+      const token = data.accessToken;
+      if (!token) {
+        throw new Error("Token not found in response");
+      }
+
+      await AsyncStorage.setItem('userToken', token);
+      console.log("Logged in successfully! Token set in AsyncStorage.");
+      router.push("/(tabs)");
 
     } catch (error) {
-      console.log(error);
+      console.error("Login failed:", error);
     }
-
-    router.push("/home");
   };
 
   return (
     <ImageBackground
       source={bg}
+      className="h-full w-full bg-cover bg-center"
       style={{ flex: 1, justifyContent: "center", alignItems: "center" }}
     >
       <View className="h-5/10 w-full flex items-center justify-center">

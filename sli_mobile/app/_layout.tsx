@@ -2,7 +2,14 @@ import { Stack } from 'expo-router';
 import React from 'react';
 
 const Layout: React.FC = () => {
-  return <Stack screenOptions={{ headerShown: false }} />;
-};
+  return (
+    <Stack>
+      <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+      <Stack.Screen name="login" options={{ headerShown: false }} />
+      <Stack.Screen name="notfound" options={{ headerShown: false }} />
 
-export default Layout;
+    </Stack>
+  );
+};
+  export default Layout;
+

@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, Button, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, Button } from 'react-native';
 import { useRouter } from 'expo-router';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
@@ -14,7 +14,7 @@ const HomeScreen: React.FC = () => {
   return (
     <View style={styles.container}>
       <Text>Home Screen</Text>
-      <Button title="Logout" onPress={handleLogout} />
+      <Button title="LOGOUT" onPress={handleLogout} />
     </View>
   );
 };
