@@ -13,6 +13,10 @@ const CustomerDetailScreen: React.FC = () => {
   const navigation = useNavigation();
 
   useEffect(() => {
+    if (name) {
+      navigation.setOptions({ title: `${name}` });
+    }
+
     const fetchCustomer = async () => {
       setLoading(true);
       try {
@@ -28,13 +32,7 @@ const CustomerDetailScreen: React.FC = () => {
     };
 
     fetchCustomer();
-  }, [id]);
-
-  useEffect(() => {
-    if (name) {
-      navigation.setOptions({ title: name as string });
-    }
-  }, [name]);
+  }, [id, name, navigation]);
 
   return (
     <SafeAreaView className="w-full h-full">
@@ -46,6 +44,7 @@ const CustomerDetailScreen: React.FC = () => {
         <View>
           <Text>ID: {customer.Id}</Text>
           <Text>Name: {customer.Name}</Text>
+          {/* Add other customer fields here */}
         </View>
       ) : (
         <Text>No customer found</Text>
