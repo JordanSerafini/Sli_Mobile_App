@@ -21,6 +21,7 @@ import { getCustomersPaginated } from "../../utils/functions/customer_functions"
 const localisationIcon = require("../../assets/Icons/localisation.png");
 const phoneIcon = require("../../assets/Icons/phone.png");
 const emailIcon = require("../../assets/Icons/mail.png");
+const addIcon = require("../../assets/Icons/add.png");
 
 const CreerChantier: React.FC = () => {
   const [searchQueryCustomers, setSearchQueryCustomers] = useState("");
@@ -166,7 +167,7 @@ const CreerChantier: React.FC = () => {
   };
 
   return (
-    <SafeAreaView className="w-full h-full gap-y-3 items-center flex">
+    <SafeAreaView className="w-full h-full items-center flex justify-between">
       {/*------------------------------------------------------------------- 1st part: customer + chantier nbr ----------------------------------------------------------------------------------------------*/}
       <View className="w-full max-h-2/10 flex-row">
         <TextInput
@@ -276,8 +277,10 @@ const CreerChantier: React.FC = () => {
         </View>
       </View>
 
+      {/*------------------------------------------------------------------- Last part ------------------------------------------------------------------------------------------------*/}
+      <View className="w-9.5/10  h-2/10 items-center flex-row gap-x-2">
       {/*------------------------------------------------------------------- Date ----------------------------------------------------------------------------------------------*/}
-      <View className="w-full p-4">
+      <View className="w-5/10 gap-y-1">
         <TouchableOpacity onPress={() => setShowStartDatePicker(true)}>
           <Text className="p-2 bg-white rounded- w-full shadow-md border border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-500">
             Start Date:{" "}
@@ -307,9 +310,23 @@ const CreerChantier: React.FC = () => {
           />
         )}
       </View>
-      <Button title="Submit" onPress={handleSubmit} />
+      {/*------------------------------------------------------------------- Add fiche ----------------------------------------------------------------------------------------------*/}
+      <View className="w-5/10 gap-y-1 ">
+        <TouchableOpacity className="w-full items-center">
+          <Image source={addIcon} className="w-4/10 h-16" />
+        </TouchableOpacity>
+      </View>
+
+      </View>
+      {/*------------------------------------------------------------------- Submit ----------------------------------------------------------------------------------------------*/}
+      <TouchableOpacity className="w-full">
+        <Text className="w-full px-4 py-2 text-center font-bold text-white  bg-blue-700" style={{ letterSpacing: 8}}
+ >Envoyer</Text>
+      </TouchableOpacity>
     </SafeAreaView>
   );
 };
+
+
 
 export default CreerChantier;
