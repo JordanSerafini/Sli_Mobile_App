@@ -6,5 +6,6 @@ const router = express.Router();
 router.get('/items' , item_controller.getAllItems);
 router.get('/items/:id' , item_controller.getItemById);
 router.get('/item/paginated' , item_controller.getItemsPaginated);
+router.post('/item' , item_controller.createItem);
 
 export default router;

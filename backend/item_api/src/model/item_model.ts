@@ -1,7 +1,12 @@
 import { Request, Response } from 'express';
 import { pgClient } from '../client/client';
 import * as fs from 'fs';
-import path from 'path';
+import path from "path";
+import { fileURLToPath } from 'url';
+
+// Get the directory name
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 const item_model = {
   async getAllItems(req: Request, res: Response) {
@@ -129,7 +134,7 @@ const item_model = {
       const result = await pgClient.query(query, Object.values(data));
 
       // Utiliser le nom de l'item pour générer le nom du fichier CSV
-      const itemName = data.name; // Supposons que le nom de l'item est stocké dans la clé 'name'
+      const itemName = data.Caption; // Supposons que le nom de l'item est stocké dans la clé 'name'
       const cleanedItemName = itemName.replace(/[^a-zA-Z0-9]/g, ''); // Supprimer les caractères spéciaux pour le nom du fichier
       const filePath = path.join(
         __dirname,
