@@ -15,7 +15,6 @@ export default function CalendarPage() {
     })();
   }, []);
 
-  console.log(calendars);
 
   return (
     <View style={styles.container}>
