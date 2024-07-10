@@ -6,7 +6,6 @@ import {
   FlatList,
   TextInput,
   TouchableOpacity,
-  Button,
   Linking,
 } from "react-native";
 import { useRouter } from "expo-router";
@@ -87,20 +86,25 @@ const ClientScreen: React.FC = () => {
     <Provider>
       <SafeAreaView className="flex-1 p-4 gap-2">
         <TextInput
-          className="h-10 border border-gray-300 mb-4 px-2"
+          className="h-0.5/10 border border-gray-300 mb-4 px-2"
           value={searchQuery}
           onChangeText={handleSearch}
           placeholder="Search"
         />
         {loading ? (
+          <View className="h-8/10 flex items-center justify-center w-full gap-2 flex-row">
+            <Text>Loading...</Text>
           <ActivityIndicator size="large" color="#0000ff" />
+          </View>
         ) : error ? (
           <Text className="text-red-500">Error: {error.message}</Text>
         ) : (
           <FlatList
             data={customers}
+            className="h-8/10 min-h-8/10"
             keyExtractor={(item) =>
               item.Id ? item.Id.toString() : Math.random().toString()
+              
             }
             renderItem={({ item }) => (
               <View className="p-4 border-b border-gray-200 flex flex-row justify-between">
@@ -132,7 +136,7 @@ const ClientScreen: React.FC = () => {
           />
         )}
         {/*----------------------------------------------------------------------- NAV ------------------------------------------------------------------*/}
-        <View className="flex-row justify-between items-center border-t-2 border-gray-700 pt-4">
+        <View className="flex-row justify-between items-center border-t border-gray-700 h-1/10">
           <TouchableOpacity
             onPress={handlePreviousPage}
             disabled={offset === 0}
