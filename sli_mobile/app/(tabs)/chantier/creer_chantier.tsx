@@ -7,7 +7,7 @@ import {
   FlatList,
   TouchableOpacity,
   ScrollView,
-  Image
+  Image,
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import DateTimePicker from "@react-native-community/datetimepicker";
@@ -19,6 +19,8 @@ import { getChantiers } from "../../utils/functions/chantier_functions";
 import { getCustomersPaginated } from "../../utils/functions/customer_functions";
 
 const localisationIcon = require("../../assets/Icons/localisation.png");
+const phoneIcon = require("../../assets/Icons/phone.png");
+const emailIcon = require("../../assets/Icons/mail.png");
 
 const CreerChantier: React.FC = () => {
   const [searchQueryCustomers, setSearchQueryCustomers] = useState("");
@@ -61,7 +63,9 @@ const CreerChantier: React.FC = () => {
       const today = new Date();
       const formattedDate = `${today.getDate().toString().padStart(2, "0")}${(
         today.getMonth() + 1
-      ).toString().padStart(2, "0")}${today.getFullYear()}`;
+      )
+        .toString()
+        .padStart(2, "0")}${today.getFullYear()}`;
       const newName = `chantier ${chantierCount}-${formattedDate}`;
       setChantier((prev) => ({ ...prev, name: newName }));
     } catch (error) {
@@ -121,7 +125,8 @@ const CreerChantier: React.FC = () => {
         address: selectedCustomer.MainDeliveryAddress_Address1 ?? "",
         city: selectedCustomer.MainDeliveryAddress_City ?? "",
         postal_code: selectedCustomer.MainDeliveryAddress_Zipcode ?? "",
-        country: selectedCustomer.MainDeliveryAddress_Countryisocode ?? "France",
+        country:
+          selectedCustomer.MainDeliveryAddress_Countryisocode ?? "France",
         phone: selectedCustomer.MainDeliveryContact_CellPhone ?? "",
         email: selectedCustomer.MainDeliveryContact_Email ?? "",
         contact: selectedCustomer.MainDeliveryContact_Name ?? "",
@@ -148,144 +153,160 @@ const CreerChantier: React.FC = () => {
 
   const handleStartDateChange = (event: any, selectedDate?: Date) => {
     if (selectedDate) {
-      handleChange('start_date', selectedDate);
+      handleChange("start_date", selectedDate);
     }
     setShowStartDatePicker(false);
   };
 
   const handleEndDateChange = (event: any, selectedDate?: Date) => {
     if (selectedDate) {
-      handleChange('end_date', selectedDate);
+      handleChange("end_date", selectedDate);
     }
     setShowEndDatePicker(false);
   };
 
   return (
-    <SafeAreaView className="w-full h-full flex justify-center items-center">
+    <SafeAreaView className="w-full h-full gap-y-3 items-center flex">
       {/*------------------------------------------------------------------- 1st part: customer + chantier nbr ----------------------------------------------------------------------------------------------*/}
-        <View className="w-full max-h-2/10 flex-row pb-4 ">
-          <TextInput
-            value={searchQueryCustomers}
-            onChangeText={handleNewSearch}
-            placeholder="Sélectionner un client"
-            className="p-2 bg-white rounded- w-5.5/10 shadow-md border border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-500"
-          />
-           <TextInput
-            value={chantier.name}
-            onChangeText={(text) => handleChange("name", text)}
-            placeholder="Name"
-            className="p-2 bg-white shadow-md border border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-500 w-4.5/10"
-          />
-        </View>
+      <View className="w-full max-h-2/10 flex-row">
+        <TextInput
+          value={searchQueryCustomers}
+          onChangeText={handleNewSearch}
+          placeholder="Sélectionner un client"
+          className="p-2 bg-white rounded- w-5.5/10 shadow-md border border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-500"
+        />
+        <TextInput
+          value={chantier.name}
+          onChangeText={(text) => handleChange("name", text)}
+          placeholder="Name"
+          className="p-2 bg-white shadow-md border border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-500 w-4.5/10"
+        />
+      </View>
       {/*------------------------------------------------------------------- 1st part: List customer ----------------------------------------------------------------------------------------------*/}
-        <View className="max-h-5/10">
-          {customers.length > 0 && !selectedCustomer && (
-            <FlatList
-            className="pl-6 mb-6"
-              nestedScrollEnabled={true}
-              data={customers}
-              keyExtractor={(item) => (item.id ? item.id.toString() : "")}
-              renderItem={({ item }) => (
-                <TouchableOpacity onPress={() => handleCustomerSelect(item)}>
-                  <View className="p-1 bg-white rounded- w-full shadow-md border border-gray-300 mt-1">
-                    <Text>{item.Name}</Text>
-                  </View>
-                </TouchableOpacity>
-              )}
-            />
-          )}
-        </View>
+      <View className="max-h-5/10">
+        {customers.length > 0 && !selectedCustomer && (
+          <FlatList
+            className="pl-"
+            nestedScrollEnabled={true}
+            data={customers}
+            keyExtractor={(item) => (item.id ? item.id.toString() : "")}
+            renderItem={({ item }) => (
+              <TouchableOpacity onPress={() => handleCustomerSelect(item)}>
+                <View className="p-1 bg-white rounded- w-full shadow-md border border-gray-300 mt-1">
+                  <Text>{item.Name}</Text>
+                </View>
+              </TouchableOpacity>
+            )}
+          />
+        )}
+      </View>
 
       {/*------------------------------------------------------------------- 2nd part: address ----------------------------------------------------------------------------------------------*/}
-        <View className="flex flex-row items-center justify-center w-9/10">
-          <Image source={localisationIcon} className="w-6 h-6" />
-          <View>
+      <View className="flex flex-row items-center justify-center w-9/10 gap-x-1">
+        <Image source={localisationIcon} className="w-6 h-7" />
+        <View>
           <TextInput
             value={chantier.address}
             onChangeText={(text) => handleChange("address", text)}
             placeholder="Address"
-            className="p-2 bg-white rounded- w-full shadow-md border border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-500"
+            className="p-2 bg-white  w-full shadow-md border border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-500"
           />
-          <View className="w-full flex-row">
+          <View className="w-full flex-row ">
             <TextInput
               value={chantier.city}
               onChangeText={(text) => handleChange("city", text)}
               placeholder="City"
-              className="p-2 bg-white rounded- w-6/10 shadow-md border border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-500"
+              className="p-2 bg-white w-6/10 shadow-md border border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-500"
             />
             <TextInput
               value={chantier.postal_code}
               onChangeText={(text) => handleChange("postal_code", text)}
               placeholder="Postal Code"
-              className="p-2 bg-white rounded- w-2/10 shadow-md border border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-500"
+              className="p-2 bg-white  w-2/10 shadow-md border border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-500"
             />
             <TextInput
               value={chantier.country}
               onChangeText={(text) => handleChange("country", text)}
               placeholder="Country"
-              className="p-2 bg-white rounded- w-2/10 shadow-md border border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-500"
+              className="p-2 bg-white  w-2/10 shadow-md border border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-500"
             />
           </View>
-          </View>
         </View>
+      </View>
 
-        <TextInput
-          value={chantier.description}
-          multiline={true}
-          numberOfLines={4}
-          onChangeText={(text) => handleChange("description", text)}
-          placeholder="Description"
-          className="p-2 bg-white rounded- w-full shadow-md border border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-500"
-        />
-        <TextInput
-          value={chantier.phone}
-          onChangeText={(text) => handleChange("phone", text)}
-          placeholder="Phone"
-          className="p-2 bg-white rounded- w-full shadow-md border border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-500"
-        />
-        <TextInput
-          value={chantier.email}
-          onChangeText={(text) => handleChange("email", text)}
-          placeholder="Email"
-          keyboardType="email-address"
-          autoCapitalize="none"
-          className="p-2 bg-white rounded- w-full shadow-md border border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-500"
-        />
+      {/*------------------------------------------------------------------- Description ----------------------------------------------------------------------------------------------*/}
+      <TextInput
+        value={chantier.description}
+        multiline={true}
+        numberOfLines={5}
+        onChangeText={(text) => handleChange("description", text)}
+        placeholder="Description"
+        className="p-2 bg-white rounded-xl w-9.5/10 shadow-md border border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-500 overflow-auto "
+      />
+      {/*------------------------------------------------------------------- Contact ----------------------------------------------------------------------------------------------*/}
+      <View className="w-9.5/10 gap-y-1 items-center ">
         <TextInput
           value={chantier.contact}
           onChangeText={(text) => handleChange("contact", text)}
           placeholder="Contact"
           className="p-2 bg-white rounded- w-full shadow-md border border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-500"
         />
-        <View className="w-full p-4">
-          <TouchableOpacity onPress={() => setShowStartDatePicker(true)}>
-            <Text className="p-2 bg-white rounded- w-full shadow-md border border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-500">
-              Start Date: {chantier.start_date ? chantier.start_date.toDateString() : ""}
-            </Text>
-          </TouchableOpacity>
-          {showStartDatePicker && chantier.start_date && (
-            <DateTimePicker
-              value={chantier.start_date}
-              mode="date"
-              display="default"
-              onChange={handleStartDateChange}
+        <View className="flex flex-row gap-x-1 w-9.5/10 items-center">
+
+          <View className="w-5/10 flex-row gap-1 items-center">
+            <Image source={phoneIcon} className="w-6 h-7" />
+            <TextInput
+              value={chantier.phone}
+              onChangeText={(text) => handleChange("phone", text)}
+              placeholder="Phone"
+              className="p-2 bg-white w-8/10 rounded-xl shadow-md border border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-500"
             />
-          )}
-          <TouchableOpacity onPress={() => setShowEndDatePicker(true)}>
-            <Text className="p-2 bg-white rounded- w-full shadow-md border border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-500">
-              End Date: {chantier.end_date ? chantier.end_date.toDateString() : ""}
-            </Text>
-          </TouchableOpacity>
-          {showEndDatePicker && chantier.end_date && (
-            <DateTimePicker
-              value={chantier.end_date}
-              mode="date"
-              display="default"
-              onChange={handleEndDateChange}
-            />
-          )}
+          </View>
+          <View className="w-5/10 flex-row gap-1 items-center">
+          <Image source={emailIcon} className="w-7 h-7" />
+          <TextInput
+            value={chantier.email}
+            onChangeText={(text) => handleChange("email", text)}
+            placeholder="Email"
+            keyboardType="email-address"
+            autoCapitalize="none"
+            className="p-2 bg-white rounded- w-8/10 shadow-md border border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-500"
+          />
+          </View>
         </View>
-        <Button title="Submit" onPress={handleSubmit} />
+      </View>
+
+      <View className="w-full p-4">
+        <TouchableOpacity onPress={() => setShowStartDatePicker(true)}>
+          <Text className="p-2 bg-white rounded- w-full shadow-md border border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-500">
+            Start Date:{" "}
+            {chantier.start_date ? chantier.start_date.toDateString() : ""}
+          </Text>
+        </TouchableOpacity>
+        {showStartDatePicker && chantier.start_date && (
+          <DateTimePicker
+            value={chantier.start_date}
+            mode="date"
+            display="default"
+            onChange={handleStartDateChange}
+          />
+        )}
+        <TouchableOpacity onPress={() => setShowEndDatePicker(true)}>
+          <Text className="p-2 bg-white rounded- w-full shadow-md border border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-500">
+            End Date:{" "}
+            {chantier.end_date ? chantier.end_date.toDateString() : ""}
+          </Text>
+        </TouchableOpacity>
+        {showEndDatePicker && chantier.end_date && (
+          <DateTimePicker
+            value={chantier.end_date}
+            mode="date"
+            display="default"
+            onChange={handleEndDateChange}
+          />
+        )}
+      </View>
+      <Button title="Submit" onPress={handleSubmit} />
     </SafeAreaView>
   );
 };
