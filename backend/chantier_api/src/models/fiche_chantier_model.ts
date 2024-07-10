@@ -2,6 +2,7 @@ import { pgClient } from '../client/client';
 
 // Fonction pour créer une fiche chantier
 const createFicheChantier = async (data) => {
+  const chantier_id = data.chantier_id;
   const columns = Object.keys(data).map(key => `"${key}"`);
   const values = Object.values(data);
   const placeholders = values.map((_, index) => `$${index + 1}`);
@@ -13,12 +14,31 @@ const createFicheChantier = async (data) => {
   `;
 
   try {
+    // Insert the new FicheChantier
     const res = await pgClient.query(query, values);
-    return res.rows[0];
+    const newFicheChantier = res.rows[0];
+
+    // Update the corresponding Chantier with the new fiche_chantier_id
+    const updateQuery = `
+      UPDATE "Chantier"
+      SET fiche_chantier_id = $1
+      WHERE id = $2
+      RETURNING *;
+    `;
+    const updateValues = [newFicheChantier.id, chantier_id];
+
+    const updateRes = await pgClient.query(updateQuery, updateValues);
+    const updatedChantier = updateRes.rows[0];
+
+    // Return the new FicheChantier and the updated Chantier
+    return {
+      newFicheChantier,
+      updatedChantier
+    };
   } catch (err) {
     throw err;
   }
-};
+}
 
 // Fonction pour obtenir une fiche chantier par ID
 const getFicheChantierByChantierId = async (id) => {
