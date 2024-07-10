@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { View, Text, ActivityIndicator } from 'react-native';
 import { useLocalSearchParams, useNavigation } from 'expo-router';
-import { getCustomerById } from '../../utils/functions';
+import { getCustomerById } from '../../utils/functions/customer_functions';
 import { Customer } from '../../@types/customer.type';
 import { SafeAreaView } from 'react-native-safe-area-context';
 

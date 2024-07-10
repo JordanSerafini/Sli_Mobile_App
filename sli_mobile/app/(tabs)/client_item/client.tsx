@@ -9,7 +9,7 @@ import {
   Linking,
 } from "react-native";
 import { useRouter } from "expo-router";
-import { getCustomersPaginated } from "../../utils/functions";
+import { getCustomersPaginated } from "../../utils/functions/customer_functions";
 import { Customer } from "../../@types/customer.type";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { Menu, Provider } from "react-native-paper";

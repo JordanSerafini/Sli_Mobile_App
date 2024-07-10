@@ -1,5 +1,5 @@
-import { Customer } from "../@types/customer.type";
-import { url } from "./url";
+import { Customer } from "../../@types/customer.type";
+import { url } from "../url";
 
 export const getCustomersPaginated = async (searchQuery = '', limit = 25, offset = 0) => {
     try {
