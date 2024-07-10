@@ -7,6 +7,7 @@ import {
   FlatList,
   TouchableOpacity,
   ScrollView,
+  Image
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import DateTimePicker from "@react-native-community/datetimepicker";
@@ -17,10 +18,14 @@ import { Customer } from "../../@types/customer.type";
 import { getChantiers } from "../../utils/functions/chantier_functions";
 import { getCustomersPaginated } from "../../utils/functions/customer_functions";
 
+const localisationIcon = require("../../assets/Icons/localisation.png");
+
 const CreerChantier: React.FC = () => {
   const [searchQueryCustomers, setSearchQueryCustomers] = useState("");
   const [customers, setCustomers] = useState<Customer[]>([]);
-  const [selectedCustomer, setSelectedCustomer] = useState<Customer | null>(null);
+  const [selectedCustomer, setSelectedCustomer] = useState<Customer | null>(
+    null
+  );
 
   const [chantier, setChantier] = useState<Chantier>({
     name: "",
@@ -156,120 +161,131 @@ const CreerChantier: React.FC = () => {
   };
 
   return (
-    <SafeAreaView className="w-full h-full items-center justify-start">
-      <ScrollView className="w-full h-full">
-      <View className="w-full max-h-9/10 p-4">
+    <SafeAreaView className="w-full h-full flex justify-center items-center">
+      {/*------------------------------------------------------------------- 1st part: customer + chantier nbr ----------------------------------------------------------------------------------------------*/}
+        <View className="w-full max-h-2/10 flex-row pb-4 ">
+          <TextInput
+            value={searchQueryCustomers}
+            onChangeText={handleNewSearch}
+            placeholder="Sélectionner un client"
+            className="p-2 bg-white rounded- w-5.5/10 shadow-md border border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-500"
+          />
+           <TextInput
+            value={chantier.name}
+            onChangeText={(text) => handleChange("name", text)}
+            placeholder="Name"
+            className="p-2 bg-white shadow-md border border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-500 w-4.5/10"
+          />
+        </View>
+      {/*------------------------------------------------------------------- 1st part: List customer ----------------------------------------------------------------------------------------------*/}
+        <View className="max-h-5/10">
+          {customers.length > 0 && !selectedCustomer && (
+            <FlatList
+            className="pl-6 mb-6"
+              nestedScrollEnabled={true}
+              data={customers}
+              keyExtractor={(item) => (item.id ? item.id.toString() : "")}
+              renderItem={({ item }) => (
+                <TouchableOpacity onPress={() => handleCustomerSelect(item)}>
+                  <View className="p-1 bg-white rounded- w-full shadow-md border border-gray-300 mt-1">
+                    <Text>{item.Name}</Text>
+                  </View>
+                </TouchableOpacity>
+              )}
+            />
+          )}
+        </View>
+
+      {/*------------------------------------------------------------------- 2nd part: address ----------------------------------------------------------------------------------------------*/}
+        <View className="flex flex-row items-center justify-center w-9/10">
+          <Image source={localisationIcon} className="w-6 h-6" />
+          <View>
+          <TextInput
+            value={chantier.address}
+            onChangeText={(text) => handleChange("address", text)}
+            placeholder="Address"
+            className="p-2 bg-white rounded- w-full shadow-md border border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-500"
+          />
+          <View className="w-full flex-row">
+            <TextInput
+              value={chantier.city}
+              onChangeText={(text) => handleChange("city", text)}
+              placeholder="City"
+              className="p-2 bg-white rounded- w-6/10 shadow-md border border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-500"
+            />
+            <TextInput
+              value={chantier.postal_code}
+              onChangeText={(text) => handleChange("postal_code", text)}
+              placeholder="Postal Code"
+              className="p-2 bg-white rounded- w-2/10 shadow-md border border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-500"
+            />
+            <TextInput
+              value={chantier.country}
+              onChangeText={(text) => handleChange("country", text)}
+              placeholder="Country"
+              className="p-2 bg-white rounded- w-2/10 shadow-md border border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-500"
+            />
+          </View>
+          </View>
+        </View>
+
         <TextInput
-          value={chantier.name}
-          onChangeText={(text) => handleChange("name", text)}
-          placeholder="Name"
+          value={chantier.description}
+          multiline={true}
+          numberOfLines={4}
+          onChangeText={(text) => handleChange("description", text)}
+          placeholder="Description"
           className="p-2 bg-white rounded- w-full shadow-md border border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-500"
         />
         <TextInput
-          value={searchQueryCustomers}
-          onChangeText={handleNewSearch}
-          placeholder="Search Customers"
+          value={chantier.phone}
+          onChangeText={(text) => handleChange("phone", text)}
+          placeholder="Phone"
           className="p-2 bg-white rounded- w-full shadow-md border border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-500"
         />
-
-        {customers.length > 0 && !selectedCustomer && (
-          <FlatList
-            className="pl-6"
-            data={customers}
-            keyExtractor={(item) => (item.id ? item.id.toString() : "")}
-            renderItem={({ item }) => (
-              <TouchableOpacity onPress={() => handleCustomerSelect(item)}>
-                <View className="p-1 bg-white rounded- w-full shadow-md border border-gray-300 mt-1">
-                  <Text>{item.Name}</Text>
-                </View>
-              </TouchableOpacity>
-            )}
-          />
-        )}
-      </View>
-
-      <TextInput
-        value={chantier.description}
-        multiline={true}
-        numberOfLines={6}
-        onChangeText={(text) => handleChange("description", text)}
-        placeholder="Description"
-        className="p-2 bg-white rounded- w-full shadow-md border border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-500"
-      />
-      <TextInput
-        value={chantier.address}
-        onChangeText={(text) => handleChange("address", text)}
-        placeholder="Address"
-        className="p-2 bg-white rounded- w-full shadow-md border border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-500"
-      />
-      <TextInput
-        value={chantier.city}
-        onChangeText={(text) => handleChange("city", text)}
-        placeholder="City"
-        className="p-2 bg-white rounded- w-full shadow-md border border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-500"
-      />
-      <TextInput
-        value={chantier.postal_code}
-        onChangeText={(text) => handleChange("postal_code", text)}
-        placeholder="Postal Code"
-        className="p-2 bg-white rounded- w-full shadow-md border border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-500"
-      />
-      <TextInput
-        value={chantier.country}
-        onChangeText={(text) => handleChange("country", text)}
-        placeholder="Country"
-        className="p-2 bg-white rounded- w-full shadow-md border border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-500"
-      />
-      <TextInput
-        value={chantier.phone}
-        onChangeText={(text) => handleChange("phone", text)}
-        placeholder="Phone"
-        className="p-2 bg-white rounded- w-full shadow-md border border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-500"
-      />
-      <TextInput
-        value={chantier.email}
-        onChangeText={(text) => handleChange("email", text)}
-        placeholder="Email"
-        keyboardType="email-address"
-        autoCapitalize="none"
-        className="p-2 bg-white rounded- w-full shadow-md border border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-500"
-      />
-      <TextInput
-        value={chantier.contact}
-        onChangeText={(text) => handleChange("contact", text)}
-        placeholder="Contact"
-        className="p-2 bg-white rounded- w-full shadow-md border border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-500"
-      />
-      <View className="w-full p-4">
-        <TouchableOpacity onPress={() => setShowStartDatePicker(true)}>
-          <Text className="p-2 bg-white rounded- w-full shadow-md border border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-500">
-            Start Date: {chantier.start_date ? chantier.start_date.toDateString() : ""}
-          </Text>
-        </TouchableOpacity>
-        {showStartDatePicker && chantier.start_date && (
-          <DateTimePicker
-            value={chantier.start_date}
-            mode="date"
-            display="default"
-            onChange={handleStartDateChange}
-          />
-        )}
-        <TouchableOpacity onPress={() => setShowEndDatePicker(true)}>
-          <Text className="p-2 bg-white rounded- w-full shadow-md border border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-500">
-            End Date: {chantier.end_date ? chantier.end_date.toDateString() : ""}
-          </Text>
-        </TouchableOpacity>
-        {showEndDatePicker && chantier.end_date && (
-          <DateTimePicker
-            value={chantier.end_date}
-            mode="date"
-            display="default"
-            onChange={handleEndDateChange}
-          />
-        )}
-      </View>
-      <Button title="Submit" onPress={handleSubmit} />
-      </ScrollView>
+        <TextInput
+          value={chantier.email}
+          onChangeText={(text) => handleChange("email", text)}
+          placeholder="Email"
+          keyboardType="email-address"
+          autoCapitalize="none"
+          className="p-2 bg-white rounded- w-full shadow-md border border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-500"
+        />
+        <TextInput
+          value={chantier.contact}
+          onChangeText={(text) => handleChange("contact", text)}
+          placeholder="Contact"
+          className="p-2 bg-white rounded- w-full shadow-md border border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-500"
+        />
+        <View className="w-full p-4">
+          <TouchableOpacity onPress={() => setShowStartDatePicker(true)}>
+            <Text className="p-2 bg-white rounded- w-full shadow-md border border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-500">
+              Start Date: {chantier.start_date ? chantier.start_date.toDateString() : ""}
+            </Text>
+          </TouchableOpacity>
+          {showStartDatePicker && chantier.start_date && (
+            <DateTimePicker
+              value={chantier.start_date}
+              mode="date"
+              display="default"
+              onChange={handleStartDateChange}
+            />
+          )}
+          <TouchableOpacity onPress={() => setShowEndDatePicker(true)}>
+            <Text className="p-2 bg-white rounded- w-full shadow-md border border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-500">
+              End Date: {chantier.end_date ? chantier.end_date.toDateString() : ""}
+            </Text>
+          </TouchableOpacity>
+          {showEndDatePicker && chantier.end_date && (
+            <DateTimePicker
+              value={chantier.end_date}
+              mode="date"
+              display="default"
+              onChange={handleEndDateChange}
+            />
+          )}
+        </View>
+        <Button title="Submit" onPress={handleSubmit} />
     </SafeAreaView>
   );
 };
