@@ -21,7 +21,12 @@ const CreerChantier: React.FC = () => {
     fiche_chantier_id: 0,
   });
 
+  //* -------------------------------------------------------- Input Manager -------------------------------------------------------- *//
+  const handleChange = (field: keyof Chantier, value: any) => {
+    setChantier({ ...chantier, [field]: value });
+  };
 
+//* -------------------------------------------------------- Name Generation -------------------------------------------------------- *//
   const generateChantierName = async () => {
     try {
       const chantiers = await getChantiers();
@@ -39,9 +44,7 @@ const CreerChantier: React.FC = () => {
     generateChantierName();
   }, []);
 
-  const handleChange = (field: keyof Chantier, value: any) => {
-    setChantier({ ...chantier, [field]: value });
-  };
+  //* -------------------------------------------------------- Handle Submit -------------------------------------------------------- *//
 
   const handleSubmit = () => {
     console.log("Chantier submitted", chantier);
