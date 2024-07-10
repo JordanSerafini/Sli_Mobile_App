@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { View, TextInput, Button, Image, TouchableOpacity } from 'react-native';
+import { View, Text, Button, Image, TouchableOpacity } from 'react-native';
 
 import { getItemPaginated } from '../../utils/functions/item_function';
 import { getStaff } from '../../utils/functions/chantier_functions';
@@ -10,8 +10,6 @@ import { Item } from '../../@types/item.type';
 const closeIcon = require('../../assets/Icons/close.png');
 
 const CreerFicheChantier: React.FC<{ setShowAddModal: (value: boolean) => void, onSave: (fiche: FicheChantier) => void, chantierId: number }> = ({ onSave, chantierId, setShowAddModal }) => {
-  const [name, setName] = useState('');
-  const [description, setDescription] = useState('');
   const [staff, setStaff] = useState<Staff[]>([]);
   const [staffSelected, setStaffSelected] = useState<Staff[]>([]);
   const [items, setItems] = useState<Item[]>([]);
@@ -41,8 +39,7 @@ const CreerFicheChantier: React.FC<{ setShowAddModal: (value: boolean) => void, 
   const handleSubmit = () => {
     const newFicheChantier: FicheChantier = {
       id: 0,
-      name,
-      description,
+      name: '',
       project_manager_id: undefined,
       chantier_id: chantierId
     };
@@ -50,22 +47,17 @@ const CreerFicheChantier: React.FC<{ setShowAddModal: (value: boolean) => void, 
   };
 
   return (
-    <View className='w-9/10 h-8/10 z-50 bg-white border rounded-3xl p-4 items-center justify-center'>
+    <View className='w-9/10 h-8/10 z-50 bg-white border rounded-3xl items-center justify-between'>
       <TouchableOpacity onPress={() => setShowAddModal(false)} style={{ position: 'absolute', top: 10, right: 10 }}>
         <Image source={closeIcon} className='w-6 h-6' />
       </TouchableOpacity>
-      <TextInput
-        placeholder="Name"
-        value={name}
-        onChangeText={setName}
-        className='mb-4 p-2 border border-gray-300 rounded'
-      />
-      <TextInput
-        placeholder="Description"
-        value={description}
-        onChangeText={setDescription}
-        className='mb-4 p-2 border border-gray-300 rounded'
-      />
+      <View className='h-5/10'>
+        <Text></Text>
+      </View>
+      <View className='h-5/10'>
+
+      </View>
+      
       <Button title="Save Fiche Chantier" onPress={handleSubmit} />
     </View>
   );
