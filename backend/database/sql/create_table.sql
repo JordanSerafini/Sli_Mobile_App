@@ -9,7 +9,6 @@ CREATE TABLE "Staff" (
     email VARCHAR(255) UNIQUE
 );
 
-
 CREATE TABLE "FicheChantier" (
     id SERIAL PRIMARY KEY,
     name VARCHAR(255),
@@ -34,7 +33,7 @@ CREATE TABLE "Chantier" (
     client_id INTEGER REFERENCES "Customer"(id),
     calendar_id INTEGER REFERENCES "Calendars"(id),
     fiche_chantier_id INTEGER REFERENCES "FicheChantier"(id),
-    
+   
 );
 
 CREATE TABLE "Chantier_Staff" (
