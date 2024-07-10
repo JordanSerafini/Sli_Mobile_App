@@ -55,7 +55,7 @@ const item_model = {
       queryParams.push(limit);
       queryParams.push(offset);
 
-      query += ` ORDER BY "Name" ASC LIMIT $${queryParams.length - 1} OFFSET $${queryParams.length}`;
+      query += ` ORDER BY "Caption" ASC LIMIT $${queryParams.length - 1} OFFSET $${queryParams.length}`;
       countQuery += `;`;
 
       // Exécution des requêtes en parallèle pour plus d'efficacité

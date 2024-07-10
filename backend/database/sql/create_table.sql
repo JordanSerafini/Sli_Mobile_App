@@ -15,6 +15,7 @@ CREATE TABLE "FicheChantier" (
     description TEXT,
     project_supervision TEXT,
     project_manager_id INTEGER REFERENCES "Staff"(id)
+    chantier_id INTEGER REFERENCES "Chantier"(id)
 );
 
 CREATE TABLE "Chantier" (

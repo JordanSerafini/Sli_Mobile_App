@@ -50,6 +50,19 @@ export const chantier_controller = {
       console.error('Error deleting chantier by ID:', err);
       res.status(500).json({ message: "Internal server error" });
     }
-  }
+  },
+
+  async getChantierByIdFull(req, res) {
+    try {
+      const chantier = await getChantierById(req.params.id);
+      if (!chantier) {
+        return res.status(404).json({ message: "Chantier not found" });
+      }
+      res.status(200).json(chantier);
+    } catch (err) {
+      console.error('Error getting chantier by ID:', err);
+      res.status(500).json({ message: "Internal server error" });
+    }
+  },
 
 };
