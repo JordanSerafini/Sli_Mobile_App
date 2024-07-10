@@ -8,6 +8,8 @@ import { FicheChantier, Staff } from '../../@types/chantier.type';
 import { Item } from '../../@types/item.type';
 
 const closeIcon = require('../../assets/Icons/close.png');
+const addPersonIcon = require('../../assets/Icons/addPerson.png');
+const outilsIcon = require('../../assets/Icons/outils.png');
 
 const CreerFicheChantier: React.FC<{ setShowAddModal: (value: boolean) => void, onSave: (fiche: FicheChantier) => void, chantierId: number }> = ({ onSave, chantierId, setShowAddModal }) => {
   const [staff, setStaff] = useState<Staff[]>([]);
@@ -47,15 +49,24 @@ const CreerFicheChantier: React.FC<{ setShowAddModal: (value: boolean) => void, 
   };
 
   return (
-    <View className='w-9/10 h-8/10 z-50 bg-white border rounded-3xl items-center justify-between'>
+    <View className='w-9/10 h-8/10 z-50 bg-white border rounded-3xl items- justify-between'>
+      {/*-------------------------------------------- Close Button ------------------------------------------------------*/}
       <TouchableOpacity onPress={() => setShowAddModal(false)} style={{ position: 'absolute', top: 10, right: 10 }}>
         <Image source={closeIcon} className='w-6 h-6' />
       </TouchableOpacity>
-      <View className='h-5/10'>
-        <Text></Text>
-      </View>
-      <View className='h-5/10'>
 
+      {/*-------------------------------------------- Ajouter staff ------------------------------------------------------*/}
+      <View className='h-5/10 px-2 items-center'>
+        <TouchableOpacity>
+          <Image source={addPersonIcon} className='w-12 h-12' />
+        </TouchableOpacity>
+      </View>
+
+      {/*-------------------------------------------- Ajouter Item ------------------------------------------------------*/}
+      <View className='h-5/10 px-2 items-center'>
+        <TouchableOpacity>
+          <Image source={outilsIcon} className='w-12 h-12' />
+        </TouchableOpacity>
       </View>
       
       <Button title="Save Fiche Chantier" onPress={handleSubmit} />
