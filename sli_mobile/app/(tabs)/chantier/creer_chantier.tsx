@@ -8,11 +8,13 @@ import {
   TouchableOpacity,
   ScrollView,
   Image,
+  Modal,
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import DateTimePicker from "@react-native-community/datetimepicker";
+import CreerFicheChantier from "./creer_fiche_chantier";
 
-import { Chantier } from "../../@types/chantier.type";
+import { Chantier, FicheChantier } from "../../@types/chantier.type";
 import { Customer } from "../../@types/customer.type";
 
 import { getChantiers } from "../../utils/functions/chantier_functions";
@@ -48,6 +50,7 @@ const CreerChantier: React.FC = () => {
 
   const [showStartDatePicker, setShowStartDatePicker] = useState(false);
   const [showEndDatePicker, setShowEndDatePicker] = useState(false);
+  const [showAddModal, setShowAddModal] = useState(false);
 
   const debounceTimeout = useRef<NodeJS.Timeout | null>(null);
 
@@ -152,6 +155,7 @@ const CreerChantier: React.FC = () => {
     console.log("Chantier submitted", chantier);
   };
 
+    //* -------------------------------------------------------- Date -------------------------------------------------------- *//
   const handleStartDateChange = (event: any, selectedDate?: Date) => {
     if (selectedDate) {
       handleChange("start_date", selectedDate);
@@ -166,8 +170,14 @@ const CreerChantier: React.FC = () => {
     setShowEndDatePicker(false);
   };
 
+    //* -------------------------------------------------------- Save Fiche -------------------------------------------------------- *//
+  const handleSaveFicheChantier = (fiche: FicheChantier) => {
+    console.log('Fiche Chantier saved:', fiche);
+    setShowAddModal(false);
+  };
+
   return (
-    <SafeAreaView className="w-full h-full items-center flex justify-between">
+    <SafeAreaView className={`w-full h-full items-center flex justify-between ${showAddModal ? "opacity-20":""}`}>
       {/*------------------------------------------------------------------- 1st part: customer + chantier nbr ----------------------------------------------------------------------------------------------*/}
       <View className="w-full max-h-2/10 flex-row">
         <TextInput
@@ -311,7 +321,7 @@ const CreerChantier: React.FC = () => {
         </View>
         {/*------------------------------------------------------------------- Add fiche ----------------------------------------------------------------------------------------------*/}
         <View className="w-5/10 gap-y-1 ">
-          <TouchableOpacity className="w-full items-center">
+          <TouchableOpacity className="w-full items-center" onPress={()=>setShowAddModal(true)}>
             <Image source={addIcon} className="w-4/10 h-16" />
           </TouchableOpacity>
         </View>
@@ -325,6 +335,17 @@ const CreerChantier: React.FC = () => {
           Envoyer
         </Text>
       </TouchableOpacity>
+      <Modal
+        visible={showAddModal}
+        transparent={true}
+        animationType="slide"
+        onRequestClose={() => setShowAddModal(false)}
+      >
+        <View className="w-screen h-screen items-center justify-center">
+            <CreerFicheChantier setShowAddModal={setShowAddModal} onSave={handleSaveFicheChantier} chantierId={chantier.id!} />
+         
+          </View>
+      </Modal>
     </SafeAreaView>
   );
 };

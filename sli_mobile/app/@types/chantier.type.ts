@@ -18,7 +18,7 @@ export interface Chantier {
   }
 
   // Interface for the FicheChantier table
-interface FicheChantier {
+  export interface FicheChantier {
     id: number;
     name: string;
     description?: string;
@@ -28,7 +28,7 @@ interface FicheChantier {
   }
 
 // Interface for the Staff table
-interface Staff {
+export interface Staff {
     id: number;
     name: string;
     grade?: string;
