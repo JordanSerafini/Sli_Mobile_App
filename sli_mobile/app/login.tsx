@@ -30,26 +30,29 @@ const LoginScreen: React.FC = () => {
         },
         body: JSON.stringify({ email, password }),
       });
-
+  
       if (!response.ok) {
-        throw new Error("Error logging in");
+        const errorData = await response.json();
+        throw new Error(errorData.error || "Error logging in");
       }
-
+      console.log("Login response:", response);
       const data = await response.json();
+      console.log("Login successful:", data);
       const token = data.accessToken;
       if (!token) {
         throw new Error("Token not found in response");
       }
-
+  
       await AsyncStorage.setItem('userToken', token);
-      //console.log("Logged in successfully! Token set in AsyncStorage.");
       router.push("/home");
-
+  
     } catch (error) {
       console.error("Login failed:", error);
+      const errorObj = error as Error;
+      alert(errorObj.message);
     }
   };
-
+  
   return (
     <ImageBackground
       source={bg}
