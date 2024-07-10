@@ -276,6 +276,7 @@ const CreerChantier: React.FC = () => {
         </View>
       </View>
 
+      {/*------------------------------------------------------------------- Date ----------------------------------------------------------------------------------------------*/}
       <View className="w-full p-4">
         <TouchableOpacity onPress={() => setShowStartDatePicker(true)}>
           <Text className="p-2 bg-white rounded- w-full shadow-md border border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-500">
