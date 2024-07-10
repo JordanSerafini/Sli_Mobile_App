@@ -1,10 +1,17 @@
 import React, { useEffect, useState } from "react";
-import { Button, Text, TextInput, View, ScrollView } from "react-native";
+import { Button, Text, TextInput, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
+
 import { Chantier } from "../../@types/chantier.type";
+import { Customer } from "../../@types/customer.type";
+
 import { getChantiers } from "../../utils/functions/chantier_functions";
+import { getCustomersPaginated } from "../../utils/functions/customer_functions";
 
 const CreerChantier: React.FC = () => {
+  const [searchQueryCustomers, setSearchQueryCustomers] = useState("");
+  const [customers, setCustomers] = useState<Customer[]>([]);
+
   const [chantier, setChantier] = useState<Chantier>({
     name: "",
     description: "",
@@ -44,8 +51,22 @@ const CreerChantier: React.FC = () => {
     generateChantierName();
   }, []);
 
-  //* -------------------------------------------------------- Handle Submit -------------------------------------------------------- *//
+  //* -------------------------------------------------------- Handle Customer -------------------------------------------------------- *//
+  useEffect(() => {
+    if (searchQueryCustomers.length < 2) return;
+    const fetchCustomers = async () => {
+      try {
+        const customers = await getCustomersPaginated(searchQueryCustomers);
+        setCustomers(customers);
+      } catch (error) {
+        console.error("Error fetching customers:", error);
+      }
+    };
 
+    fetchCustomers();
+  }, [searchQueryCustomers]);
+
+  //* -------------------------------------------------------- Handle Submit -------------------------------------------------------- *//
   const handleSubmit = () => {
     console.log("Chantier submitted", chantier);
   };
@@ -53,6 +74,7 @@ const CreerChantier: React.FC = () => {
 
   return (
     <SafeAreaView className="w-full h-full items-center justify-start">
+      <View className="w-full">
         <TextInput
           value={chantier.name}
           onChangeText={(text) => handleChange("name", text)}
@@ -60,7 +82,16 @@ const CreerChantier: React.FC = () => {
           className="p-2 bg-white rounded- w-full shadow-md border border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-500"
         />
         <TextInput
+          value={chantier.contact}
+          onChangeText={(text) => setSearchQueryCustomers(text)}
+          placeholder="Name"
+          className="p-2 bg-white rounded- w-full shadow-md border border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-500"
+        />
+        </View>
+        <TextInput
           value={chantier.description}
+          multiline={true}
+          numberOfLines={6}
           onChangeText={(text) => handleChange("description", text)}
           placeholder="Description"
           className="p-2 bg-white rounded- w-full shadow-md border border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-500"
