@@ -253,7 +253,6 @@ const CreerChantier: React.FC = () => {
           className="p-2 bg-white rounded- w-full shadow-md border border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-500"
         />
         <View className="flex flex-row gap-x-1 w-9.5/10 items-center">
-
           <View className="w-5/10 flex-row gap-1 items-center">
             <Image source={phoneIcon} className="w-6 h-7" />
             <TextInput
@@ -264,69 +263,70 @@ const CreerChantier: React.FC = () => {
             />
           </View>
           <View className="w-5/10 flex-row gap-1 items-center">
-          <Image source={emailIcon} className="w-7 h-7" />
-          <TextInput
-            value={chantier.email}
-            onChangeText={(text) => handleChange("email", text)}
-            placeholder="Email"
-            keyboardType="email-address"
-            autoCapitalize="none"
-            className="p-2 bg-white rounded- w-8/10 shadow-md border border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-500"
-          />
+            <Image source={emailIcon} className="w-7 h-7" />
+            <TextInput
+              value={chantier.email}
+              onChangeText={(text) => handleChange("email", text)}
+              placeholder="Email"
+              keyboardType="email-address"
+              autoCapitalize="none"
+              className="p-2 bg-white rounded- w-8/10 shadow-md border border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-500"
+            />
           </View>
         </View>
       </View>
 
       {/*------------------------------------------------------------------- Last part ------------------------------------------------------------------------------------------------*/}
       <View className="w-9.5/10  h-2/10 items-center flex-row gap-x-2">
-      {/*------------------------------------------------------------------- Date ----------------------------------------------------------------------------------------------*/}
-      <View className="w-5/10 gap-y-1">
-        <TouchableOpacity onPress={() => setShowStartDatePicker(true)}>
-          <Text className="p-2 bg-white rounded- w-full shadow-md border border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-500">
-            Start Date:{" "}
-            {chantier.start_date ? chantier.start_date.toDateString() : ""}
-          </Text>
-        </TouchableOpacity>
-        {showStartDatePicker && chantier.start_date && (
-          <DateTimePicker
-            value={chantier.start_date}
-            mode="date"
-            display="default"
-            onChange={handleStartDateChange}
-          />
-        )}
-        <TouchableOpacity onPress={() => setShowEndDatePicker(true)}>
-          <Text className="p-2 bg-white rounded- w-full shadow-md border border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-500">
-            End Date:{" "}
-            {chantier.end_date ? chantier.end_date.toDateString() : ""}
-          </Text>
-        </TouchableOpacity>
-        {showEndDatePicker && chantier.end_date && (
-          <DateTimePicker
-            value={chantier.end_date}
-            mode="date"
-            display="default"
-            onChange={handleEndDateChange}
-          />
-        )}
-      </View>
-      {/*------------------------------------------------------------------- Add fiche ----------------------------------------------------------------------------------------------*/}
-      <View className="w-5/10 gap-y-1 ">
-        <TouchableOpacity className="w-full items-center">
-          <Image source={addIcon} className="w-4/10 h-16" />
-        </TouchableOpacity>
-      </View>
-
+        {/*------------------------------------------------------------------- Date ----------------------------------------------------------------------------------------------*/}
+        <View className="w-5/10 gap-y-1">
+          <TouchableOpacity onPress={() => setShowStartDatePicker(true)}>
+            <Text className="p-2 bg-white rounded- w-full shadow-md border border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-500">
+              Start Date:{" "}
+              {chantier.start_date ? chantier.start_date.toDateString() : ""}
+            </Text>
+          </TouchableOpacity>
+          {showStartDatePicker && chantier.start_date && (
+            <DateTimePicker
+              value={chantier.start_date}
+              mode="date"
+              display="default"
+              onChange={handleStartDateChange}
+            />
+          )}
+          <TouchableOpacity onPress={() => setShowEndDatePicker(true)}>
+            <Text className="p-2 bg-white rounded- w-full shadow-md border border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-500">
+              End Date:{" "}
+              {chantier.end_date ? chantier.end_date.toDateString() : ""}
+            </Text>
+          </TouchableOpacity>
+          {showEndDatePicker && chantier.end_date && (
+            <DateTimePicker
+              value={chantier.end_date}
+              mode="date"
+              display="default"
+              onChange={handleEndDateChange}
+            />
+          )}
+        </View>
+        {/*------------------------------------------------------------------- Add fiche ----------------------------------------------------------------------------------------------*/}
+        <View className="w-5/10 gap-y-1 ">
+          <TouchableOpacity className="w-full items-center">
+            <Image source={addIcon} className="w-4/10 h-16" />
+          </TouchableOpacity>
+        </View>
       </View>
       {/*------------------------------------------------------------------- Submit ----------------------------------------------------------------------------------------------*/}
       <TouchableOpacity className="w-full">
-        <Text className="w-full px-4 py-2 text-center font-bold text-white  bg-blue-700" style={{ letterSpacing: 8}}
- >Envoyer</Text>
+        <Text
+          className="w-full px-4 py-2 text-center font-bold text-white  bg-blue-700"
+          style={{ letterSpacing: 8 }}
+        >
+          Envoyer
+        </Text>
       </TouchableOpacity>
     </SafeAreaView>
   );
 };
-
-
 
 export default CreerChantier;
