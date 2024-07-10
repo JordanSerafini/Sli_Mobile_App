@@ -3,7 +3,6 @@ import router from "./routes/router";
 import dotenv from "dotenv";
 import cors from 'cors';
 
-
 //config
 dotenv.config();
 

@@ -7,7 +7,7 @@ router.get('/customers', client_controller.getAllCustomers);
 router.get('/customer/:id', client_controller.getCustomerById);
 router.get('/customer/:name', client_controller.getCustomerByName);
 router.get('/customers/paginated', client_controller.getCustomersPaginated);
-router.post('/customers', client_controller.createCustomer);
+router.post('/customer', client_controller.createCustomer);
 router.put('/customer/:id', client_controller.updateCustomerById);
 router.delete('/customer/:id', client_controller.deleteCustomerById);
 
