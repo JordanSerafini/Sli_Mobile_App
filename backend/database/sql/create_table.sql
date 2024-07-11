@@ -30,7 +30,6 @@ CREATE TABLE "Calendars" (
     title VARCHAR(255)
 );
 
-
 CREATE TABLE "Chantier" (
     id SERIAL PRIMARY KEY,
     name VARCHAR(255),
