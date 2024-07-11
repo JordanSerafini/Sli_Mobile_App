@@ -48,6 +48,8 @@ const CreerFicheChantier: React.FC<{ setShowAddModal: (value: boolean) => void, 
     onSave(newFicheChantier);
   };
 
+  console.log('staff:', staff);
+
   return (
     <View className='w-9/10 h-8/10 z-50 bg-white border rounded-3xl items- justify-between'>
       {/*-------------------------------------------- Close Button ------------------------------------------------------*/}

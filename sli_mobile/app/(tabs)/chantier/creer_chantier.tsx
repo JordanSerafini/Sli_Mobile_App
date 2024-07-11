@@ -335,6 +335,7 @@ const CreerChantier: React.FC = () => {
           Envoyer
         </Text>
       </TouchableOpacity>
+      {/*------------------------------------------------------------------- Modal ----------------------------------------------------------------------------------------------*/}
       <Modal
         visible={showAddModal}
         transparent={true}

@@ -25,6 +25,8 @@ export interface Chantier {
     project_supervision?: string;
     project_manager_id?: number;
     chantier_id?: number;
+    imageUrl?: string | null;
+    audioUrl?: string | null;
   }
 
 // Interface for the Staff table
