@@ -8,7 +8,7 @@ export default function TabLayout() {
         name="home"
         options={{
           title: 'Home',
-          tabBarIcon: ({ color }) => <FontAwesome size={28} name="home" color={color} />,
+          tabBarIcon: ({ color }) => <FontAwesome size={28} name="home" color={color} className='bg-red-500'/>,
         }}
       />
       <Tabs.Screen
