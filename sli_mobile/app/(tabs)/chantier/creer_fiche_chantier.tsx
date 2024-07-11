@@ -32,8 +32,6 @@ const CreerFicheChantier: React.FC<{
   const [itemsSelected, setItemsSelected] = useState<Item[]>([]);
   const [showStaffList, setShowStaffList] = useState(false);
   const [showItemsList, setShowItemsList] = useState(false);
-  const [showItem, setShowItem] = useState(true);
-  const [showStaff, setShowStaff] = useState(true);
 
 
   useEffect(() => {
@@ -127,13 +125,13 @@ const CreerFicheChantier: React.FC<{
       </TouchableOpacity>
 
       {/*-------------------------------------------- Ajouter staff ------------------------------------------------------*/}
-      {showStaff && (
       <View
-        className={`h-5/10 w-full p-2 items-center justify-center${
-          showStaffList ? "h-9/10" : "h-5/10"
-        }`}
+        className={`w-full p-2 items-center justify-center${
+          showStaffList ? "h-9/10" : " h-5/10"
+        }
+        ${showItemsList ? "hidden" : " h-5/10 " }
+        `}
       >
-      {/*-------------------------------------------- Expand staff ------------------------------------------------------*/}
         <TouchableOpacity className="self-start">
           <Image source={expandIcon} className="w-4 h-4" />
         </TouchableOpacity>
@@ -150,7 +148,6 @@ const CreerFicheChantier: React.FC<{
             keyExtractor={(item) => item.id.toString()}
             renderItem={({ item }) => (
               <View className="justify-between items-center p-8 border rounded-lg ml-4 ">
-
       {/*-------------------------------------------- Delete Icon staff ------------------------------------------------------*/}
                 <TouchableOpacity
                   onPress={() => deleteStaffSelected(item.id)}
@@ -159,7 +156,7 @@ const CreerFicheChantier: React.FC<{
                 >
                   <Image source={closeIcon} className="w-6 h-6" />
                 </TouchableOpacity>
-      {/*-------------------------------------------- staff card ------------------------------------------------------*/}
+
                 <Image source={workerIcon} className="w-6 h-6" />
                 <Text>{item.name}</Text>
                 <Text>{item.phone}</Text>
@@ -171,13 +168,14 @@ const CreerFicheChantier: React.FC<{
           />
         )}
       </View>
-      )}
+
       {/*-------------------------------------------- Ajouter Item ------------------------------------------------------*/}
-      {showItem && (
       <View
-        className={`h-5/10 w-full p-2 items-center justify-center border-2 border-green-400 ${
-          showStaffList ? "hidden" : ""
-        }`}
+        className={`w-full p-2 items-center justify-center border-2 border-green-400 ${
+          showStaffList ? "hidden" : " h-5/10 "
+        }
+        ${showItemsList ? " h-9/10 " : " h-5/10 " }
+        `}
       >
         <TouchableOpacity onPress={() => setShowItemsList(!showItemsList)}>
           <Image source={outilsIcon} className="w-12 h-12" />
@@ -208,7 +206,7 @@ const CreerFicheChantier: React.FC<{
           )}
         />
       </View>
-      )}
+
       <Button title="Save Fiche Chantier" onPress={handleSubmit} />
     </View>
   );
