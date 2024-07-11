@@ -33,7 +33,6 @@ const CreerFicheChantier: React.FC<{
   const [showStaffList, setShowStaffList] = useState(false);
   const [showItemsList, setShowItemsList] = useState(false);
 
-
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -126,10 +125,10 @@ const CreerFicheChantier: React.FC<{
 
       {/*-------------------------------------------- Ajouter staff ------------------------------------------------------*/}
       <View
-        className={`w-full p-2 items-center justify-center${
-          showStaffList ? "h-9/10" : " h-5/10"
+        className={`w-full p-2  items-center justify-center ${
+          showStaffList ? " min-h-7.5/10 " : " h-4.5/10 "
         }
-        ${showItemsList ? "hidden" : " h-5/10 " }
+        ${showItemsList ? "hidden" : " h-4.5/10 "}
         `}
       >
         <TouchableOpacity className="self-start">
@@ -148,7 +147,7 @@ const CreerFicheChantier: React.FC<{
             keyExtractor={(item) => item.id.toString()}
             renderItem={({ item }) => (
               <View className="justify-between items-center p-8 border rounded-lg ml-4 ">
-      {/*-------------------------------------------- Delete Icon staff ------------------------------------------------------*/}
+                {/*-------------------------------------------- Delete Icon staff ------------------------------------------------------*/}
                 <TouchableOpacity
                   onPress={() => deleteStaffSelected(item.id)}
                   style={{ position: "absolute", top: 10, right: 10 }}
@@ -171,10 +170,10 @@ const CreerFicheChantier: React.FC<{
 
       {/*-------------------------------------------- Ajouter Item ------------------------------------------------------*/}
       <View
-        className={`w-full p-2 items-center justify-center border-2 border-green-400 ${
-          showStaffList ? "hidden" : " h-5/10 "
+        className={`w-full p-2 items-center justify-center ${
+          showStaffList ? "hidden" : " h-4.5/10 "
         }
-        ${showItemsList ? " h-9/10 " : " h-5/10 " }
+        ${showItemsList ? " h-9/10 " : " h-4.5/10 "}
         `}
       >
         <TouchableOpacity onPress={() => setShowItemsList(!showItemsList)}>
@@ -184,7 +183,7 @@ const CreerFicheChantier: React.FC<{
           <FlatList
             className="w-full h-8/10 gap-2 flex-row border-2 border-red-400"
             data={items}
-            horizontal={true}
+            horizontal={false}
             keyExtractor={(item) => item.id.toString()}
             renderItem={({ item }) => (
               <TouchableOpacity
@@ -207,7 +206,27 @@ const CreerFicheChantier: React.FC<{
         />
       </View>
 
-      <Button title="Save Fiche Chantier" onPress={handleSubmit} />
+      {/*-------------------------------------------- More + Save ------------------------------------------------------*/}
+      <View className="flex flex-row w-full bg-green-500 rounded-b-2xl h-0.5/10">
+        <TouchableOpacity>
+          <Text
+            className="h-full min-w-1/10 text-center"
+          >
+            ...
+          </Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          onPress={handleSubmit}
+          className=" w-fullrounded-b-3xl"
+        >
+          <Text
+            className="bg-blue-500 h-full min-w-9/10 text-white text-center font-bold"
+            style={{ letterSpacing: 5 }}
+          >
+            Sauvegarder
+          </Text>
+        </TouchableOpacity>
+      </View>
     </View>
   );
 };
