@@ -14,16 +14,17 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import DateTimePicker from "@react-native-community/datetimepicker";
 import CreerFicheChantier from "./creer_fiche_chantier";
 
-import { Chantier, FicheChantier } from "../../@types/chantier.type";
-import { Customer } from "../../@types/customer.type";
 
-import { getChantiers } from "../../utils/functions/chantier_functions";
-import { getCustomersPaginated } from "../../utils/functions/customer_functions";
+import { Customer } from "../../../@types/customer.type";
 
-const localisationIcon = require("../../assets/Icons/localisation.png");
-const phoneIcon = require("../../assets/Icons/phone.png");
-const emailIcon = require("../../assets/Icons/mail.png");
-const addIcon = require("../../assets/Icons/add.png");
+import { getChantiers } from "../../../utils/functions/chantier_functions";
+import { getCustomersPaginated } from "../../../utils/functions/customer_functions";
+import { Chantier, FicheChantier } from "../../../@types/chantier.type";
+
+const localisationIcon = require("../../../assets/Icons/localisation.png");
+const phoneIcon = require("../../../assets/Icons/phone.png");
+const emailIcon = require("../../../assets/Icons/mail.png");
+const addIcon = require("../../../assets/Icons/add.png");
 
 const CreerChantier: React.FC = () => {
   const [searchQueryCustomers, setSearchQueryCustomers] = useState("");

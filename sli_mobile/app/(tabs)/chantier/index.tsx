@@ -10,7 +10,7 @@ const ChantierScreen: React.FC = () => {
   };
 
   const navigateToCreerChantier = () => {
-    router.push('/chantier/creer_chantier');
+    router.push('/chantier/Add_Chantier/creer_chantier');
   };
 
   return (

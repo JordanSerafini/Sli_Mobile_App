@@ -9,17 +9,17 @@ import {
   ScrollView,
 } from "react-native";
 
-import { getItemPaginated } from "../../utils/functions/item_function";
-import { getStaff } from "../../utils/functions/chantier_functions";
+import { getItemPaginated } from "../../../utils/functions/item_function";
+import { getStaff } from "../../../utils/functions/chantier_functions";
 
-import { FicheChantier, Staff } from "../../@types/chantier.type";
-import { Item } from "../../@types/item.type";
+import { FicheChantier, Staff } from "../../../@types/chantier.type";
+import { Item } from "../../../@types/item.type";
 
-const closeIcon = require("../../assets/Icons/close.png");
-const addPersonIcon = require("../../assets/Icons/addPerson.png");
-const outilsIcon = require("../../assets/Icons/outils.png");
-const workerIcon = require("../../assets/Icons/worker.png");
-const expandIcon = require("../../assets/Icons/expand.png");
+const closeIcon = require("../../../assets/Icons/close.png");
+const addPersonIcon = require("../../../assets/Icons/addPerson.png");
+const outilsIcon = require("../../../assets/Icons/outils.png");
+const workerIcon = require("../../../assets/Icons/worker.png");
+const expandIcon = require("../../../assets/Icons/expand.png");
 
 const CreerFicheChantier: React.FC<{
   setShowAddModal: (value: boolean) => void;
