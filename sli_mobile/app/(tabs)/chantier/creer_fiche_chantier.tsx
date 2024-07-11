@@ -1,24 +1,40 @@
-import React, { useEffect, useState } from 'react';
-import { View, Text, Button, Image, TouchableOpacity, FlatList } from 'react-native';
+import React, { useEffect, useState } from "react";
+import {
+  View,
+  Text,
+  Button,
+  Image,
+  TouchableOpacity,
+  FlatList,
+  ScrollView,
+} from "react-native";
 
-import { getItemPaginated } from '../../utils/functions/item_function';
-import { getStaff } from '../../utils/functions/chantier_functions';
+import { getItemPaginated } from "../../utils/functions/item_function";
+import { getStaff } from "../../utils/functions/chantier_functions";
 
-import { FicheChantier, Staff } from '../../@types/chantier.type';
-import { Item } from '../../@types/item.type';
+import { FicheChantier, Staff } from "../../@types/chantier.type";
+import { Item } from "../../@types/item.type";
 
-const closeIcon = require('../../assets/Icons/close.png');
-const addPersonIcon = require('../../assets/Icons/addPerson.png');
-const outilsIcon = require('../../assets/Icons/outils.png');
-const workerIcon = require('../../assets/Icons/worker.png');
+const closeIcon = require("../../assets/Icons/close.png");
+const addPersonIcon = require("../../assets/Icons/addPerson.png");
+const outilsIcon = require("../../assets/Icons/outils.png");
+const workerIcon = require("../../assets/Icons/worker.png");
+const expandIcon = require("../../assets/Icons/expand.png");
 
-const CreerFicheChantier: React.FC<{ setShowAddModal: (value: boolean) => void, onSave: (fiche: FicheChantier) => void, chantierId: number }> = ({ onSave, chantierId, setShowAddModal }) => {
+const CreerFicheChantier: React.FC<{
+  setShowAddModal: (value: boolean) => void;
+  onSave: (fiche: FicheChantier) => void;
+  chantierId: number;
+}> = ({ onSave, chantierId, setShowAddModal }) => {
   const [staff, setStaff] = useState<Staff[]>([]);
   const [staffSelected, setStaffSelected] = useState<Staff[]>([]);
   const [items, setItems] = useState<Item[]>([]);
   const [itemsSelected, setItemsSelected] = useState<Item[]>([]);
   const [showStaffList, setShowStaffList] = useState(false);
   const [showItemsList, setShowItemsList] = useState(false);
+  const [showItem, setShowItem] = useState(true);
+  const [showStaff, setShowStaff] = useState(true);
+
 
   useEffect(() => {
     const fetchData = async () => {
@@ -26,14 +42,14 @@ const CreerFicheChantier: React.FC<{ setShowAddModal: (value: boolean) => void, 
         const staffResponse = await getStaff();
         setStaff(staffResponse);
       } catch (error) {
-        console.error('Error fetching staff:', error);
+        console.error("Error fetching staff:", error);
       }
 
       try {
-        const itemResponse = await getItemPaginated(50, 0, '');
+        const itemResponse = await getItemPaginated(50, 0, "");
         setItems(itemResponse.items);
       } catch (error) {
-        console.error('Error fetching items:', error);
+        console.error("Error fetching items:", error);
       }
     };
 
@@ -42,82 +58,146 @@ const CreerFicheChantier: React.FC<{ setShowAddModal: (value: boolean) => void, 
 
   const handleStaffSelect = (selectedStaff: Staff) => {
     setStaffSelected([...staffSelected, selectedStaff]);
-    setStaff(staff.filter(s => s.id !== selectedStaff.id));
+    setStaff(staff.filter((s) => s.id !== selectedStaff.id));
   };
 
   const handleItemSelect = (selectedItem: Item) => {
     setItemsSelected([...itemsSelected, selectedItem]);
-    setItems(items.filter(i => i.id !== selectedItem.id));
+    setItems(items.filter((i) => i.id !== selectedItem.id));
   };
 
   const handleSubmit = () => {
     const newFicheChantier: FicheChantier = {
       id: 0,
-      name: '',
+      name: "",
       project_manager_id: undefined,
       chantier_id: chantierId,
-     
     };
     onSave(newFicheChantier);
   };
 
+  const renderGrid = (data: any) => {
+    let rows = [];
+    for (let i = 0; i < data.length; i += 2) {
+      rows.push(
+        <View
+          key={i}
+          style={{ flexDirection: "row", justifyContent: "space-around" }}
+        >
+          <TouchableOpacity
+            onPress={() => handleStaffSelect(data[i])}
+            style={{ flex: 1, alignItems: "center", padding: 10 }}
+          >
+            <Image source={workerIcon} style={{ width: 50, height: 50 }} />
+            <Text>{data[i].name}</Text>
+          </TouchableOpacity>
+          {data[i + 1] && (
+            <TouchableOpacity
+              onPress={() => handleStaffSelect(data[i + 1])}
+              style={{ flex: 1, alignItems: "center", padding: 10 }}
+            >
+              <Image source={workerIcon} style={{ width: 50, height: 50 }} />
+              <Text>{data[i + 1].name}</Text>
+            </TouchableOpacity>
+          )}
+        </View>
+      );
+    }
+    return rows;
+  };
+
+  const deleteStaffSelected = (id: number) => {
+    const staffSelectedCopy = staffSelected.filter((s) => s.id !== id);
+    const staffSelectedDeleted = staffSelected.find((s) => s.id === id);
+    if (staffSelectedDeleted) {
+      setStaffSelected(staffSelectedCopy);
+      setStaff([...staff, staffSelectedDeleted]);
+    }
+  };
+
   return (
-    <View className='w-9/10 h-8/10 z-50 bg-white border rounded-3xl items- justify-between'>
+    <View className="w-9/10 h-8/10 z-50 bg-white border rounded-3xl items- justify-between">
       {/*-------------------------------------------- Close Button ------------------------------------------------------*/}
-      <TouchableOpacity onPress={() => setShowAddModal(false)} style={{ position: 'absolute', top: 10, right: 10 }}>
-        <Image source={closeIcon} className='w-6 h-6' />
+      <TouchableOpacity
+        onPress={() => setShowAddModal(false)}
+        style={{ position: "absolute", top: 10, right: 10 }}
+        className={`z-40 ${showStaffList || showItemsList ? "hidden" : ""} `}
+      >
+        <Image source={closeIcon} className="w-6 h-6" />
       </TouchableOpacity>
 
       {/*-------------------------------------------- Ajouter staff ------------------------------------------------------*/}
-      <View className='h-5/10 w-full p-2 items-center justify-center border-2 border-blue-400'>
-        <TouchableOpacity onPress={() => setShowStaffList(!showStaffList)}>
-          <Image source={addPersonIcon} className='w-12 h-12' />
+      {showStaff && (
+      <View
+        className={`h-5/10 w-full p-2 items-center justify-center${
+          showStaffList ? "h-9/10" : "h-5/10"
+        }`}
+      >
+      {/*-------------------------------------------- Expand staff ------------------------------------------------------*/}
+        <TouchableOpacity className="self-start">
+          <Image source={expandIcon} className="w-4 h-4" />
         </TouchableOpacity>
-        {showStaffList && (
+
+        <TouchableOpacity onPress={() => setShowStaffList(!showStaffList)}>
+          <Image source={addPersonIcon} className="w-12 h-12" />
+        </TouchableOpacity>
+        {showStaffList ? (
+          <ScrollView className="w-full h-8/10">{renderGrid(staff)}</ScrollView>
+        ) : (
           <FlatList
-            className='w-full h-8/10 gap-2 flex-row border-2 border-red-400'
-            data={staff}
+            data={staffSelected}
             horizontal={true}
             keyExtractor={(item) => item.id.toString()}
             renderItem={({ item }) => (
-              <TouchableOpacity onPress={() => handleStaffSelect(item)} className='flex items-center justify-center p-2 shadow-2xl'>
-                <Image source={workerIcon} className='w-6 h-6' />
+              <View className="justify-between items-center p-8 border rounded-lg ml-4 ">
+
+      {/*-------------------------------------------- Delete Icon staff ------------------------------------------------------*/}
+                <TouchableOpacity
+                  onPress={() => deleteStaffSelected(item.id)}
+                  style={{ position: "absolute", top: 10, right: 10 }}
+                  className="z-40"
+                >
+                  <Image source={closeIcon} className="w-6 h-6" />
+                </TouchableOpacity>
+      {/*-------------------------------------------- staff card ------------------------------------------------------*/}
+                <Image source={workerIcon} className="w-6 h-6" />
                 <Text>{item.name}</Text>
-              </TouchableOpacity>
+                <Text>{item.phone}</Text>
+                <Text>{item.role}</Text>
+              </View>
             )}
+            style={{ width: "100%", height: "100%" }}
+            contentContainerStyle={{ alignItems: "center" }}
           />
         )}
-        <Text>Staff sélectionné :</Text>
-        <FlatList
-          data={staffSelected}
-          keyExtractor={(item) => item.id.toString()}
-          renderItem={({ item }) => (
-            <View>
-              <Text>{item.name}</Text>
-            </View>
-          )}
-        />
       </View>
-
+      )}
       {/*-------------------------------------------- Ajouter Item ------------------------------------------------------*/}
-      <View className='h-5/10 w-full p-2 items-center justify-center border-2 border-green-400'>
+      {showItem && (
+      <View
+        className={`h-5/10 w-full p-2 items-center justify-center border-2 border-green-400 ${
+          showStaffList ? "hidden" : ""
+        }`}
+      >
         <TouchableOpacity onPress={() => setShowItemsList(!showItemsList)}>
-          <Image source={outilsIcon} className='w-12 h-12' />
+          <Image source={outilsIcon} className="w-12 h-12" />
         </TouchableOpacity>
         {showItemsList && (
           <FlatList
-            className='w-full h-8/10 gap-2 flex-row border-2 border-red-400'
+            className="w-full h-8/10 gap-2 flex-row border-2 border-red-400"
             data={items}
             horizontal={true}
             keyExtractor={(item) => item.id.toString()}
             renderItem={({ item }) => (
-              <TouchableOpacity onPress={() => handleItemSelect(item)} className='flex items-center justify-center p-2 shadow-2xl'>
+              <TouchableOpacity
+                onPress={() => handleItemSelect(item)}
+                className="flex items-center justify-center p-2 shadow-2xl"
+              >
                 <Text>{item.Caption}</Text>
               </TouchableOpacity>
             )}
           />
         )}
-        <Text>Items sélectionnés :</Text>
         <FlatList
           data={itemsSelected}
           keyExtractor={(item) => item.id.toString()}
@@ -128,7 +208,7 @@ const CreerFicheChantier: React.FC<{ setShowAddModal: (value: boolean) => void, 
           )}
         />
       </View>
-
+      )}
       <Button title="Save Fiche Chantier" onPress={handleSubmit} />
     </View>
   );
