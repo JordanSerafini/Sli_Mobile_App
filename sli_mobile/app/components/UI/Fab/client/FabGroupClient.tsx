@@ -18,9 +18,9 @@ const FabPerso = () => {
         color={"white"} 
         actions={[
           { icon: 'plus', onPress: () => console.log('Pressed add'), color: theme.colors.primary },
-          { icon: 'star', label: 'Star', onPress: () => console.log('Pressed star'), color: theme.colors.primary },
-          { icon: 'email', label: 'Email', onPress: () => console.log('Pressed email'), color: theme.colors.primary },
-          { icon: 'account-plus', label: 'Ajout', onPress: () => console.log('Pressed notifications'), color: theme.colors.primary },
+          { icon: 'file-send', label: 'Formulaire satisfaction', onPress: () => console.log('Pressed email'), color: theme.colors.primary },
+          { icon: 'account-edit', label: 'Editer client', onPress: () => console.log('Pressed star'), color: theme.colors.primary },
+          { icon: 'account-plus', label: 'Ajouter client', onPress: () => console.log('Pressed notifications'), color: theme.colors.primary },
         ]}
         onStateChange={onStateChange}
         onPress={() => {
