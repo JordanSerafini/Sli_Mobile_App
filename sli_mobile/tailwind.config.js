@@ -182,6 +182,24 @@ module.exports = {
         "black-pers":"#343a40",
         "black-strong":"#212529",
         'blue-perso': '#26474E',
+
+        // Purple
+        'purplePerso-50': '#EDE5F2',
+        'purplePerso-100': '#DBCCE6',
+        'purplePerso-200': '#C9B2D9',
+        'purplePerso-300': '#B799CD',
+        'purplePerso-400': '#A57FC0',
+        'purplePerso-500': '#9366B4',
+        'purplePerso-600': '#814CA7',
+        'purplePerso-700': '#6F339B',
+        'purplePerso-800': '#5D198E',
+        'purplePerso-900': '#4B0082',
+        'purple-primary': '#663399',
+        
+        'theme-primary': '#6a5acd',
+        'theme-secondary': '#17657D',
+
+        
       },
 
       letterSpacing: {
