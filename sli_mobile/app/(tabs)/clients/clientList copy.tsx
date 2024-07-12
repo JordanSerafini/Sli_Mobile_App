@@ -23,7 +23,6 @@ const ClientScreen: React.FC = () => {
   const [limit, setLimit] = useState(25);
   const [offset, setOffset] = useState(0);
   const [loading, setLoading] = useState(true);
-  const [loadingMore, setLoadingMore] = useState(false);
   const [error, setError] = useState<any>(null);
   const [menuVisible, setMenuVisible] = useState(false);
   const [selectedPhones, setSelectedPhones] = useState<string[]>([]);
@@ -34,32 +33,34 @@ const ClientScreen: React.FC = () => {
 
   const router = useRouter();
 
-  const fetchCustomers = async (newSearch = false) => {
-    if (loadingMore) return;
-
-    setLoadingMore(true);
-    try {
-      const data = await getCustomersPaginated(searchQuery, limit, newSearch ? 0 : offset);
-      setCustomers((prevCustomers) => newSearch ? data.customers : [...prevCustomers, ...data.customers]);
-      setTotalPages(data.totalPages);
-      setTotalCustomers(data.totalCustomer);
-      setOffset(newSearch ? limit : offset + limit);
-    } catch (error) {
-      setError(error);
-    }
-    setLoadingMore(false);
-    setLoading(false);
-  };
-
   useEffect(() => {
-    setLoading(true);
-    fetchCustomers(true);
-  }, [searchQuery, limit]);
+    const fetchCustomers = async () => {
+      setLoading(true);
+      try {
+        const data = await getCustomersPaginated(searchQuery, limit, offset);
+        setCustomers(data.customers);
+        setTotalPages(data.totalPages);
+        setTotalCustomers(data.totalCustomer);
+        setLoading(false);
+      } catch (error) {
+        setError(error);
+        setLoading(false);
+      }
+    };
+    fetchCustomers();
+  }, [searchQuery, limit, offset]);
 
   const handleSearch = (text: string) => {
     setSearchQuery(text);
     setOffset(0);
-    setCustomers([]);
+  };
+
+  const handleNextPage = () => {
+    setOffset((prevOffset) => prevOffset + limit);
+  };
+
+  const handlePreviousPage = () => {
+    setOffset((prevOffset) => Math.max(prevOffset - limit, 0));
   };
 
   const handleCustomerPress = (customer: Customer) => {
@@ -84,16 +85,48 @@ const ClientScreen: React.FC = () => {
   return (
     <Provider>
       <View className="h-full w-screen items-center pt-2">
-        <View className="h-10 w-9.5/10 items-center bg-gray-200">
+        <View className="h-20 w-9.5/10 items-center ">
           {/*----------------------------------------------------------------------- Search input ------------------------------------------------------------------*/}
           <TextInput
-            className="h-10/10 w-full px-2 "
+            className="h-5/10 w-full px-2"
             value={searchQuery}
             onChangeText={handleSearch}
             placeholder="Search"
           />
+          {/*----------------------------------------------------------------------- NAV ------------------------------------------------------------------*/}
+          <View className="flex-row justify-between items-center  h-5/10 w-full">
+            <TouchableOpacity
+              onPress={handlePreviousPage}
+              disabled={offset === 0}
+              style={{ opacity: offset === 0 ? 0.5 : 1 }}
+            >
+              <View className="bg-blue-500 rounded-full p-">
+                <Icon
+                  name="arrow-left"
+                  size={30}
+                  color={offset === 0 ? "white" : "white"}
+                />
+              </View>
+            </TouchableOpacity>
+            <Text>
+              Page {offset / limit + 1} / {totalPages}
+            </Text>
+            <TouchableOpacity
+              onPress={handleNextPage}
+              disabled={offset + limit >= totalCustomers}
+              style={{ opacity: offset + limit >= totalCustomers ? 0.5 : 1 }}
+            >
+              <View className="bg-blue-500 rounded-full p-">
+                <Icon
+                  name="arrow-right"
+                  size={30}
+                  color={offset + limit >= totalCustomers ? "gray" : "white"}
+                />
+              </View>
+            </TouchableOpacity>
+          </View>
         </View>
-        {loading && offset === 0 ? (
+        {loading ? (
           <View className="h-8/10 flex items-center justify-center w-full gap-2 flex-row">
             <Text>Loading...</Text>
             <ActivityIndicator size="large" color="#0000ff" />
@@ -135,9 +168,6 @@ const ClientScreen: React.FC = () => {
                 )}
               </View>
             )}
-            onEndReached={() => fetchCustomers()}
-            onEndReachedThreshold={0.5}
-            ListFooterComponent={loadingMore ? <ActivityIndicator size="small" color="#0000ff" /> : null}
           />
         )}
         {/*----------------------------------------------------------------------- NAV ------------------------------------------------------------------*/}
