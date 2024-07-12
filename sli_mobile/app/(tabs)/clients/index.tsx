@@ -7,14 +7,13 @@ import ButtonPerso from "../../components/UI/ButtonPerso";
 import FabPerso from "../../components/UI/Fab/client/FabGroupClient";
 import { View } from "react-native";
 import ClientScreen from "./clientList";
+import MapClientScreen from "./clientMapAll";
 
 const IndexScreen: React.FC = () => {
 
   const [content, setContent] = React.useState("Liste" || "Carte");
 
-  const clientClick = () => {
-    router.push("/clients/clientList");
-  };
+
 
   const theme = {
     ...DefaultTheme,
@@ -31,23 +30,26 @@ const IndexScreen: React.FC = () => {
       <SafeAreaView className="flex items-center justify-start w-full h-full ">
         <View className="w-full flex-row items-center justify-evenly ">
           <ButtonPerso
-            mode={"contained"}
+            mode={ content== "Liste" ? "contained" : "outlined"}
             icon={"account"}
             text={"Liste"}
             css="w-4.5/10 self-center"
-            onPress={clientClick}
+            onPress={() => setContent("Liste")}
           />
           <ButtonPerso
-            mode={"outlined"}
+            mode={ content== "Carte" ? "contained" : "outlined"}
             icon={"map-marker-account"}
             text={"Carte"}
             css="w-4.5/10 self-center"
-            onPress={clientClick}
+            onPress={() => setContent("Carte")}
           />
         </View>
       <View>
         {content === "Liste" && (
           < ClientScreen />
+        )}
+        {content === "Carte" && (
+          < MapClientScreen />
         )}
           
       </View>

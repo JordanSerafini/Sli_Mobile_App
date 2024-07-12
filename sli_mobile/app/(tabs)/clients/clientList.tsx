@@ -84,7 +84,7 @@ const ClientScreen: React.FC = () => {
   return (
     <Provider>
       <View className="h-full w-screen items-center pt-2">
-        <View className="h-10 w-9.5/10 items-center bg-gray-200">
+        <View className="h-10 w-9.5/10 items-center bg-gray-200 mb-2">
           {/*----------------------------------------------------------------------- Search input ------------------------------------------------------------------*/}
           <TextInput
             className="h-10/10 w-full px-2 "
@@ -104,7 +104,7 @@ const ClientScreen: React.FC = () => {
           //*----------------------------------------------------------------------- Liste ------------------------------------------------------------------*/}
           <FlatList
             data={customers}
-            className="h-8/10 min-h-8/10 w-full"
+            className="max-h-8.5/10 w-full "
             keyExtractor={(item) =>
               item.Id ? item.Id.toString() : Math.random().toString()
             }
