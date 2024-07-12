@@ -169,7 +169,41 @@ const client_model = {
     }
   },
 
+  async getCustomersWithinRadius(req: Request, res: Response) {
+    const { latCentral, lonCentral, rayonM } = req.query;
+  
+    try {
+      // Convertir les paramètres en nombres
+      const lat = parseFloat(latCentral as string);
+      const lon = parseFloat(lonCentral as string);
+      const rayon = parseFloat(rayonM as string);
+  
+      if (isNaN(lat) || isNaN(lon) || isNaN(rayon)) {
+        return res.status(400).json({ error: 'Invalid parameters' });
+      }
+  
+      const query = `
+        SELECT *
+        FROM (
+          SELECT *,
+                 (6371000 * acos(cos(radians($1)) * cos(radians("Lat")) * cos(radians("Lon") - radians($2)) + sin(radians($1)) * sin(radians("Lat")))) AS distance
+          FROM "Customer"
+        ) AS subquery
+        WHERE distance < $3;
+      `;
+      const values = [lat, lon, rayon];
+      const result = await pgClient.query(query, values);
+      return res.status(200).json(result.rows);
+    } catch (err) {
+      console.error('Error fetching customers within radius:', err);
+      return res.status(500).json({ error: 'Internal Server Error' });
+    }
+  }
+  
+
+ 
 };
+
 
 //? Fonction écriture CSV
 function writeCustomerToCSV(filePath: string, customer: any): void {

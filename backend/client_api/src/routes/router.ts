@@ -11,4 +11,7 @@ router.post('/customer', client_controller.createCustomer);
 router.put('/customer/:id', client_controller.updateCustomerById);
 router.delete('/customer/:id', client_controller.deleteCustomerById);
 
+router.get('/customers/cluster', client_controller.getCustomersCluster);
+
+
 export default router;

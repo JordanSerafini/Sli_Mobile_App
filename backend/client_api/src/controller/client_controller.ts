@@ -65,6 +65,16 @@ const customer_controller = {
       res.status(500).json({ message: 'Internal server error' });
     }
   },
+
+  async getCustomersCluster(req: Request, res: Response) {
+    try {
+      await client_model.getCustomersWithinRadius(req, res);
+    } catch (err) {
+      console.error('Error in getCustomersCluster:', err);
+      res.status(500).json({ message: 'Internal server error' });
+    }
+  },
+
 };
 
 export default customer_controller;

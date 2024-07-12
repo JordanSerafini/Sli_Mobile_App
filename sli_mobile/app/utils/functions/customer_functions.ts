@@ -113,3 +113,22 @@ export const deleteCustomerById = async (id: number) => {
         throw error;
     }
 };
+
+export const getCustomersCluster = async ( latCentral: number, lonCentral: number, rayonM: number) => {
+    try {
+      const response = await fetch(
+        `${url.client}/customers/cluster?latCentral=${latCentral}&lonCentral=${lonCentral}&rayonM=${rayonM}`
+      );
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      const data = await response.json();
+      return data;
+    } catch (error) {
+      console.error('Error fetching customers cluster:', error);
+      throw error;
+    }
+    
+  };
+
+  
