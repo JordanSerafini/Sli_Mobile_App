@@ -28,7 +28,8 @@ const IndexScreen: React.FC = () => {
   return (
     <PaperProvider theme={theme}>
       <SafeAreaView className="flex items-center justify-start w-full h-full ">
-        <View className="w-full flex-row items-center justify-evenly ">
+        {/*---------------------------------------- Button Nav -----------------------------*/}
+        <View className="w-full flex-row items-center justify-evenly pb-2">
           <ButtonPerso
             mode={ content== "Liste" ? "contained" : "outlined"}
             icon={"account"}
@@ -44,6 +45,7 @@ const IndexScreen: React.FC = () => {
             onPress={() => setContent("Carte")}
           />
         </View>
+        {/*---------------------------------------- Content -----------------------------*/}
       <View>
         {content === "Liste" && (
           < ClientScreen />

@@ -11,7 +11,6 @@ import {
 import { useRouter } from "expo-router";
 import { getCustomersPaginated } from "../../utils/functions/customer_functions";
 import { Customer } from "../../@types/customer.type";
-import { SafeAreaView } from "react-native-safe-area-context";
 import { Menu, Provider } from "react-native-paper";
 import Icon from "react-native-vector-icons/MaterialIcons";
 
@@ -83,7 +82,7 @@ const ClientScreen: React.FC = () => {
 
   return (
     <Provider>
-      <View className="h-full w-screen items-center pt-2">
+      <View className="h-full w-screen items-center">
         <View className="h-10 w-9.5/10 items-center bg-gray-200 mb-2">
           {/*----------------------------------------------------------------------- Search input ------------------------------------------------------------------*/}
           <TextInput

@@ -30,13 +30,13 @@ const LoginScreen: React.FC = () => {
         },
         body: JSON.stringify({ email, password }),
       });
-      console.log("Login response:", response);
+      //console.log("Login response:", response);
       if (!response.ok) {
         const errorData = await response.json();
         throw new Error(errorData.error || "Error logging in");
       }
       const data = await response.json();
-      console.log("Login successful:", data);
+      //console.log("Login successful:", data);
       const token = data.accessToken;
       if (!token) {
         throw new Error("Token not found in response");
