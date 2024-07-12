@@ -17,12 +17,12 @@ const CustomerDetailScreen: React.FC = () => {
       navigation.setOptions({ title: `${name}` });
     }
 
-    const fetchCustomer = async () => {
+    const fetchCustomer = async (id: number) => {
       setLoading(true);
       try {
-        const data = await getCustomerById(id as string);
+        const data = await getCustomerById(id);
         setCustomer(data);
-        console.log('Customer data:', data);
+        //console.log('Customer data:', data);
         setLoading(false);
       } catch (error) {
         console.error('Error fetching customer:', error);
@@ -31,7 +31,14 @@ const CustomerDetailScreen: React.FC = () => {
       }
     };
 
-    fetchCustomer();
+    // Conversion de id en nombre
+    const numericId = Number(id);
+    if (!isNaN(numericId)) {
+      fetchCustomer(numericId);
+    } else {
+      setError(new Error('Invalid customer ID'));
+      setLoading(false);
+    }
   }, [id, name, navigation]);
 
   return (
@@ -44,7 +51,6 @@ const CustomerDetailScreen: React.FC = () => {
         <View>
           <Text>ID: {customer.Id}</Text>
           <Text>Name: {customer.Name}</Text>
-          {/* Add other customer fields here */}
         </View>
       ) : (
         <Text>No customer found</Text>

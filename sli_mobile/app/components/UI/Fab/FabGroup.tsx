@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { FAB, Portal } from 'react-native-paper';
 
-const MyComponent = () => {
+const FabPerso = () => {
   const [state, setState] = React.useState({ open: false });
 
   const onStateChange = ({ open }: { open: boolean }) => setState({ open });
@@ -43,4 +43,4 @@ const MyComponent = () => {
   );
 };
 
-export default MyComponent;
+export default FabPerso;
