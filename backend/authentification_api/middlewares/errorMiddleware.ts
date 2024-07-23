@@ -2,13 +2,17 @@ import { Request, Response, NextFunction } from 'express';
 import logger from './logger';
 
 const errorMiddleware = (err: any, req: Request, res: Response, next: NextFunction) => {
-  logger.error(err.message, {
+  logger.error('An error occurred', {
+    message: err.message,
     stack: err.stack,
+    url: req.originalUrl,
     method: req.method,
-    url: req.url,
-    status: res.statusCode,
+    ip: req.ip
   });
-  res.status(500).json({ message: 'Internal Server Error' });
+
+  res.status(500).json({
+    message: 'Internal Server Error',
+  });
 };
 
 export default errorMiddleware;
