@@ -42,6 +42,16 @@ const CustomerDetailScreen: React.FC = () => {
     }
   }, [id, name, navigation]);
 
+  const amountColor = (amount: number) => {
+    if (amount > 0) {
+      return "text-green-500";
+    } else if (amount < 0) {
+      return "text-red-500";
+    } else {
+      return "text-gray-500";
+    }
+  };
+
   return (
     <SafeAreaView className="w-full h-full">
       {loading ? (
@@ -52,8 +62,8 @@ const CustomerDetailScreen: React.FC = () => {
         <View className="gap-4">
           {/*<Text className="text-lg font-bold">{customer.Id}</Text> */}
           <Text className="text-xl italic text-center">
-            {customer.MainInvoicingContact_FirstName}{" "}
-            {customer.MainInvoicingContact_Name}{" "}
+            {customer.MainInvoicingContact_FirstName}
+            {customer.MainInvoicingContact_Name}
           </Text>
           {customer.MainInvoicingContact_Email ? (
             <View className="flex-row items-center gap-2 ">
@@ -62,8 +72,15 @@ const CustomerDetailScreen: React.FC = () => {
             </View>
           ) : (
             <Text>Pas d'email renseigné</Text>
-          
           )}
+          {customer.ExtendedCurrentAmount &&
+          <View>
+            <Text>Compte courant :</Text>
+            <Text className={amountColor(customer.ExtendedCurrentAmount)}>
+              {customer.ExtendedCurrentAmount}
+            </Text>
+          </View>
+          }
         </View>
       ) : (
         <Text>No customer found</Text>
