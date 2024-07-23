@@ -1,13 +1,14 @@
+import { logError } from '../../middlewares/logger';
 import { client_model } from '../model/client_model';
 import { Request, Response } from 'express';
 
 
 const customer_controller = {
-  async getAllCustomers(req: Request, res: Response) {
+   async getAllCustomers(req: Request, res: Response) {
     try {
       await client_model.getAllCustomers(req, res);
     } catch (err) {
-      console.error('Error in getAllCustomers:', err);
+      logError(err, req);
       res.status(500).json({ message: 'Internal server error' });
     }
   },
@@ -16,7 +17,7 @@ const customer_controller = {
     try {
       await client_model.getCustomerById(req, res);
     } catch (err) {
-      console.error('Error in getCustomerById:', err);
+      logError(err, req);
       res.status(500).json({ message: 'Internal server error' });
     }
   },
@@ -25,7 +26,7 @@ const customer_controller = {
     try {
       await client_model.getCustomerByName(req, res);
     } catch (err) {
-      console.error('Error in getCustomerByName:', err);
+      logError(err, req);
       res.status(500).json({ message: 'Internal server error' });
     }
   },
@@ -34,7 +35,7 @@ const customer_controller = {
     try {
       await client_model.getCustomersPaginated(req, res);
     } catch (err) {
-      console.error('Error in getCustomersPaginated:', err);
+      logError(err, req);
       res.status(500).json({ message: 'Internal server error' });
     }
   },
@@ -43,7 +44,7 @@ const customer_controller = {
     try {
       await client_model.deleteCustomerById(req, res);
     } catch (err) {
-      console.error('Error in deleteCustomerById:', err);
+      logError(err, req);
       res.status(500).json({ message: 'Internal server error' });
     }
   },
@@ -52,7 +53,7 @@ const customer_controller = {
     try {
       await client_model.updateCustomerById(req, res);
     } catch (err) {
-      console.error('Error in updateCustomerById:', err);
+      logError(err, req);
       res.status(500).json({ message: 'Internal server error' });
     }
   },
@@ -61,7 +62,7 @@ const customer_controller = {
     try {
       await client_model.createCustomer(req, res);
     } catch (err) {
-      console.error('Error in createCustomer:', err);
+      logError(err, req);
       res.status(500).json({ message: 'Internal server error' });
     }
   },
@@ -70,11 +71,10 @@ const customer_controller = {
     try {
       await client_model.getCustomersWithinRadius(req, res);
     } catch (err) {
-      console.error('Error in getCustomersCluster:', err);
+      logError(err, req);
       res.status(500).json({ message: 'Internal server error' });
     }
   },
-
 };
 
 export default customer_controller;

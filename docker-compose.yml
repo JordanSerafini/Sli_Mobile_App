@@ -34,7 +34,8 @@ services:
     volumes:
       - ./backend/client_api:/app
       - /app/node_modules
-      - ./backend/middlewares:/app/middlewares
+      - ./backend/client_api/logs:/app/logs
+
     networks:
       - app-network
 

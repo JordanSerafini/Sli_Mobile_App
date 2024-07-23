@@ -18,14 +18,14 @@ const logger = createLogger({
     format.splat(),
     format.json()
   ),
-  defaultMeta: { service: 'authentification_api' },
+  defaultMeta: { service: 'client_api' },
   transports: [
     new DailyRotateFile({
       filename: path.join(logDirectory, 'combined-%DATE%.log'),
       datePattern: 'YYYY-MM-DD',
       zippedArchive: true,
       maxSize: '20m',
-      auditFile: path.join(__dirname, '../logs/audit.json')
+      auditFile: path.join(logDirectory, 'audit.json')  
     }),
     new transports.Console({
       format: format.combine(
@@ -39,5 +39,16 @@ const logger = createLogger({
 logger.on('error', (err) => {
   console.error('Error occurred in logger:', err);
 });
+
+// Fonction d'assistance pour enregistrer les erreurs
+export const logError = (err: any, req: any) => {
+  logger.error('An error occurred', {
+    message: err.message,
+    stack: err.stack,
+    url: req.originalUrl,
+    method: req.method,
+    ip: req.ip
+  });
+};
 
 export default logger;
