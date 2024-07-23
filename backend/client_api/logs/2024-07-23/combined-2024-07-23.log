@@ -1,5 +1,4 @@
-{"ip":"172.18.0.1","level":"error","message":"Erreur intentionnelle pour le test","metadata":{"ip":"172.18.0.1","method":"GET","service":"client_api","stack":"Error: Erreur intentionnelle pour le test\n    at getCustomersPaginated (/app/src/controller/client_controller.ts:36:12)\n    at Layer.handle [as handle_request] (/app/node_modules/express/lib/router/layer.js:95:5)\n    at next (/app/node_modules/express/lib/router/route.js:149:13)\n    at Route.dispatch (/app/node_modules/express/lib/router/route.js:119:3)\n    at Layer.handle [as handle_request] (/app/node_modules/express/lib/router/layer.js:95:5)\n    at /app/node_modules/express/lib/router/index.js:284:15\n    at Function.process_params (/app/node_modules/express/lib/router/index.js:346:12)\n    at next (/app/node_modules/express/lib/router/index.js:280:10)\n    at Function.handle (/app/node_modules/express/lib/router/index.js:175:3)\n    at router (/app/node_modules/express/lib/router/index.js:47:12)","timestamp":"2024-07-23 14:01:37","url":"/customers/paginated?searchQuery=&limit=25&offset=0"},"method":"GET","stack":"Error: Erreur intentionnelle pour le test\n    at getCustomersPaginated (/app/src/controller/client_controller.ts:36:12)\n    at Layer.handle [as handle_request] (/app/node_modules/express/lib/router/layer.js:95:5)\n    at next (/app/node_modules/express/lib/router/route.js:149:13)\n    at Route.dispatch (/app/node_modules/express/lib/router/route.js:119:3)\n    at Layer.handle [as handle_request] (/app/node_modules/express/lib/router/layer.js:95:5)\n    at /app/node_modules/express/lib/router/index.js:284:15\n    at Function.process_params (/app/node_modules/express/lib/router/index.js:346:12)\n    at next (/app/node_modules/express/lib/router/index.js:280:10)\n    at Function.handle (/app/node_modules/express/lib/router/index.js:175:3)\n    at router (/app/node_modules/express/lib/router/index.js:47:12)","url":"/customers/paginated?searchQuery=&limit=25&offset=0"}
-2024-07-23 14:03:53 [client_api] error: Erreur intentionnelle pour le test 
+2024-07-23 14:09:56 [client_api] error: Erreur intentionnelle pour le test
 Error: Erreur intentionnelle pour le test
     at getCustomersPaginated (/app/src/controller/client_controller.ts:36:12)
     at Layer.handle [as handle_request] (/app/node_modules/express/lib/router/layer.js:95:5)
@@ -10,13 +9,16 @@ Error: Erreur intentionnelle pour le test
     at Function.process_params (/app/node_modules/express/lib/router/index.js:346:12)
     at next (/app/node_modules/express/lib/router/index.js:280:10)
     at Function.handle (/app/node_modules/express/lib/router/index.js:175:3)
-    at router (/app/node_modules/express/lib/router/index.js:47:12) 
+    at router (/app/node_modules/express/lib/router/index.js:47:12)
 {
   "url": "/customers/paginated?searchQuery=&limit=25&offset=0",
   "method": "GET",
   "ip": "172.18.0.1"
 }
-2024-07-23 14:04:42 [client_api] error: Erreur intentionnelle pour le test 
+
+--------------------------
+
+2024-07-23 14:10:13 [client_api] error: Erreur intentionnelle pour le test
 Error: Erreur intentionnelle pour le test
     at getCustomersPaginated (/app/src/controller/client_controller.ts:36:12)
     at Layer.handle [as handle_request] (/app/node_modules/express/lib/router/layer.js:95:5)
@@ -27,13 +29,16 @@ Error: Erreur intentionnelle pour le test
     at Function.process_params (/app/node_modules/express/lib/router/index.js:346:12)
     at next (/app/node_modules/express/lib/router/index.js:280:10)
     at Function.handle (/app/node_modules/express/lib/router/index.js:175:3)
-    at router (/app/node_modules/express/lib/router/index.js:47:12) 
+    at router (/app/node_modules/express/lib/router/index.js:47:12)
 {
   "url": "/customers/paginated?searchQuery=&limit=25&offset=0",
   "method": "GET",
   "ip": "172.18.0.1"
 }
-2024-07-23 14:05:05 [client_api] error: Erreur intentionnelle pour le test 
+
+--------------------------
+
+2024-07-23 14:10:19 [client_api] error: Erreur intentionnelle pour le test
 Error: Erreur intentionnelle pour le test
     at getCustomersPaginated (/app/src/controller/client_controller.ts:36:12)
     at Layer.handle [as handle_request] (/app/node_modules/express/lib/router/layer.js:95:5)
@@ -44,9 +49,32 @@ Error: Erreur intentionnelle pour le test
     at Function.process_params (/app/node_modules/express/lib/router/index.js:346:12)
     at next (/app/node_modules/express/lib/router/index.js:280:10)
     at Function.handle (/app/node_modules/express/lib/router/index.js:175:3)
-    at router (/app/node_modules/express/lib/router/index.js:47:12) 
+    at router (/app/node_modules/express/lib/router/index.js:47:12)
 {
   "url": "/customers/paginated?searchQuery=&limit=25&offset=0",
   "method": "GET",
   "ip": "172.18.0.1"
 }
+
+--------------------------
+
+2024-07-23 14:10:34 [client_api] error: Erreur intentionnelle pour le test
+Error: Erreur intentionnelle pour le test
+    at getCustomersPaginated (/app/src/controller/client_controller.ts:36:12)
+    at Layer.handle [as handle_request] (/app/node_modules/express/lib/router/layer.js:95:5)
+    at next (/app/node_modules/express/lib/router/route.js:149:13)
+    at Route.dispatch (/app/node_modules/express/lib/router/route.js:119:3)
+    at Layer.handle [as handle_request] (/app/node_modules/express/lib/router/layer.js:95:5)
+    at /app/node_modules/express/lib/router/index.js:284:15
+    at Function.process_params (/app/node_modules/express/lib/router/index.js:346:12)
+    at next (/app/node_modules/express/lib/router/index.js:280:10)
+    at Function.handle (/app/node_modules/express/lib/router/index.js:175:3)
+    at router (/app/node_modules/express/lib/router/index.js:47:12)
+{
+  "url": "/customers/paginated?searchQuery=&limit=25&offset=0",
+  "method": "GET",
+  "ip": "172.18.0.1"
+}
+
+--------------------------
+

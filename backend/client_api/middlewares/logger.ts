@@ -3,7 +3,7 @@ import path from 'path';
 import { fileURLToPath } from 'url';
 import DailyRotateFile from 'winston-daily-rotate-file';
 
-// Obtenir __dirname dans un module ES
+// Obtenir __filename et __dirname dans un module ES
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
@@ -13,20 +13,23 @@ const logDirectory = path.join(__dirname, '../logs', new Date().toISOString().sp
 const logger = createLogger({
   level: 'info',
   format: format.combine(
-    format.timestamp({ format: 'YYYY-MM-DD HH:mm:ss' }),
+    format.timestamp({ format: 'DD-MM-YYYY HH:mm:ss' }),
     format.errors({ stack: true }),
     format.splat(),
     format.printf(({ timestamp, level, message, service, stack, ...meta }) => {
-      return `${timestamp} [${service}] ${level}: ${message} ${stack ? '\n' + stack : ''} ${Object.keys(meta).length ? '\n' + JSON.stringify(meta, null, 2) : ''}`;
-    })  ),
+      const metaString = Object.keys(meta).length ? '\n' + JSON.stringify(meta, null, 2) : '';
+      const stackString = stack ? '\n' + stack : '';
+      return `${timestamp} [${service}] ${level}: ${message}${stackString}${metaString}\n\n------------------------------------------------------------------------------------------------\n`;
+    })
+  ),
   defaultMeta: { service: 'client_api' },
   transports: [
     new DailyRotateFile({
       filename: path.join(logDirectory, 'combined-%DATE%.log'),
-      datePattern: 'YYYY-MM-DD',
+      datePattern: 'DD-MM-YYYY',
       zippedArchive: true,
       maxSize: '20m',
-      auditFile: path.join(logDirectory, 'audit.json')  
+      auditFile: path.join(logDirectory, 'audit.json')
     }),
     new transports.Console({
       format: format.combine(
