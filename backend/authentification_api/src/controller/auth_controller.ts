@@ -13,7 +13,7 @@ const auth_controller = {
     try {
       const user: UserType | null = await login(email, password);
       if (!user) {
-        logError(new Error('Invalid credentials'), req);
+        logError(new Error('Invalid credentials'), req, { email });
         return res.status(401).json({ message: 'Invalid credentials' });
       }
 
@@ -38,7 +38,7 @@ const auth_controller = {
       });
       res.json({ accessToken });
     } catch (error) {
-      logError(error, req);
+      logError(error, req, { email });
       next(new Error(`Error during login: ${error.message}`));
     }
   }

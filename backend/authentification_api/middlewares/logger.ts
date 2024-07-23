@@ -7,11 +7,9 @@ import DailyRotateFile from 'winston-daily-rotate-file';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-// Obtenir la date actuelle au format DD-MM-YYYY
 const today = new Date();
-const formattedDate = today.toLocaleDateString('fr-FR').split('/').reverse().join('-'); // Format DD-MM-YYYY
+const formattedDate = today.toLocaleDateString('fr-FR').split('/').reverse().join('-'); 
 
-// Créer un répertoire de logs avec la date du jour au format DD-MM-YYYY
 const logDirectory = path.join(__dirname, '../logs', formattedDate);
 
 const logger = createLogger({
@@ -30,7 +28,7 @@ const logger = createLogger({
   transports: [
     new DailyRotateFile({
       filename: path.join(logDirectory, 'combined-%DATE%.log'),
-      datePattern: 'DD-MM-YYYY',
+      datePattern: 'DD-MM-YYYY',  
       zippedArchive: true,
       maxSize: '20m',
       auditFile: path.join(logDirectory, 'audit.json')
@@ -49,13 +47,14 @@ logger.on('error', (err) => {
 });
 
 // Fonction d'assistance pour enregistrer les erreurs
-export const logError = (err: any, req: any) => {
+export const logError = (err: any, req: any, meta: any = {}) => {
   logger.error('An error occurred', {
     message: err.message,
     stack: err.stack,
     url: req.originalUrl,
     method: req.method,
-    ip: req.ip
+    ip: req.ip,
+    ...meta
   });
 };
 
