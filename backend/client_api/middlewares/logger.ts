@@ -16,8 +16,9 @@ const logger = createLogger({
     format.timestamp({ format: 'YYYY-MM-DD HH:mm:ss' }),
     format.errors({ stack: true }),
     format.splat(),
-    format.json()
-  ),
+    format.printf(({ timestamp, level, message, service, stack, ...meta }) => {
+      return `${timestamp} [${service}] ${level}: ${message} ${stack ? '\n' + stack : ''} ${Object.keys(meta).length ? '\n' + JSON.stringify(meta, null, 2) : ''}`;
+    })  ),
   defaultMeta: { service: 'client_api' },
   transports: [
     new DailyRotateFile({

@@ -1,3 +1,4 @@
 {"level":"info","message":"Login successful for email: jordan@solution-logique.fr","service":"authentification_api","timestamp":"2024-07-23 13:55:40"}
 {"level":"warn","message":"Invalid credentials for email: jordan@solution-logique.fru","service":"authentification_api","timestamp":"2024-07-23 13:55:50"}
 {"level":"info","message":"Login successful for email: jordan@solution-logique.fr","service":"authentification_api","timestamp":"2024-07-23 13:55:56"}
+{"level":"info","message":"Login successful for email: jordan@solution-logique.fr","service":"authentification_api","timestamp":"2024-07-23 14:01:34"}
