@@ -19,21 +19,19 @@ const CustomerDetailScreen: React.FC = () => {
       navigation.setOptions({ title: `${name}` });
     }
 
-    const fetchCustomer = async (id: number) => {
+    const fetchCustomer = async (customerId: number) => {
       setLoading(true);
       try {
-        const data = await getCustomerById(id);
+        const data = await getCustomerById(customerId);
         setCustomer(data);
-        //console.log('Customer data:', data);
         setLoading(false);
-      } catch (error) {
-        console.error("Error fetching customer:", error);
-        setError(error);
+      } catch (fetchError) {
+        console.error("Error fetching customer:", fetchError);
+        setError(fetchError);
         setLoading(false);
       }
     };
 
-    // Conversion de id en nombre
     const numericId = Number(id);
     if (!isNaN(numericId)) {
       fetchCustomer(numericId);
@@ -61,19 +59,16 @@ const CustomerDetailScreen: React.FC = () => {
         <Text className="text-red-500">Error: {error.message}</Text>
       ) : customer ? (
         <View className="gap-4 w-9.5/10 items-center">
-          {/*<Text className="text-lg font-bold">{customer.Id}</Text> */}
           <Text className="text-xl italic">
             <Text>{customer.MainInvoicingContact_FirstName} </Text>
             <Text>{customer.MainInvoicingContact_Name}</Text>
           </Text>
-          {customer.MainInvoicingContact_Email ? (
+          {customer.MainInvoicingContact_Email && (
             <View className="flex-row self-start gap-2 ">
               <Icon name="mail" size={24} color="#3B82F6" />
               <Text>{customer.MainInvoicingContact_Email}</Text>
             </View>
-          ) : (
-            <Text>Pas d'email renseigné</Text>
-          )}
+          ) }
           <View className="flex-row justify-between w-full">
             {customer.CurrentAmount && (
               <View className="flex-row items-center gap-1">
@@ -84,7 +79,7 @@ const CustomerDetailScreen: React.FC = () => {
               </View>
             )}
             {customer.Civility && (
-              <View className=" ">
+              <View>
                 <Text className="font-bold text-white bg-green-800 px-4 py-2 rounded-full">
                   {customer.Civility}
                 </Text>
@@ -92,37 +87,34 @@ const CustomerDetailScreen: React.FC = () => {
             )}
           </View>
           {customer.NotesClear && (
-          <ScrollView className="w-full max-h-3/10 p-4 rounded-xl bg-white">
-           <Text>{customer.NotesClear}</Text> 
-          </ScrollView>
+            <ScrollView className="w-full max-h-3/10 overflow-auto p-4 rounded-xl bg-white">
+              <Text>{customer.NotesClear}</Text>
+            </ScrollView>
           )}
-
           {customer.Lat && customer.Lon ? (
-
-          <MapView
-            style={{ width: "100%", height: 250 }}
-            initialRegion={{
-              latitude: Number(customer.Lat),
-              longitude: Number(customer.Lon),
-              latitudeDelta: 0.0922,
-              longitudeDelta: 0.0421,
-            }}
-          >
-            <Marker
-              coordinate={{
+            <MapView
+              style={{ width: "100%", height: 250 }}
+              initialRegion={{
                 latitude: Number(customer.Lat),
                 longitude: Number(customer.Lon),
+                latitudeDelta: 0.0922,
+                longitudeDelta: 0.0421,
               }}
-              title={customer?.Name ?? ''}
-              description={customer?.MainDeliveryAddress_Address1 ?? ''}
-            />
-          </MapView>
-          ): (
-            <Text>Pas d'adresse a afficher</Text>
-          )
-        
-        }
-
+            >
+              <Marker
+                coordinate={{
+                  latitude: Number(customer.Lat),
+                  longitude: Number(customer.Lon),
+                }}
+                title={customer?.Name ?? ''}
+                description={customer?.MainDeliveryAddress_Address1 ?? ''}
+              >
+                
+              </Marker>
+            </MapView>
+          ) : (
+            <Text>Pas d'adresse à afficher</Text>
+          )}
         </View>
       ) : (
         <Text>No customer found</Text>
