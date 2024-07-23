@@ -7,13 +7,16 @@ import DailyRotateFile from 'winston-daily-rotate-file';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-// Créer un répertoire de logs avec la date du jour
-const logDirectory = path.join(__dirname, '../logs', new Date().toISOString().split('T')[0].replace(/-/g, '-'));
+// Obtenir la date actuelle au format DD-MM-YYYY
+const today = new Date();
+const formattedDate = today.toLocaleDateString('fr-FR').split('/').reverse().join('-'); 
+
+const logDirectory = path.join(__dirname, '../logs', formattedDate);
 
 const logger = createLogger({
   level: 'info',
   format: format.combine(
-    format.timestamp({ format: 'DD-MM-YYYY HH:mm:ss' }),
+    format.timestamp({ format: 'YYYY-MM-YYYY HH:mm:ss' }),
     format.errors({ stack: true }),
     format.splat(),
     format.printf(({ timestamp, level, message, service, stack, ...meta }) => {

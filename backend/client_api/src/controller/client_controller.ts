@@ -33,7 +33,7 @@ const customer_controller = {
 
   async getCustomersPaginated(req: Request, res: Response) {
     try {
-     //throw new Error('Erreur intentionnelle pour le test');
+     // throw new Error('Erreur intentionnelle pour le test');
       await client_model.getCustomersPaginated(req, res);
     } catch (err) {
       logError(err, req);

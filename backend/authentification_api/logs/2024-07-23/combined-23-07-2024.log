@@ -1,4 +1,4 @@
-23-07-2024 14:19:12 [authentification_api] error: Invalid credentials
+23-07-2024 14:25:00 [authentification_api] error: Invalid credentials
 Error: Invalid credentials
     at login (/app/src/controller/auth_controller.ts:16:18)
     at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
@@ -10,9 +10,10 @@ Error: Invalid credentials
 
 --------------------------------------------------------------
 
-23-07-2024 14:19:17 [authentification_api] error: Invalid credentials
+23-07-2024 14:25:03 [authentification_api] error: Invalid credentials
 Error: Invalid credentials
     at login (/app/src/controller/auth_controller.ts:16:18)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
 {
   "url": "/login",
   "method": "POST",
@@ -21,7 +22,7 @@ Error: Invalid credentials
 
 --------------------------------------------------------------
 
-23-07-2024 14:19:20 [authentification_api] info: Login successful for email: jordan@solution-logique.fr
+23-07-2024 14:25:06 [authentification_api] info: Login successful for email: jordan@solution-logique.fr
 {
   "ip": "172.18.0.1",
   "url": "/login",
@@ -30,7 +31,7 @@ Error: Invalid credentials
 
 --------------------------------------------------------------
 
-23-07-2024 14:19:27 [authentification_api] info: Login successful for email: jordan@solution-logique.fr
+23-07-2024 14:25:11 [authentification_api] info: Login successful for email: jordan@solution-logique.fr
 {
   "ip": "172.18.0.1",
   "url": "/login",
@@ -39,7 +40,7 @@ Error: Invalid credentials
 
 --------------------------------------------------------------
 
-23-07-2024 14:19:33 [authentification_api] info: Login successful for email: jordan@solution-logique.fr
+23-07-2024 14:25:16 [authentification_api] info: Login successful for email: jordan@solution-logique.fr
 {
   "ip": "172.18.0.1",
   "url": "/login",
@@ -48,7 +49,7 @@ Error: Invalid credentials
 
 --------------------------------------------------------------
 
-23-07-2024 14:19:40 [authentification_api] info: Login successful for email: jordan@solution-logique.fr
+23-07-2024 14:25:21 [authentification_api] info: Login successful for email: jordan@solution-logique.fr
 {
   "ip": "172.18.0.1",
   "url": "/login",
