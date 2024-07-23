@@ -15,8 +15,8 @@ interface UserType {
 
 const login = async (email: string, plainPassword: string): Promise<UserType | null> => {
     const query = `
-        SELECT id, email, role, nom, prenom, isShadow, utilisateur_id, position, telephone, password
-        FROM Utilisateurs
+        SELECT id, email, role, nom, prenom, telephone, password
+        FROM "Utilisateurs"
         WHERE email = $1;
     `;
     try {

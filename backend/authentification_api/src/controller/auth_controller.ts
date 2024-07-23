@@ -24,9 +24,6 @@ const auth_controller = {
                     role: user.role, 
                     nom: user.nom, 
                     prenom: user.prenom, 
-                    isShadow: user.isShadow, 
-                    utilisateur_id: user.utilisateur_id, 
-                    position: user.position, 
                     telephone: user.telephone 
                 },
                 process.env.JWT_SECRET as string,

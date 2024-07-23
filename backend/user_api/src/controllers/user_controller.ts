@@ -2,7 +2,7 @@ import { createUser, getAllUsers, getUserById, updateUser, deleteUser } from '..
 
 // Créer un utilisateur
 const createUtilisateur = async (req, res) => {
-    const { nom, prenom, email, password, role, isShadow, utilisateur_id, position, telephone } = req.body;
+    const { nom, prenom, email, password, role, telephone } = req.body;
     try {
       const newUser = await createUser(
         nom,
@@ -10,9 +10,6 @@ const createUtilisateur = async (req, res) => {
         email,
         password,
         role,
-        isShadow,
-        utilisateur_id,
-        position,
         telephone
       );
       res.status(201).json(newUser);

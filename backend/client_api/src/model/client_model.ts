@@ -23,7 +23,7 @@ const client_model = {
 
   async getCustomerById(req: Request, res: Response) {
     const id = parseInt(req.params.id, 10);
-    const query = `SELECT * FROM "Customer" WHERE id = $1;`;
+    const query = `SELECT * FROM "Customer" WHERE "Id" = $1;`;
     try {
       const result = await pgClient.query(query, [id]);
       if (result.rows.length === 0) {

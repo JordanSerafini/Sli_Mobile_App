@@ -2,14 +2,14 @@ import { pgClient } from '../client/client';
 import bcrypt from 'bcryptjs';
 
 // Fonction pour créer un utilisateur
-const createUser = async (nom, prenom, email, password, role = 1, isShadow = false, utilisateur_id = null, position = null, telephone = null) => {
+const createUser = async (nom, prenom, email, password, role, telephone = null) => {
     const hashedPassword = await bcrypt.hash(password, 10);
     const query = `
-      INSERT INTO Utilisateurs (nom, prenom, email, password, role, isShadow, utilisateur_id, position, telephone)
-      VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)
+      INSERT INTO "Utilisateurs" (nom, prenom, email, password, role, telephone)
+      VALUES ($1, $2, $3, $4, $5, $6)
       RETURNING *;
     `;
-    const values = [nom, prenom, email, hashedPassword, role, isShadow, utilisateur_id, position, telephone];
+    const values = [nom, prenom, email, hashedPassword, role, telephone];
     try {
       const res = await pgClient.query(query, values);
       return res.rows[0];
