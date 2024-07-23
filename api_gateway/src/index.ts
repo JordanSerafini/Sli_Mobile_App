@@ -5,7 +5,7 @@ import dotenv from 'dotenv';
 dotenv.config();
 
 const app = express();
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 3000;
 
 // Configuration des routes pour chaque service backend
 const services = {
@@ -40,6 +40,7 @@ app.use('/clients', createProxyMiddleware({
   pathRewrite: {
     '^/clients': '', 
   },
+  logLevel: 'debug',
 }));
 
 // Proxy pour le service des items
