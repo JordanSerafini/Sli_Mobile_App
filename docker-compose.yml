@@ -1,4 +1,18 @@
 services:
+  api_gateway:
+    build: ./api_gateway
+    ports:
+      - "3000:3000"
+    environment:
+      - PORT=3000
+    networks:
+      - app-network
+    depends_on:
+      - user_api
+      - authentification_api
+      - client_api
+      - item_api
+
   user_api:
     build:
       context: ./backend/user_api
@@ -57,7 +71,6 @@ services:
       - ./backend/authentification_api/logs:/app/logs
     networks:
       - app-network
-
 
   item_api:
     container_name: item_api
