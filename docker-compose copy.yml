@@ -1,0 +1,105 @@
+services:
+  user_api:
+    build:
+      context: ./backend/user_api
+      dockerfile: Dockerfile
+    ports:
+      - "5001:5001"
+    environment:
+      - DB_USER=jordans
+      - DB_HOST=host.docker.internal
+      - DB_NAME=SLI
+      - DB_PASSWORD=slitest
+      - DB_PORT=5432
+    volumes:
+      - ./backend/user_api:/app
+      - /app/node_modules
+      - ./backend/middlewares:/app/middlewares 
+
+  client_api:
+    container_name: client_api
+    build:
+      context: ./backend/client_api
+      dockerfile: Dockerfile
+    ports:
+      - "5003:5003"
+    environment:
+      - DB_USER=jordans
+      - DB_HOST=host.docker.internal
+      - DB_NAME=SLI
+      - DB_PASSWORD=slitest
+      - DB_PORT=5432
+    volumes:
+      - ./backend/client_api:/app
+      - /app/node_modules
+      - ./backend/middlewares:/app/middlewares
+
+  authentification_api:
+    build:
+      context: ./backend/authentification_api
+      dockerfile: Dockerfile
+    ports:
+      - "5002:5002"
+    environment:
+      - DB_USER=jordans
+      - DB_HOST=host.docker.internal
+      - DB_NAME=SLI
+      - DB_PASSWORD=slitest
+      - DB_PORT=5432
+    volumes:
+      - ./backend/authentification_api:/app
+      - /app/node_modules
+      - ./backend/middlewares:/app/middlewares 
+
+  item_api:
+    container_name: item_api
+    build:
+      context: ./backend/item_api
+      dockerfile: Dockerfile
+    ports:
+      - "5004:5004"
+    environment:
+      - DB_USER=jordans
+      - DB_HOST=host.docker.internal
+      - DB_NAME=SLI
+      - DB_PASSWORD=slitest
+      - DB_PORT=5432
+    volumes:
+      - ./backend/item_api:/app
+      - /app/node_modules
+      - ./backend/middlewares:/app/middlewares
+
+  synchro_api:
+    container_name: synchro_api
+    build:
+      context: ./backend/synchro_api
+      dockerfile: Dockerfile
+    ports:
+      - "5007:5007"
+    environment:
+      - DB_USER=jordans
+      - DB_HOST=host.docker.internal
+      - DB_NAME=SLI
+      - DB_PASSWORD=slitest
+      - DB_PORT=5432
+    volumes:
+      - ./backend/synchro_api:/app
+      - /app/node_modules
+      - ./backend/middlewares:/app/middlewares
+    depends_on:
+      - postgres
+
+  postgres:
+    image: postgres:latest
+    container_name: postgres
+    environment:
+      POSTGRES_USER: jordans
+      POSTGRES_PASSWORD: slitest
+      POSTGRES_DB: SLI
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+
+volumes:
+  postgres_data:
