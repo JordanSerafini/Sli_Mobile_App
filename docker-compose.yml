@@ -5,6 +5,10 @@ services:
       - "3000:3000"
     environment:
       - PORT=3000
+      - USER_SERVICE_URL=http://user_api:5001
+      - AUTH_SERVICE_URL=http://authentification_api:5002
+      - CLIENT_SERVICE_URL=http://client_api:5003
+      - ITEM_SERVICE_URL=http://item_api:5004
     networks:
       - app-network
     depends_on:
@@ -12,7 +16,7 @@ services:
       - authentification_api
       - client_api
       - item_api
-
+      
   user_api:
     build:
       context: ./backend/user_api
