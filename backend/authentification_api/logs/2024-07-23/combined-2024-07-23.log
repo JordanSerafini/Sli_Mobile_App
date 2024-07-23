@@ -1,5 +1,3 @@
-{"level":"warn","message":"Invalid credentials for email: jordan@solution-logique.frs","service":"authentification_api","timestamp":"2024-07-23 13:31:24"}
-{"level":"warn","message":"Invalid credentials for email: jordan@solution-logique.fr","service":"authentification_api","timestamp":"2024-07-23 13:31:29"}
-{"level":"info","message":"Login successful for email: jordan@solution-logique.fr","service":"authentification_api","timestamp":"2024-07-23 13:31:32"}
-{"level":"info","message":"Login successful for email: jordan@solution-logique.fr","service":"authentification_api","timestamp":"2024-07-23 13:49:03"}
-{"level":"info","message":"Login successful for email: jordan@solution-logique.fr","service":"authentification_api","timestamp":"2024-07-23 13:53:09"}
+{"level":"info","message":"Login successful for email: jordan@solution-logique.fr","service":"authentification_api","timestamp":"2024-07-23 13:55:40"}
+{"level":"warn","message":"Invalid credentials for email: jordan@solution-logique.fru","service":"authentification_api","timestamp":"2024-07-23 13:55:50"}
+{"level":"info","message":"Login successful for email: jordan@solution-logique.fr","service":"authentification_api","timestamp":"2024-07-23 13:55:56"}
