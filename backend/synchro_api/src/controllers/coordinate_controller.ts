@@ -3,6 +3,17 @@ import { pgClient } from "../../../authentification_api/src/client/client";
 import { Request, Response } from "express";
 import fs from 'fs';
 import path from 'path';
+import { fileURLToPath } from 'url';
+
+interface FailedAddress {
+  Id: string | number;
+  Name: string;
+  Address: string;
+}
+
+// Obtenez le répertoire du fichier en cours d'exécution
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 const CoordinateSyncController = {
   async updateAllCustomerCoordinates(req: Request, res: Response) {
