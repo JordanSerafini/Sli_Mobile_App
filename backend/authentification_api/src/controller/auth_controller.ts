@@ -1,18 +1,19 @@
 import { login, UserType } from '../model/auth_model';
-import { Request, Response } from 'express';
+import { Request, Response, NextFunction } from 'express';
 import jwt from 'jsonwebtoken';
 import dotenv from 'dotenv';
+import logger from '../../middlewares/logger';
 
 dotenv.config();
 
 const auth_controller = {
-    async login(req: Request, res: Response) {
+    async login(req: Request, res: Response, next: NextFunction) {
         const { email, password } = req.body;
 
         try {
             const user: UserType | null = await login(email, password);
             if (!user) {
-                console.log('Invalid credentials for email:', email);
+                logger.warn(`Invalid credentials for email: ${email}`);
                 return res.status(401).json({ message: 'Invalid credentials' });
             }
 
@@ -30,11 +31,11 @@ const auth_controller = {
                 { expiresIn: '7d' }
             );
 
-            console.log('Login successful for email:', email);
+            logger.info(`Login successful for email: ${email}`);
             res.json({ accessToken });
         } catch (error) {
-            console.error('Error during login:', error);
-            res.status(500).json({ message: 'Internal server error' });
+            logger.error(`Error during login for email: ${email}`, { error: error.message });
+            next(new Error(`Error during login: ${error.message}`));
         }
     }
 };

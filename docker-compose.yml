@@ -53,10 +53,10 @@ services:
     volumes:
       - ./backend/authentification_api:/app
       - /app/node_modules
-      - ./backend/middlewares:/app/middlewares 
       - ./backend/authentification_api/logs:/app/logs
     networks:
       - app-network
+
 
   item_api:
     container_name: item_api
