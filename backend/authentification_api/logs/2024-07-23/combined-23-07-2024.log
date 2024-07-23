@@ -1,0 +1,59 @@
+23-07-2024 14:19:12 [authentification_api] error: Invalid credentials
+Error: Invalid credentials
+    at login (/app/src/controller/auth_controller.ts:16:18)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+{
+  "url": "/login",
+  "method": "POST",
+  "ip": "172.18.0.1"
+}
+
+--------------------------------------------------------------
+
+23-07-2024 14:19:17 [authentification_api] error: Invalid credentials
+Error: Invalid credentials
+    at login (/app/src/controller/auth_controller.ts:16:18)
+{
+  "url": "/login",
+  "method": "POST",
+  "ip": "172.18.0.1"
+}
+
+--------------------------------------------------------------
+
+23-07-2024 14:19:20 [authentification_api] info: Login successful for email: jordan@solution-logique.fr
+{
+  "ip": "172.18.0.1",
+  "url": "/login",
+  "method": "POST"
+}
+
+--------------------------------------------------------------
+
+23-07-2024 14:19:27 [authentification_api] info: Login successful for email: jordan@solution-logique.fr
+{
+  "ip": "172.18.0.1",
+  "url": "/login",
+  "method": "POST"
+}
+
+--------------------------------------------------------------
+
+23-07-2024 14:19:33 [authentification_api] info: Login successful for email: jordan@solution-logique.fr
+{
+  "ip": "172.18.0.1",
+  "url": "/login",
+  "method": "POST"
+}
+
+--------------------------------------------------------------
+
+23-07-2024 14:19:40 [authentification_api] info: Login successful for email: jordan@solution-logique.fr
+{
+  "ip": "172.18.0.1",
+  "url": "/login",
+  "method": "POST"
+}
+
+--------------------------------------------------------------
+

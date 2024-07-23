@@ -1,4 +1,4 @@
-2024-07-23 14:09:56 [client_api] error: Erreur intentionnelle pour le test
+23-07-2024 14:19:21 [client_api] error: Erreur intentionnelle pour le test
 Error: Erreur intentionnelle pour le test
     at getCustomersPaginated (/app/src/controller/client_controller.ts:36:12)
     at Layer.handle [as handle_request] (/app/node_modules/express/lib/router/layer.js:95:5)
@@ -16,9 +16,9 @@ Error: Erreur intentionnelle pour le test
   "ip": "172.18.0.1"
 }
 
---------------------------
+------------------------------------------------------------------------------------------------
 
-2024-07-23 14:10:13 [client_api] error: Erreur intentionnelle pour le test
+23-07-2024 14:19:28 [client_api] error: Erreur intentionnelle pour le test
 Error: Erreur intentionnelle pour le test
     at getCustomersPaginated (/app/src/controller/client_controller.ts:36:12)
     at Layer.handle [as handle_request] (/app/node_modules/express/lib/router/layer.js:95:5)
@@ -36,9 +36,9 @@ Error: Erreur intentionnelle pour le test
   "ip": "172.18.0.1"
 }
 
---------------------------
+------------------------------------------------------------------------------------------------
 
-2024-07-23 14:10:19 [client_api] error: Erreur intentionnelle pour le test
+23-07-2024 14:19:34 [client_api] error: Erreur intentionnelle pour le test
 Error: Erreur intentionnelle pour le test
     at getCustomersPaginated (/app/src/controller/client_controller.ts:36:12)
     at Layer.handle [as handle_request] (/app/node_modules/express/lib/router/layer.js:95:5)
@@ -56,9 +56,9 @@ Error: Erreur intentionnelle pour le test
   "ip": "172.18.0.1"
 }
 
---------------------------
+------------------------------------------------------------------------------------------------
 
-2024-07-23 14:10:34 [client_api] error: Erreur intentionnelle pour le test
+23-07-2024 14:19:41 [client_api] error: Erreur intentionnelle pour le test
 Error: Erreur intentionnelle pour le test
     at getCustomersPaginated (/app/src/controller/client_controller.ts:36:12)
     at Layer.handle [as handle_request] (/app/node_modules/express/lib/router/layer.js:95:5)
@@ -76,5 +76,5 @@ Error: Erreur intentionnelle pour le test
   "ip": "172.18.0.1"
 }
 
---------------------------
+------------------------------------------------------------------------------------------------
 
