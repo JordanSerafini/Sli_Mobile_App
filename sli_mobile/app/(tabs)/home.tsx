@@ -14,7 +14,7 @@ const HomeScreen: React.FC = () => {
 
   const handleSendLog = async () => {
     try {
-      await postLogs('This is a test log from HomeScreen');
+      await postLogs('test');
       console.log('Log sent successfully');
     } catch (error) {
       console.error('Failed to send log:', error);
