@@ -6,7 +6,6 @@ export const postLogs = async (error: any) => {
 
     try {
         const user = await AsyncStorage.getItem('user');
-        console.log('Retrieved user from AsyncStorage in postLogs:', user);
         const parsedUser = user ? JSON.parse(user) : null;
 
         const formattedError = {
