@@ -4,20 +4,15 @@ import { fileURLToPath } from 'url';
 import DailyRotateFile from 'winston-daily-rotate-file';
 import fs from 'fs';
 
-// Obtenir __filename et __dirname dans un module ES
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-// Obtenir la date actuelle au format DD-MM-YYYY
 const today = new Date();
 const formattedDate = today.toLocaleDateString('fr-FR').split('/').reverse().join('-');
 
 const logDirectory = path.join(__dirname, '../logs', `log-${formattedDate}`);
-console.log(`Log directory: ${logDirectory}`);
 
-// Créez le répertoire de logs s'il n'existe pas
 if (!fs.existsSync(logDirectory)) {
-  console.log(`Creating log directory at ${logDirectory}`);
   fs.mkdirSync(logDirectory, { recursive: true });
 } else {
   console.log(`Log directory already exists at ${logDirectory}`);
@@ -29,10 +24,10 @@ const logger = createLogger({
     format.timestamp({ format: 'YYYY-MM-DD HH:mm:ss' }),
     format.errors({ stack: true }),
     format.splat(),
-    format.printf(({ timestamp, level, message, service, stack, ...meta }) => {
+    format.printf(({ timestamp, level, message, service, user, stack, ...meta }) => {
       const metaString = Object.keys(meta).length ? '\n' + JSON.stringify(meta, null, 2) : '';
       const stackString = stack ? '\n' + stack : '';
-      return `${timestamp} [${service}] ${level}: ${message}${stackString}${metaString}\n\n------------------------------------------------------------------------------------------------\n`;
+      return `${timestamp} [${service}] ${user} ${level}: ${message}${stackString}${metaString}\n\n------------------------------------------------------------------------------------------------\n`;
     })
   ),
   defaultMeta: { service: 'logger_api' },
@@ -57,38 +52,21 @@ logger.on('error', (err) => {
   console.error('Error occurred in logger:', err);
 });
 
-// Fonction d'assistance pour enregistrer les erreurs
-interface ErrorDetails {
-  message: any;
-  stack: any;
-  url: any;
-  method: any;
-  user: any;
-  ip: any;
-  response?: {
-    status: any;
-    data: any;
-  };
-  timestamp?: string; // Add timestamp field
-}
-
-export const logError = (err: any, req: any) => {
-  console.log('Logging error:', err);
-  const errorDetails: ErrorDetails = {
-    message: err.message,
-    stack: err.stack,
-    url: req.originalUrl,
-    method: req.method,
-    user: req.body.user || 'Unknown user',
+export const logError = (error, req) => {
+  console.log('logError received:', error); // Débogage
+  const errorDetails = {
+    message: error.message,
+    stack: error.stack,
+    url: error.url || req.originalUrl,
+    method: error.method || req.method,
+    user: error.user || 'Unknown user',
     ip: req.ip,
-    timestamp: new Date().toISOString() // Add timestamp value
   };
 
-  if (err.response) {
-    // Inclure les détails de la réponse de l'erreur, si disponibles
+  if (error.response) {
     errorDetails.response = {
-      status: err.response.status,
-      data: err.response.data
+      status: error.response.status,
+      data: error.response.data
     };
   }
 

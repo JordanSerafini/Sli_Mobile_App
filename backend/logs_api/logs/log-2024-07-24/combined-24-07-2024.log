@@ -1,4 +1,4 @@
-2024-07-24T14:32:41.658Z [logger_api] error: 
+2024-07-24 14:59:11 [logger_api] Unknown user error: 
 Error
     at <anonymous> (/app/src/index.ts:13:12)
     at Layer.handle [as handle_request] (/app/node_modules/express/lib/router/layer.js:95:5)
@@ -13,7 +13,6 @@ Error
 {
   "url": "/",
   "method": "POST",
-  "user": "jordan@solution-logique.fr",
   "ip": "::ffff:172.18.0.7"
 }
 
