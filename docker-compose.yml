@@ -17,6 +17,20 @@ services:
       - client_api
       - item_api
       
+  logger_api:
+    build:
+      context: ./backend/logger_api
+      dockerfile: Dockerfile
+    ports:
+      - "5050:5050"
+    volumes:
+      - ./backend/logger_api:/app
+      - ./backend/logger_api/logs:/app/logs
+      - /app/node_modules
+    environment:
+      - NODE_ENV=development
+
+
   user_api:
     build:
       context: ./backend/user_api

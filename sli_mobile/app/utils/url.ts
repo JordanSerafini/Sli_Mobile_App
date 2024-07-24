@@ -5,6 +5,7 @@ export const url = {
     item: "http://192.168.20.12:5004",
     chantier: "http://192.168.20.12:5005",
     staff:"http://192.168.20.12:5006",
+    logger_api: "http://192.168.20.12:5050",
     api_gateway: "http://192.168.20.12:3000",
 
     homeUser: "http://192.168.1.10:5001",
