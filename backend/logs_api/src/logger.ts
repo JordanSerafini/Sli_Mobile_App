@@ -69,7 +69,6 @@ interface ErrorDetails {
     status: any;
     data: any;
   };
-  rawError?: any; 
   timestamp?: string; // Add timestamp field
 }
 
@@ -82,7 +81,6 @@ export const logError = (err: any, req: any) => {
     method: req.method,
     user: req.body.user || 'Unknown user',
     ip: req.ip,
-    rawError: JSON.stringify(err, Object.getOwnPropertyNames(err)),
     timestamp: new Date().toISOString() // Add timestamp value
   };
 

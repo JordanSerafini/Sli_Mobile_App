@@ -36,7 +36,7 @@ console.log('Item Service URL:', services.itemService);
 app.use('/logs', createProxyMiddleware({
   target: services.logsService,
   changeOrigin: true,
-  pathRewrite: {'^/logs': ''},
+  pathRewrite: {'^/logs': '/'},
 }));
 
 // Proxy pour le service des utilisateurs

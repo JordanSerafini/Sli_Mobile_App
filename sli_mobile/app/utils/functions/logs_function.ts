@@ -15,11 +15,9 @@ export const postLogs = async (error: any) => {
             url: error.config?.url || 'No URL',
             method: error.config?.method || 'No method',
             user: parsedUser ? parsedUser.email : 'Unknown user',
-            rawError: JSON.stringify(error, Object.getOwnPropertyNames(error)),
             timestamp: new Date().toISOString(),
         };
 
-        console.log('Formatted error to be sent:', formattedError);
 
         const response = await fetch(`${url.api_gateway}/logs`, {
             method: 'POST',
@@ -30,7 +28,6 @@ export const postLogs = async (error: any) => {
         });
 
         const data = await response.text();
-        console.log('Raw response from API:', data);
 
         if (!response.ok) {
             throw new Error('Network response was not ok');
