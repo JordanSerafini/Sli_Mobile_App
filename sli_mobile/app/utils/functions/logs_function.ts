@@ -3,7 +3,7 @@ import { url } from "../url";
 export const postLogs = async (error: string) => {
     console.log('Sending log:', error);
     try {
-        const response = await fetch(`${url.logger_api}/logs`, {
+        const response = await fetch(`${url.api_gateway}/logs`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'

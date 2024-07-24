@@ -9,6 +9,7 @@ services:
       - AUTH_SERVICE_URL=http://authentification_api:5002
       - CLIENT_SERVICE_URL=http://client_api:5003
       - ITEM_SERVICE_URL=http://item_api:5004
+      - LOGS_SERVICE_URL=http://logs_api:5050
     networks:
       - app-network
     depends_on:
@@ -16,20 +17,22 @@ services:
       - authentification_api
       - client_api
       - item_api
+      - logs_api
       
-  logger_api:
+  logs_api:
     build:
-      context: ./backend/logger_api
+      context: ./backend/logs_api
       dockerfile: Dockerfile
     ports:
       - "5050:5050"
     volumes:
-      - ./backend/logger_api:/app
-      - ./backend/logger_api/logs:/app/logs
+      - ./backend/logs_api:/app
+      - ./backend/logs_api/logs:/app/logs
       - /app/node_modules
     environment:
       - NODE_ENV=development
-
+    networks:
+      - app-network
 
   user_api:
     build:
@@ -67,7 +70,6 @@ services:
       - ./backend/client_api:/app
       - /app/node_modules
       - ./backend/client_api/logs:/app/logs
-
     networks:
       - app-network
 

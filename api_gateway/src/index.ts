@@ -17,6 +17,7 @@ const services = {
   authService: process.env.AUTH_SERVICE_URL,
   clientService: process.env.CLIENT_SERVICE_URL,
   itemService: process.env.ITEM_SERVICE_URL,
+  logsService: process.env.LOGS_SERVICE_URL,
 };
 
 // Vérifiez les URLs des services
@@ -30,6 +31,13 @@ console.log('User Service URL:', services.userService);
 console.log('Auth Service URL:', services.authService);
 console.log('Client Service URL:', services.clientService);
 console.log('Item Service URL:', services.itemService);
+
+// Proxy pour le service de logs
+app.use('/logs', createProxyMiddleware({
+  target: services.logsService,
+  changeOrigin: true,
+  pathRewrite: {'^/logs': ''},
+}));
 
 // Proxy pour le service des utilisateurs
 app.use('/users', createProxyMiddleware({
@@ -50,7 +58,7 @@ app.use('/clients', createProxyMiddleware({
   target: services.clientService,
   changeOrigin: true,
   pathRewrite: {'^/clients': ''},
-  logLevel: 'debug', // Ajoutez le niveau de log
+  logLevel: 'debug',
 }));
 
 // Proxy pour le service des items
