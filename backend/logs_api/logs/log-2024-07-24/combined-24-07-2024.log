@@ -46,3 +46,51 @@ Error: Test log message
 
 ------------------------------------------------------------------------------------------------
 
+2024-07-24 15:18:58 [logger_api] jordan@solution-logique.fr error: Test log message
+Error: Test log message
+    at ?anon_0_ (http://bjubt34-anonymous-8081.exp.direct/node_modules%5Cexpo-router%5Centry.bundle//&platform=android&dev=true&hot=false&lazy=true&transform.engine=hermes&transform.bytecode=true&transform.routerRoot=app:180565:37)
+    at next (native)
+    at asyncGeneratorStep (http://bjubt34-anonymous-8081.exp.direct/node_modules%5Cexpo-router%5Centry.bundle//&platform=android&dev=true&hot=false&lazy=true&transform.engine=hermes&transform.bytecode=true&transform.routerRoot=app:5844:19)
+    at _next (http://bjubt34-anonymous-8081.exp.direct/node_modules%5Cexpo-router%5Centry.bundle//&platform=android&dev=true&hot=false&lazy=true&transform.engine=hermes&transform.bytecode=true&transform.routerRoot=app:5858:29)
+    at anonymous (http://bjubt34-anonymous-8081.exp.direct/node_modules%5Cexpo-router%5Centry.bundle//&platform=android&dev=true&hot=false&lazy=true&transform.engine=hermes&transform.bytecode=true&transform.routerRoot=app:5863:14)
+    at tryCallTwo (address at InternalBytecode.js:1:1222)
+    at doResolve (address at InternalBytecode.js:1:2541)
+    at Promise (address at InternalBytecode.js:1:1318)
+    at anonymous (http://bjubt34-anonymous-8081.exp.direct/node_modules%5Cexpo-router%5Centry.bundle//&platform=android&dev=true&hot=false&lazy=true&transform.engine=hermes&transform.bytecode=true&transform.routerRoot=app:5855:25)
+    at apply (native)
+    at handleSendLog (http://bjubt34-anonymous-8081.exp.direct/node_modules%5Cexpo-router%5Centry.bundle//&platform=android&dev=true&hot=false&lazy=true&transform.engine=hermes&transform.bytecode=true&transform.routerRoot=app:180574:27)
+    at _performTransitionSideEffects (http://bjubt34-anonymous-8081.exp.direct/node_modules%5Cexpo-router%5Centry.bundle//&platform=android&dev=true&hot=false&lazy=true&transform.engine=hermes&transform.bytecode=true&transform.routerRoot=app:93106:22)
+    at _receiveSignal (http://bjubt34-anonymous-8081.exp.direct/node_modules%5Cexpo-router%5Centry.bundle//&platform=android&dev=true&hot=false&lazy=true&transform.engine=hermes&transform.bytecode=true&transform.routerRoot=app:93056:45)
+    at onResponderRelease (http://bjubt34-anonymous-8081.exp.direct/node_modules%5Cexpo-router%5Centry.bundle//&platform=android&dev=true&hot=false&lazy=true&transform.engine=hermes&transform.bytecode=true&transform.routerRoot=app:92893:34)
+    at apply (native)
+    at invokeGuardedCallbackImpl (http://bjubt34-anonymous-8081.exp.direct/node_modules%5Cexpo-router%5Centry.bundle//&platform=android&dev=true&hot=false&lazy=true&transform.engine=hermes&transform.bytecode=true&transform.routerRoot=app:68859:23)
+    at apply (native)
+    at invokeGuardedCallback (http://bjubt34-anonymous-8081.exp.direct/node_modules%5Cexpo-router%5Centry.bundle//&platform=android&dev=true&hot=false&lazy=true&transform.engine=hermes&transform.bytecode=true&transform.routerRoot=app:68893:40)
+    at apply (native)
+    at invokeGuardedCallbackAndCatchFirstError (http://bjubt34-anonymous-8081.exp.direct/node_modules%5Cexpo-router%5Centry.bundle//&platform=android&dev=true&hot=false&lazy=true&transform.engine=hermes&transform.bytecode=true&transform.routerRoot=app:68907:36)
+    at executeDispatch (http://bjubt34-anonymous-8081.exp.direct/node_modules%5Cexpo-router%5Centry.bundle//&platform=android&dev=true&hot=false&lazy=true&transform.engine=hermes&transform.bytecode=true&transform.routerRoot=app:68983:48)
+    at executeDispatchesInOrder (http://bjubt34-anonymous-8081.exp.direct/node_modules%5Cexpo-router%5Centry.bundle//&platform=android&dev=true&hot=false&lazy=true&transform.engine=hermes&transform.bytecode=true&transform.routerRoot=app:69005:26)
+    at executeDispatchesAndRelease (http://bjubt34-anonymous-8081.exp.direct/node_modules%5Cexpo-router%5Centry.bundle//&platform=android&dev=true&hot=false&lazy=true&transform.engine=hermes&transform.bytecode=true&transform.routerRoot=app:70678:35)
+    at executeDispatchesAndReleaseTopLevel (http://bjubt34-anonymous-8081.exp.direct/node_modules%5Cexpo-router%5Centry.bundle//&platform=android&dev=true&hot=false&lazy=true&transform.engine=hermes&transform.bytecode=true&transform.routerRoot=app:70686:43)
+    at forEach (native)
+    at forEachAccumulated (http://bjubt34-anonymous-8081.exp.direct/node_modules%5Cexpo-router%5Centry.bundle//&platform=android&dev=true&hot=false&lazy=true&transform.engine=hermes&transform.bytecode=true&transform.routerRoot=app:69608:22)
+    at runEventsInBatch (http://bjubt34-anonymous-8081.exp.direct/node_modules%5Cexpo-router%5Centry.bundle//&platform=android&dev=true&hot=false&lazy=true&transform.engine=hermes&transform.bytecode=true&transform.routerRoot=app:70699:27)
+    at runExtractedPluginEventsInBatch (http://bjubt34-anonymous-8081.exp.direct/node_modules%5Cexpo-router%5Centry.bundle//&platform=android&dev=true&hot=false&lazy=true&transform.engine=hermes&transform.bytecode=true&transform.routerRoot=app:70810:25)
+    at anonymous (http://bjubt34-anonymous-8081.exp.direct/node_modules%5Cexpo-router%5Centry.bundle//&platform=android&dev=true&hot=false&lazy=true&transform.engine=hermes&transform.bytecode=true&transform.routerRoot=app:70781:42)
+    at batchedUpdates (http://bjubt34-anonymous-8081.exp.direct/node_modules%5Cexpo-router%5Centry.bundle//&platform=android&dev=true&hot=false&lazy=true&transform.engine=hermes&transform.bytecode=true&transform.routerRoot=app:86395:20)
+    at batchedUpdates$1 (http://bjubt34-anonymous-8081.exp.direct/node_modules%5Cexpo-router%5Centry.bundle//&platform=android&dev=true&hot=false&lazy=true&transform.engine=hermes&transform.bytecode=true&transform.routerRoot=app:70654:36)
+    at _receiveRootNodeIDEvent (http://bjubt34-anonymous-8081.exp.direct/node_modules%5Cexpo-router%5Centry.bundle//&platform=android&dev=true&hot=false&lazy=true&transform.engine=hermes&transform.bytecode=true&transform.routerRoot=app:70780:25)
+    at receiveTouches (http://bjubt34-anonymous-8081.exp.direct/node_modules%5Cexpo-router%5Centry.bundle//&platform=android&dev=true&hot=false&lazy=true&transform.engine=hermes&transform.bytecode=true&transform.routerRoot=app:70869:34)
+    at apply (native)
+    at __callFunction (http://bjubt34-anonymous-8081.exp.direct/node_modules%5Cexpo-router%5Centry.bundle//&platform=android&dev=true&hot=false&lazy=true&transform.engine=hermes&transform.bytecode=true&transform.routerRoot=app:2676:38)
+    at anonymous (http://bjubt34-anonymous-8081.exp.direct/node_modules%5Cexpo-router%5Centry.bundle//&platform=android&dev=true&hot=false&lazy=true&transform.engine=hermes&transform.bytecode=true&transform.routerRoot=app:2392:31)
+    at __guard (http://bjubt34-anonymous-8081.exp.direct/node_modules%5Cexpo-router%5Centry.bundle//&platform=android&dev=true&hot=false&lazy=true&transform.engine=hermes&transform.bytecode=true&transform.routerRoot=app:2609:15)
+    at callFunctionReturnFlushedQueue (http://bjubt34-anonymous-8081.exp.direct/node_modules%5Cexpo-router%5Centry.bundle//&platform=android&dev=true&hot=false&lazy=true&transform.engine=hermes&transform.bytecode=true&transform.routerRoot=app:2391:21)
+{
+  "url": "No URL",
+  "method": "No method",
+  "ip": "::ffff:172.18.0.7"
+}
+
+------------------------------------------------------------------------------------------------
+
