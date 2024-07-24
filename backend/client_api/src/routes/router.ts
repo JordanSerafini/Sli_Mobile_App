@@ -4,7 +4,7 @@ import client_controller from "../controller/client_controller";
 const router = express.Router();
 
 router.get('/paginated', client_controller.getCustomersPaginated);
-router.get('/customers/cluster', client_controller.getCustomersCluster);
+router.get('/cluster', client_controller.getCustomersCluster);
 router.get('/', client_controller.getAllCustomers);
 router.get('/:id', client_controller.getCustomerById);
 router.get('/:name', client_controller.getCustomerByName);
