@@ -3,7 +3,7 @@ import { url } from "../url";
 
 export const getAllCustomers = async () => {
     try {
-        const response = await fetch(`${url.client}/customers`);
+        const response = await fetch(`${url.api_gateway}/clients`);
         if (!response.ok) {
             throw new Error('Network response was not ok');
         }
@@ -17,7 +17,7 @@ export const getAllCustomers = async () => {
 
 export const getCustomerById = async (id: number) => {
     try {
-        const response = await fetch(`${url.client}/customer/${id}`);
+        const response = await fetch(`${url.api_gateway}/clients/${id}`);
         if (!response.ok) {
             throw new Error('Network response was not ok');
         }
@@ -31,7 +31,7 @@ export const getCustomerById = async (id: number) => {
 
 export const getCustomerByName = async (name: string) => {
     try {
-        const response = await fetch(`${url.client}/customer/${name}`);
+        const response = await fetch(`${url.api_gateway}/clients/${name}`);
         if (!response.ok) {
             throw new Error('Network response was not ok');
         }
@@ -45,7 +45,7 @@ export const getCustomerByName = async (name: string) => {
 
 export const getCustomersPaginated = async (searchQuery: string, limit: number, offset: number) => {
     try {
-        const response = await fetch(`${url.client}/customers/paginated?searchQuery=${searchQuery}&limit=${limit}&offset=${offset}`);
+        const response = await fetch(`${url.api_gateway}/clients/paginated?searchQuery=${searchQuery}&limit=${limit}&offset=${offset}`);
         if (!response.ok) {
             throw new Error('Network response was not ok');
         }
@@ -60,7 +60,7 @@ export const getCustomersPaginated = async (searchQuery: string, limit: number, 
 
 export const createCustomer = async (customer: Customer) => {
     try {
-        const response = await fetch(`${url.client}/customer`, {
+        const response = await fetch(`${url.api_gateway}/clients`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -80,7 +80,7 @@ export const createCustomer = async (customer: Customer) => {
 
 export const updateCustomerById = async (id: number, customer: Customer) => {
     try {
-        const response = await fetch(`${url.client}/customer/${id}`, {
+        const response = await fetch(`${url.api_gateway}/clients/${id}`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
@@ -100,7 +100,7 @@ export const updateCustomerById = async (id: number, customer: Customer) => {
 
 export const deleteCustomerById = async (id: number) => {
     try {
-        const response = await fetch(`${url.client}/customer/${id}`, {
+        const response = await fetch(`${url.api_gateway}/clients/${id}`, {
             method: 'DELETE',
         });
         if (!response.ok) {
@@ -117,7 +117,7 @@ export const deleteCustomerById = async (id: number) => {
 export const getCustomersCluster = async ( latCentral: number, lonCentral: number, rayonM: number) => {
     try {
       const response = await fetch(
-        `${url.client}/customers/cluster?latCentral=${latCentral}&lonCentral=${lonCentral}&rayonM=${rayonM}`
+        `${url.api_gateway}/clients/cluster?latCentral=${latCentral}&lonCentral=${lonCentral}&rayonM=${rayonM}`
       );
       if (!response.ok) {
         throw new Error('Network response was not ok');

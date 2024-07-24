@@ -52,37 +52,41 @@ const client_model = {
   },
 
   async getCustomersPaginated(req: Request, res: Response) {
+    console.log(req.query);
     try {
       const limit = parseInt(req.query.limit as string, 10) || 25;
       const offset = parseInt(req.query.offset as string, 10) || 0;
       const searchQuery = (req.query.searchQuery as string) || "";
-
+  
+  
       let query = `SELECT * FROM "Customer"`;
       let countQuery = `SELECT COUNT(*) FROM "Customer"`;
       let queryParams: (string | number)[] = [];
       let countParams: (string | number)[] = [];
-
+  
       if (searchQuery) {
         query += ` WHERE "Name" ILIKE $1`;
         countQuery += ` WHERE "Name" ILIKE $1`;
         queryParams.push(`%${searchQuery}%`);
         countParams.push(`%${searchQuery}%`);
       }
-
+  
       queryParams.push(limit);
       queryParams.push(offset);
-
+  
       query += ` ORDER BY "Name" ASC LIMIT $${queryParams.length - 1} OFFSET $${queryParams.length}`;
       countQuery += `;`;
-
+  
+      console.log(`Query: ${query}, Query Params: ${queryParams}`);
+  
       const [customerResult, totalResult] = await Promise.all([
         pgClient.query(query, queryParams),
         pgClient.query(countQuery, countParams),
       ]);
-
+  
       const totalCustomer = parseInt(totalResult.rows[0].count, 10);
       const totalPages = Math.ceil(totalCustomer / limit);
-
+  
       res.json({
         totalCustomer,
         totalPages,

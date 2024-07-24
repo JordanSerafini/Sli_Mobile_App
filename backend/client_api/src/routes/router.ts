@@ -3,15 +3,15 @@ import client_controller from "../controller/client_controller";
 
 const router = express.Router();
 
-router.get('/customers', client_controller.getAllCustomers);
-router.get('/customer/:id', client_controller.getCustomerById);
-router.get('/customer/:name', client_controller.getCustomerByName);
-router.get('/customers/paginated', client_controller.getCustomersPaginated);
-router.post('/customer', client_controller.createCustomer);
-router.put('/customer/:id', client_controller.updateCustomerById);
-router.delete('/customer/:id', client_controller.deleteCustomerById);
-
+router.get('/paginated', client_controller.getCustomersPaginated);
 router.get('/customers/cluster', client_controller.getCustomersCluster);
+router.get('/', client_controller.getAllCustomers);
+router.get('/:id', client_controller.getCustomerById);
+router.get('/:name', client_controller.getCustomerByName);
+router.post('/', client_controller.createCustomer);
+router.put('/:id', client_controller.updateCustomerById);
+router.delete('/:id', client_controller.deleteCustomerById);
+
 
 
 export default router;

@@ -1,11 +1,15 @@
 import express from 'express';
 import { createProxyMiddleware } from 'http-proxy-middleware';
 import dotenv from 'dotenv';
+import cors from 'cors';
 
 dotenv.config();
 
 const app = express();
 const PORT = process.env.PORT || 3000;
+
+app.use(cors());
+
 
 // Configuration des routes pour chaque service backend
 const services = {
@@ -59,3 +63,5 @@ app.use('/items', createProxyMiddleware({
 app.listen(PORT, () => {
   console.log(`API Gateway is running on port ${PORT}`);
 });
+
+
