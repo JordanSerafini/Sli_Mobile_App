@@ -37,7 +37,7 @@ const LoginScreen: React.FC = () => {
         throw new Error(errorData.error || "Error logging in");
       }
       const data = await response.json();
-      console.log("Login successful:", data);
+      //console.log("Login successful:", data);
       const token = data.accessToken;
       const user = data.user;
       if (!token) {

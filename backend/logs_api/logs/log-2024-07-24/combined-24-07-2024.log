@@ -1,27 +1,6 @@
-2024-07-24T14:24:33.016Z [logger_api] error: 
+2024-07-24T14:32:41.658Z [logger_api] error: 
 Error
-    at <anonymous> (/app/src/index.ts:12:12)
-    at Layer.handle [as handle_request] (/app/node_modules/express/lib/router/layer.js:95:5)
-    at next (/app/node_modules/express/lib/router/route.js:149:13)
-    at Route.dispatch (/app/node_modules/express/lib/router/route.js:119:3)
-    at Layer.handle [as handle_request] (/app/node_modules/express/lib/router/layer.js:95:5)
-    at /app/node_modules/express/lib/router/index.js:284:15
-    at Function.process_params (/app/node_modules/express/lib/router/index.js:346:12)
-    at next (/app/node_modules/express/lib/router/index.js:280:10)
-    at /app/node_modules/body-parser/lib/read.js:137:5
-    at AsyncResource.runInAsyncScope (node:async_hooks:206:9)
-{
-  "url": "/",
-  "method": "POST",
-  "user": "jordan@solution-logique.fr",
-  "ip": "::ffff:172.18.0.7"
-}
-
-------------------------------------------------------------------------------------------------
-
-2024-07-24T14:25:03.135Z [logger_api] error: 
-Error
-    at <anonymous> (/app/src/index.ts:12:12)
+    at <anonymous> (/app/src/index.ts:13:12)
     at Layer.handle [as handle_request] (/app/node_modules/express/lib/router/layer.js:95:5)
     at next (/app/node_modules/express/lib/router/route.js:149:13)
     at Route.dispatch (/app/node_modules/express/lib/router/route.js:119:3)
