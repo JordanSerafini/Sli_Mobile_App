@@ -4,9 +4,25 @@ import { fileURLToPath } from 'url';
 import DailyRotateFile from 'winston-daily-rotate-file';
 import fs from 'fs';
 
+// Fonction d'assistance pour enregistrer les erreurs
+interface ErrorDetails {
+  message: string;
+  stack: string;
+  url: string;
+  method: string;
+  user: string;
+  ip: string;
+  response?: {
+    status: number;
+    data: any;
+  };
+}
+
+// Obtenir __filename et __dirname dans un module ES
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
+// Obtenir la date actuelle au format DD-MM-YYYY
 const today = new Date();
 const formattedDate = today.toLocaleDateString('fr-FR').split('/').reverse().join('-');
 
@@ -52,9 +68,8 @@ logger.on('error', (err) => {
   console.error('Error occurred in logger:', err);
 });
 
-export const logError = (error, req) => {
-  console.log('logError received:', error); // Débogage
-  const errorDetails = {
+export const logError = (error: any, req: any) => {
+  const errorDetails: ErrorDetails = {
     message: error.message,
     stack: error.stack,
     url: error.url || req.originalUrl,
@@ -63,12 +78,6 @@ export const logError = (error, req) => {
     ip: req.ip,
   };
 
-  if (error.response) {
-    errorDetails.response = {
-      status: error.response.status,
-      data: error.response.data
-    };
-  }
 
   logger.error('An error occurred', errorDetails);
 };

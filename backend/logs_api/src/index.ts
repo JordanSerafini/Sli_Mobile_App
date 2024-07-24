@@ -7,8 +7,7 @@ const port = 5050;
 
 app.use(bodyParser.json());
 
-app.post('/logs', (req, res) => {
-  console.log('Received log:', req.body); 
+app.post('/', (req, res) => {
   try {
     const error = req.body;
     if (!error.message || !error.stack) {
