@@ -9,20 +9,19 @@ const HomeScreen: React.FC = () => {
 
   const handleLogout = async () => {
     await AsyncStorage.removeItem('userToken');
+    await AsyncStorage.removeItem('user');
     router.push('/login');
   };
 
   const handleSendLog = async () => {
     try {
-      await postLogs('test 2');
+      const logMessage = new Error('Test log message');
+      logMessage.message = 'Test log message';
+      await postLogs(logMessage);
       console.log('Log sent successfully');
     } catch (error) {
       console.error('Failed to send log:', error);
     }
-  };
-
-  const handleThrowError = () => {
-    throw new Error('test throw error');
   };
 
   return (
@@ -30,7 +29,6 @@ const HomeScreen: React.FC = () => {
       <Text>Home Screen</Text>
       <Button title="LOGOUT" onPress={handleLogout} />
       <Button title="Send Log" onPress={handleSendLog} />
-      <Button title="Throw Error" onPress={handleThrowError} />
     </View>
   );
 };

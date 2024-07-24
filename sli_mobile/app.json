@@ -2,6 +2,7 @@
   "expo": {
     "name": "sli_mobile",
     "slug": "sli_mobile",
+    "platforms": ["ios", "android", "web"],
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./app/assets/sli.jpg",

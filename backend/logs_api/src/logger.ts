@@ -2,7 +2,7 @@ import { createLogger, format, transports } from 'winston';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import DailyRotateFile from 'winston-daily-rotate-file';
-import fs from 'fs'; 
+import fs from 'fs';
 
 // Obtenir __filename et __dirname dans un module ES
 const __filename = fileURLToPath(import.meta.url);
@@ -10,7 +10,7 @@ const __dirname = path.dirname(__filename);
 
 // Obtenir la date actuelle au format DD-MM-YYYY
 const today = new Date();
-const formattedDate = today.toLocaleDateString('fr-FR').split('/').reverse().join('-'); 
+const formattedDate = today.toLocaleDateString('fr-FR').split('/').reverse().join('-');
 
 const logDirectory = path.join(__dirname, '../logs', `log-${formattedDate}`);
 console.log(`Log directory: ${logDirectory}`);
@@ -58,14 +58,43 @@ logger.on('error', (err) => {
 });
 
 // Fonction d'assistance pour enregistrer les erreurs
+interface ErrorDetails {
+  message: any;
+  stack: any;
+  url: any;
+  method: any;
+  user: any;
+  ip: any;
+  response?: {
+    status: any;
+    data: any;
+  };
+  rawError?: any; 
+  timestamp?: string; // Add timestamp field
+}
+
 export const logError = (err: any, req: any) => {
-  logger.error('An error occurred', {
+  console.log('Logging error:', err);
+  const errorDetails: ErrorDetails = {
     message: err.message,
     stack: err.stack,
     url: req.originalUrl,
     method: req.method,
-    ip: req.ip
-  });
+    user: req.body.user || 'Unknown user',
+    ip: req.ip,
+    rawError: JSON.stringify(err, Object.getOwnPropertyNames(err)),
+    timestamp: new Date().toISOString() // Add timestamp value
+  };
+
+  if (err.response) {
+    // Inclure les détails de la réponse de l'erreur, si disponibles
+    errorDetails.response = {
+      status: err.response.status,
+      data: err.response.data
+    };
+  }
+
+  logger.error('An error occurred', errorDetails);
 };
 
 export default logger;

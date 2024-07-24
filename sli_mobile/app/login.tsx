@@ -10,6 +10,7 @@ import {
 import { useRouter } from "expo-router";
 import { url } from "./utils/url";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { postLogs } from "./utils/functions/logs_function";
 
 
 const sli = require("./assets/sli.jpg");
@@ -36,19 +37,26 @@ const LoginScreen: React.FC = () => {
         throw new Error(errorData.error || "Error logging in");
       }
       const data = await response.json();
-      //console.log("Login successful:", data);
+      console.log("Login successful:", data);
       const token = data.accessToken;
+      const user = data.user;
       if (!token) {
+        await postLogs(new Error("Token not found in response"));
         throw new Error("Token not found in response");
       }
-  
+      if (!user) {
+        await postLogs(new Error("User information not found in response"));
+        throw new Error("User information not found in response");
+      }
       await AsyncStorage.setItem('userToken', token);
+      await AsyncStorage.setItem('user', JSON.stringify(user));
+
       router.push("/home");
   
-    } catch (error) {
+    } catch (error: any) {
+      await postLogs(error);  
       console.error("Login failed:", error);
-      const errorObj = error as Error;
-      alert(errorObj.message);
+      alert(error.message);
     }
   };
   
