@@ -21,11 +21,16 @@ const HomeScreen: React.FC = () => {
     }
   };
 
+  const handleThrowError = () => {
+    throw new Error('test throw error');
+  };
+
   return (
     <View style={styles.container}>
       <Text>Home Screen</Text>
       <Button title="LOGOUT" onPress={handleLogout} />
       <Button title="Send Log" onPress={handleSendLog} />
+      <Button title="Throw Error" onPress={handleThrowError} />
     </View>
   );
 };

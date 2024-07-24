@@ -8,7 +8,6 @@ const port = 5050;
 app.use(bodyParser.json());
 
 app.post('/logs', (req, res) => {
-  console.log(req.body);
   const { error } = req.body;
   logError(new Error(error), req);
   res.status(200).send('Error logged');

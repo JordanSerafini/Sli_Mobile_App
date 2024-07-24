@@ -18,3 +18,43 @@ Error: This is a test log from HomeScreen
 
 ------------------------------------------------------------------------------------------------
 
+2024-07-24 09:50:29 [logger_api] error: This is a test log from HomeScreen
+Error: This is a test log from HomeScreen
+    at <anonymous> (/app/src/index.ts:13:12)
+    at Layer.handle [as handle_request] (/app/node_modules/express/lib/router/layer.js:95:5)
+    at next (/app/node_modules/express/lib/router/route.js:149:13)
+    at Route.dispatch (/app/node_modules/express/lib/router/route.js:119:3)
+    at Layer.handle [as handle_request] (/app/node_modules/express/lib/router/layer.js:95:5)
+    at /app/node_modules/express/lib/router/index.js:284:15
+    at Function.process_params (/app/node_modules/express/lib/router/index.js:346:12)
+    at next (/app/node_modules/express/lib/router/index.js:280:10)
+    at /app/node_modules/body-parser/lib/read.js:137:5
+    at AsyncResource.runInAsyncScope (node:async_hooks:206:9)
+{
+  "url": "/logs",
+  "method": "POST",
+  "ip": "::ffff:172.19.0.1"
+}
+
+------------------------------------------------------------------------------------------------
+
+2024-07-24 09:56:57 [logger_api] error: This is a test log from HomeScreen
+Error: This is a test log from HomeScreen
+    at <anonymous> (/app/src/index.ts:13:12)
+    at Layer.handle [as handle_request] (/app/node_modules/express/lib/router/layer.js:95:5)
+    at next (/app/node_modules/express/lib/router/route.js:149:13)
+    at Route.dispatch (/app/node_modules/express/lib/router/route.js:119:3)
+    at Layer.handle [as handle_request] (/app/node_modules/express/lib/router/layer.js:95:5)
+    at /app/node_modules/express/lib/router/index.js:284:15
+    at Function.process_params (/app/node_modules/express/lib/router/index.js:346:12)
+    at next (/app/node_modules/express/lib/router/index.js:280:10)
+    at /app/node_modules/body-parser/lib/read.js:137:5
+    at AsyncResource.runInAsyncScope (node:async_hooks:206:9)
+{
+  "url": "/logs",
+  "method": "POST",
+  "ip": "::ffff:172.19.0.1"
+}
+
+------------------------------------------------------------------------------------------------
+
