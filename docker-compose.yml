@@ -18,7 +18,7 @@ services:
       - client_api
       - item_api
       - logs_api
-      
+
   logs_api:
     build:
       context: ./backend/logs_api
@@ -42,7 +42,7 @@ services:
       - "5002:5002"
     environment:
       - DB_USER=jordans
-      - DB_HOST=host.docker.internal
+      - DB_HOST=postgres_db
       - DB_NAME=SLI
       - DB_PASSWORD=slitest
       - DB_PORT=5432
@@ -61,7 +61,7 @@ services:
       - "5001:5001"
     environment:
       - DB_USER=jordans
-      - DB_HOST=host.docker.internal
+      - DB_HOST=postgres_db
       - DB_NAME=SLI
       - DB_PASSWORD=slitest
       - DB_PORT=5432
@@ -81,7 +81,7 @@ services:
       - "5003:5003"
     environment:
       - DB_USER=jordans
-      - DB_HOST=host.docker.internal
+      - DB_HOST=postgres_db
       - DB_NAME=SLI
       - DB_PASSWORD=slitest
       - DB_PORT=5432
@@ -92,7 +92,6 @@ services:
     networks:
       - app-network
 
-
   item_api:
     container_name: item_api
     build:
@@ -102,7 +101,7 @@ services:
       - "5004:5004"
     environment:
       - DB_USER=jordans
-      - DB_HOST=host.docker.internal
+      - DB_HOST=postgres_db
       - DB_NAME=SLI
       - DB_PASSWORD=slitest
       - DB_PORT=5432
@@ -123,7 +122,7 @@ services:
       POSTGRES_DB: SLI
     volumes:
       - pgdata:/var/lib/postgresql/data
-      - ./dump.sql:/docker-entrypoint-initdb.d/dump.sql
+      - ./BackupBDD:/docker-entrypoint-initdb.d
     ports:
       - "5432:5432"
     networks:
