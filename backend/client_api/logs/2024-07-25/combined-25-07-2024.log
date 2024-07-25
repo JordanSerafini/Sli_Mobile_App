@@ -1,0 +1,13 @@
+2024-07-2024 12:48:24 [client_api] error: Cannot read properties of undefined (reading 'replace')
+TypeError: Cannot read properties of undefined (reading 'replace')
+    at Object.createCustomer (/app/src/model/client_model.ts:209:46)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at createCustomer (/app/src/controller/client_controller.ts:65:7)
+{
+  "url": "/",
+  "method": "POST",
+  "ip": "172.18.0.9"
+}
+
+------------------------------------------------------------------------------------------------
+

@@ -70,7 +70,7 @@ export const getCustomersPaginated = async (searchQuery: string, limit: number, 
     }
 };
 
-export const createCustomer = async (customer: Customer) => {
+export const createCustomer = async (customer:any) => {
     try {
         const response = await fetch(`${url.api_gateway}/clients`, {
             method: 'POST',
