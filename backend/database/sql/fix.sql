@@ -9,7 +9,12 @@ BEGIN;
         password VARCHAR(255) NOT NULL,
         role VARCHAR(255) NOT NULL,
         telephone VARCHAR(255),
+        NbrOfAttemps INTEGER,
+        isBLocked BOOLEAN,*
+        Token TEXT
     );
+
+ALTER TABLE "Utilisateurs" ADD COLUMN "BlockTime" TIMESTAMP;
 
 ALTER TABLE "FicheChantier" ADD COLUMN "imageUrl" TEXT;
 ALTER TABLE "FicheChantier" ADD COLUMN "audioUrl" TEXT;

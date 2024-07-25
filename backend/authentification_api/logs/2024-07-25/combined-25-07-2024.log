@@ -673,3 +673,399 @@
 
 --------------------------------------------------------------
 
+25-07-2024 14:29:12 [authentification_api] error: Invalid credentials
+Error: Invalid credentials
+    at login (/app/src/controller/auth_controller.ts:16:18)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+{
+  "url": "/login",
+  "method": "POST",
+  "ip": "172.18.0.1",
+  "email": "jordan@solution-logique.frq"
+}
+
+--------------------------------------------------------------
+
+25-07-2024 14:29:15 [authentification_api] error: Invalid credentials
+Error: Invalid credentials
+    at login (/app/src/controller/auth_controller.ts:16:18)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+{
+  "url": "/login",
+  "method": "POST",
+  "ip": "172.18.0.1",
+  "email": "jordan@solution-logique.frq"
+}
+
+--------------------------------------------------------------
+
+25-07-2024 14:29:16 [authentification_api] error: Invalid credentials
+Error: Invalid credentials
+    at login (/app/src/controller/auth_controller.ts:16:18)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+{
+  "url": "/login",
+  "method": "POST",
+  "ip": "172.18.0.1",
+  "email": "jordan@solution-logique.frq"
+}
+
+--------------------------------------------------------------
+
+25-07-2024 14:29:17 [authentification_api] error: Invalid credentials
+Error: Invalid credentials
+    at login (/app/src/controller/auth_controller.ts:16:18)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+{
+  "url": "/login",
+  "method": "POST",
+  "ip": "172.18.0.1",
+  "email": "jordan@solution-logique.frq"
+}
+
+--------------------------------------------------------------
+
+25-07-2024 14:29:19 [authentification_api] error: Invalid credentials
+Error: Invalid credentials
+    at login (/app/src/controller/auth_controller.ts:16:18)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+{
+  "url": "/login",
+  "method": "POST",
+  "ip": "172.18.0.1",
+  "email": "jordan@solution-logique.frq"
+}
+
+--------------------------------------------------------------
+
+25-07-2024 14:29:20 [authentification_api] error: Invalid credentials
+Error: Invalid credentials
+    at login (/app/src/controller/auth_controller.ts:16:18)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+{
+  "url": "/login",
+  "method": "POST",
+  "ip": "172.18.0.1",
+  "email": "jordan@solution-logique.frq"
+}
+
+--------------------------------------------------------------
+
+25-07-2024 14:29:24 [authentification_api] info: Login successful for email: jordan@solution-logique.fr
+{
+  "ip": "172.18.0.1",
+  "url": "/login",
+  "method": "POST"
+}
+
+--------------------------------------------------------------
+
+25-07-2024 14:29:53 [authentification_api] error: Invalid credentials
+Error: Invalid credentials
+    at login (/app/src/controller/auth_controller.ts:16:18)
+{
+  "url": "/login",
+  "method": "POST",
+  "ip": "172.18.0.1",
+  "email": "jordan@solution-logique.fr"
+}
+
+--------------------------------------------------------------
+
+25-07-2024 14:29:57 [authentification_api] error: Invalid credentials
+Error: Invalid credentials
+    at login (/app/src/controller/auth_controller.ts:16:18)
+{
+  "url": "/login",
+  "method": "POST",
+  "ip": "172.18.0.1",
+  "email": "jordan@solution-logique.fr"
+}
+
+--------------------------------------------------------------
+
+25-07-2024 14:29:59 [authentification_api] error: Invalid credentials
+Error: Invalid credentials
+    at login (/app/src/controller/auth_controller.ts:16:18)
+{
+  "url": "/login",
+  "method": "POST",
+  "ip": "172.18.0.1",
+  "email": "jordan@solution-logique.fr"
+}
+
+--------------------------------------------------------------
+
+25-07-2024 14:30:00 [authentification_api] error: Invalid credentials
+Error: Invalid credentials
+    at login (/app/src/controller/auth_controller.ts:16:18)
+{
+  "url": "/login",
+  "method": "POST",
+  "ip": "172.18.0.1",
+  "email": "jordan@solution-logique.fr"
+}
+
+--------------------------------------------------------------
+
+25-07-2024 14:30:01 [authentification_api] error: Invalid credentials
+Error: Invalid credentials
+    at login (/app/src/controller/auth_controller.ts:16:18)
+{
+  "url": "/login",
+  "method": "POST",
+  "ip": "172.18.0.1",
+  "email": "jordan@solution-logique.fr"
+}
+
+--------------------------------------------------------------
+
+25-07-2024 14:30:02 [authentification_api] error: Invalid credentials
+Error: Invalid credentials
+    at login (/app/src/controller/auth_controller.ts:16:18)
+{
+  "url": "/login",
+  "method": "POST",
+  "ip": "172.18.0.1",
+  "email": "jordan@solution-logique.fr"
+}
+
+--------------------------------------------------------------
+
+25-07-2024 14:30:04 [authentification_api] error: Invalid credentials
+Error: Invalid credentials
+    at login (/app/src/controller/auth_controller.ts:16:18)
+{
+  "url": "/login",
+  "method": "POST",
+  "ip": "172.18.0.1",
+  "email": "jordan@solution-logique.fr"
+}
+
+--------------------------------------------------------------
+
+25-07-2024 14:30:07 [authentification_api] info: Login successful for email: jordan@solution-logique.fr
+{
+  "ip": "172.18.0.1",
+  "url": "/login",
+  "method": "POST"
+}
+
+--------------------------------------------------------------
+
+25-07-2024 14:33:11 [authentification_api] error: column "NbrOfAttemps" does not exist
+error: column "NbrOfAttemps" does not exist
+    at /app/node_modules/pg/lib/client.js:526:17
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at login (/app/src/model/auth_model.ts:22:24)
+    at login (/app/src/controller/auth_controller.ts:14:37)
+{
+  "url": "/login",
+  "method": "POST",
+  "ip": "172.18.0.1",
+  "email": "jordan@solution-logique.fr"
+}
+
+--------------------------------------------------------------
+
+25-07-2024 14:33:11 [authentification_api] error: Error during login: column "NbrOfAttemps" does not exist
+Error: Error during login: column "NbrOfAttemps" does not exist
+    at login (/app/src/controller/auth_controller.ts:52:12)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+{
+  "url": "/login",
+  "method": "POST",
+  "ip": "172.18.0.1"
+}
+
+--------------------------------------------------------------
+
+25-07-2024 14:33:14 [authentification_api] error: column "NbrOfAttemps" does not exist
+error: column "NbrOfAttemps" does not exist
+    at /app/node_modules/pg/lib/client.js:526:17
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at login (/app/src/model/auth_model.ts:22:24)
+    at login (/app/src/controller/auth_controller.ts:14:37)
+{
+  "url": "/login",
+  "method": "POST",
+  "ip": "172.18.0.1",
+  "email": "jordan@solution-logique.fr"
+}
+
+--------------------------------------------------------------
+
+25-07-2024 14:33:14 [authentification_api] error: Error during login: column "NbrOfAttemps" does not exist
+Error: Error during login: column "NbrOfAttemps" does not exist
+    at login (/app/src/controller/auth_controller.ts:52:12)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+{
+  "url": "/login",
+  "method": "POST",
+  "ip": "172.18.0.1"
+}
+
+--------------------------------------------------------------
+
+25-07-2024 14:33:20 [authentification_api] error: column "NbrOfAttemps" does not exist
+error: column "NbrOfAttemps" does not exist
+    at /app/node_modules/pg/lib/client.js:526:17
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at login (/app/src/model/auth_model.ts:22:24)
+    at login (/app/src/controller/auth_controller.ts:14:37)
+{
+  "url": "/login",
+  "method": "POST",
+  "ip": "172.18.0.1",
+  "email": "jordan@solution-logique.fr"
+}
+
+--------------------------------------------------------------
+
+25-07-2024 14:33:20 [authentification_api] error: Error during login: column "NbrOfAttemps" does not exist
+Error: Error during login: column "NbrOfAttemps" does not exist
+    at login (/app/src/controller/auth_controller.ts:52:12)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+{
+  "url": "/login",
+  "method": "POST",
+  "ip": "172.18.0.1"
+}
+
+--------------------------------------------------------------
+
+25-07-2024 14:33:25 [authentification_api] error: column "NbrOfAttemps" does not exist
+error: column "NbrOfAttemps" does not exist
+    at /app/node_modules/pg/lib/client.js:526:17
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at login (/app/src/model/auth_model.ts:22:24)
+    at login (/app/src/controller/auth_controller.ts:14:37)
+{
+  "url": "/login",
+  "method": "POST",
+  "ip": "172.18.0.1",
+  "email": "jordan@solution-logique.fr"
+}
+
+--------------------------------------------------------------
+
+25-07-2024 14:33:25 [authentification_api] error: Error during login: column "NbrOfAttemps" does not exist
+Error: Error during login: column "NbrOfAttemps" does not exist
+    at login (/app/src/controller/auth_controller.ts:52:12)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+{
+  "url": "/login",
+  "method": "POST",
+  "ip": "172.18.0.1"
+}
+
+--------------------------------------------------------------
+
+25-07-2024 14:33:27 [authentification_api] error: column "NbrOfAttemps" does not exist
+error: column "NbrOfAttemps" does not exist
+    at /app/node_modules/pg/lib/client.js:526:17
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at login (/app/src/model/auth_model.ts:22:24)
+    at login (/app/src/controller/auth_controller.ts:14:37)
+{
+  "url": "/login",
+  "method": "POST",
+  "ip": "172.18.0.1",
+  "email": "jordan@solution-logique.fr"
+}
+
+--------------------------------------------------------------
+
+25-07-2024 14:33:27 [authentification_api] error: Error during login: column "NbrOfAttemps" does not exist
+Error: Error during login: column "NbrOfAttemps" does not exist
+    at login (/app/src/controller/auth_controller.ts:52:12)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+{
+  "url": "/login",
+  "method": "POST",
+  "ip": "172.18.0.1"
+}
+
+--------------------------------------------------------------
+
+25-07-2024 14:33:34 [authentification_api] error: column "NbrOfAttemps" does not exist
+error: column "NbrOfAttemps" does not exist
+    at /app/node_modules/pg/lib/client.js:526:17
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at login (/app/src/model/auth_model.ts:22:24)
+    at login (/app/src/controller/auth_controller.ts:14:37)
+{
+  "url": "/login",
+  "method": "POST",
+  "ip": "172.18.0.1",
+  "email": "jordan@solution-logique.fr"
+}
+
+--------------------------------------------------------------
+
+25-07-2024 14:33:34 [authentification_api] error: Error during login: column "NbrOfAttemps" does not exist
+Error: Error during login: column "NbrOfAttemps" does not exist
+    at login (/app/src/controller/auth_controller.ts:52:12)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+{
+  "url": "/login",
+  "method": "POST",
+  "ip": "172.18.0.1"
+}
+
+--------------------------------------------------------------
+
+25-07-2024 14:45:33 [authentification_api] info: Login successful for email: jordan@solution-logique.fr
+{
+  "ip": "172.18.0.1",
+  "url": "/login",
+  "method": "POST"
+}
+
+--------------------------------------------------------------
+
+25-07-2024 14:45:39 [authentification_api] info: Login successful for email: jordan@solution-logique.fr
+{
+  "ip": "172.18.0.1",
+  "url": "/login",
+  "method": "POST"
+}
+
+--------------------------------------------------------------
+
+25-07-2024 14:45:44 [authentification_api] info: Login successful for email: jordan@solution-logique.fr
+{
+  "ip": "172.18.0.1",
+  "url": "/login",
+  "method": "POST"
+}
+
+--------------------------------------------------------------
+
+25-07-2024 14:46:19 [authentification_api] info: Login successful for email: jordan@solution-logique.fr
+{
+  "ip": "172.18.0.1",
+  "url": "/login",
+  "method": "POST"
+}
+
+--------------------------------------------------------------
+
+25-07-2024 14:49:18 [authentification_api] info: Login successful for email: jordan@solution-logique.fr
+{
+  "ip": "172.18.0.1",
+  "url": "/login",
+  "method": "POST"
+}
+
+--------------------------------------------------------------
+
+25-07-2024 14:49:24 [authentification_api] info: Login successful for email: jordan@solution-logique.frjjd
+{
+  "ip": "172.18.0.1",
+  "url": "/login",
+  "method": "POST"
+}
+
+--------------------------------------------------------------
+
