@@ -1,5 +1,6 @@
 services:
   api_gateway:
+    container_name: api_gateway
     build: ./api_gateway
     ports:
       - "3000:3000"
@@ -20,6 +21,7 @@ services:
       - logs_api
 
   logs_api:
+    container_name: logs_api
     build:
       context: ./backend/logs_api
       dockerfile: Dockerfile
@@ -35,6 +37,7 @@ services:
       - app-network
 
   authentification_api:
+    container_name: authentification_api
     build:
       context: ./backend/authentification_api
       dockerfile: Dockerfile
@@ -54,6 +57,7 @@ services:
       - app-network
 
   user_api:
+    container_name: user_api
     build:
       context: ./backend/user_api
       dockerfile: Dockerfile
@@ -117,8 +121,8 @@ services:
       - app-network
 
   postgres_db:
-    image: postgres:16-alpine
     container_name: postgres_db
+    image: postgres:16-alpine
     restart: always
     environment:
       POSTGRES_USER: jordans
