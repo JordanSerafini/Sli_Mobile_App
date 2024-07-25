@@ -43,7 +43,7 @@ const client_model = {
 
       if (cachedData) {
         console.log('Cache hit');
-        return res.json(JSON.parse(cachedData)); 
+        return res.json(JSON.parse(cachedData));
       } else {
         console.log('Cache miss');
 
@@ -51,7 +51,7 @@ const client_model = {
         if (result.rows.length === 0) {
           return res.status(404).json({ message: "Customer not found" });
         }
-        await redisClient.setEx(cacheKey, 3600, JSON.stringify(result.rows[0])); 
+        await redisClient.setEx(cacheKey, 3600, JSON.stringify(result.rows[0]));
         res.json(result.rows[0]);
       }
     } catch (err) {
@@ -59,6 +59,7 @@ const client_model = {
       res.status(500).json({ message: "Internal server error" });
     }
   },
+
 
   async getCustomerByName(req: Request, res: Response) {
     const name = req.params.name;

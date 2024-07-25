@@ -85,12 +85,16 @@ services:
       - DB_NAME=SLI
       - DB_PASSWORD=slitest
       - DB_PORT=5432
+      - REDIS_URL=redis://client_redis:6379
     volumes:
       - ./backend/client_api:/app
       - /app/node_modules
       - ./backend/client_api/logs:/app/logs
     networks:
       - app-network
+    depends_on:
+      - postgres_db
+      - client_redis
 
   item_api:
     container_name: item_api
@@ -128,10 +132,20 @@ services:
     networks:
       - app-network
 
+  client_redis:
+    image: redis:6.2
+    container_name: client_redis
+    volumes:
+      - client_redis_data:/data
+    networks:
+      - app-network
+
 networks:
   app-network:
     driver: bridge
 
 volumes:
   pgdata:
+    driver: local
+  client_redis_data:
     driver: local
