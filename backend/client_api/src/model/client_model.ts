@@ -60,7 +60,6 @@ const client_model = {
     }
   },
 
-
   async getCustomerByName(req: Request, res: Response) {
     const name = req.params.name;
     const query = `SELECT * FROM "Customer" WHERE "Name" = $1;`;
@@ -94,40 +93,53 @@ const client_model = {
       const limit = parseInt(req.query.limit as string, 10) || 25;
       const offset = parseInt(req.query.offset as string, 10) || 0;
       const searchQuery = (req.query.searchQuery as string) || "";
+      const cacheKey = `customers_paginated_${limit}_${offset}_${searchQuery}`;
 
-      let query = `SELECT * FROM "Customer"`;
-      let countQuery = `SELECT COUNT(*) FROM "Customer"`;
-      let queryParams: (string | number)[] = [];
-      let countParams: (string | number)[] = [];
+      const cachedData = await redisClient.get(cacheKey);
+      if (cachedData) {
+        console.log('Cache hit');
+        return res.json(JSON.parse(cachedData));
+      } else {
+        console.log('Cache miss');
 
-      if (searchQuery) {
-        query += ` WHERE "Name" ILIKE $1`;
-        countQuery += ` WHERE "Name" ILIKE $1`;
-        queryParams.push(`%${searchQuery}%`);
-        countParams.push(`%${searchQuery}%`);
+        let query = `SELECT * FROM "Customer"`;
+        let countQuery = `SELECT COUNT(*) FROM "Customer"`;
+        let queryParams: (string | number)[] = [];
+        let countParams: (string | number)[] = [];
+
+        if (searchQuery) {
+          query += ` WHERE "Name" ILIKE $1`;
+          countQuery += ` WHERE "Name" ILIKE $1`;
+          queryParams.push(`%${searchQuery}%`);
+          countParams.push(`%${searchQuery}%`);
+        }
+
+        queryParams.push(limit);
+        queryParams.push(offset);
+
+        query += ` ORDER BY "Name" ASC LIMIT $${queryParams.length - 1} OFFSET $${queryParams.length}`;
+        countQuery += `;`;
+
+        console.log(`Query: ${query}, Query Params: ${queryParams}`);
+
+        const [customerResult, totalResult] = await Promise.all([
+          pgClient.query(query, queryParams),
+          pgClient.query(countQuery, countParams),
+        ]);
+
+        const totalCustomer = parseInt(totalResult.rows[0].count, 10);
+        const totalPages = Math.ceil(totalCustomer / limit);
+
+        const response = {
+          totalCustomer,
+          totalPages,
+          customers: customerResult.rows,
+        };
+
+        await redisClient.setEx(cacheKey, 3600, JSON.stringify(response));
+
+        return res.json(response);
       }
-
-      queryParams.push(limit);
-      queryParams.push(offset);
-
-      query += ` ORDER BY "Name" ASC LIMIT $${queryParams.length - 1} OFFSET $${queryParams.length}`;
-      countQuery += `;`;
-
-      console.log(`Query: ${query}, Query Params: ${queryParams}`);
-
-      const [customerResult, totalResult] = await Promise.all([
-        pgClient.query(query, queryParams),
-        pgClient.query(countQuery, countParams),
-      ]);
-
-      const totalCustomer = parseInt(totalResult.rows[0].count, 10);
-      const totalPages = Math.ceil(totalCustomer / limit);
-
-      res.json({
-        totalCustomer,
-        totalPages,
-        customers: customerResult.rows,
-      });
     } catch (err) {
       console.error("Erreur lors de la récupération des données :", err);
       if (!res.headersSent) {
@@ -171,7 +183,6 @@ const client_model = {
     const data = req.body;
 
     try {
-        // Transformer les clés en respectant les majuscules comme dans la base de données
         const columns = Object.keys(data)
             .map((key) => `"${key}"`)
             .join(", ");
@@ -182,9 +193,8 @@ const client_model = {
         const query = `INSERT INTO "Customer" (${columns}) VALUES (${values})`;
         await pgClient.query(query, Object.values(data));
 
-        // Utiliser le nom du client pour générer le nom du fichier CSV
-        const clientName = data.Name; // Supposons que le nom du client est stocké dans la clé 'Name'
-        const cleanedClientName = clientName.replace(/[^a-zA-Z0-9]/g, ''); // Supprimer les caractères spéciaux pour le nom du fichier
+        const clientName = data.Name;
+        const cleanedClientName = clientName.replace(/[^a-zA-Z0-9]/g, '');
         const filePath = path.join(
             __dirname,
             "validated",
@@ -195,9 +205,8 @@ const client_model = {
 
     } catch (error) {
         console.error("Failed to add customer:", error);
-        // En cas d'erreur, enregistrer les données dans un fichier d'erreur avec le nom du client
-        const clientName = data.Name; // Récupérer le nom du client
-        const cleanedClientName = clientName.replace(/[^a-zA-Z0-9]/g, ''); // Supprimer les caractères spéciaux pour le nom du fichier
+        const clientName = data.Name;
+        const cleanedClientName = clientName.replace(/[^a-zA-Z0-9]/g, '');
         const filePath = path.join(
             __dirname,
             "error",
@@ -212,7 +221,6 @@ const client_model = {
     const { latCentral, lonCentral, rayonM } = req.query;
   
     try {
-      // Convertir les paramètres en nombres
       const lat = parseFloat(latCentral as string);
       const lon = parseFloat(lonCentral as string);
       const rayon = parseFloat(rayonM as string);
@@ -246,20 +254,20 @@ function writeCustomerToCSV(filePath: string, customer: any): void {
   const values = Object.values(customer).map((value) => {
     let outputValue = "";
     if (typeof value === 'string') {
-      outputValue = value.replace(/"/g, '""'); // Escaper les guillemets doubles pour le format CSV
+      outputValue = value.replace(/"/g, '""');
     } else if (value === null || value === undefined) {
       outputValue = "";
     } else {
       outputValue = JSON.stringify(value).replace(/"/g, '""');
     }
 
-    return `"${outputValue}"`; // Encapsuler chaque valeur entre guillemets doubles
+    return `"${outputValue}"`;
   }).join(";");
 
   const dataLine = `${values}\n`;
 
   if (!fs.existsSync(filePath)) {
-    const header = `${columns}\n`; // Ajouter l'en-tête si le fichier est nouveau
+    const header = `${columns}\n`;
     fs.writeFileSync(filePath, header + dataLine, 'utf8');
   } else {
     fs.appendFileSync(filePath, dataLine, 'utf8');
