@@ -88,7 +88,6 @@ const client_model = {
   },
 
   async getCustomersPaginated(req: Request, res: Response) {
-    console.log(req.query);
     try {
       const limit = parseInt(req.query.limit as string, 10) || 25;
       const offset = parseInt(req.query.offset as string, 10) || 0;
@@ -119,8 +118,6 @@ const client_model = {
 
         query += ` ORDER BY "Name" ASC LIMIT $${queryParams.length - 1} OFFSET $${queryParams.length}`;
         countQuery += `;`;
-
-        console.log(`Query: ${query}, Query Params: ${queryParams}`);
 
         const [customerResult, totalResult] = await Promise.all([
           pgClient.query(query, queryParams),
