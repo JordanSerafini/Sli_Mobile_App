@@ -1,3 +1,4 @@
 Name;email;phone;addressType;address;postalCode;city;note
 "Test";"Jordan@solution-logique.fr";"07079990";"Facturation";"Test pringy";"75470";"Pringy";"Test de note"
 "Test";"";"0607080999";"Facturation";"Rue du test";"74370";"Pringy";""
+"Test";"";"0607080999";"Facturation";"Rue du test";"74370";"Pringy";""

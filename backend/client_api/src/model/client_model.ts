@@ -148,7 +148,7 @@ const client_model = {
 
   async deleteCustomerById(req: Request, res: Response) {
     const id = parseInt(req.params.id, 10);
-    const query = `DELETE FROM "Customer" WHERE id = $1 RETURNING *;`;
+    const query = `DELETE FROM "Customer" WHERE "Id" = $1 RETURNING *;`;
     try {
       const result = await pgClient.query(query, [id]);
       if (result.rows.length === 0) {
@@ -179,7 +179,6 @@ const client_model = {
 
   async createCustomer(req: Request, res: Response) {
     const data = req.body;
-
     try {
         const columns = Object.keys(data)
             .map((key) => `"${key}"`)

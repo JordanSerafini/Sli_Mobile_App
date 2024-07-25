@@ -60,7 +60,7 @@ const CustomerDetailScreen: React.FC = () => {
       ) : customer ? (
         <View className="gap-4 w-9.5/10 items-center">
           <Text className="text-xl italic">
-            <Text>{customer.MainInvoicingContact_FirstName} </Text>
+            <Text>{customer.MainInvoicingContact_FirstName} {customer.Id}</Text>
             <Text>{customer.MainInvoicingContact_Name}</Text>
           </Text>
           {customer.MainInvoicingContact_Email && (

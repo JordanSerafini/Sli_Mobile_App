@@ -115,7 +115,7 @@ export interface Customer {
     MainInvoicingAddress_Address2: string | null; 
     MainInvoicingAddress_Address3: string | null; 
     MainInvoicingAddress_Address4: string | null; 
-    MainInvoicingAddress_Zipcode: string | null; 
+    MainInvoicingAddress_ZipCode: string | null; 
     MainInvoicingAddress_City: string | null; 
     MainInvoicingAddress_State: string | null; 
     MainInvoicingAddress_Countryisocode: string | null; 
@@ -127,7 +127,7 @@ export interface Customer {
     MainInvoicingContact_FirstName: string | null;
     MainDeliveryAddress_Address3: string | null; 
     MainDeliveryAddress_Address4: string | null; 
-    MainDeliveryAddress_Zipcode: string | null; 
+    MainDeliveryAddress_ZipCode: string | null; 
     MainDeliveryAddress_City: string | null; 
     MainDeliveryAddress_State: string | null; 
     MainDeliveryAddress_Countryisocode: string | null; 

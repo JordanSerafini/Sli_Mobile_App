@@ -70,8 +70,10 @@ export const getCustomersPaginated = async (searchQuery: string, limit: number, 
     }
 };
 
-export const createCustomer = async (customer:any) => {
+// Define the function with specific type for better type checking (if you're using TypeScript)
+export const createCustomer = async (customer: any): Promise<any> => {
     try {
+        // Perform the fetch request to the API endpoint
         const response = await fetch(`${url.api_gateway}/clients`, {
             method: 'POST',
             headers: {
@@ -79,19 +81,36 @@ export const createCustomer = async (customer:any) => {
             },
             body: JSON.stringify(customer),
         });
+
+        // Check if the HTTP response status code is successful
         if (!response.ok) {
             const error = new Error('Network response was not ok');
-            await postLogs(error);
+            // Log error to server before throwing to handle it further up the call stack
+            await postLogs({
+                level: 'error',
+                message: `Failed to add customer: ${error.message}`,
+                statusCode: response.status,
+                statusText: response.statusText,
+            });
             throw error;
         }
+
+        // Parse the JSON response body
         const data = await response.json();
         return data;
+
     } catch (error: any) {
-        await postLogs(error);
+        // Log the error locally and also send it to server-side logging
         console.error('Error adding customer:', error);
+        await postLogs({
+            level: 'error',
+            message: `Unhandled exception in createCustomer: ${error.message}`,
+            error: error,
+        });
         throw error;
     }
 };
+
 
 export const updateCustomerById = async (id: number, customer: Customer) => {
     try {

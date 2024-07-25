@@ -71,13 +71,13 @@ const AddClientModal: React.FC<AddClientModalProps> = ({
       customerData.MainDeliveryContact_Email = customer.email;
       customerData.MainDeliveryContact_CellPhone = customer.phone;
       customerData.MainDeliveryAddress_Address1 = customer.address;
-      customerData.MainDeliveryAddress_Zipcode = customer.postalCode;
+      customerData.MainDeliveryAddress_ZipCode = customer.postalCode;
       customerData.MainDeliveryAddress_City = customer.city;
     } else {
       customerData.MainInvoicingContact_Email = customer.email;
       customerData.MainInvoicingContact_Cellphone = customer.phone;
       customerData.MainInvoicingAddress_Address1 = customer.address;
-      customerData.MainInvoicingAddress_Zipcode = customer.postalCode;
+      customerData.MainInvoicingAddress_ZipCode = customer.postalCode;
       customerData.MainInvoicingAddress_City = customer.city;
     }
 
@@ -87,6 +87,7 @@ const AddClientModal: React.FC<AddClientModalProps> = ({
       setSuccessMessageVisible(true);
       setConfirmationVisible(false);
       onDismiss();
+  
     } catch (error) {
       console.error("Failed to add customer:", error);
     }
