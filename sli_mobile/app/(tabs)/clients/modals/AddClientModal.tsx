@@ -27,17 +27,7 @@ interface Client {
   address: string;
   postalCode: string;
   city: string;
-  NoteClear: string;
-  MainDeliveryContact_Email: string | null;
-  MainInvoicingContact_Email: string | null;
-  MainInvoicingContact_Cellphone: string | null;
-  MainDeliveryContact_CellPhone: string | null;
-  MainInvoicingAddress_Address1: string | null;
-  MainDeliveryAddress_Address1: string | null;
-  MainInvoicingAddress_PostalCode: string | null;
-  MainDeliveryAddress_PostalCode: string | null;
-  MainInvoicingAddress_City: string | null;
-  MainDeliveryAddress_City: string | null;
+  note: string;
 }
 
 const AddClientModal: React.FC<AddClientModalProps> = ({
@@ -52,57 +42,59 @@ const AddClientModal: React.FC<AddClientModalProps> = ({
     address: "",
     postalCode: "",
     city: "",
-    NoteClear: "",
-    MainDeliveryContact_Email: null,
-    MainInvoicingContact_Email: null,
-    MainInvoicingContact_Cellphone: null,
-    MainDeliveryContact_CellPhone: null,
-    MainInvoicingAddress_Address1: null,
-    MainDeliveryAddress_Address1: null,
-    MainInvoicingAddress_PostalCode: null,
-    MainDeliveryAddress_PostalCode: null,
-    MainInvoicingAddress_City: null,
-    MainDeliveryAddress_City: null,
+    note: "",
+  });
+
+  const [confirmationVisible, setConfirmationVisible] = React.useState(false);
+  const [successMessageVisible, setSuccessMessageVisible] =
+    React.useState(false);
+  const [createdClient, setCreatedClient] = React.useState<{
+    name: string;
+    id: string | null;
+  }>({
+    name: "",
+    id: null,
   });
 
   const handleAddressTypeChange = (type: string) => {
     setClient({ ...client, addressType: type });
   };
 
-  const handleCreateCustomer = (customer: Client) => {
+  const handleCreateCustomer = async (customer: Client) => {
+    let customerData: any = {
+      Name: customer.name,
+      NotesClear: customer.note,
+    };
+
     // Set the appropriate fields based on address type
     if (customer.addressType === "Livraison") {
-      customer.MainDeliveryContact_Email = customer.email || null;
-      customer.MainDeliveryContact_CellPhone = customer.phone;
-      customer.MainDeliveryAddress_Address1 = customer.address;
-      customer.MainDeliveryAddress_PostalCode = customer.postalCode;
-      customer.MainDeliveryAddress_City = customer.city;
-      customer.MainInvoicingContact_Email = null;
-      customer.MainInvoicingContact_Cellphone = null;
-      customer.MainInvoicingAddress_Address1 = null;
-      customer.MainInvoicingAddress_PostalCode = null;
-      customer.MainInvoicingAddress_City = null;
+      customerData.MainDeliveryContact_Email = customer.email;
+      customerData.MainDeliveryContact_CellPhone = customer.phone;
+      customerData.MainDeliveryAddress_Address1 = customer.address;
+      customerData.MainDeliveryAddress_Zipcode = customer.postalCode;
+      customerData.MainDeliveryAddress_City = customer.city;
     } else {
-      customer.MainInvoicingContact_Email = customer.email || null;
-      customer.MainInvoicingContact_Cellphone = customer.phone;
-      customer.MainInvoicingAddress_Address1 = customer.address;
-      customer.MainInvoicingAddress_PostalCode = customer.postalCode;
-      customer.MainInvoicingAddress_City = customer.city;
-      customer.MainDeliveryContact_Email = null;
-      customer.MainDeliveryContact_CellPhone = null;
-      customer.MainDeliveryAddress_Address1 = null;
-      customer.MainDeliveryAddress_PostalCode = null;
-      customer.MainDeliveryAddress_City = null;
+      customerData.MainInvoicingContact_Email = customer.email;
+      customerData.MainInvoicingContact_Cellphone = customer.phone;
+      customerData.MainInvoicingAddress_Address1 = customer.address;
+      customerData.MainInvoicingAddress_Zipcode = customer.postalCode;
+      customerData.MainInvoicingAddress_City = customer.city;
     }
-    createCustomer(customer);
-    setConfirmationVisible(false);
-    onDismiss();
-  };
 
-  const [confirmationVisible, setConfirmationVisible] = React.useState(false);
+    try {
+      const response = await createCustomer(customerData);
+      setCreatedClient({ name: response.Name, id: response.Id });
+      setSuccessMessageVisible(true);
+      setConfirmationVisible(false);
+      onDismiss();
+    } catch (error) {
+      console.error("Failed to add customer:", error);
+    }
+  };
 
   const showConfirmation = () => setConfirmationVisible(true);
   const hideConfirmation = () => setConfirmationVisible(false);
+  const hideSuccessMessage = () => setSuccessMessageVisible(false);
 
   return (
     <>
@@ -111,7 +103,9 @@ const AddClientModal: React.FC<AddClientModalProps> = ({
           behavior={Platform.OS === "ios" ? "padding" : "height"}
           style={{ height: "100%" }}
         >
-          <ScrollView contentContainerStyle={{ flexGrow: 1, justifyContent: 'center' }}>
+          <ScrollView
+            contentContainerStyle={{ flexGrow: 1, justifyContent: "center" }}
+          >
             <View className="h-9.5/10 w-9.5/10 bg-white self-center rounded-lg items-center justify-evenly">
               <TouchableOpacity
                 className="absolute top-0 right-0 p-2 z-10"
@@ -132,7 +126,9 @@ const AddClientModal: React.FC<AddClientModalProps> = ({
                     placeholder="Nom du client"
                     className="h-8 justify-center w-8/10"
                     value={client.name}
-                    onChangeText={(text) => setClient({ ...client, name: text })}
+                    onChangeText={(text) =>
+                      setClient({ ...client, name: text })
+                    }
                   />
                 </View>
                 {/*---------------------------------------- Tel du client -----------------------------*/}
@@ -147,7 +143,9 @@ const AddClientModal: React.FC<AddClientModalProps> = ({
                     placeholder="Téléphone"
                     className="h-8 justify-center w-8/10"
                     value={client.phone}
-                    onChangeText={(text) => setClient({ ...client, phone: text })}
+                    onChangeText={(text) =>
+                      setClient({ ...client, phone: text })
+                    }
                   />
                 </View>
                 {/*---------------------------------------- Email du client -----------------------------*/}
@@ -162,7 +160,9 @@ const AddClientModal: React.FC<AddClientModalProps> = ({
                     placeholder="Email"
                     className="h-8 justify-center w-8/10"
                     value={client.email}
-                    onChangeText={(text) => setClient({ ...client, email: text })}
+                    onChangeText={(text) =>
+                      setClient({ ...client, email: text })
+                    }
                   />
                 </View>
                 {/*---------------------------------------- Selection type adresse -----------------------------*/}
@@ -246,8 +246,10 @@ const AddClientModal: React.FC<AddClientModalProps> = ({
                     multiline={true}
                     numberOfLines={8}
                     className="justify-center w-8/10"
-                    value={client.NoteClear}
-                    onChangeText={(text) => setClient({ ...client, NoteClear: text })}
+                    value={client.note}
+                    onChangeText={(text) =>
+                      setClient({ ...client, note: text })
+                    }
                   />
                 </View>
               </View>
@@ -274,11 +276,23 @@ const AddClientModal: React.FC<AddClientModalProps> = ({
             <Text>Adresse: {client.address}</Text>
             <Text>Code postal: {client.postalCode}</Text>
             <Text>Ville: {client.city}</Text>
-            <Text>Note: {client.NoteClear}</Text>
+            <Text>Note: {client.note}</Text>
           </Dialog.Content>
           <Dialog.Actions>
             <Button onPress={hideConfirmation}>Annuler</Button>
-            <Button onPress={() => handleCreateCustomer(client)}>Confirmer</Button>
+            <Button onPress={() => handleCreateCustomer(client)}>
+              Confirmer
+            </Button>
+          </Dialog.Actions>
+        </Dialog>
+        <Dialog visible={successMessageVisible} onDismiss={hideSuccessMessage}>
+          <Dialog.Title>Client créé avec succès</Dialog.Title>
+          <Dialog.Content>
+            <Text>Nom: {createdClient.name}</Text>
+            <Text>ID: {createdClient.id}</Text>
+          </Dialog.Content>
+          <Dialog.Actions>
+            <Button onPress={hideSuccessMessage}>OK</Button>
           </Dialog.Actions>
         </Dialog>
       </Portal>
