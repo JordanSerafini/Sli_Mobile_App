@@ -10,6 +10,7 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 const client_model = {
+  
   async getAllCustomers(req: Request, res: Response) {
     const query = `SELECT * FROM "Customer" ORDER BY "Name" ASC;`;
     const cacheKey = 'all_customers';
