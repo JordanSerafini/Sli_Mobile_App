@@ -1,12 +1,12 @@
 // App.tsx
-import React, { useEffect } from 'react';
+import React from 'react';
 import { View, StyleSheet } from 'react-native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import AppNavigationContainer from './NavigationContainer';
-import { getCustomersPaginated } from './app/utils/functions/customer_functions';
+//import { getCustomersPaginated } from './app/utils/functions/customer_functions';
 
 export default function App() {
-
+/*
   useEffect(() => {
     // Fonction asynchrone à l'intérieur de useEffect
     const fetchData = async () => {
@@ -19,7 +19,7 @@ export default function App() {
 
     fetchData(); // Appel de la fonction asynchrone
   }, []);
-
+*/
   return (
     <SafeAreaProvider>
       <View style={styles.container}>
