@@ -7,12 +7,8 @@ interface UserType {
     role: number;
     nom: string;
     prenom: string;
+    position: string | null;
     telephone: string | null;
-    password: string;
-    NbrOfAttempts: number;
-    IsBlocked: boolean;
-    BlockTime: Date | null;
-    Token: string;
 }
 
 const login = async (email: string, plainPassword: string): Promise<UserType | null> => {

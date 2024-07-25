@@ -1069,3 +1069,210 @@ Error: Error during login: column "NbrOfAttemps" does not exist
 
 --------------------------------------------------------------
 
+25-07-2024 14:50:10 [authentification_api] error: Invalid credentials
+Error: Invalid credentials
+    at login (/app/src/controller/auth_controller.ts:16:18)
+{
+  "url": "/login",
+  "method": "POST",
+  "ip": "172.18.0.1",
+  "email": "jordan@solution-logique.fr"
+}
+
+--------------------------------------------------------------
+
+25-07-2024 14:51:58 [authentification_api] error: Invalid credentials
+Error: Invalid credentials
+    at login (/app/src/controller/auth_controller.ts:16:18)
+{
+  "url": "/login",
+  "method": "POST",
+  "ip": "172.18.0.1",
+  "email": "jordan@solution-logique.fr"
+}
+
+--------------------------------------------------------------
+
+25-07-2024 14:52:07 [authentification_api] info: Login successful for email: jordan@solution-logique.fr
+{
+  "ip": "172.18.0.1",
+  "url": "/login",
+  "method": "POST"
+}
+
+--------------------------------------------------------------
+
+25-07-2024 14:56:18 [authentification_api] error: column "nbrofattempts" does not exist
+error: column "nbrofattempts" does not exist
+    at /app/node_modules/pg/lib/client.js:526:17
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at login (/app/src/model/auth_model.ts:28:24)
+    at login (/app/src/controller/auth_controller.ts:14:37)
+{
+  "url": "/login",
+  "method": "POST",
+  "ip": "172.18.0.1",
+  "email": "jordan@solution-logique.fr"
+}
+
+--------------------------------------------------------------
+
+25-07-2024 14:56:18 [authentification_api] error: Error during login: column "nbrofattempts" does not exist
+Error: Error during login: column "nbrofattempts" does not exist
+    at login (/app/src/controller/auth_controller.ts:52:12)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+{
+  "url": "/login",
+  "method": "POST",
+  "ip": "172.18.0.1"
+}
+
+--------------------------------------------------------------
+
+25-07-2024 14:57:03 [authentification_api] error: column "nbrofattempts" does not exist
+error: column "nbrofattempts" does not exist
+    at /app/node_modules/pg/lib/client.js:526:17
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at login (/app/src/model/auth_model.ts:28:24)
+    at login (/app/src/controller/auth_controller.ts:14:37)
+{
+  "url": "/login",
+  "method": "POST",
+  "ip": "172.18.0.1",
+  "email": "jordan@solution-logique.fr"
+}
+
+--------------------------------------------------------------
+
+25-07-2024 14:57:03 [authentification_api] error: Error during login: column "nbrofattempts" does not exist
+Error: Error during login: column "nbrofattempts" does not exist
+    at login (/app/src/controller/auth_controller.ts:52:12)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+{
+  "url": "/login",
+  "method": "POST",
+  "ip": "172.18.0.1"
+}
+
+--------------------------------------------------------------
+
+25-07-2024 14:59:15 [authentification_api] error: column "nbrofattempts" does not exist
+error: column "nbrofattempts" does not exist
+    at /app/node_modules/pg/lib/client.js:526:17
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at login (/app/src/model/auth_model.ts:28:24)
+    at login (/app/src/controller/auth_controller.ts:14:37)
+{
+  "url": "/login",
+  "method": "POST",
+  "ip": "172.18.0.1",
+  "email": "jordan@solution-logique.fr"
+}
+
+--------------------------------------------------------------
+
+25-07-2024 14:59:15 [authentification_api] error: Error during login: column "nbrofattempts" does not exist
+Error: Error during login: column "nbrofattempts" does not exist
+    at login (/app/src/controller/auth_controller.ts:52:12)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+{
+  "url": "/login",
+  "method": "POST",
+  "ip": "172.18.0.1"
+}
+
+--------------------------------------------------------------
+
+25-07-2024 15:02:44 [authentification_api] error: column "nbrofattempts" does not exist
+error: column "nbrofattempts" does not exist
+    at /app/node_modules/pg/lib/client.js:526:17
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at login (/app/src/model/auth_model.ts:28:24)
+    at login (/app/src/controller/auth_controller.ts:14:37)
+{
+  "url": "/login",
+  "method": "POST",
+  "ip": "172.18.0.1",
+  "email": "jordan@solution-logique.fr"
+}
+
+--------------------------------------------------------------
+
+25-07-2024 15:02:44 [authentification_api] error: Error during login: column "nbrofattempts" does not exist
+Error: Error during login: column "nbrofattempts" does not exist
+    at login (/app/src/controller/auth_controller.ts:52:12)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+{
+  "url": "/login",
+  "method": "POST",
+  "ip": "172.18.0.1"
+}
+
+--------------------------------------------------------------
+
+25-07-2024 15:04:51 [authentification_api] error: column "nbrofattempts" does not exist
+error: column "nbrofattempts" does not exist
+    at /app/node_modules/pg/lib/client.js:526:17
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at login (/app/src/model/auth_model.ts:28:24)
+    at login (/app/src/controller/auth_controller.ts:14:37)
+{
+  "url": "/login",
+  "method": "POST",
+  "ip": "172.18.0.1",
+  "email": "jordan@solution-logique.fr"
+}
+
+--------------------------------------------------------------
+
+25-07-2024 15:04:51 [authentification_api] error: Error during login: column "nbrofattempts" does not exist
+Error: Error during login: column "nbrofattempts" does not exist
+    at login (/app/src/controller/auth_controller.ts:52:12)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+{
+  "url": "/login",
+  "method": "POST",
+  "ip": "172.18.0.1"
+}
+
+--------------------------------------------------------------
+
+25-07-2024 15:06:12 [authentification_api] info: Login successful for email: jordan@solution-logique.fr
+{
+  "ip": "172.18.0.1",
+  "url": "/login",
+  "method": "POST"
+}
+
+--------------------------------------------------------------
+
+25-07-2024 15:06:17 [authentification_api] info: Login successful for email: jordan@solution-logique.fr
+{
+  "ip": "172.18.0.1",
+  "url": "/login",
+  "method": "POST"
+}
+
+--------------------------------------------------------------
+
+25-07-2024 15:09:07 [authentification_api] error: Invalid credentials
+Error: Invalid credentials
+    at login (/app/src/controller/auth_controller.ts:16:18)
+{
+  "url": "/login",
+  "method": "POST",
+  "ip": "172.18.0.1",
+  "email": "jordan@solution-logique.fr"
+}
+
+--------------------------------------------------------------
+
+25-07-2024 15:09:11 [authentification_api] info: Login successful for email: jordan@solution-logique.fr
+{
+  "ip": "172.18.0.1",
+  "url": "/login",
+  "method": "POST"
+}
+
+--------------------------------------------------------------
+

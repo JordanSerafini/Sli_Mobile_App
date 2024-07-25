@@ -24,7 +24,7 @@ const LoginScreen: React.FC = () => {
 
   const handleLogin = async () => {
     try {
-      const response = await fetch(`${url.auth}/login`, {
+      const response = await fetch(`${url.api_gateway}/auth`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

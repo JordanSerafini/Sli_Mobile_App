@@ -21,7 +21,7 @@ const createUser = async (nom, prenom, email, password, role, telephone = null) 
 // Fonction pour obtenir un utilisateur par ID
 const getUserById = async (id) => {
   const query = `
-    SELECT * FROM Utilisateurs WHERE id = $1;
+    SELECT * FROM "Utilisateurs" WHERE id = $1;
   `;
   try {
     const res = await pgClient.query(query, [id]);
@@ -33,7 +33,7 @@ const getUserById = async (id) => {
 
 const getAllUsers = async () => {
     const query = `
-        SELECT * FROM Utilisateurs;
+        SELECT * FROM "Utilisateurs";
     `;
     try {
         const res = await pgClient.query(query);
@@ -46,7 +46,7 @@ const getAllUsers = async () => {
 // Fonction pour mettre à jour un utilisateur
 const updateUser = async (id, nom, prenom, email, password, role, isShadow, utilisateur_id, position, login_attempts, blocked_until, telephone) => {
   const query = `
-    UPDATE Utilisateurs
+    UPDATE "Utilisateurs"
     SET nom = $1, prenom = $2, email = $3, password = $4, role = $5, isShadow = $6, utilisateur_id = $7, position = $8, login_attempts = $9, blocked_until = $10, telephone = $11
     WHERE id = $12
     RETURNING *;
@@ -63,7 +63,7 @@ const updateUser = async (id, nom, prenom, email, password, role, isShadow, util
 // Fonction pour supprimer un utilisateur
 const deleteUser = async (id) => {
   const query = `
-    DELETE FROM Utilisateurs WHERE id = $1 RETURNING *;
+    DELETE FROM "Utilisateurs" WHERE id = $1 RETURNING *;
   `;
   try {
     const res = await pgClient.query(query, [id]);
