@@ -53,7 +53,7 @@ const IndexScreen: React.FC = () => {
           {content === "Liste" && <ClientScreen />}
           {content === "Carte" && <MapClientScreen />}
         </View>
-        {showAddClientModal ? (null) : (
+        {showAddClientModal || showEditClientModal ? (null) : (
         <FabPerso
           showAddModal={() => {
             setShowAddModal(true);
