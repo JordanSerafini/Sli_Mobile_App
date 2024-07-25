@@ -41,13 +41,13 @@ const ClientScreen: React.FC = () => {
       const data = await getCustomersPaginated(searchQuery, limit, newSearch ? 0 : offset);
       setCustomers((prevCustomers) => newSearch ? data.customers : [...prevCustomers, ...data.customers]);
       setTotalPages(data.totalPages);
-      setTotalCustomers(data.totalCustomer);
+      setTotalCustomers(data.totalCustomers);  // corrected totalCustomers
       setOffset(newSearch ? limit : offset + limit);
     } catch (error) {
       setError(error);
     }
     setLoadingMore(false);
-    setLoading(false);
+    setLoading(false);  // Ensure loading is set to false after fetch completes
   };
 
   useEffect(() => {
@@ -134,7 +134,11 @@ const ClientScreen: React.FC = () => {
                 )}
               </View>
             )}
-            onEndReached={() => fetchCustomers()}
+            onEndReached={() => {
+              if (offset < totalPages * limit) {
+                fetchCustomers();
+              }
+            }}
             onEndReachedThreshold={0.5}
             ListFooterComponent={loadingMore ? <ActivityIndicator size="small" color="#0000ff" /> : null}
           />

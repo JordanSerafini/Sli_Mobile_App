@@ -70,10 +70,8 @@ export const getCustomersPaginated = async (searchQuery: string, limit: number, 
     }
 };
 
-// Define the function with specific type for better type checking (if you're using TypeScript)
 export const createCustomer = async (customer: any): Promise<any> => {
     try {
-        // Perform the fetch request to the API endpoint
         const response = await fetch(`${url.api_gateway}/clients`, {
             method: 'POST',
             headers: {
@@ -84,19 +82,35 @@ export const createCustomer = async (customer: any): Promise<any> => {
 
         // Check if the HTTP response status code is successful
         if (!response.ok) {
-            const error = new Error('Network response was not ok');
+            const error = new Error(`Network response was not ok: ${response.status} ${response.statusText}`);
             // Log error to server before throwing to handle it further up the call stack
             await postLogs({
                 level: 'error',
-                message: `Failed to add customer: ${error.message}`,
+                message: `Failed to add customer: ${response.status} ${response.statusText}`,
                 statusCode: response.status,
                 statusText: response.statusText,
             });
             throw error;
         }
 
-        // Parse the JSON response body
-        const data = await response.json();
+        // Check and log the response text before parsing
+        const responseText = await response.text();
+        console.log('Response Text:', responseText);
+
+        // Attempt to parse the response text as JSON
+        let data;
+        try {
+            data = JSON.parse(responseText);
+        } catch (jsonParseError: any) {
+            console.error('Error parsing JSON:', jsonParseError);
+            await postLogs({
+                level: 'error',
+                message: `JSON Parse error: ${jsonParseError.message}`,
+                responseText: responseText,
+            });
+            throw new Error(`JSON Parse error: ${jsonParseError.message}`);
+        }
+
         return data;
 
     } catch (error: any) {

@@ -62,36 +62,35 @@ const AddClientModal: React.FC<AddClientModalProps> = ({
 
   const handleCreateCustomer = async (customer: Client) => {
     let customerData: any = {
-      Name: customer.name,
-      NotesClear: customer.note,
+        Name: customer.name,
+        NotesClear: customer.note,
     };
 
-    // Set the appropriate fields based on address type
     if (customer.addressType === "Livraison") {
-      customerData.MainDeliveryContact_Email = customer.email;
-      customerData.MainDeliveryContact_CellPhone = customer.phone;
-      customerData.MainDeliveryAddress_Address1 = customer.address;
-      customerData.MainDeliveryAddress_ZipCode = customer.postalCode;
-      customerData.MainDeliveryAddress_City = customer.city;
+        customerData.MainDeliveryContact_Email = customer.email;
+        customerData.MainDeliveryContact_CellPhone = customer.phone;
+        customerData.MainDeliveryAddress_Address1 = customer.address;
+        customerData.MainDeliveryAddress_ZipCode = customer.postalCode;
+        customerData.MainDeliveryAddress_City = customer.city;
     } else {
-      customerData.MainInvoicingContact_Email = customer.email;
-      customerData.MainInvoicingContact_Cellphone = customer.phone;
-      customerData.MainInvoicingAddress_Address1 = customer.address;
-      customerData.MainInvoicingAddress_ZipCode = customer.postalCode;
-      customerData.MainInvoicingAddress_City = customer.city;
+        customerData.MainInvoicingContact_Email = customer.email;
+        customerData.MainInvoicingContact_CellPhone = customer.phone;
+        customerData.MainInvoicingAddress_Address1 = customer.address;
+        customerData.MainInvoicingAddress_ZipCode = customer.postalCode;
+        customerData.MainInvoicingAddress_City = customer.city;
     }
 
     try {
-      const response = await createCustomer(customerData);
-      setCreatedClient({ name: response.Name, id: response.Id });
-      setSuccessMessageVisible(true);
-      setConfirmationVisible(false);
-      onDismiss();
-  
+        const response = await createCustomer(customerData);
+        setCreatedClient({ name: response.Name, id: response.Id });
+        setSuccessMessageVisible(true);
+        setConfirmationVisible(false);
+        onDismiss();
     } catch (error) {
-      console.error("Failed to add customer:", error);
+        console.error("Failed to add customer:", error);
     }
-  };
+};
+
 
   const showConfirmation = () => setConfirmationVisible(true);
   const hideConfirmation = () => setConfirmationVisible(false);

@@ -150,35 +150,49 @@ const client_model = {
     const id = parseInt(req.params.id, 10);
     const query = `DELETE FROM "Customer" WHERE "Id" = $1 RETURNING *;`;
     try {
-      const result = await pgClient.query(query, [id]);
-      if (result.rows.length === 0) {
-        return res.status(404).json({ message: "Customer not found" });
-      }
-      res.json(result.rows[0]);
-    } catch (err) {
-      console.error('Error deleting customer by ID:', err);
-      res.status(500).json({ message: "Internal server error" });
-    }
-  },
+        const result = await pgClient.query(query, [id]);
+        if (result.rows.length === 0) {
+            return res.status(404).json({ message: "Customer not found" });
+        }
 
-  async updateCustomerById(req: Request, res: Response) {
-    const id = parseInt(req.params.id, 10);
-    const { name, email } = req.body;
-    const query = `UPDATE "Customer" SET name = $1, email = $2 WHERE id = $3 RETURNING *;`;
-    try {
+        // Invalidate the cache
+        await redisClient.del('all_customers');
+        await redisClient.del(`customer_${id}`);
+        await redisClient.del(`customers_paginated_*`);
+
+        res.json(result.rows[0]);
+    } catch (err) {
+        console.error('Error deleting customer by ID:', err);
+        res.status(500).json({ message: "Internal server error" });
+    }
+},
+
+
+async updateCustomerById(req: Request, res: Response) {
+  const id = parseInt(req.params.id, 10);
+  const { name, email } = req.body;
+  const query = `UPDATE "Customer" SET "Name" = $1, "Email" = $2 WHERE "Id" = $3 RETURNING *;`;
+  try {
       const result = await pgClient.query(query, [name, email, id]);
       if (result.rows.length === 0) {
-        return res.status(404).json({ message: "Customer not found" });
+          return res.status(404).json({ message: "Customer not found" });
       }
+
+      // Invalidate the cache
+      await redisClient.del('all_customers');
+      await redisClient.del(`customer_${id}`);
+      await redisClient.del(`customers_paginated_*`);
+
       res.json(result.rows[0]);
-    } catch (err) {
+  } catch (err) {
       console.error('Error updating customer by ID:', err);
       res.status(500).json({ message: "Internal server error" });
-    }
-  },
+  }
+},
 
   async createCustomer(req: Request, res: Response) {
     const data = req.body;
+
     try {
         const columns = Object.keys(data)
             .map((key) => `"${key}"`)
@@ -187,19 +201,16 @@ const client_model = {
             .map((value, index) => `$${index + 1}`)
             .join(", ");
 
-        const query = `INSERT INTO "Customer" (${columns}) VALUES (${values})`;
-        await pgClient.query(query, Object.values(data));
+        const query = `INSERT INTO "Customer" (${columns}) VALUES (${values}) RETURNING *`;
+        const result = await pgClient.query(query, Object.values(data));
+        
+        const newCustomer = result.rows[0];
 
-        const clientName = data.Name;
-        const cleanedClientName = clientName.replace(/[^a-zA-Z0-9]/g, '');
-        const filePath = path.join(
-            __dirname,
-            "validated",
-            `Customers_Validated.csv`
-        );
-        writeCustomerToCSV(filePath, data);
-        res.status(201).send("Customer added successfully");
+        // Invalidate the cache
+        await redisClient.del('all_customers');
+        await redisClient.del(`customers_paginated_*`);
 
+        res.status(201).json(newCustomer);
     } catch (error) {
         console.error("Failed to add customer:", error);
         const clientName = data.Name;
@@ -212,7 +223,7 @@ const client_model = {
         writeCustomerToCSV(filePath, data);
         res.status(500).send("Error adding customer");
     }
-  },
+},
 
   async getCustomersWithinRadius(req: Request, res: Response) {
     const { latCentral, lonCentral, rayonM } = req.query;
