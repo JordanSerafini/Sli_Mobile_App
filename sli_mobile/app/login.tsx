@@ -49,11 +49,11 @@ const LoginScreen: React.FC = () => {
         throw new Error("User information not found in response");
       }
 
-      //const start = new Date().getTime(); 
+      const start = new Date().getTime(); 
       await setup();
-      //const end = new Date().getTime(); 
-      //const duration = end - start; 
-      //console.log(`Setup took ${duration} milliseconds`);
+      const end = new Date().getTime(); 
+      const duration = end - start; 
+      console.log(`Setup took ${duration} milliseconds`);
 
       await AsyncStorage.setItem("userToken", token);
       await AsyncStorage.setItem("user", JSON.stringify(user));
