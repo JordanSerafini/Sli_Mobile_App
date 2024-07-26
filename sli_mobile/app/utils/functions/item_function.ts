@@ -19,7 +19,7 @@ export const getItem = async () => {
     }
 };
 
-export const getItemPaginated = async (limit: number, offset: number, searchQuery: string) => {
+export const getItemPaginated = async (searchQuery: string, limit: number, offset: number) => {
     try {
         const response = await fetch(`${url.item}/items/paginated?limit=${limit}&offset=${offset}&searchQuery=${searchQuery}`);
         if (!response.ok) {

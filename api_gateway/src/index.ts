@@ -10,7 +10,6 @@ const PORT = process.env.PORT || 3000;
 
 app.use(cors());
 
-
 // Configuration des routes pour chaque service backend
 const services = {
   userService: process.env.USER_SERVICE_URL,

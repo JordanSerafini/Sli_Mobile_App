@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   View,
   Text,
@@ -11,7 +11,7 @@ import { useRouter } from "expo-router";
 import { url } from "./utils/url";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { postLogs } from "./utils/functions/logs_function";
-
+import { setup } from "./utils/functions/setup_function";
 
 const sli = require("./assets/sli.jpg");
 const bg = require("./assets/loginBg.png");
@@ -48,18 +48,24 @@ const LoginScreen: React.FC = () => {
         await postLogs(new Error("User information not found in response"));
         throw new Error("User information not found in response");
       }
-      await AsyncStorage.setItem('userToken', token);
-      await AsyncStorage.setItem('user', JSON.stringify(user));
+
+      //const start = new Date().getTime(); 
+      await setup();
+      //const end = new Date().getTime(); 
+      //const duration = end - start; 
+      //console.log(`Setup took ${duration} milliseconds`);
+
+      await AsyncStorage.setItem("userToken", token);
+      await AsyncStorage.setItem("user", JSON.stringify(user));
 
       router.push("/home");
-  
     } catch (error: any) {
-      await postLogs(error);  
+      await postLogs(error);
       console.error("Login failed:", error);
       alert(error.message);
     }
   };
-  
+
   return (
     <ImageBackground
       source={bg}

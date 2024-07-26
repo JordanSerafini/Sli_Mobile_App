@@ -1,0 +1,26 @@
+2024-07-26 07:58:52 [logger_api] Unknown user error: Error logging in
+Error: Error logging in
+    at ?anon_0_ (http://bjubt34-anonymous-8081.exp.direct/app\login.bundle//&platform=android&hot=false&lazy=true&transform.engine=hermes&transform.bytecode=true&transform.routerRoot=app&dev=true&minify=false&modulesOnly=true&runModule=false&shallow=true:51:28)
+    at next (native)
+    at asyncGeneratorStep (http://bjubt34-anonymous-8081.exp.direct/node_modules%5Cexpo-router%5Centry.bundle//&platform=android&dev=true&hot=false&lazy=true&transform.engine=hermes&transform.bytecode=true&transform.routerRoot=app:5844:19)
+    at _next (http://bjubt34-anonymous-8081.exp.direct/node_modules%5Cexpo-router%5Centry.bundle//&platform=android&dev=true&hot=false&lazy=true&transform.engine=hermes&transform.bytecode=true&transform.routerRoot=app:5858:29)
+    at tryCallOne (address at InternalBytecode.js:1:1180)
+    at anonymous (address at InternalBytecode.js:1:1874)
+    at apply (native)
+    at anonymous (http://bjubt34-anonymous-8081.exp.direct/node_modules%5Cexpo-router%5Centry.bundle//&platform=android&dev=true&hot=false&lazy=true&transform.engine=hermes&transform.bytecode=true&transform.routerRoot=app:14840:26)
+    at _callTimer (http://bjubt34-anonymous-8081.exp.direct/node_modules%5Cexpo-router%5Centry.bundle//&platform=android&dev=true&hot=false&lazy=true&transform.engine=hermes&transform.bytecode=true&transform.routerRoot=app:14719:17)
+    at _callReactNativeMicrotasksPass (http://bjubt34-anonymous-8081.exp.direct/node_modules%5Cexpo-router%5Centry.bundle//&platform=android&dev=true&hot=false&lazy=true&transform.engine=hermes&transform.bytecode=true&transform.routerRoot=app:14764:17)
+    at callReactNativeMicrotasks (http://bjubt34-anonymous-8081.exp.direct/node_modules%5Cexpo-router%5Centry.bundle//&platform=android&dev=true&hot=false&lazy=true&transform.engine=hermes&transform.bytecode=true&transform.routerRoot=app:14970:44)
+    at __callReactNativeMicrotasks (http://bjubt34-anonymous-8081.exp.direct/node_modules%5Cexpo-router%5Centry.bundle//&platform=android&dev=true&hot=false&lazy=true&transform.engine=hermes&transform.bytecode=true&transform.routerRoot=app:2637:48)
+    at anonymous (http://bjubt34-anonymous-8081.exp.direct/node_modules%5Cexpo-router%5Centry.bundle//&platform=android&dev=true&hot=false&lazy=true&transform.engine=hermes&transform.bytecode=true&transform.routerRoot=app:2410:45)
+    at __guard (http://bjubt34-anonymous-8081.exp.direct/node_modules%5Cexpo-router%5Centry.bundle//&platform=android&dev=true&hot=false&lazy=true&transform.engine=hermes&transform.bytecode=true&transform.routerRoot=app:2609:15)
+    at flushedQueue (http://bjubt34-anonymous-8081.exp.direct/node_modules%5Cexpo-router%5Centry.bundle//&platform=android&dev=true&hot=false&lazy=true&transform.engine=hermes&transform.bytecode=true&transform.routerRoot=app:2409:21)
+    at invokeCallbackAndReturnFlushedQueue (http://bjubt34-anonymous-8081.exp.direct/node_modules%5Cexpo-router%5Centry.bundle//&platform=android&dev=true&hot=false&lazy=true&transform.engine=hermes&transform.bytecode=true&transform.routerRoot=app:2403:33)
+{
+  "url": "No URL",
+  "method": "No method",
+  "ip": "::ffff:172.18.0.9"
+}
+
+------------------------------------------------------------------------------------------------
+
