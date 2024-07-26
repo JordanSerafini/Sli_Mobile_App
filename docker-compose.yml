@@ -123,7 +123,6 @@ services:
   postgres_db:
     container_name: postgres_db
     image: postgres:16-alpine
-    restart: always
     environment:
       POSTGRES_USER: jordans
       POSTGRES_PASSWORD: slitest
