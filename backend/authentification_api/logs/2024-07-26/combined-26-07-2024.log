@@ -172,3 +172,12 @@ Error: Invalid credentials
 
 --------------------------------------------------------------
 
+26-07-2024 14:28:41 [authentification_api] info: Login successful for email: jordan@solution-logique.fr
+{
+  "ip": "172.18.0.9",
+  "url": "/",
+  "method": "POST"
+}
+
+--------------------------------------------------------------
+

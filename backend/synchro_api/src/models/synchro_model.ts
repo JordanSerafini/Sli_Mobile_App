@@ -1,85 +1,59 @@
 import { pgClient } from '../client/client';
+import EBPclient from '../client/ebpclient'; // Supposons que ce soit un client MSSQL
 
-// Fonction pour créer un staff
-const createStaff = async (data) => {
-  const columns = Object.keys(data).map(key => `"${key}"`);
-  const values = Object.values(data);
-  const placeholders = values.map((_, index) => `$${index + 1}`);
+const compareCustomer = async () => {
+    try {
+        // Récupérer le nombre de clients dans chaque base de données
+        const ebpCustomerLengthResult = await EBPclient.query('SELECT COUNT(*) as count FROM Customer');
+        const pgCustomerLengthResult = await pgClient.query('SELECT COUNT(*) as count FROM customer');
 
-  const query = `
-    INSERT INTO "Staff" (${columns.join(', ')})
-    VALUES (${placeholders.join(', ')})
-    RETURNING *;
-  `;
+        const ebpCustomerLength = ebpCustomerLengthResult.recordset[0].count;
+        const pgCustomerLength = parseInt(pgCustomerLengthResult.rows[0].count, 10);
 
-  try {
-    const res = await pgClient.query(query, values);
-    return res.rows[0];
-  } catch (err) {
-    throw err;
-  }
+        if (ebpCustomerLength !== pgCustomerLength) {
+            console.log('Number of customers differs. Synchronizing...');
+
+            // Récupérer les clients de chaque base de données
+            const EBPcustomers = await EBPclient.query('SELECT * FROM Customer');
+            const PGcustomers = await pgClient.query('SELECT * FROM customer');
+
+            const ebpCustomerMap = new Map();
+            EBPcustomers.recordset.forEach(customer => {
+                ebpCustomerMap.set(customer.Name, customer);
+            });
+
+            const pgCustomerMap = new Map();
+            PGcustomers.rows.forEach(customer => {
+                pgCustomerMap.set(customer.Name, customer);
+            });
+
+            for (const [id, ebpCustomer] of ebpCustomerMap) {
+                const pgCustomer = pgCustomerMap.get(id);
+
+                if (!pgCustomer) {
+                    // Insérer le client dans PostgreSQL
+                    await pgClient.query(
+                        'INSERT INTO customer (id, name, email, ...) VALUES ($1, $2, $3, ...)',
+                        [ebpCustomer.id, ebpCustomer.name, ebpCustomer.email /*, ... autres champs */]
+                    );
+                } else if (JSON.stringify(pgCustomer) !== JSON.stringify(ebpCustomer)) {
+                    // Mettre à jour le client dans PostgreSQL
+                    await pgClient.query(
+                        'UPDATE customer SET name = $1, email = $2, ... WHERE id = $3',
+                        [ebpCustomer.name, ebpCustomer.email /*, ... autres champs */, ebpCustomer.id]
+                    );
+                }
+            }
+
+            console.log('Synchronization complete.');
+        } else {
+            console.log('Customers are in sync.');
+        }
+    } catch (error) {
+        console.error('Error comparing and synchronizing customers:', error);
+    }
 };
 
-const getStaffById = async (id) => {
-  const query = `
-    SELECT * FROM "Staff"
-    WHERE id = $1;
-  `;
+compareCustomer();
 
-  try {
-    const res = await pgClient.query(query, [id]);
-    return res.rows[0];
-  } catch (err) {
-    throw err;
-  }
-}
-
-const getAllStaff = async () => {
-  const query = `
-    SELECT * FROM "Staff";
-  `;
-
-  try {
-    const res = await pgClient.query(query);
-    return res.rows;
-  } catch (err) {
-    throw err;
-  }
-}
-
-const updateStaff = async (id, data) => {
-  const updates = Object.keys(data).map((key, index) => `"${key}" = $${index + 1}`);
-  const values = Object.values(data);
-  values.push(id); // Add id to the end for the WHERE clause
-
-  const query = `
-    UPDATE "Staff"
-    SET ${updates.join(', ')}
-    WHERE id = $${values.length}
-    RETURNING *;
-  `;
-
-  try {
-    const res = await pgClient.query(query, values);
-    return res.rows[0];
-  } catch (err) {
-    throw err;
-  }
-}
-
-const deleteStaffById = async (id) => {
-  const query = `
-    DELETE FROM "Staff"
-    WHERE id = $1
-    RETURNING *;
-  `;
-
-  try {
-    const res = await pgClient.query(query, [id]);
-    return res.rows[0];
-  } catch (err) {
-    throw err;
-  }
-}
-
-export { createStaff, getStaffById, getAllStaff, updateStaff, deleteStaffById };
+export { compareCustomer };
