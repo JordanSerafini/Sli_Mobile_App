@@ -1,5 +1,5 @@
 import { pgClient } from '../client/client';
-import EBPclient from '../client/ebpclient'; // Supposons que ce soit un client MSSQL
+import EBPclient from '../client/ebpClient';
 
 const getColumnNames = async (client, tableName) => {
     const result = await client.query(`SELECT COLUMN_NAME FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = '${tableName}'`);
