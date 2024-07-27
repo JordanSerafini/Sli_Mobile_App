@@ -125,7 +125,7 @@ const AddClientModal: React.FC<AddClientModalProps> = ({
                   />
                   <TextInput
                     placeholder="Nom du client"
-                    className="justify-center w-8/10 rounded-xl  bg-white border border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-500"
+                    className="justify-center w-8/10 rounded-xl  bg-white border border-gray-300 focus:border-blue-800 focus:ring-2 focus:ring-blue-800"
                     value={client.name}
                     onChangeText={(text) =>
                       setClient({ ...client, name: text })
@@ -142,7 +142,7 @@ const AddClientModal: React.FC<AddClientModalProps> = ({
                   />
                   <TextInput
                     placeholder="Téléphone"
-                    className="justify-center w-8/10 rounded-xl  bg-white border border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-500"
+                    className="justify-center w-8/10 rounded-xl  bg-white border border-gray-300 focus:border-blue-800 focus:ring-2 focus:ring-blue-800"
                     value={client.phone}
                     onChangeText={(text) =>
                       setClient({ ...client, phone: text })
@@ -159,7 +159,7 @@ const AddClientModal: React.FC<AddClientModalProps> = ({
                   />
                   <TextInput
                     placeholder="Email"
-                    className="justify-center w-8/10 rounded-xl  bg-white border border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-500"
+                    className="justify-center w-8/10 rounded-xl  bg-white border border-gray-300 focus:border-blue-800 focus:ring-2 focus:ring-blue-800"
                     value={client.email}
                     onChangeText={(text) =>
                       setClient({ ...client, email: text })
@@ -207,7 +207,7 @@ const AddClientModal: React.FC<AddClientModalProps> = ({
                     />
                     <TextInput
                       placeholder="Adresse"
-                      className="justify-center w-8/10 rounded-xl  bg-white border border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-500"
+                      className="justify-center w-8/10 rounded-xl  bg-white border border-gray-300 focus:border-blue-800 focus:ring-2 focus:ring-blue-800"
                       value={client.address}
                       onChangeText={(text) =>
                         setClient({ ...client, address: text })
@@ -218,7 +218,7 @@ const AddClientModal: React.FC<AddClientModalProps> = ({
                   <View className="flex-row h-10 w-full justify-evenly items-center mb-6">
                     <TextInput
                       placeholder="Code postal"
-                      className="justify-center w-3/10 rounded-xl  bg-white border border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-500"
+                      className="justify-center w-3/10 rounded-xl  bg-white border border-gray-300 focus:border-blue-800 focus:ring-2 focus:ring-blue-800"
                       value={client.postalCode}
                       onChangeText={(text) =>
                         setClient({ ...client, postalCode: text })
@@ -226,7 +226,7 @@ const AddClientModal: React.FC<AddClientModalProps> = ({
                     />
                     <TextInput
                       placeholder="Ville"
-                      className="justify-center w-6/10 rounded-xl  bg-white border border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-500"
+                      className="justify-center w-6/10 rounded-xl  bg-white border border-gray-300 focus:border-blue-800 focus:ring-2 focus:ring-blue-800"
                       value={client.city}
                       onChangeText={(text) =>
                         setClient({ ...client, city: text })
@@ -246,7 +246,7 @@ const AddClientModal: React.FC<AddClientModalProps> = ({
                     placeholder="..."
                     multiline={true}
                     numberOfLines={8}
-                    className="justify-center w-8/10 rounded-xl  bg-white border border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-500"
+                    className="justify-center w-8/10 rounded-xl  bg-white border border-gray-300 focus:border-blue-800 focus:ring-2 focus:ring-blue-800"
                     value={client.note}
                     onChangeText={(text) =>
                       setClient({ ...client, note: text })
