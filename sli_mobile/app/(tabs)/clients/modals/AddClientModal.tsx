@@ -7,6 +7,7 @@ import {
   KeyboardAvoidingView,
   ScrollView,
   Platform,
+  SafeAreaView,
 } from "react-native";
 import Icon from "react-native-vector-icons/MaterialIcons";
 import Icon_2 from "react-native-vector-icons/FontAwesome6";
@@ -106,16 +107,16 @@ const AddClientModal: React.FC<AddClientModalProps> = ({
           <ScrollView
             contentContainerStyle={{ flexGrow: 1, justifyContent: "center" }}
           >
-            <View className="h-9.5/10 w-9.5/10 bg-white self-center rounded-lg items-center justify-evenly">
+            <View className="h-9.5/10 w-9.5/10 bg-white self-center rounded-lg items-center">
               <TouchableOpacity
                 className="absolute top-0 right-0 p-2 z-10"
                 onPress={onDismiss}
               >
                 <Icon name="close" size={25} color="red" />
               </TouchableOpacity>
-              <View className="gap-y-2 h-9/10 w-full">
+              <SafeAreaView className="h-9/10 w-full items-center pt-4">
                 {/*---------------------------------------- Nom du client -----------------------------*/}
-                <View className="flex-row gap-2 w-full justify-center pt-4">
+                <View className="flex-row h-10 w-full justify-evenly items-center mb-6 mt-6">
                   <Icon
                     name="person"
                     size={30}
@@ -124,7 +125,7 @@ const AddClientModal: React.FC<AddClientModalProps> = ({
                   />
                   <TextInput
                     placeholder="Nom du client"
-                    className="h-8 justify-center w-8/10"
+                    className="justify-center w-8/10 rounded-xl  bg-white border border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-500"
                     value={client.name}
                     onChangeText={(text) =>
                       setClient({ ...client, name: text })
@@ -132,7 +133,7 @@ const AddClientModal: React.FC<AddClientModalProps> = ({
                   />
                 </View>
                 {/*---------------------------------------- Tel du client -----------------------------*/}
-                <View className="flex-row gap-2 w-full justify-center">
+                <View className="flex-row h-10 w-full justify-evenly items-center mb-6">
                   <Icon
                     name="contact-phone"
                     size={30}
@@ -141,7 +142,7 @@ const AddClientModal: React.FC<AddClientModalProps> = ({
                   />
                   <TextInput
                     placeholder="Téléphone"
-                    className="h-8 justify-center w-8/10"
+                    className="justify-center w-8/10 rounded-xl  bg-white border border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-500"
                     value={client.phone}
                     onChangeText={(text) =>
                       setClient({ ...client, phone: text })
@@ -149,7 +150,7 @@ const AddClientModal: React.FC<AddClientModalProps> = ({
                   />
                 </View>
                 {/*---------------------------------------- Email du client -----------------------------*/}
-                <View className="flex-row gap-2 w-full justify-center">
+                <View className="flex-row h-10 w-full justify-evenly items-center mb-6">
                   <Icon
                     name="email"
                     size={30}
@@ -158,7 +159,7 @@ const AddClientModal: React.FC<AddClientModalProps> = ({
                   />
                   <TextInput
                     placeholder="Email"
-                    className="h-8 justify-center w-8/10"
+                    className="justify-center w-8/10 rounded-xl  bg-white border border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-500"
                     value={client.email}
                     onChangeText={(text) =>
                       setClient({ ...client, email: text })
@@ -166,22 +167,22 @@ const AddClientModal: React.FC<AddClientModalProps> = ({
                   />
                 </View>
                 {/*---------------------------------------- Selection type adresse -----------------------------*/}
-                <View className="flex-row w-9.5/10 gap-1 pl-3">
+                <View className="flex-row w-10/10 gap-1 mb-6 justify-center">
                   <TouchableOpacity
-                    className={`w-1/2 items-center ${
+                    className={`w-4.5/10 items-center h-20 justify-center rounded-xl ${
                       client.addressType === "Livraison"
-                        ? "bg-gray-200"
-                        : "bg-white"
+                      ? "border-2 border-blue-500 bg-gray-50"
+                      : "bg-white"
                     }`}
                     onPress={() => handleAddressTypeChange("Livraison")}
                   >
-                    <Icon_2 name="truck" size={30} color={`${theme.accent}`} />
-                    <Text className="text-lg">Livraison</Text>
+                    <Icon_2 name="truck" size={30} color={`${client.addressType === "Livraison" ? "rgb(59 130 246)" : "#e5e7eb"  }`} />
+                    <Text className={`text-lg ${client.addressType === "Livraison" ? "text-blue-500" : "opacity-10"}`}>Livraison</Text>
                   </TouchableOpacity>
                   <TouchableOpacity
-                    className={`w-1/2 items-center ${
+                    className={`w-4.5/10 items-center h-20 justify-center rounded-xl ${
                       client.addressType === "Facturation"
-                        ? "bg-gray-200"
+                      ? "border-2 border-blue-500 bg-gray-50"
                         : "bg-white"
                     }`}
                     onPress={() => handleAddressTypeChange("Facturation")}
@@ -189,16 +190,16 @@ const AddClientModal: React.FC<AddClientModalProps> = ({
                     <Icon_2
                       name="file-invoice-dollar"
                       size={30}
-                      color={`${theme.accent}`}
+                      color={`${client.addressType === "Facturation" ? "rgb(59 130 246)" : "#e5e7eb"   }`}
                     />
-                    <Text className="text-lg">Facturation</Text>
+                    <Text className={`text-lg ${client.addressType === "Facturation" ? "text-blue-500" : "opacity-10"}`}>Facturation</Text>
                   </TouchableOpacity>
                 </View>
                 {/*---------------------------------------- adresse -----------------------------*/}
-                <View className="w-full justify-center gap-1">
+                <View className="w-full justify-center gap-1 ">
                   {/*---------------------------------------- Selection type adresse -----------------------------*/}
-                  <View className="flex-row gap-1 w-8.5/10">
-                    <Icon
+                  <View className="flex-row h-10 w-full justify-evenly items-center mb-6">
+                  <Icon
                       name="home"
                       size={30}
                       color={`${theme.accent}`}
@@ -206,7 +207,7 @@ const AddClientModal: React.FC<AddClientModalProps> = ({
                     />
                     <TextInput
                       placeholder="Adresse"
-                      className="h-8 justify-center w-full"
+                      className="justify-center w-8/10 rounded-xl  bg-white border border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-500"
                       value={client.address}
                       onChangeText={(text) =>
                         setClient({ ...client, address: text })
@@ -214,10 +215,10 @@ const AddClientModal: React.FC<AddClientModalProps> = ({
                     />
                   </View>
                   {/*---------------------------------------- CP + ville -----------------------------*/}
-                  <View className="flex-row w-full gap-2 items-center justify-center">
+                  <View className="flex-row h-10 w-full justify-evenly items-center mb-6">
                     <TextInput
                       placeholder="Code postal"
-                      className="h-8 justify-center w-3/10"
+                      className="justify-center w-3/10 rounded-xl  bg-white border border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-500"
                       value={client.postalCode}
                       onChangeText={(text) =>
                         setClient({ ...client, postalCode: text })
@@ -225,7 +226,7 @@ const AddClientModal: React.FC<AddClientModalProps> = ({
                     />
                     <TextInput
                       placeholder="Ville"
-                      className="h-8 justify-center w-6/10"
+                      className="justify-center w-6/10 rounded-xl  bg-white border border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-500"
                       value={client.city}
                       onChangeText={(text) =>
                         setClient({ ...client, city: text })
@@ -234,7 +235,7 @@ const AddClientModal: React.FC<AddClientModalProps> = ({
                   </View>
                 </View>
                 {/*---------------------------------------- Note -----------------------------*/}
-                <View className="flex-row gap-2 w-full justify-center">
+                  <View className="flex-row w-full h-24 justify-evenly items-center">
                   <Icon
                     name="note"
                     size={30}
@@ -245,14 +246,14 @@ const AddClientModal: React.FC<AddClientModalProps> = ({
                     placeholder="..."
                     multiline={true}
                     numberOfLines={8}
-                    className="justify-center w-8/10"
+                    className="justify-center w-8/10 rounded-xl  bg-white border border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-500"
                     value={client.note}
                     onChangeText={(text) =>
                       setClient({ ...client, note: text })
                     }
                   />
                 </View>
-              </View>
+              </SafeAreaView>
               {/*---------------------------------------- Bouton ajouter -----------------------------*/}
               <ButtonPerso
                 css="w-9.5/10"
