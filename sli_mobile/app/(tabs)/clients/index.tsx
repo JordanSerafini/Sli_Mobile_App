@@ -37,14 +37,14 @@ const IndexScreen: React.FC = () => {
             mode={content === "Liste" ? "contained" : "outlined"}
             icon={"account"}
             text={"Liste"}
-            css="w-4.5/10 self-center"
+            css={`w-4.5/10 self-center ${content === "Liste" ?  "bg-blue-800" : "bg-gray-100"}`}
             onPress={() => setContent("Liste")}
           />
           <ButtonPerso
             mode={content === "Carte" ? "contained" : "outlined"}
             icon={"map-marker-account"}
             text={"Carte"}
-            css="w-4.5/10 self-center"
+            css={`w-4.5/10 self-center ${content === "Carte" ?  "bg-blue-800" : "bg-gray-100"}`}
             onPress={() => setContent("Carte")}
           />
         </View>

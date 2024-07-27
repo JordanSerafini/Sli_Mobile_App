@@ -6,7 +6,6 @@ import HomeScreen from './app/(tabs)/home';
 const Stack = createStackNavigator();
 
 export default function AppNavigationContainer() {
-  console.log("AppNavigationContainer rendered");
 
   return (
     <NavigationContainer>

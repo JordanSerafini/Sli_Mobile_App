@@ -112,7 +112,7 @@ const AddClientModal: React.FC<AddClientModalProps> = ({
                 className="absolute top-0 right-0 p-2 z-10"
                 onPress={onDismiss}
               >
-                <Icon name="close" size={25} color="red" />
+                <Icon name="close" size={25} color="#e11d48" />
               </TouchableOpacity>
               <SafeAreaView className="h-9/10 w-full items-center pt-4">
                 {/*---------------------------------------- Nom du client -----------------------------*/}
@@ -171,7 +171,7 @@ const AddClientModal: React.FC<AddClientModalProps> = ({
                   <TouchableOpacity
                     className={`w-4.5/10 items-center h-20 justify-center rounded-xl ${
                       client.addressType === "Livraison"
-                      ? "border-2 border-blue-800 bg-gray-50"
+                      ? "border-2 border-blue-800 bg-gray-100"
                       : "bg-white"
                     }`}
                     onPress={() => handleAddressTypeChange("Livraison")}
@@ -182,7 +182,7 @@ const AddClientModal: React.FC<AddClientModalProps> = ({
                   <TouchableOpacity
                     className={`w-4.5/10 items-center h-20 justify-center rounded-xl ${
                       client.addressType === "Facturation"
-                      ? "border-2 border-blue-800 bg-gray-50"
+                      ? "border-2 border-blue-800 bg-gray-100"
                         : "bg-white"
                     }`}
                     onPress={() => handleAddressTypeChange("Facturation")}
@@ -256,7 +256,7 @@ const AddClientModal: React.FC<AddClientModalProps> = ({
               </SafeAreaView>
               {/*---------------------------------------- Bouton ajouter -----------------------------*/}
               <ButtonPerso
-                css="w-9.5/10"
+                css="w-9.5/10 bg-blue-800"
                 icon="account-plus"
                 mode="contained"
                 text="Ajouter"

@@ -34,7 +34,7 @@ const FabPerso: React.FC<FabPersoProps> = ({
           { icon: 'account-plus', label: 'Ajouter client', onPress: showAddClientModal, color: theme.colors.primary },
         ]}
         onStateChange={onStateChange}
-        fabStyle={{ backgroundColor: theme.colors.primary }}
+        fabStyle={{ backgroundColor: '#1e40af' }}
       />
     </Portal>
   );
