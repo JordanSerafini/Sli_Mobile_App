@@ -41,13 +41,13 @@ const ClientScreen: React.FC = () => {
       const data = await getCustomersPaginated(searchQuery, limit, newSearch ? 0 : offset);
       setCustomers((prevCustomers) => newSearch ? data.customers : [...prevCustomers, ...data.customers]);
       setTotalPages(data.totalPages);
-      setTotalCustomers(data.totalCustomers);  // corrected totalCustomers
+      setTotalCustomers(data.totalCustomers);
       setOffset(newSearch ? limit : offset + limit);
     } catch (error) {
       setError(error);
     }
     setLoadingMore(false);
-    setLoading(false);  // Ensure loading is set to false after fetch completes
+    setLoading(false);
   };
 
   useEffect(() => {
@@ -84,7 +84,6 @@ const ClientScreen: React.FC = () => {
     <Provider>
       <View className="h-full w-screen items-center">
         <View className="h-10 w-9.5/10 items-center bg-gray-200 mb-2">
-          {/*----------------------------------------------------------------------- Search input ------------------------------------------------------------------*/}
           <TextInput
             className="h-10/10 w-full px-2 "
             value={searchQuery}
@@ -100,7 +99,6 @@ const ClientScreen: React.FC = () => {
         ) : error ? (
           <Text className="text-red-500">Error: {error.message}</Text>
         ) : (
-          //*----------------------------------------------------------------------- Liste ------------------------------------------------------------------*/}
           <FlatList
             data={customers}
             className="max-h-8.5/10 w-full "
@@ -143,8 +141,6 @@ const ClientScreen: React.FC = () => {
             ListFooterComponent={loadingMore ? <ActivityIndicator size="small" color="#0000ff" /> : null}
           />
         )}
-        {/*----------------------------------------------------------------------- NAV ------------------------------------------------------------------*/}
-
         <Menu
           visible={menuVisible}
           onDismiss={() => setMenuVisible(false)}

@@ -1,0 +1,173 @@
+2024-07-27 06:58:06 [logger_api] Unknown user error: Network request failed
+TypeError: Network request failed
+    at anonymous (http://3--giby-anonymous-8081.exp.direct/node_modules%5Cexpo-router%5Centry.bundle//&platform=android&dev=true&hot=false&lazy=true&transform.engine=hermes&transform.bytecode=true&transform.routerRoot=app:6476:33)
+    at apply (native)
+    at anonymous (http://3--giby-anonymous-8081.exp.direct/node_modules%5Cexpo-router%5Centry.bundle//&platform=android&dev=true&hot=false&lazy=true&transform.engine=hermes&transform.bytecode=true&transform.routerRoot=app:14808:26)
+    at _callTimer (http://3--giby-anonymous-8081.exp.direct/node_modules%5Cexpo-router%5Centry.bundle//&platform=android&dev=true&hot=false&lazy=true&transform.engine=hermes&transform.bytecode=true&transform.routerRoot=app:14719:17)
+    at callTimers (http://3--giby-anonymous-8081.exp.direct/node_modules%5Cexpo-router%5Centry.bundle//&platform=android&dev=true&hot=false&lazy=true&transform.engine=hermes&transform.bytecode=true&transform.routerRoot=app:14927:19)
+    at apply (native)
+    at __callFunction (http://3--giby-anonymous-8081.exp.direct/node_modules%5Cexpo-router%5Centry.bundle//&platform=android&dev=true&hot=false&lazy=true&transform.engine=hermes&transform.bytecode=true&transform.routerRoot=app:2676:38)
+    at anonymous (http://3--giby-anonymous-8081.exp.direct/node_modules%5Cexpo-router%5Centry.bundle//&platform=android&dev=true&hot=false&lazy=true&transform.engine=hermes&transform.bytecode=true&transform.routerRoot=app:2392:31)
+    at __guard (http://3--giby-anonymous-8081.exp.direct/node_modules%5Cexpo-router%5Centry.bundle//&platform=android&dev=true&hot=false&lazy=true&transform.engine=hermes&transform.bytecode=true&transform.routerRoot=app:2609:15)
+    at callFunctionReturnFlushedQueue (http://3--giby-anonymous-8081.exp.direct/node_modules%5Cexpo-router%5Centry.bundle//&platform=android&dev=true&hot=false&lazy=true&transform.engine=hermes&transform.bytecode=true&transform.routerRoot=app:2391:21)
+{
+  "url": "No URL",
+  "method": "No method",
+  "ip": "::ffff:172.18.0.9"
+}
+
+------------------------------------------------------------------------------------------------
+
+2024-07-27 06:58:09 [logger_api] jordan@solution-logique.fr error: Network request failed
+TypeError: Network request failed
+    at anonymous (http://3--giby-anonymous-8081.exp.direct/node_modules%5Cexpo-router%5Centry.bundle//&platform=android&dev=true&hot=false&lazy=true&transform.engine=hermes&transform.bytecode=true&transform.routerRoot=app:6476:33)
+    at apply (native)
+    at anonymous (http://3--giby-anonymous-8081.exp.direct/node_modules%5Cexpo-router%5Centry.bundle//&platform=android&dev=true&hot=false&lazy=true&transform.engine=hermes&transform.bytecode=true&transform.routerRoot=app:14808:26)
+    at _callTimer (http://3--giby-anonymous-8081.exp.direct/node_modules%5Cexpo-router%5Centry.bundle//&platform=android&dev=true&hot=false&lazy=true&transform.engine=hermes&transform.bytecode=true&transform.routerRoot=app:14719:17)
+    at callTimers (http://3--giby-anonymous-8081.exp.direct/node_modules%5Cexpo-router%5Centry.bundle//&platform=android&dev=true&hot=false&lazy=true&transform.engine=hermes&transform.bytecode=true&transform.routerRoot=app:14927:19)
+    at apply (native)
+    at __callFunction (http://3--giby-anonymous-8081.exp.direct/node_modules%5Cexpo-router%5Centry.bundle//&platform=android&dev=true&hot=false&lazy=true&transform.engine=hermes&transform.bytecode=true&transform.routerRoot=app:2676:38)
+    at anonymous (http://3--giby-anonymous-8081.exp.direct/node_modules%5Cexpo-router%5Centry.bundle//&platform=android&dev=true&hot=false&lazy=true&transform.engine=hermes&transform.bytecode=true&transform.routerRoot=app:2392:31)
+    at __guard (http://3--giby-anonymous-8081.exp.direct/node_modules%5Cexpo-router%5Centry.bundle//&platform=android&dev=true&hot=false&lazy=true&transform.engine=hermes&transform.bytecode=true&transform.routerRoot=app:2609:15)
+    at callFunctionReturnFlushedQueue (http://3--giby-anonymous-8081.exp.direct/node_modules%5Cexpo-router%5Centry.bundle//&platform=android&dev=true&hot=false&lazy=true&transform.engine=hermes&transform.bytecode=true&transform.routerRoot=app:2391:21)
+{
+  "url": "No URL",
+  "method": "No method",
+  "ip": "::ffff:172.18.0.9"
+}
+
+------------------------------------------------------------------------------------------------
+
+2024-07-27 06:58:33 [logger_api] Unknown user error: Network request failed
+TypeError: Network request failed
+    at anonymous (http://3--giby-anonymous-8081.exp.direct/node_modules%5Cexpo-router%5Centry.bundle//&platform=android&dev=true&hot=false&lazy=true&transform.engine=hermes&transform.bytecode=true&transform.routerRoot=app:6476:33)
+    at apply (native)
+    at anonymous (http://3--giby-anonymous-8081.exp.direct/node_modules%5Cexpo-router%5Centry.bundle//&platform=android&dev=true&hot=false&lazy=true&transform.engine=hermes&transform.bytecode=true&transform.routerRoot=app:14808:26)
+    at _callTimer (http://3--giby-anonymous-8081.exp.direct/node_modules%5Cexpo-router%5Centry.bundle//&platform=android&dev=true&hot=false&lazy=true&transform.engine=hermes&transform.bytecode=true&transform.routerRoot=app:14719:17)
+    at callTimers (http://3--giby-anonymous-8081.exp.direct/node_modules%5Cexpo-router%5Centry.bundle//&platform=android&dev=true&hot=false&lazy=true&transform.engine=hermes&transform.bytecode=true&transform.routerRoot=app:14927:19)
+    at apply (native)
+    at __callFunction (http://3--giby-anonymous-8081.exp.direct/node_modules%5Cexpo-router%5Centry.bundle//&platform=android&dev=true&hot=false&lazy=true&transform.engine=hermes&transform.bytecode=true&transform.routerRoot=app:2676:38)
+    at anonymous (http://3--giby-anonymous-8081.exp.direct/node_modules%5Cexpo-router%5Centry.bundle//&platform=android&dev=true&hot=false&lazy=true&transform.engine=hermes&transform.bytecode=true&transform.routerRoot=app:2392:31)
+    at __guard (http://3--giby-anonymous-8081.exp.direct/node_modules%5Cexpo-router%5Centry.bundle//&platform=android&dev=true&hot=false&lazy=true&transform.engine=hermes&transform.bytecode=true&transform.routerRoot=app:2609:15)
+    at callFunctionReturnFlushedQueue (http://3--giby-anonymous-8081.exp.direct/node_modules%5Cexpo-router%5Centry.bundle//&platform=android&dev=true&hot=false&lazy=true&transform.engine=hermes&transform.bytecode=true&transform.routerRoot=app:2391:21)
+{
+  "url": "No URL",
+  "method": "No method",
+  "ip": "::ffff:172.18.0.9"
+}
+
+------------------------------------------------------------------------------------------------
+
+2024-07-27 06:58:49 [logger_api] Unknown user error: Network request failed
+TypeError: Network request failed
+    at anonymous (http://3--giby-anonymous-8081.exp.direct/node_modules%5Cexpo-router%5Centry.bundle//&platform=android&dev=true&hot=false&lazy=true&transform.engine=hermes&transform.bytecode=true&transform.routerRoot=app:6476:33)
+    at apply (native)
+    at anonymous (http://3--giby-anonymous-8081.exp.direct/node_modules%5Cexpo-router%5Centry.bundle//&platform=android&dev=true&hot=false&lazy=true&transform.engine=hermes&transform.bytecode=true&transform.routerRoot=app:14808:26)
+    at _callTimer (http://3--giby-anonymous-8081.exp.direct/node_modules%5Cexpo-router%5Centry.bundle//&platform=android&dev=true&hot=false&lazy=true&transform.engine=hermes&transform.bytecode=true&transform.routerRoot=app:14719:17)
+    at callTimers (http://3--giby-anonymous-8081.exp.direct/node_modules%5Cexpo-router%5Centry.bundle//&platform=android&dev=true&hot=false&lazy=true&transform.engine=hermes&transform.bytecode=true&transform.routerRoot=app:14927:19)
+    at apply (native)
+    at __callFunction (http://3--giby-anonymous-8081.exp.direct/node_modules%5Cexpo-router%5Centry.bundle//&platform=android&dev=true&hot=false&lazy=true&transform.engine=hermes&transform.bytecode=true&transform.routerRoot=app:2676:38)
+    at anonymous (http://3--giby-anonymous-8081.exp.direct/node_modules%5Cexpo-router%5Centry.bundle//&platform=android&dev=true&hot=false&lazy=true&transform.engine=hermes&transform.bytecode=true&transform.routerRoot=app:2392:31)
+    at __guard (http://3--giby-anonymous-8081.exp.direct/node_modules%5Cexpo-router%5Centry.bundle//&platform=android&dev=true&hot=false&lazy=true&transform.engine=hermes&transform.bytecode=true&transform.routerRoot=app:2609:15)
+    at callFunctionReturnFlushedQueue (http://3--giby-anonymous-8081.exp.direct/node_modules%5Cexpo-router%5Centry.bundle//&platform=android&dev=true&hot=false&lazy=true&transform.engine=hermes&transform.bytecode=true&transform.routerRoot=app:2391:21)
+{
+  "url": "No URL",
+  "method": "No method",
+  "ip": "::ffff:172.18.0.9"
+}
+
+------------------------------------------------------------------------------------------------
+
+2024-07-27 06:59:39 [logger_api] Unknown user error: Failed to fetch
+TypeError: Failed to fetch
+    at getItemPaginated (http://localhost:8081/node_modules%5Cexpo-router%5Centry.bundle?platform=web&dev=true&hot=false&lazy=true&transform.engine=hermes&transform.routerRoot=app:25995:30)
+    at setup (http://localhost:8081/node_modules%5Cexpo-router%5Centry.bundle?platform=web&dev=true&hot=false&lazy=true&transform.engine=hermes&transform.routerRoot=app:56122:49)
+    at async handleLogin (http://localhost:8081/node_modules%5Cexpo-router%5Centry.bundle?platform=web&dev=true&hot=false&lazy=true&transform.engine=hermes&transform.routerRoot=app:55898:9)
+{
+  "url": "No URL",
+  "method": "No method",
+  "ip": "::ffff:172.18.0.9"
+}
+
+------------------------------------------------------------------------------------------------
+
+2024-07-27 06:59:59 [logger_api] Unknown user error: Network request failed
+TypeError: Network request failed
+    at anonymous (http://3--giby-anonymous-8081.exp.direct/node_modules%5Cexpo-router%5Centry.bundle//&platform=android&dev=true&hot=false&lazy=true&transform.engine=hermes&transform.bytecode=true&transform.routerRoot=app:6476:33)
+    at apply (native)
+    at anonymous (http://3--giby-anonymous-8081.exp.direct/node_modules%5Cexpo-router%5Centry.bundle//&platform=android&dev=true&hot=false&lazy=true&transform.engine=hermes&transform.bytecode=true&transform.routerRoot=app:14808:26)
+    at _callTimer (http://3--giby-anonymous-8081.exp.direct/node_modules%5Cexpo-router%5Centry.bundle//&platform=android&dev=true&hot=false&lazy=true&transform.engine=hermes&transform.bytecode=true&transform.routerRoot=app:14719:17)
+    at callTimers (http://3--giby-anonymous-8081.exp.direct/node_modules%5Cexpo-router%5Centry.bundle//&platform=android&dev=true&hot=false&lazy=true&transform.engine=hermes&transform.bytecode=true&transform.routerRoot=app:14927:19)
+    at apply (native)
+    at __callFunction (http://3--giby-anonymous-8081.exp.direct/node_modules%5Cexpo-router%5Centry.bundle//&platform=android&dev=true&hot=false&lazy=true&transform.engine=hermes&transform.bytecode=true&transform.routerRoot=app:2676:38)
+    at anonymous (http://3--giby-anonymous-8081.exp.direct/node_modules%5Cexpo-router%5Centry.bundle//&platform=android&dev=true&hot=false&lazy=true&transform.engine=hermes&transform.bytecode=true&transform.routerRoot=app:2392:31)
+    at __guard (http://3--giby-anonymous-8081.exp.direct/node_modules%5Cexpo-router%5Centry.bundle//&platform=android&dev=true&hot=false&lazy=true&transform.engine=hermes&transform.bytecode=true&transform.routerRoot=app:2609:15)
+    at callFunctionReturnFlushedQueue (http://3--giby-anonymous-8081.exp.direct/node_modules%5Cexpo-router%5Centry.bundle//&platform=android&dev=true&hot=false&lazy=true&transform.engine=hermes&transform.bytecode=true&transform.routerRoot=app:2391:21)
+{
+  "url": "No URL",
+  "method": "No method",
+  "ip": "::ffff:172.18.0.9"
+}
+
+------------------------------------------------------------------------------------------------
+
+2024-07-27 07:08:52 [logger_api] Unknown user error: Network request failed
+TypeError: Network request failed
+    at anonymous (http://3--giby-anonymous-8081.exp.direct/node_modules%5Cexpo-router%5Centry.bundle//&platform=android&dev=true&hot=false&lazy=true&transform.engine=hermes&transform.bytecode=true&transform.routerRoot=app:6476:33)
+    at apply (native)
+    at anonymous (http://3--giby-anonymous-8081.exp.direct/node_modules%5Cexpo-router%5Centry.bundle//&platform=android&dev=true&hot=false&lazy=true&transform.engine=hermes&transform.bytecode=true&transform.routerRoot=app:14808:26)
+    at _callTimer (http://3--giby-anonymous-8081.exp.direct/node_modules%5Cexpo-router%5Centry.bundle//&platform=android&dev=true&hot=false&lazy=true&transform.engine=hermes&transform.bytecode=true&transform.routerRoot=app:14719:17)
+    at callTimers (http://3--giby-anonymous-8081.exp.direct/node_modules%5Cexpo-router%5Centry.bundle//&platform=android&dev=true&hot=false&lazy=true&transform.engine=hermes&transform.bytecode=true&transform.routerRoot=app:14927:19)
+    at apply (native)
+    at __callFunction (http://3--giby-anonymous-8081.exp.direct/node_modules%5Cexpo-router%5Centry.bundle//&platform=android&dev=true&hot=false&lazy=true&transform.engine=hermes&transform.bytecode=true&transform.routerRoot=app:2676:38)
+    at anonymous (http://3--giby-anonymous-8081.exp.direct/node_modules%5Cexpo-router%5Centry.bundle//&platform=android&dev=true&hot=false&lazy=true&transform.engine=hermes&transform.bytecode=true&transform.routerRoot=app:2392:31)
+    at __guard (http://3--giby-anonymous-8081.exp.direct/node_modules%5Cexpo-router%5Centry.bundle//&platform=android&dev=true&hot=false&lazy=true&transform.engine=hermes&transform.bytecode=true&transform.routerRoot=app:2609:15)
+    at callFunctionReturnFlushedQueue (http://3--giby-anonymous-8081.exp.direct/node_modules%5Cexpo-router%5Centry.bundle//&platform=android&dev=true&hot=false&lazy=true&transform.engine=hermes&transform.bytecode=true&transform.routerRoot=app:2391:21)
+{
+  "url": "No URL",
+  "method": "No method",
+  "ip": "::ffff:172.18.0.9"
+}
+
+------------------------------------------------------------------------------------------------
+
+2024-07-27 07:09:06 [logger_api] Unknown user error: Network request failed
+TypeError: Network request failed
+    at anonymous (http://3--giby-anonymous-8081.exp.direct/node_modules%5Cexpo-router%5Centry.bundle//&platform=android&dev=true&hot=false&lazy=true&transform.engine=hermes&transform.bytecode=true&transform.routerRoot=app:6476:33)
+    at apply (native)
+    at anonymous (http://3--giby-anonymous-8081.exp.direct/node_modules%5Cexpo-router%5Centry.bundle//&platform=android&dev=true&hot=false&lazy=true&transform.engine=hermes&transform.bytecode=true&transform.routerRoot=app:14808:26)
+    at _callTimer (http://3--giby-anonymous-8081.exp.direct/node_modules%5Cexpo-router%5Centry.bundle//&platform=android&dev=true&hot=false&lazy=true&transform.engine=hermes&transform.bytecode=true&transform.routerRoot=app:14719:17)
+    at callTimers (http://3--giby-anonymous-8081.exp.direct/node_modules%5Cexpo-router%5Centry.bundle//&platform=android&dev=true&hot=false&lazy=true&transform.engine=hermes&transform.bytecode=true&transform.routerRoot=app:14927:19)
+    at apply (native)
+    at __callFunction (http://3--giby-anonymous-8081.exp.direct/node_modules%5Cexpo-router%5Centry.bundle//&platform=android&dev=true&hot=false&lazy=true&transform.engine=hermes&transform.bytecode=true&transform.routerRoot=app:2676:38)
+    at anonymous (http://3--giby-anonymous-8081.exp.direct/node_modules%5Cexpo-router%5Centry.bundle//&platform=android&dev=true&hot=false&lazy=true&transform.engine=hermes&transform.bytecode=true&transform.routerRoot=app:2392:31)
+    at __guard (http://3--giby-anonymous-8081.exp.direct/node_modules%5Cexpo-router%5Centry.bundle//&platform=android&dev=true&hot=false&lazy=true&transform.engine=hermes&transform.bytecode=true&transform.routerRoot=app:2609:15)
+    at callFunctionReturnFlushedQueue (http://3--giby-anonymous-8081.exp.direct/node_modules%5Cexpo-router%5Centry.bundle//&platform=android&dev=true&hot=false&lazy=true&transform.engine=hermes&transform.bytecode=true&transform.routerRoot=app:2391:21)
+{
+  "url": "No URL",
+  "method": "No method",
+  "ip": "::ffff:172.18.0.9"
+}
+
+------------------------------------------------------------------------------------------------
+
+2024-07-27 07:15:55 [logger_api] Unknown user error: Network request failed
+TypeError: Network request failed
+    at anonymous (http://3--giby-anonymous-8081.exp.direct/node_modules%5Cexpo-router%5Centry.bundle//&platform=android&dev=true&hot=false&lazy=true&transform.engine=hermes&transform.bytecode=true&transform.routerRoot=app:6476:33)
+    at apply (native)
+    at anonymous (http://3--giby-anonymous-8081.exp.direct/node_modules%5Cexpo-router%5Centry.bundle//&platform=android&dev=true&hot=false&lazy=true&transform.engine=hermes&transform.bytecode=true&transform.routerRoot=app:14808:26)
+    at _callTimer (http://3--giby-anonymous-8081.exp.direct/node_modules%5Cexpo-router%5Centry.bundle//&platform=android&dev=true&hot=false&lazy=true&transform.engine=hermes&transform.bytecode=true&transform.routerRoot=app:14719:17)
+    at callTimers (http://3--giby-anonymous-8081.exp.direct/node_modules%5Cexpo-router%5Centry.bundle//&platform=android&dev=true&hot=false&lazy=true&transform.engine=hermes&transform.bytecode=true&transform.routerRoot=app:14927:19)
+    at apply (native)
+    at __callFunction (http://3--giby-anonymous-8081.exp.direct/node_modules%5Cexpo-router%5Centry.bundle//&platform=android&dev=true&hot=false&lazy=true&transform.engine=hermes&transform.bytecode=true&transform.routerRoot=app:2676:38)
+    at anonymous (http://3--giby-anonymous-8081.exp.direct/node_modules%5Cexpo-router%5Centry.bundle//&platform=android&dev=true&hot=false&lazy=true&transform.engine=hermes&transform.bytecode=true&transform.routerRoot=app:2392:31)
+    at __guard (http://3--giby-anonymous-8081.exp.direct/node_modules%5Cexpo-router%5Centry.bundle//&platform=android&dev=true&hot=false&lazy=true&transform.engine=hermes&transform.bytecode=true&transform.routerRoot=app:2609:15)
+    at callFunctionReturnFlushedQueue (http://3--giby-anonymous-8081.exp.direct/node_modules%5Cexpo-router%5Centry.bundle//&platform=android&dev=true&hot=false&lazy=true&transform.engine=hermes&transform.bytecode=true&transform.routerRoot=app:2391:21)
+{
+  "url": "No URL",
+  "method": "No method",
+  "ip": "::ffff:172.18.0.9"
+}
+
+------------------------------------------------------------------------------------------------
+

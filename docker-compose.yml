@@ -44,10 +44,10 @@ services:
     ports:
       - "5002:5002"
     environment:
-      - DB_USER=jordans
+      - DB_USER=sjordan
       - DB_HOST=postgres_db
       - DB_NAME=SLI
-      - DB_PASSWORD=slitest
+      - DB_PASSWORD=slibdd
       - DB_PORT=5432
     volumes:
       - ./backend/authentification_api:/app
@@ -64,10 +64,10 @@ services:
     ports:
       - "5001:5001"
     environment:
-      - DB_USER=jordans
+      - DB_USER=sjordan
       - DB_HOST=postgres_db
       - DB_NAME=SLI
-      - DB_PASSWORD=slitest
+      - DB_PASSWORD=slibdd
       - DB_PORT=5432
     volumes:
       - ./backend/user_api:/app
@@ -84,10 +84,10 @@ services:
     ports:
       - "5003:5003"
     environment:
-      - DB_USER=jordans
+      - DB_USER=sjordan
       - DB_HOST=postgres_db
       - DB_NAME=SLI
-      - DB_PASSWORD=slitest
+      - DB_PASSWORD=slibdd
       - DB_PORT=5432
       - REDIS_URL=redis://client_redis:6379
     volumes:
@@ -108,10 +108,10 @@ services:
     ports:
       - "5004:5004"
     environment:
-      - DB_USER=jordans
+      - DB_USER=sjordan
       - DB_HOST=postgres_db
       - DB_NAME=SLI
-      - DB_PASSWORD=slitest
+      - DB_PASSWORD=slibdd
       - DB_PORT=5432
     volumes:
       - ./backend/item_api:/app
@@ -124,8 +124,8 @@ services:
     container_name: postgres_db
     image: postgres:16-alpine
     environment:
-      POSTGRES_USER: jordans
-      POSTGRES_PASSWORD: slitest
+      POSTGRES_USER: sjordan
+      POSTGRES_PASSWORD: slibdd
       POSTGRES_DB: SLI
     volumes:
       - pgdata:/var/lib/postgresql/data
