@@ -171,18 +171,18 @@ const AddClientModal: React.FC<AddClientModalProps> = ({
                   <TouchableOpacity
                     className={`w-4.5/10 items-center h-20 justify-center rounded-xl ${
                       client.addressType === "Livraison"
-                      ? "border-2 border-blue-500 bg-gray-50"
+                      ? "border-2 border-blue-800 bg-gray-50"
                       : "bg-white"
                     }`}
                     onPress={() => handleAddressTypeChange("Livraison")}
                   >
-                    <Icon_2 name="truck" size={30} color={`${client.addressType === "Livraison" ? "rgb(59 130 246)" : "#e5e7eb"  }`} />
-                    <Text className={`text-lg ${client.addressType === "Livraison" ? "text-blue-500" : "opacity-10"}`}>Livraison</Text>
+                    <Icon_2 name="truck" size={30} color={`${client.addressType === "Livraison" ? "#1e3a8a" : "#e5e7eb"  }`} />
+                    <Text className={`text-lg ${client.addressType === "Livraison" ? "text-blue-800" : "opacity-10"}`}>Livraison</Text>
                   </TouchableOpacity>
                   <TouchableOpacity
                     className={`w-4.5/10 items-center h-20 justify-center rounded-xl ${
                       client.addressType === "Facturation"
-                      ? "border-2 border-blue-500 bg-gray-50"
+                      ? "border-2 border-blue-800 bg-gray-50"
                         : "bg-white"
                     }`}
                     onPress={() => handleAddressTypeChange("Facturation")}
@@ -190,9 +190,9 @@ const AddClientModal: React.FC<AddClientModalProps> = ({
                     <Icon_2
                       name="file-invoice-dollar"
                       size={30}
-                      color={`${client.addressType === "Facturation" ? "rgb(59 130 246)" : "#e5e7eb"   }`}
+                      color={`${client.addressType === "Facturation" ? "#1e3a8a" : "#e5e7eb"   }`}
                     />
-                    <Text className={`text-lg ${client.addressType === "Facturation" ? "text-blue-500" : "opacity-10"}`}>Facturation</Text>
+                    <Text className={`text-lg ${client.addressType === "Facturation" ? "text-blue-800" : "opacity-10"}`}>Facturation</Text>
                   </TouchableOpacity>
                 </View>
                 {/*---------------------------------------- adresse -----------------------------*/}
