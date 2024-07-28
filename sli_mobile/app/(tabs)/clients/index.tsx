@@ -11,7 +11,16 @@ import EditClientModal from "./modals/EditClientModal";
 
 const IndexScreen: React.FC = () => {
   const [content, setContent] = useState("Liste" || "Carte");
-
+  const customer = {
+    Id: 1262,
+    name: "2 I Process",
+    email: "test@test.com",
+    phone: "1234567890",
+    address: "123 rue de la rue",
+    postalCode: "12345",
+    city: "Ville",
+    note: "Note Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus dolorum, voluptate id corrupti reiciendis nihil unde rerum numquam quibusdam recusandae, odio cumque quos dolor at. Quas ipsa sed eum voluptate?",
+  }
   // États pour chaque modal
   const [showAddModal, setShowAddModal] = useState(false);
   const [showEmailModal, setShowEmailModal] = useState(false);
@@ -66,7 +75,7 @@ const IndexScreen: React.FC = () => {
         {/*---------------------------------------- Modals -----------------------------*/}
         <Portal>
           <AddClientModal visible={showAddClientModal} onDismiss={() => setShowAddClientModal(false)} />
-          <EditClientModal visible={showEditClientModal} onDismiss={() => setShowEditClientModal(false)} />
+          <EditClientModal visible={showEditClientModal} onDismiss={() => setShowEditClientModal(false)} customer={customer} />
         </Portal>
       </SafeAreaView>
     </PaperProvider>

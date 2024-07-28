@@ -59,16 +59,19 @@ const CustomerDetailScreen: React.FC = () => {
         <Text className="text-red-500">Error: {error.message}</Text>
       ) : customer ? (
         <View className="gap-4 w-9.5/10 items-center">
-          <Text className="text-xl italic">
-            <Text>{customer.MainInvoicingContact_FirstName} {customer.Id}</Text>
+          {/* -------------------------------------------------------------------------------------- Id + Name ----------------------------------------------------------------------------------------- */}
+          <View className="text-xl italic">
+            <Text>{customer.Id}{customer.MainInvoicingContact_FirstName}</Text>
             <Text>{customer.MainInvoicingContact_Name}</Text>
-          </Text>
+          </View>
+          {/* ---------------------------------------------------------------------------------------- Email -------------------------------------------------------------------------------------------- */}
           {customer.MainInvoicingContact_Email && (
-            <View className="flex-row self-start gap-2 ">
-              <Icon name="mail" size={24} color="#3B82F6" />
-              <Text>{customer.MainInvoicingContact_Email}</Text>
-            </View>
+            <View className="flex-row self-start gap-2 w-8.5/10">
+              <Icon name="mail" size={24} color="#15803d" className="" />
+              <Text className="bg-white p-1 rounded-xl h-full w-10/10">{customer.MainInvoicingContact_Email}</Text>
+            </View> 
           ) }
+          {/* -------------------------------------------------------------------------------- Compte courant + civility --------------------------------------------------------------------------------- */}
           <View className="flex-row justify-between w-full">
             {customer.CurrentAmount && (
               <View className="flex-row items-center gap-1">
@@ -93,7 +96,7 @@ const CustomerDetailScreen: React.FC = () => {
           )}
           {customer.Lat && customer.Lon ? (
             <MapView
-              style={{ width: "100%", height: 250 }}
+              style={{ width: "100%", height: 240 }}
               initialRegion={{
                 latitude: Number(customer.Lat),
                 longitude: Number(customer.Lon),
