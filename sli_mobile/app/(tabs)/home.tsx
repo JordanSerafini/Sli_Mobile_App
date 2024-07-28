@@ -18,7 +18,7 @@ const HomeScreen: React.FC = () => {
 
 
   return (
-    <View className='h-screen w-screen'>
+    <View className='h-screen w-screen items-center justify-start'>
 
       <Dashboard />
       <MainHome/>

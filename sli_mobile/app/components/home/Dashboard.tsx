@@ -249,7 +249,7 @@ function Dashboard() {
   const formattedDate = formatDate(dateSelected);
 
   return (
-    <View className="pt-8 h-fit rounded-3xl bg-blue-800 items-center">
+    <View className="pt-8 h-fit w-full rounded-3xl bg-blue-800 items-center">
       {/* ------------------------------------------------------------ Header --------------------------------------------------------------------------- */}
       <View className="items-center w-9/10 flex-row justify-between">
         <Icon name="navicon" size={30} color="white" />

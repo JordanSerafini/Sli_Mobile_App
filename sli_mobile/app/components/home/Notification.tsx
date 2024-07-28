@@ -1,78 +1,37 @@
-import React from 'react'
-import { View,Text } from 'react-native'
-
-interface NotificationProps {
-    notifications: Notification[];
-    }
+import React from 'react';
+import { View, Text, FlatList } from 'react-native';
 
 interface Notification {
-    title: string;
-    description: string;
-    type: string;
-    start: string;
-    end: string;
-    startHour: string;
-    endHour: string;
+  title: string;
+  description: string;
+  type: string;
+  start: string;
+  end: string;
+  startHour: string;
+  endHour: string;
 }
 
+interface NotificationProps {
+  notifications: Notification[];
+}
 
-function Notification() {
-
-    const notifications: Notification[] = [
-        {
-            title: 'Meeting',
-            description: 'Meeting with the team',
-            type: 'meeting',
-            start: '2021-08-02',
-            end: '2021-08-02',
-            startHour: '10:00',
-            endHour: '11:00'
-        },
-        {
-            title: 'Meeting',
-            description: 'Meeting with the team',
-            type: 'meeting',
-            start: '2021-08-02',
-            end: '2021-08-02',
-            startHour: '10:00',
-            endHour: '11:00'
-        },
-        {
-            title: 'Meeting',
-            description: 'Meeting with the team',
-            type: 'meeting',
-            start: '2021-08-02',
-            end: '2021-08-02',
-            startHour: '10:00',
-            endHour: '11:00'
-        },
-        {
-            title: 'Meeting',
-            description: 'Meeting with the team',
-            type: 'meeting',
-            start: '2021-08-02',
-            end: '2021-08-02',
-            startHour: '10:00',
-            endHour: '11:00'
-        },
-        {
-            title: 'Meeting',
-            description: 'Meeting with the team',
-            type: 'meeting',
-            start: '2021-08-02',
-            end: '2021-08-02',
-            startHour: '10:00',
-            endHour: '11:00'
-        },
-    ];
-
+const NotificationComponent: React.FC<NotificationProps> = ({ notifications }) => {
   return (
-    <View>
-        <View>
-            <Text>Notifications</Text>
+    <FlatList
+      data={notifications}
+      horizontal
+      keyExtractor={(item, index) => index.toString()}
+      renderItem={({ item }) => (
+        <View className="h-28 w-72 p-4 bg-white rounded-lg shadow m-2">
+          <Text className="text-lg font-bold text-blue-800">{item.title}</Text>
+          <Text>{item.description}</Text>
+          <Text className='text-green-800'>
+            {item.startHour} - {item.endHour} {item.start}
+          </Text>
         </View>
-    </View>
-  )
-}
+      )}
+    />
+  );
+};
 
-export default Notification
+export default NotificationComponent;
