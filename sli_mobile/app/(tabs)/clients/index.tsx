@@ -31,7 +31,7 @@ const IndexScreen: React.FC = () => {
     ...DefaultTheme,
     colors: {
       ...DefaultTheme.colors,
-      primary: "#3B82F6",
+      primary: "#1e40af",
       secondary: "#BFDBFE",
       accent: "#1E3A8A",
     },

@@ -7,7 +7,14 @@ export default function ClientLayout() {
       <Stack.Screen name="clientList" options={{ headerShown: false, title: 'Client Liste' }} />
       <Stack.Screen
         name="clientDetail"
-        options={{ headerShown: true, title: 'Client Details' }}
+        options={{ 
+          headerShown: true, 
+          title: 'Client Details',
+          headerStyle: {
+            backgroundColor: '#1e3a8a',
+          },
+          headerTintColor: '#fff', 
+        }}
       />
     </Stack>
   );

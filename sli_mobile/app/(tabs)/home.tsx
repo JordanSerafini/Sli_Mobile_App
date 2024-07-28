@@ -2,7 +2,10 @@ import React from 'react';
 import { View, Text, Button, StyleSheet } from 'react-native';
 import { useRouter } from 'expo-router';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { postLogs } from '../utils/functions/logs_function';
+import { SafeAreaView } from 'react-native-safe-area-context';
+
+import Dashboard from '../components/home/Dashboard';
+import MainHome from '../components/home/MainHome';
 
 const HomeScreen: React.FC = () => {
   const router = useRouter();
@@ -13,32 +16,17 @@ const HomeScreen: React.FC = () => {
     router.push('/login');
   };
 
-  const handleSendLog = async () => {
-    try {
-      const logMessage = new Error('Test log message');
-      logMessage.message = 'Test log message';
-      await postLogs(logMessage);
-      console.log('Log sent successfully');
-    } catch (error) {
-      console.error('Failed to send log:', error);
-    }
-  };
 
   return (
-    <View style={styles.container}>
-      <Text>Home Screen</Text>
-      <Button title="LOGOUT" onPress={handleLogout} />
-      <Button title="Send Log" onPress={handleSendLog} />
+    <View className='h-screen w-screen'>
+
+      <Dashboard />
+      <MainHome/>
+      {/*<Button title="LOGOUT" onPress={handleLogout} />*/}
     </View>
   );
 };
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-});
+
 
 export default HomeScreen;

@@ -1,27 +1,12 @@
-// App.tsx
 import React from 'react';
-import { View, StyleSheet } from 'react-native';
+import { View, StyleSheet, StatusBar } from 'react-native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
-import AppNavigationContainer from './NavigationContainer';
-//import { getCustomersPaginated } from './app/utils/functions/customer_functions';
+import AppNavigationContainer from './NavigationContainer'; // Assurez-vous de fournir le bon chemin
 
 export default function App() {
-/*
-  useEffect(() => {
-    // Fonction asynchrone à l'intérieur de useEffect
-    const fetchData = async () => {
-      try {
-        await getCustomersPaginated("", 25, 0);
-      } catch (error) {
-        console.error('Error fetching customers:', error);
-      }
-    };
-
-    fetchData(); // Appel de la fonction asynchrone
-  }, []);
-*/
   return (
     <SafeAreaProvider>
+      <StatusBar barStyle="light-content" backgroundColor="#1e3a8a" />
       <View style={styles.container}>
         <AppNavigationContainer />
       </View>
@@ -32,5 +17,6 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: '#1e3a8a', // Optionnel: si vous souhaitez que le fond global soit aussi bleu
   },
 });
