@@ -4,7 +4,6 @@ import { SafeAreaView, Text } from 'react-native';
 import { DefaultTheme, Provider as PaperProvider } from 'react-native-paper';
 
 import ButtonPerso from '../../components/UI/ButtonPerso';
-import FabPerso from '../../components/UI/Fab/client/FabGroupClient';
 
 const IndexScreen: React.FC = () => {
 
@@ -26,7 +25,6 @@ const IndexScreen: React.FC = () => {
     <PaperProvider theme={theme}>
       <SafeAreaView className='flex items-center justify-center w-full h-full '>
       <ButtonPerso mode={"outlined"} icon={"account"} text={"Liste des articles"} css="w-4.5/10 self-center" onPress={clientClick} />
-      <FabPerso />
 
 
       </SafeAreaView>
