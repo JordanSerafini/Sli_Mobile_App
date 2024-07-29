@@ -36,19 +36,19 @@ const NoteCards: React.FC<NoteCardsProps> = ({ notes }) => {
   }
 
   return (
-    <View className="h-32">
+    <View className="h-28">
       <Carousel
         loop
         width={width}
         height={width / 2}
         autoPlay
         data={notes}
-        scrollAnimationDuration={1000}
+        scrollAnimationDuration={2000}
         renderItem={({ item, index }) => (
           <View
             key={index}
             style={{ alignItems: "center", justifyContent: "center" }}
-            className="h-20  bg-white w-7/10 rounded-lg self-center p-2"
+            className={`h-20 bg-white w-8.5/10 rounded-lg self-center p-2 ${item.urgence === "Haute" ? "border-2 border-red-500" :  null}`}
           >
 
             <View className=" w-10/10 justify-between flex-row h-4/5 p-2">
@@ -60,7 +60,7 @@ const NoteCards: React.FC<NoteCardsProps> = ({ notes }) => {
               />
             </View>
 
-            <Text>{item.date}</Text>
+            <Text className="self-end">{item.date}</Text>
           </View>
         )}
       />
