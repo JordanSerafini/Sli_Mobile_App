@@ -19,6 +19,8 @@ services:
       - client_api
       - item_api
       - logs_api
+      - postgres_db
+      - client_redis
 
   logs_api:
     container_name: logs_api
@@ -35,6 +37,9 @@ services:
       - NODE_ENV=development
     networks:
       - app-network
+    depends_on:
+      - postgres_db
+      - client_redis
 
   authentification_api:
     container_name: authentification_api
@@ -44,11 +49,14 @@ services:
     ports:
       - "5002:5002"
     environment:
-      - DB_USER=sjordan
+      - DB_USER=jordans
       - DB_HOST=postgres_db
       - DB_NAME=SLI
-      - DB_PASSWORD=slibdd
+      - DB_PASSWORD=slitest
       - DB_PORT=5432
+    depends_on:
+      - postgres_db
+      - client_redis
     volumes:
       - ./backend/authentification_api:/app
       - /app/node_modules
@@ -64,11 +72,14 @@ services:
     ports:
       - "5001:5001"
     environment:
-      - DB_USER=sjordan
+      - DB_USER=jordans
       - DB_HOST=postgres_db
       - DB_NAME=SLI
-      - DB_PASSWORD=slibdd
+      - DB_PASSWORD=slitest
       - DB_PORT=5432
+    depends_on:
+      - postgres_db
+      - client_redis
     volumes:
       - ./backend/user_api:/app
       - /app/node_modules
@@ -84,10 +95,10 @@ services:
     ports:
       - "5003:5003"
     environment:
-      - DB_USER=sjordan
+      - DB_USER=jordans
       - DB_HOST=postgres_db
       - DB_NAME=SLI
-      - DB_PASSWORD=slibdd
+      - DB_PASSWORD=slitest
       - DB_PORT=5432
       - REDIS_URL=redis://client_redis:6379
     volumes:
@@ -108,11 +119,14 @@ services:
     ports:
       - "5004:5004"
     environment:
-      - DB_USER=sjordan
+      - DB_USER=jordans
       - DB_HOST=postgres_db
       - DB_NAME=SLI
-      - DB_PASSWORD=slibdd
+      - DB_PASSWORD=slitest
       - DB_PORT=5432
+    depends_on:
+      - postgres_db
+      - client_redis
     volumes:
       - ./backend/item_api:/app
       - /app/node_modules
@@ -124,8 +138,8 @@ services:
     container_name: postgres_db
     image: postgres:16-alpine
     environment:
-      POSTGRES_USER: sjordan
-      POSTGRES_PASSWORD: slibdd
+      POSTGRES_USER: jordans
+      POSTGRES_PASSWORD: slitest
       POSTGRES_DB: SLI
     volumes:
       - pgdata:/var/lib/postgresql/data
@@ -142,6 +156,8 @@ services:
       - client_redis_data:/data
     networks:
       - app-network
+    depends_on:
+      - postgres_db
 
 networks:
   app-network:
