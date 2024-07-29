@@ -3,6 +3,9 @@ import { View, Text, Image, TouchableOpacity } from "react-native";
 import Icon from "react-native-vector-icons/FontAwesome";
 import DateTimePicker from "@react-native-community/datetimepicker";
 import EventCards from "./EventCards";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { router } from "expo-router";
+import { LinearGradient } from 'expo-linear-gradient';
 
 const pp = require("../../assets/pp.jpeg");
 
@@ -35,7 +38,6 @@ const events: { [key: string]: Event[] } = {
       startHour: "14:00",
       endHour: "16:00",
       urgence: "Moyen",
-
     },
     {
       title: "Event 3",
@@ -45,7 +47,6 @@ const events: { [key: string]: Event[] } = {
       startHour: "16:00",
       endHour: "18:00",
       urgence: "Moyen",
-
     },
     {
       title: "Event 4",
@@ -55,7 +56,6 @@ const events: { [key: string]: Event[] } = {
       startHour: "18:00",
       endHour: "20:00",
       urgence: "Faible",
-
     },
     {
       title: "Event 5",
@@ -236,10 +236,15 @@ const events: { [key: string]: Event[] } = {
   ],
 };
 
-
 function Dashboard() {
   const [dateSelected, setDateSelected] = useState<Date>(new Date());
   const [showPicker, setShowPicker] = useState<boolean>(false);
+
+  const handleLogout = async () => {
+    await AsyncStorage.removeItem("userToken");
+    await AsyncStorage.removeItem("user");
+    router.push("/login");
+  };
 
   const onChange = (event: any, selectedDate?: Date) => {
     const currentDate = selectedDate || dateSelected;
@@ -248,8 +253,8 @@ function Dashboard() {
   };
 
   const formatDate = (date: Date): string => {
-    const day = date.getDate().toString().padStart(2, '0');
-    const month = (date.getMonth() + 1).toString().padStart(2, '0');
+    const day = date.getDate().toString().padStart(2, "0");
+    const month = (date.getMonth() + 1).toString().padStart(2, "0");
     const year = date.getFullYear();
     return `${day}/${month}/${year}`;
   };
@@ -257,42 +262,49 @@ function Dashboard() {
   const formattedDate = formatDate(dateSelected);
 
   return (
-    <View className="pt-8 h-fit w-full rounded-3xl bg-blue-800 items-center">
-      {/* ------------------------------------------------------------ Header --------------------------------------------------------------------------- */}
-      <View className="items-center w-9/10 flex-row justify-between">
-        <Icon name="navicon" size={30} color="white" />
-        <Text className="text-white font-bold text-base">Tableau de bord</Text>
-        <Image source={pp} className="rounded-full w-12 h-12" />
-      </View>
-      {/* ------------------------------------------------------------ Input date du jour --------------------------------------------------------------------------- */}
-      <View className="w-9/10 items-center pt-3">
-        <TouchableOpacity
-          onPress={() => setShowPicker(true)}
-          className="mt-2 w-full "
-        >
-          <View className="bg-white rounded-full p-2 text-blue-800 w-full text-center flex-row items-center justify-between">
-            <Text className=" ">
-              {dateSelected.toDateString()}
-            </Text>
-            <Icon name="calendar" size={25} color="blue" />
-          </View>
-        </TouchableOpacity>
-        {showPicker && (
-          <DateTimePicker
-            value={dateSelected}
-            mode="date"
-            display="default"
-            onChange={onChange}
-          />
+    <LinearGradient colors={['#4c669f', '#3b5998', '#192f6a']} className="w-screen">
+
+      <View className="pt-8 h-fit w-full rounded-3xl items-center">
+        {/* ------------------------------------------------------------ Header --------------------------------------------------------------------------- */}
+        <View className="items-center w-9/10 flex-row justify-between">
+          <Icon name="navicon" size={30} color="white" />
+          <Text className="text-white font-bold text-base">
+            Tableau de bord
+          </Text>
+          <TouchableOpacity onPress={handleLogout}>
+            <Image source={pp} className="rounded-full w-12 h-12" />
+          </TouchableOpacity>
+        </View>
+        {/* ------------------------------------------------------------ Input date du jour --------------------------------------------------------------------------- */}
+        <View className="w-9/10 items-center pt-3">
+          <TouchableOpacity
+            onPress={() => setShowPicker(true)}
+            className="mt-2 w-full "
+          >
+            <View className="bg-white rounded-full p-2 text-blue-800 w-full text-center flex-row items-center justify-between">
+              <Text className=" ">{dateSelected.toDateString()}</Text>
+              <Icon name="calendar" size={25} color="blue" />
+            </View>
+          </TouchableOpacity>
+          {showPicker && (
+            <DateTimePicker
+              value={dateSelected}
+              mode="date"
+              display="default"
+              onChange={onChange}
+            />
+          )}
+        </View>
+        {/* ------------------------------------------------------------ Card events --------------------------------------------------------------------------- */}
+        {events[formattedDate] ? (
+          <EventCards events={events[formattedDate]} />
+        ) : (
+          <Text className="text-white p-4">
+            Aucun événement pour cette date.
+          </Text>
         )}
       </View>
-      {/* ------------------------------------------------------------ Card events --------------------------------------------------------------------------- */}
-      {events[formattedDate] ? (
-        <EventCards events={events[formattedDate]} />
-      ) : (
-        <Text className="text-white p-4">Aucun événement pour cette date.</Text>
-      )}
-    </View>
+    </LinearGradient>
   );
 }
 
