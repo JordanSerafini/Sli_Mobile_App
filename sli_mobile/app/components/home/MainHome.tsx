@@ -1,6 +1,7 @@
 import React from "react";
-import { View, Text } from "react-native";
+import { View, Text, ScrollView } from "react-native";
 import NotificationComponent from "./Notification";
+import NoteComponent from "./Note";
 
 const MainHome: React.FC = () => {
   const notifications = [
@@ -58,14 +59,16 @@ const MainHome: React.FC = () => {
 
   return (
     <View className="pt-6 w-9.5/10 items-center justify-center">
+      
       <View className="h-40">
-        <Text className="">Evènements aujourd'hui</Text>
+        <Text className="">Evènements ajourd'hui</Text>
         <NotificationComponent notifications={notifications} />
       </View>
       <View className="h-40">
         <Text className="">Evènements cette semaine</Text>
         <NotificationComponent notifications={notifications} />
       </View>
+
     </View>
   );
 };

@@ -13,25 +13,29 @@ interface Event {
   end: string;
   startHour: string;
   endHour: string;
+  urgence?: string;
 }
 
 const events: { [key: string]: Event[] } = {
   "29/07/2024": [
     {
-      title: "Event 1",
+      title: "Rappeler Mr Untel",
       description: "Description 1",
       start: "29/07/2024",
       end: "29/07/2024",
       startHour: "10:00",
       endHour: "12:00",
+      urgence: "Haute",
     },
     {
-      title: "Event 2",
+      title: "Chantier Mr Laurent",
       description: "Description 2",
       start: "29/07/2024",
       end: "29/07/2024",
       startHour: "14:00",
       endHour: "16:00",
+      urgence: "Moyen",
+
     },
     {
       title: "Event 3",
@@ -40,6 +44,8 @@ const events: { [key: string]: Event[] } = {
       end: "29/07/2024",
       startHour: "16:00",
       endHour: "18:00",
+      urgence: "Moyen",
+
     },
     {
       title: "Event 4",
@@ -48,6 +54,8 @@ const events: { [key: string]: Event[] } = {
       end: "29/07/2024",
       startHour: "18:00",
       endHour: "20:00",
+      urgence: "Faible",
+
     },
     {
       title: "Event 5",

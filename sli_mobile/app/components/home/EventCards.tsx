@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, FlatList } from 'react-native';
+import { View, Text, FlatList, ScrollView } from 'react-native';
 import Icon from "react-native-vector-icons/FontAwesome";
 
 interface Event {
@@ -9,11 +9,25 @@ interface Event {
   end: string;
   startHour: string;
   endHour: string;
+  urgence?: string;
 }
 
 interface EventCardsProps {
   events: Event[];
 }
+
+const getIconColor = (urgence?: string): string => {
+  switch (urgence) {
+    case "Haute":
+      return "red";
+    case "Moyen":
+      return "orange";
+    case "Faible":
+      return "green";
+    default:
+      return "black";
+  }
+};
 
 const EventCards: React.FC<EventCardsProps> = ({ events }) => {
   return (
@@ -23,13 +37,14 @@ const EventCards: React.FC<EventCardsProps> = ({ events }) => {
         horizontal
         keyExtractor={(item, index) => index.toString()}
         renderItem={({ item }) => (
-          <View className="p-4 w-36 bg-white rounded-lg shadow mr-4">
-            <View className='flex-row justify-between'> 
-            <Text className="text-lg font-bold">{item.title}</Text>
-            < Icon name="clock-o" size={24} color="green" />
+          <View className="p-4 w-48 bg-white rounded-lg shadow mr-4 justify-between">
+            <View className='flex-row justify-between items-start mb-2'>
+              <ScrollView horizontal={false} className='max-h-16'>
+                <Text className="text-sm font-bold">{item.title}</Text>
+              </ScrollView>
+              <Icon name="clock-o" size={20} color={getIconColor(item.urgence)} />
             </View>
-            <Text>{item.description}</Text>
-            <Text>
+            <Text className='self-end'>
               {item.startHour} - {item.endHour}
             </Text>
           </View>
