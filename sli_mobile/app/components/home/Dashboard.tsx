@@ -2,10 +2,10 @@ import React, { useState } from "react";
 import { View, Text, Image, TouchableOpacity } from "react-native";
 import Icon from "react-native-vector-icons/FontAwesome";
 import DateTimePicker from "@react-native-community/datetimepicker";
-import EventCards from "./EventCards";
+import NoteCards from "./NoteCards";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { router } from "expo-router";
-import { LinearGradient } from 'expo-linear-gradient';
+import { LinearGradient } from "expo-linear-gradient";
 
 const pp = require("../../assets/pp.jpeg");
 
@@ -19,10 +19,18 @@ interface Event {
   urgence?: string;
 }
 
+interface Note {
+  title: string;
+  description: string;
+  date: string;
+  urgence: string;
+  category: string;
+}
+
 const events: { [key: string]: Event[] } = {
   "29/07/2024": [
     {
-      title: "Rappeler Mr Untel",
+      title: "Rappeler Mr Untel Rappeler Mr Untel Rappeler Mr Untel Rappeler Mr Untel",
       description: "Description 1",
       start: "29/07/2024",
       end: "29/07/2024",
@@ -236,6 +244,233 @@ const events: { [key: string]: Event[] } = {
   ],
 };
 
+const notes: { [key: string]: Note[] } = {
+  "29/07/2024": [
+    {
+      "title": "Messages non lus",
+      "description": "Description de la Messages non lus",
+      "date": "29/07/2024",
+      "urgence": "Haute",
+      "category": "Catégorie 1"
+    },
+    {
+      "title": "Appelez Mr Jacques",
+      "description": "Description de la Appelez Mr Jacques",
+      "date": "29/07/2024",
+      "urgence": "Moyenne",
+      "category": "Catégorie 2"
+    },
+    {
+      "title": "Vacaresto commerciaux",
+      "description": "Description de la Vacaresto commerciaux",
+      "date": "29/07/2024",
+      "urgence": "Faible",
+      "category": "Catégorie 3"
+    },
+    {
+      "title": "Vacances Stéphane",
+      "description": "Description de la Vacances Stéphane",
+      "date": "29/07/2024",
+      "urgence": "Haute",
+      "category": "Catégorie 4"
+    },
+    {
+      "title": "Note 5",
+      "description": "Description de la note 5",
+      "date": "29/07/2024",
+      "urgence": "Moyenne",
+      "category": "Catégorie 5"
+    }
+  ],
+  "30/07/2024": [
+    {
+      "title": "Messages non lus",
+      "description": "Description de la Messages non lus",
+      "date": "30/07/2024",
+      "urgence": "Haute",
+      "category": "Catégorie 1"
+    },
+    {
+      "title": "Appelez Mr Jacques",
+      "description": "Description de la Appelez Mr Jacques",
+      "date": "30/07/2024",
+      "urgence": "Moyenne",
+      "category": "Catégorie 2"
+    },
+    {
+      "title": "Vacaresto commerciaux",
+      "description": "Description de la Vacaresto commerciaux",
+      "date": "30/07/2024",
+      "urgence": "Faible",
+      "category": "Catégorie 3"
+    },
+    {
+      "title": "Vacances Stéphane",
+      "description": "Description de la Vacances Stéphane",
+      "date": "30/07/2024",
+      "urgence": "Haute",
+      "category": "Catégorie 4"
+    },
+    {
+      "title": "Note 5",
+      "description": "Description de la note 5",
+      "date": "30/07/2024",
+      "urgence": "Moyenne",
+      "category": "Catégorie 5"
+    }
+  ],
+  "31/07/2024": [
+    {
+      "title": "Messages non lus",
+      "description": "Description de la Messages non lus",
+      "date": "31/07/2024",
+      "urgence": "Haute",
+      "category": "Catégorie 1"
+    },
+    {
+      "title": "Appelez Mr Jacques",
+      "description": "Description de la Appelez Mr Jacques",
+      "date": "31/07/2024",
+      "urgence": "Moyenne",
+      "category": "Catégorie 2"
+    },
+    {
+      "title": "Vacaresto commerciaux",
+      "description": "Description de la Vacaresto commerciaux",
+      "date": "31/07/2024",
+      "urgence": "Faible",
+      "category": "Catégorie 3"
+    },
+    {
+      "title": "Vacances Stéphane",
+      "description": "Description de la Vacances Stéphane",
+      "date": "31/07/2024",
+      "urgence": "Haute",
+      "category": "Catégorie 4"
+    },
+    {
+      "title": "Note 5",
+      "description": "Description de la note 5",
+      "date": "31/07/2024",
+      "urgence": "Moyenne",
+      "category": "Catégorie 5"
+    }
+  ],
+  "01/08/2024": [
+    {
+      "title": "Messages non lus",
+      "description": "Description de la Messages non lus",
+      "date": "01/08/2024",
+      "urgence": "Haute",
+      "category": "Catégorie 1"
+    },
+    {
+      "title": "Appelez Mr Jacques",
+      "description": "Description de la Appelez Mr Jacques",
+      "date": "01/08/2024",
+      "urgence": "Moyenne",
+      "category": "Catégorie 2"
+    },
+    {
+      "title": "Vacaresto commerciaux",
+      "description": "Description de la Vacaresto commerciaux",
+      "date": "01/08/2024",
+      "urgence": "Faible",
+      "category": "Catégorie 3"
+    },
+    {
+      "title": "Vacances Stéphane",
+      "description": "Description de la Vacances Stéphane",
+      "date": "01/08/2024",
+      "urgence": "Haute",
+      "category": "Catégorie 4"
+    },
+    {
+      "title": "Note 5",
+      "description": "Description de la note 5",
+      "date": "01/08/2024",
+      "urgence": "Moyenne",
+      "category": "Catégorie 5"
+    }
+  ],
+  "02/08/2024": [
+    {
+      "title": "Messages non lus",
+      "description": "Description de la Messages non lus",
+      "date": "02/08/2024",
+      "urgence": "Haute",
+      "category": "Catégorie 1"
+    },
+    {
+      "title": "Appelez Mr Jacques",
+      "description": "Description de la Appelez Mr Jacques",
+      "date": "02/08/2024",
+      "urgence": "Moyenne",
+      "category": "Catégorie 2"
+    },
+    {
+      "title": "Vacaresto commerciaux",
+      "description": "Description de la Vacaresto commerciaux",
+      "date": "02/08/2024",
+      "urgence": "Faible",
+      "category": "Catégorie 3"
+    },
+    {
+      "title": "Vacances Stéphane",
+      "description": "Description de la Vacances Stéphane",
+      "date": "02/08/2024",
+      "urgence": "Haute",
+      "category": "Catégorie 4"
+    },
+    {
+      "title": "Note 5",
+      "description": "Description de la note 5",
+      "date": "02/08/2024",
+      "urgence": "Moyenne",
+      "category": "Catégorie 5"
+    }
+  ],
+  "03/08/2024": [
+    {
+      "title": "Email non lus",
+      "description": "Description de la Messages non lus",
+      "date": "03/08/2024",
+      "urgence": "Haute",
+      "category": "Catégorie 1"
+    },
+    {
+      "title": "Appelez Mr Jacques",
+      "description": "Description de la Appelez Mr Jacques",
+      "date": "03/08/2024",
+      "urgence": "Moyenne",
+      "category": "Catégorie 2"
+    },
+    {
+      "title": "resto commerciaux",
+      "description": "Description de la Vacaresto commerciaux",
+      "date": "03/08/2024",
+      "urgence": "Faible",
+      "category": "Catégorie 3"
+    },
+    {
+      "title": "Vacances Stéphane",
+      "description": "Description de la Vacances Stéphane",
+      "date": "03/08/2024",
+      "urgence": "Haute",
+      "category": "Catégorie 4"
+    },
+    {
+      "title": "Note 5",
+      "description": "Description de la note 5",
+      "date": "03/08/2024",
+      "urgence": "Moyenne",
+      "category": "Catégorie 5"
+    }
+  ]
+}
+
+
+
 function Dashboard() {
   const [dateSelected, setDateSelected] = useState<Date>(new Date());
   const [showPicker, setShowPicker] = useState<boolean>(false);
@@ -262,8 +497,10 @@ function Dashboard() {
   const formattedDate = formatDate(dateSelected);
 
   return (
-    <LinearGradient colors={['#4c669f', '#3b5998', '#192f6a']} className="w-screen">
-
+    <LinearGradient
+      colors={["#4c669f", "#3b5998", "#192f6a"]}
+      className="w-screen"
+    >
       <View className="pt-8 h-fit w-full rounded-3xl items-center">
         {/* ------------------------------------------------------------ Header --------------------------------------------------------------------------- */}
         <View className="items-center w-9/10 flex-row justify-between">
@@ -296,13 +533,9 @@ function Dashboard() {
           )}
         </View>
         {/* ------------------------------------------------------------ Card events --------------------------------------------------------------------------- */}
-        {events[formattedDate] ? (
-          <EventCards events={events[formattedDate]} />
-        ) : (
-          <Text className="text-white p-4">
-            Aucun événement pour cette date.
-          </Text>
-        )}
+        <View className="h-fit mt-8">
+        <NoteCards notes={notes[formattedDate] || []} />
+        </View>
       </View>
     </LinearGradient>
   );
