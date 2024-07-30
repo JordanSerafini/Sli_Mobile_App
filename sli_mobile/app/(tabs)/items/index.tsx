@@ -7,7 +7,7 @@ import ButtonPerso from '../../components/UI/ButtonPerso';
 
 const IndexScreen: React.FC = () => {
 
-  const clientClick = () => {
+  const itemClick = () => {
     router.push('/items/itemList');
   };
 
@@ -24,7 +24,8 @@ const IndexScreen: React.FC = () => {
   return (
     <PaperProvider theme={theme}>
       <SafeAreaView className='flex items-center justify-center w-full h-full '>
-      <ButtonPerso mode={"outlined"} icon={"account"} text={"Liste des articles"} css="w-4.5/10 self-center" onPress={clientClick} />
+      <ButtonPerso mode={"outlined"} icon={"account"} text={"Liste des articles"} css="w-4.5/10 self-center" onPress={itemClick} />
+      <ButtonPerso mode={"outlined"} icon={"account"} text={"Liste des articles"} css="w-4.5/10 self-center" onPress={itemClick} />
 
 
       </SafeAreaView>
