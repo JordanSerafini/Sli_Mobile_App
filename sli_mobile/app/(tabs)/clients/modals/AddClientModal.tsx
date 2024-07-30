@@ -106,17 +106,36 @@ const AddClientModal: React.FC<AddClientModalProps> = ({
 
 
   const hasErrorsName = () => {
-    if (client.name.trim() === "") {
-      return true;
+    const name = client.name.trim();
+    if (name === "") {
+      return false; 
     }
-      const hasLetter = /[A-Za-zÀ-ÿ]/.test(client.name);
-    const isValidName = nameRegex(client.name);
-  
-    return !hasLetter || !isValidName;
+    const hasLetter = /[A-Za-zÀ-ÿ]/.test(name);
+    const isValidName = /^[A-Za-zÀ-ÿ\s'-]+$/.test(name);
+    return !(hasLetter && isValidName);
   };
   
+  const hasErrorsPhone = () => {
+    const phone = client.phone.trim();
+    if (phone === "") {
+      return false;
+    }
+    const isValidPhone = /^[0-9]{10}$/.test(phone);
+    return !isValidPhone;
+  }
+
+  const hasErrorsEmail = () => {
+    const email = client.email ? client.email.trim() : "";
   
+    if (email === "") {
+      return false;
+    }
   
+    const isValidEmail = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(email);
+    return !isValidEmail;
+  };
+  
+
 
   return (
     <>
@@ -159,7 +178,8 @@ const AddClientModal: React.FC<AddClientModalProps> = ({
                   </HelperText>
                 </View>
                 {/*---------------------------------------- Tel du client -----------------------------*/}
-                <View className="flex-row h-10 w-full justify-evenly items-center mb-6">
+                <View className="w-full ">
+                <View className="flex-row h-10 w-full justify-evenly items-center">
                   <Icon
                     name="contact-phone"
                     size={30}
@@ -174,9 +194,15 @@ const AddClientModal: React.FC<AddClientModalProps> = ({
                       setClient({ ...client, phone: text })
                     }
                   />
+                  </View>
+                  <HelperText type="error" visible={hasErrorsPhone()}>
+                    Le numéro de téléphone doit comporter 10 chiffres
+                  </HelperText>
                 </View>
                 {/*---------------------------------------- Email du client -----------------------------*/}
-                <View className="flex-row h-10 w-full justify-evenly items-center mb-6">
+                <View className="w-full ">
+
+                <View className="flex-row h-10 w-full justify-evenly items-center">
                   <Icon
                     name="email"
                     size={30}
@@ -191,6 +217,10 @@ const AddClientModal: React.FC<AddClientModalProps> = ({
                       setClient({ ...client, email: text })
                     }
                   />
+                </View>
+                < HelperText type="error" visible={hasErrorsEmail()}>
+                  L'email n'est pas valide
+                </HelperText>
                 </View>
                 {/*---------------------------------------- Selection type adresse -----------------------------*/}
                 <View className="flex-row w-10/10 gap-1 mb-6 justify-center">
