@@ -17,6 +17,7 @@ const services = {
   clientService: process.env.CLIENT_SERVICE_URL,
   itemService: process.env.ITEM_SERVICE_URL,
   logsService: process.env.LOGS_SERVICE_URL,
+  stockService: process.env.STOCK_SERVICE_URL,
 };
 
 // Vérifiez les URLs des services
@@ -65,6 +66,13 @@ app.use('/items', createProxyMiddleware({
   target: services.itemService,
   changeOrigin: true,
   pathRewrite: {'^/items': ''},
+}));
+
+// Proxy pour le service de stock
+app.use('/stock', createProxyMiddleware({
+  target: services.stockService,
+  changeOrigin: true,
+  pathRewrite: {'^/stock': ''},
 }));
 
 app.listen(PORT, () => {

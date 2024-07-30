@@ -24,7 +24,7 @@ const item_model = {
   async getItemById(req: Request, res: Response) {
     const id = parseInt(req.params.id, 10);
     const query = `
-      SELECT * FROM "Item" WHERE "Id" = $1;
+      SELECT * FROM "Item" WHERE id = $1;
     `;
     try {
       const result = await pgClient.query(query, [id]);

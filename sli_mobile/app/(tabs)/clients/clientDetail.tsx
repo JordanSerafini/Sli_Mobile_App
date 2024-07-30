@@ -23,6 +23,7 @@ const CustomerDetailScreen: React.FC = () => {
       setLoading(true);
       try {
         const data = await getCustomerById(customerId);
+        console.log("Customer data:", data);
         setCustomer(data);
         setLoading(false);
       } catch (fetchError) {

@@ -19,7 +19,6 @@ services:
       - client_api
       - item_api
       - logs_api
-      - postgres_db
       - client_redis
 
   logs_api:
@@ -38,7 +37,6 @@ services:
     networks:
       - app-network
     depends_on:
-      - postgres_db
       - client_redis
 
   authentification_api:
@@ -50,12 +48,11 @@ services:
       - "5002:5002"
     environment:
       - DB_USER=jordans
-      - DB_HOST=postgres_db
+      - DB_HOST=host.docker.internal
       - DB_NAME=SLI
       - DB_PASSWORD=slitest
       - DB_PORT=5432
     depends_on:
-      - postgres_db
       - client_redis
     volumes:
       - ./backend/authentification_api:/app
@@ -73,12 +70,11 @@ services:
       - "5001:5001"
     environment:
       - DB_USER=jordans
-      - DB_HOST=postgres_db
+      - DB_HOST=host.docker.internal
       - DB_NAME=SLI
       - DB_PASSWORD=slitest
       - DB_PORT=5432
     depends_on:
-      - postgres_db
       - client_redis
     volumes:
       - ./backend/user_api:/app
@@ -96,7 +92,7 @@ services:
       - "5003:5003"
     environment:
       - DB_USER=jordans
-      - DB_HOST=postgres_db
+      - DB_HOST=host.docker.internal
       - DB_NAME=SLI
       - DB_PASSWORD=slitest
       - DB_PORT=5432
@@ -108,7 +104,6 @@ services:
     networks:
       - app-network
     depends_on:
-      - postgres_db
       - client_redis
 
   item_api:
@@ -120,12 +115,11 @@ services:
       - "5004:5004"
     environment:
       - DB_USER=jordans
-      - DB_HOST=postgres_db
+      - DB_HOST=host.docker.internal
       - DB_NAME=SLI
       - DB_PASSWORD=slitest
       - DB_PORT=5432
     depends_on:
-      - postgres_db
       - client_redis
     volumes:
       - ./backend/item_api:/app
@@ -134,18 +128,25 @@ services:
     networks:
       - app-network
 
-  postgres_db:
-    container_name: postgres_db
-    image: postgres:16-alpine
-    environment:
-      POSTGRES_USER: jordans
-      POSTGRES_PASSWORD: slitest
-      POSTGRES_DB: SLI
-    volumes:
-      - pgdata:/var/lib/postgresql/data
-      - ./BackupBDD:/docker-entrypoint-initdb.d
+  stock_api:
+    container_name: stock_api
+    build:
+      context: ./backend/stock_api
+      dockerfile: Dockerfile
     ports:
-      - "5432:5432"
+      - "5008:5008"
+    environment:
+      - DB_USER=jordans
+      - DB_HOST=host.docker.internal
+      - DB_NAME=SLI
+      - DB_PASSWORD=slitest
+      - DB_PORT=5432
+    depends_on:
+      - client_redis
+    volumes:
+      - ./backend/stock_api:/app
+      - /app/node_modules
+      - ./backend/stock_api/logs:/app/logs
     networks:
       - app-network
 
@@ -156,8 +157,7 @@ services:
       - client_redis_data:/data
     networks:
       - app-network
-    depends_on:
-      - postgres_db
+
 
 networks:
   app-network:

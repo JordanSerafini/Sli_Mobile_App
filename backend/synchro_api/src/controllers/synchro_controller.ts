@@ -44,10 +44,13 @@ const synchro_Controller = {
 
   generateCreateTableScript: (tableInfo: TableInfo): string => {
     let script = `CREATE TABLE IF NOT EXISTS "${tableInfo.tableName}" (\n`;
-
+    
+    // Ajouter la colonne Id comme clé primaire auto-incrémentée
+    script += `    id SERIAL PRIMARY KEY,\n`;
+  
     tableInfo.columns.forEach((column, index) => {
       let pgDataType: string;
-      switch (column.type) {
+      switch (column.type.toLowerCase()) {
         case "nvarchar":
         case "varchar":
         case "nchar":
@@ -66,8 +69,6 @@ const synchro_Controller = {
           pgDataType = "DECIMAL";
           break;
         case "tinyint":
-          pgDataType = "SMALLINT";
-          break;
         case "smallint":
           pgDataType = "SMALLINT";
           break;
@@ -82,20 +83,21 @@ const synchro_Controller = {
           break;
         default:
           pgDataType = "TEXT";
-          throw new Error(`Type de données non géré : ${column.type}`);
+          console.error(`Type de données non géré : ${column.type}`);
       }
-
+  
       script += `    "${column.name}" ${pgDataType}`;
       if (index < tableInfo.columns.length - 1) {
         script += ",";
       }
       script += "\n";
     });
-
+  
     script += ");";
-
+  
     return script;
   },
+  
 
   createTables: async (): Promise<void> => {
     try {
@@ -119,68 +121,72 @@ const synchro_Controller = {
     if (value === null || value === undefined) {
       return "NULL";
     }
-
+  
     if (typeof value === "string") {
       value = value.replace(/'/g, "''");
     }
-
+  
     switch (dataType) {
       case "nvarchar":
       case "varchar":
       case "nchar":
+      case "text":
         return `'${value}'`;
       case "uniqueidentifier":
         return `'${value}'`;
       case "datetime":
-        return `'${value.toISOString()}'`;
+      case "timestamp":
+        return `'${new Date(value).toISOString()}'`;
       case "int":
+      case "integer":
       case "decimal":
       case "tinyint":
       case "smallint":
       case "float":
-      case "nchar":
         return `${value}`;
       case "bit":
-        return value ? "true" : "false";
-      case "varbinary":
-        // Vous pouvez ajouter ici la gestion des valeurs varbinary si nécessaire
-        return `'${value}'`;
       case "boolean":
         return value ? "true" : "false";
+      case "varbinary":
+      case "bytea":
+        // Vous pouvez ajouter ici la gestion des valeurs varbinary si nécessaire
+        return `'${value}'`;
       case undefined:
         return "NULL";
       default:
         throw new Error(`Type de données non géré : ${dataType}`);
     }
   },
+  
 
-  generateInsertQuery: (tableInfo, rowData, existingColumns) => {
+  generateInsertQuery: (tableInfo: TableInfo, rowData: any, existingColumns: string[]) => {
     const columns = Object.keys(rowData).filter((column) =>
       existingColumns.includes(column)
     );
+    
     const values = columns.map((column) => {
       const value = rowData[column];
-      return synchro_Controller.formatValue(
-        value,
-        tableInfo.columns.find((col) => col.name === column).type
-      );
+      const columnInfo = tableInfo.columns.find((col) => col.name === column);
+      
+      if (!columnInfo) {
+        throw new Error(`Colonne non trouvée: ${column}`);
+      }
+      
+      return synchro_Controller.formatValue(value, columnInfo.type);
     });
+    
     const quotedColumns = columns.map((column) => `"${column}"`);
-    return `INSERT INTO "${tableInfo.tableName}" (${quotedColumns.join(
-      ", "
-    )}) VALUES (${values.join(", ")})`;
+    return `INSERT INTO "${tableInfo.tableName}" (${quotedColumns.join(", ")}) VALUES (${values.join(", ")})`;
   },
 
-  insertDataFromMSSQLToPGSQLSelect: async () => {
+    insertDataFromMSSQLToPGSQLSelect: async () => {
     try {
       const startTime = Date.now();
       const tables = await synchro_Controller.getTables();
 
       console.log("Début du processus d'insertion des données...");
-      //const allowedTables = ["Customer", "Item", "StockDocument", "StockDocumentLine", "Address", "Supplier", "SupplierItem", "SaleDocumentLine", "Storehouse", "ScheduleEvent", "ScheduleEventType", "MaintenanceContract", "MaintenanceContractAssociatedFiles", "MaintenanceContractFamily", "MaintenanceContractPurchaseDocument"];
-
-      const allowedTables = ["Customer" ];
-
+      const allowedTables = ["Customer", "Item", "StockDocument", "StockDocumentLine", "Address", "Supplier", "SupplierItem", "SaleDocumentLine", "Storehouse", "ScheduleEvent", "ScheduleEventType", "MaintenanceContract", "MaintenanceContractAssociatedFiles", "MaintenanceContractFamily", "MaintenanceContractPurchaseDocument"];
+      //const allowedTables = [ "Item" ]
       for (const tableInfo of tables) {
         if (!allowedTables.includes(tableInfo.tableName)) {
           console.log(
@@ -247,17 +253,17 @@ const synchro_Controller = {
     }
   },
 
-  getExistingColumns: async (tableName) => {
+  getExistingColumns: async (tableName: string): Promise<string[]> => {
     const query = `
-        SELECT column_name 
-        FROM information_schema.columns 
-        WHERE table_name = $1
+      SELECT column_name 
+      FROM information_schema.columns 
+      WHERE table_name = $1
     `;
     const result = await pgClient.query(query, [tableName]);
     return result.rows.map((row) => row.column_name);
   },
 
-  dropAllTables: async () => {
+  dropAllTables: async (): Promise<void> => {
     try {
       const query = `
         DO $$ DECLARE
@@ -276,7 +282,7 @@ const synchro_Controller = {
     }
   },
 
-  truncateAllTables: async () => {
+  truncateAllTables: async (): Promise<void> => {
     try {
       const query = `
         DO $$ DECLARE
@@ -295,7 +301,7 @@ const synchro_Controller = {
     }
   },
 
-  truncateTable: async (tableName: string) => {
+  truncateTable: async (tableName: string): Promise<void> => {
     try {
       const query = `TRUNCATE TABLE "${tableName}" RESTART IDENTITY CASCADE`;
       await pgClient.query(query);

@@ -35,7 +35,7 @@ const client_model = {
 
   async getCustomerById(req: Request, res: Response) {
     const id = parseInt(req.params.id, 10);
-    const query = `SELECT * FROM "Customer" WHERE "Id" = $1;`;
+    const query = `SELECT * FROM "Customer" WHERE id = $1;`;
     const cacheKey = `customer_${id}`;
 
     try {
@@ -149,7 +149,7 @@ const client_model = {
 
   async deleteCustomerById(req: Request, res: Response) {
     const id = parseInt(req.params.id, 10);
-    const query = `DELETE FROM "Customer" WHERE "Id" = $1 RETURNING *;`;
+    const query = `DELETE FROM "Customer" WHERE id = $1 RETURNING *;`;
     try {
       const result = await pgClient.query(query, [id]);
       if (result.rows.length === 0) {
@@ -171,7 +171,7 @@ const client_model = {
   async updateCustomerById(req: Request, res: Response) {
     const id = parseInt(req.params.id, 10);
     const { name, email } = req.body;
-    const query = `UPDATE "Customer" SET "Name" = $1, "Email" = $2 WHERE "Id" = $3 RETURNING *;`;
+    const query = `UPDATE "Customer" SET "Name" = $1, "Email" = $2 WHERE id = $3 RETURNING *;`;
     try {
       const result = await pgClient.query(query, [name, email, id]);
       if (result.rows.length === 0) {
