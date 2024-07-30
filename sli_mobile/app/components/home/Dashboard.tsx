@@ -6,6 +6,7 @@ import NoteCards from "./NoteCards";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { router } from "expo-router";
 import { LinearGradient } from "expo-linear-gradient";
+import { useGlobalContext } from "../../context/GlobalContext";
 
 const pp = require("../../assets/pp.jpeg");
 
@@ -30,7 +31,8 @@ interface Note {
 const events: { [key: string]: Event[] } = {
   "29/07/2024": [
     {
-      title: "Rappeler Mr Untel Rappeler Mr Untel Rappeler Mr Untel Rappeler Mr Untel",
+      title:
+        "Rappeler Mr Untel Rappeler Mr Untel Rappeler Mr Untel Rappeler Mr Untel",
       description: "Description 1",
       start: "29/07/2024",
       end: "29/07/2024",
@@ -247,239 +249,232 @@ const events: { [key: string]: Event[] } = {
 const notes: { [key: string]: Note[] } = {
   "29/07/2024": [
     {
-      "title": "Messages non lus",
-      "description": "Description de la Messages non lus",
-      "date": "29/07/2024",
-      "urgence": "Haute",
-      "category": "Catégorie 1"
+      title: "Messages non lus",
+      description: "Description de la Messages non lus",
+      date: "29/07/2024",
+      urgence: "Haute",
+      category: "Catégorie 1",
     },
     {
-      "title": "Appelez Mr Jacques",
-      "description": "Description de la Appelez Mr Jacques",
-      "date": "29/07/2024",
-      "urgence": "Moyenne",
-      "category": "Catégorie 2"
+      title: "Appelez Mr Jacques",
+      description: "Description de la Appelez Mr Jacques",
+      date: "29/07/2024",
+      urgence: "Moyenne",
+      category: "Catégorie 2",
     },
     {
-      "title": "Vacaresto commerciaux",
-      "description": "Description de la Vacaresto commerciaux",
-      "date": "29/07/2024",
-      "urgence": "Faible",
-      "category": "Catégorie 3"
+      title: "Vacaresto commerciaux",
+      description: "Description de la Vacaresto commerciaux",
+      date: "29/07/2024",
+      urgence: "Faible",
+      category: "Catégorie 3",
     },
     {
-      "title": "Vacances Stéphane",
-      "description": "Description de la Vacances Stéphane",
-      "date": "29/07/2024",
-      "urgence": "Haute",
-      "category": "Catégorie 4"
+      title: "Vacances Stéphane",
+      description: "Description de la Vacances Stéphane",
+      date: "29/07/2024",
+      urgence: "Haute",
+      category: "Catégorie 4",
     },
     {
-      "title": "Note 5",
-      "description": "Description de la note 5",
-      "date": "29/07/2024",
-      "urgence": "Moyenne",
-      "category": "Catégorie 5"
-    }
+      title: "Note 5",
+      description: "Description de la note 5",
+      date: "29/07/2024",
+      urgence: "Moyenne",
+      category: "Catégorie 5",
+    },
   ],
   "30/07/2024": [
     {
-      "title": "Messages non lus",
-      "description": "Description de la Messages non lus",
-      "date": "30/07/2024",
-      "urgence": "Haute",
-      "category": "Catégorie 1"
+      title: "Messages non lus",
+      description: "Description de la Messages non lus",
+      date: "30/07/2024",
+      urgence: "Haute",
+      category: "Catégorie 1",
     },
     {
-      "title": "Appelez Mr Jacques",
-      "description": "Description de la Appelez Mr Jacques",
-      "date": "30/07/2024",
-      "urgence": "Moyenne",
-      "category": "Catégorie 2"
+      title: "Appelez Mr Jacques",
+      description: "Description de la Appelez Mr Jacques",
+      date: "30/07/2024",
+      urgence: "Moyenne",
+      category: "Catégorie 2",
     },
     {
-      "title": "Vacaresto commerciaux",
-      "description": "Description de la Vacaresto commerciaux",
-      "date": "30/07/2024",
-      "urgence": "Faible",
-      "category": "Catégorie 3"
+      title: "Vacaresto commerciaux",
+      description: "Description de la Vacaresto commerciaux",
+      date: "30/07/2024",
+      urgence: "Faible",
+      category: "Catégorie 3",
     },
     {
-      "title": "Vacances Stéphane",
-      "description": "Description de la Vacances Stéphane",
-      "date": "30/07/2024",
-      "urgence": "Haute",
-      "category": "Catégorie 4"
+      title: "Vacances Stéphane",
+      description: "Description de la Vacances Stéphane",
+      date: "30/07/2024",
+      urgence: "Haute",
+      category: "Catégorie 4",
     },
     {
-      "title": "Note 5",
-      "description": "Description de la note 5",
-      "date": "30/07/2024",
-      "urgence": "Moyenne",
-      "category": "Catégorie 5"
-    }
+      title: "Note 5",
+      description: "Description de la note 5",
+      date: "30/07/2024",
+      urgence: "Moyenne",
+      category: "Catégorie 5",
+    },
   ],
   "31/07/2024": [
     {
-      "title": "Messages non lus",
-      "description": "Description de la Messages non lus",
-      "date": "31/07/2024",
-      "urgence": "Haute",
-      "category": "Catégorie 1"
+      title: "Messages non lus",
+      description: "Description de la Messages non lus",
+      date: "31/07/2024",
+      urgence: "Haute",
+      category: "Catégorie 1",
     },
     {
-      "title": "Appelez Mr Jacques",
-      "description": "Description de la Appelez Mr Jacques",
-      "date": "31/07/2024",
-      "urgence": "Moyenne",
-      "category": "Catégorie 2"
+      title: "Appelez Mr Jacques",
+      description: "Description de la Appelez Mr Jacques",
+      date: "31/07/2024",
+      urgence: "Moyenne",
+      category: "Catégorie 2",
     },
     {
-      "title": "Vacaresto commerciaux",
-      "description": "Description de la Vacaresto commerciaux",
-      "date": "31/07/2024",
-      "urgence": "Faible",
-      "category": "Catégorie 3"
+      title: "Vacaresto commerciaux",
+      description: "Description de la Vacaresto commerciaux",
+      date: "31/07/2024",
+      urgence: "Faible",
+      category: "Catégorie 3",
     },
     {
-      "title": "Vacances Stéphane",
-      "description": "Description de la Vacances Stéphane",
-      "date": "31/07/2024",
-      "urgence": "Haute",
-      "category": "Catégorie 4"
+      title: "Vacances Stéphane",
+      description: "Description de la Vacances Stéphane",
+      date: "31/07/2024",
+      urgence: "Haute",
+      category: "Catégorie 4",
     },
     {
-      "title": "Note 5",
-      "description": "Description de la note 5",
-      "date": "31/07/2024",
-      "urgence": "Moyenne",
-      "category": "Catégorie 5"
-    }
+      title: "Note 5",
+      description: "Description de la note 5",
+      date: "31/07/2024",
+      urgence: "Moyenne",
+      category: "Catégorie 5",
+    },
   ],
   "01/08/2024": [
     {
-      "title": "Messages non lus",
-      "description": "Description de la Messages non lus",
-      "date": "01/08/2024",
-      "urgence": "Haute",
-      "category": "Catégorie 1"
+      title: "Messages non lus",
+      description: "Description de la Messages non lus",
+      date: "01/08/2024",
+      urgence: "Haute",
+      category: "Catégorie 1",
     },
     {
-      "title": "Appelez Mr Jacques",
-      "description": "Description de la Appelez Mr Jacques",
-      "date": "01/08/2024",
-      "urgence": "Moyenne",
-      "category": "Catégorie 2"
+      title: "Appelez Mr Jacques",
+      description: "Description de la Appelez Mr Jacques",
+      date: "01/08/2024",
+      urgence: "Moyenne",
+      category: "Catégorie 2",
     },
     {
-      "title": "Vacaresto commerciaux",
-      "description": "Description de la Vacaresto commerciaux",
-      "date": "01/08/2024",
-      "urgence": "Faible",
-      "category": "Catégorie 3"
+      title: "Vacaresto commerciaux",
+      description: "Description de la Vacaresto commerciaux",
+      date: "01/08/2024",
+      urgence: "Faible",
+      category: "Catégorie 3",
     },
     {
-      "title": "Vacances Stéphane",
-      "description": "Description de la Vacances Stéphane",
-      "date": "01/08/2024",
-      "urgence": "Haute",
-      "category": "Catégorie 4"
+      title: "Vacances Stéphane",
+      description: "Description de la Vacances Stéphane",
+      date: "01/08/2024",
+      urgence: "Haute",
+      category: "Catégorie 4",
     },
     {
-      "title": "Note 5",
-      "description": "Description de la note 5",
-      "date": "01/08/2024",
-      "urgence": "Moyenne",
-      "category": "Catégorie 5"
-    }
+      title: "Note 5",
+      description: "Description de la note 5",
+      date: "01/08/2024",
+      urgence: "Moyenne",
+      category: "Catégorie 5",
+    },
   ],
   "02/08/2024": [
     {
-      "title": "Messages non lus",
-      "description": "Description de la Messages non lus",
-      "date": "02/08/2024",
-      "urgence": "Haute",
-      "category": "Catégorie 1"
+      title: "Messages non lus",
+      description: "Description de la Messages non lus",
+      date: "02/08/2024",
+      urgence: "Haute",
+      category: "Catégorie 1",
     },
     {
-      "title": "Appelez Mr Jacques",
-      "description": "Description de la Appelez Mr Jacques",
-      "date": "02/08/2024",
-      "urgence": "Moyenne",
-      "category": "Catégorie 2"
+      title: "Appelez Mr Jacques",
+      description: "Description de la Appelez Mr Jacques",
+      date: "02/08/2024",
+      urgence: "Moyenne",
+      category: "Catégorie 2",
     },
     {
-      "title": "Vacaresto commerciaux",
-      "description": "Description de la Vacaresto commerciaux",
-      "date": "02/08/2024",
-      "urgence": "Faible",
-      "category": "Catégorie 3"
+      title: "Vacaresto commerciaux",
+      description: "Description de la Vacaresto commerciaux",
+      date: "02/08/2024",
+      urgence: "Faible",
+      category: "Catégorie 3",
     },
     {
-      "title": "Vacances Stéphane",
-      "description": "Description de la Vacances Stéphane",
-      "date": "02/08/2024",
-      "urgence": "Haute",
-      "category": "Catégorie 4"
+      title: "Vacances Stéphane",
+      description: "Description de la Vacances Stéphane",
+      date: "02/08/2024",
+      urgence: "Haute",
+      category: "Catégorie 4",
     },
     {
-      "title": "Note 5",
-      "description": "Description de la note 5",
-      "date": "02/08/2024",
-      "urgence": "Moyenne",
-      "category": "Catégorie 5"
-    }
+      title: "Note 5",
+      description: "Description de la note 5",
+      date: "02/08/2024",
+      urgence: "Moyenne",
+      category: "Catégorie 5",
+    },
   ],
   "03/08/2024": [
     {
-      "title": "Email non lus",
-      "description": "Description de la Messages non lus",
-      "date": "03/08/2024",
-      "urgence": "Haute",
-      "category": "Catégorie 1"
+      title: "Email non lus",
+      description: "Description de la Messages non lus",
+      date: "03/08/2024",
+      urgence: "Haute",
+      category: "Catégorie 1",
     },
     {
-      "title": "Appelez Mr Jacques",
-      "description": "Description de la Appelez Mr Jacques",
-      "date": "03/08/2024",
-      "urgence": "Moyenne",
-      "category": "Catégorie 2"
+      title: "Appelez Mr Jacques",
+      description: "Description de la Appelez Mr Jacques",
+      date: "03/08/2024",
+      urgence: "Moyenne",
+      category: "Catégorie 2",
     },
     {
-      "title": "resto commerciaux",
-      "description": "Description de la Vacaresto commerciaux",
-      "date": "03/08/2024",
-      "urgence": "Faible",
-      "category": "Catégorie 3"
+      title: "resto commerciaux",
+      description: "Description de la Vacaresto commerciaux",
+      date: "03/08/2024",
+      urgence: "Faible",
+      category: "Catégorie 3",
     },
     {
-      "title": "Vacances Stéphane",
-      "description": "Description de la Vacances Stéphane",
-      "date": "03/08/2024",
-      "urgence": "Haute",
-      "category": "Catégorie 4"
+      title: "Vacances Stéphane",
+      description: "Description de la Vacances Stéphane",
+      date: "03/08/2024",
+      urgence: "Haute",
+      category: "Catégorie 4",
     },
     {
-      "title": "Note 5",
-      "description": "Description de la note 5",
-      "date": "03/08/2024",
-      "urgence": "Moyenne",
-      "category": "Catégorie 5"
-    }
-  ]
-}
+      title: "Note 5",
+      description: "Description de la note 5",
+      date: "03/08/2024",
+      urgence: "Moyenne",
+      category: "Catégorie 5",
+    },
+  ],
+};
 
-
-
-function Dashboard() {
+const Dashboard = () => {
   const [dateSelected, setDateSelected] = useState<Date>(new Date());
   const [showPicker, setShowPicker] = useState<boolean>(false);
-
-  const handleLogout = async () => {
-    await AsyncStorage.removeItem("userToken");
-    await AsyncStorage.removeItem("user");
-    router.push("/login");
-  };
+  const { toggleMenu } = useGlobalContext();
 
   const onChange = (event: any, selectedDate?: Date) => {
     const currentDate = selectedDate || dateSelected;
@@ -496,6 +491,15 @@ function Dashboard() {
 
   const formattedDate = formatDate(dateSelected);
 
+
+  const handleLogout = async () => {
+    await AsyncStorage.removeItem("userToken");
+    await AsyncStorage.removeItem("user");
+    router.push("/login");
+  };
+
+
+
   return (
     <LinearGradient
       colors={["#4c669f", "#3b5998", "#192f6a"]}
@@ -504,7 +508,9 @@ function Dashboard() {
       <View className="pt-8 h-fit w-full rounded-3xl items-center">
         {/* ------------------------------------------------------------ Header --------------------------------------------------------------------------- */}
         <View className="items-center w-9/10 flex-row justify-between">
-          <Icon name="navicon" size={30} color="white" />
+        <TouchableOpacity onPress={toggleMenu}>
+            <Icon name="navicon" size={30} color="white" />
+          </TouchableOpacity>
           <Text className="text-white font-bold text-base">
             Tableau de bord
           </Text>
@@ -534,11 +540,11 @@ function Dashboard() {
         </View>
         {/* ------------------------------------------------------------ Card events --------------------------------------------------------------------------- */}
         <View className="h-fit mt-8">
-        <NoteCards notes={notes[formattedDate] || []} />
+          <NoteCards notes={notes[formattedDate] || []} />
         </View>
       </View>
     </LinearGradient>
   );
-}
+};
 
 export default Dashboard;

@@ -1,9 +1,11 @@
 import FontAwesome from '@expo/vector-icons/FontAwesome';
 import { Tabs } from 'expo-router';
+import { GlobalProvider } from '../context/GlobalContext';
 
 export default function TabLayout() {
 
   return (
+    <GlobalProvider>
     <Tabs screenOptions={{ tabBarActiveTintColor: '#1e40af', headerShown: false }}>
       <Tabs.Screen
         name="home"
@@ -41,5 +43,6 @@ export default function TabLayout() {
         }}
       />
     </Tabs>
+    </GlobalProvider>
   );
 }

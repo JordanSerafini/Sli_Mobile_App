@@ -1,0 +1,46 @@
+2024-07-30 07:01:26 [logger_api] jordan@solution-logique.fr error: Text strings must be rendered within a <Text> component.
+Error: Text strings must be rendered within a <Text> component.
+    at createTextInstance (http://bjubt34-anonymous-8081.exp.direct/node_modules%5Cexpo-router%5Centry.bundle//&platform=android&dev=true&hot=false&lazy=true&transform.engine=hermes&transform.bytecode=true&transform.routerRoot=app:72895:26)
+    at completeWork (http://bjubt34-anonymous-8081.exp.direct/node_modules%5Cexpo-router%5Centry.bundle//&platform=android&dev=true&hot=false&lazy=true&transform.engine=hermes&transform.bytecode=true&transform.routerRoot=app:82870:64)
+    at completeUnitOfWork (http://bjubt34-anonymous-8081.exp.direct/node_modules%5Cexpo-router%5Centry.bundle//&platform=android&dev=true&hot=false&lazy=true&transform.engine=hermes&transform.bytecode=true&transform.routerRoot=app:87233:32)
+    at performUnitOfWork (http://bjubt34-anonymous-8081.exp.direct/node_modules%5Cexpo-router%5Centry.bundle//&platform=android&dev=true&hot=false&lazy=true&transform.engine=hermes&transform.bytecode=true&transform.routerRoot=app:87054:29)
+    at workLoopSync (http://bjubt34-anonymous-8081.exp.direct/node_modules%5Cexpo-router%5Centry.bundle//&platform=android&dev=true&hot=false&lazy=true&transform.engine=hermes&transform.bytecode=true&transform.routerRoot=app:86814:28)
+    at renderRootSync (http://bjubt34-anonymous-8081.exp.direct/node_modules%5Cexpo-router%5Centry.bundle//&platform=android&dev=true&hot=false&lazy=true&transform.engine=hermes&transform.bytecode=true&transform.routerRoot=app:86780:25)
+    at performSyncWorkOnRoot (http://bjubt34-anonymous-8081.exp.direct/node_modules%5Cexpo-router%5Centry.bundle//&platform=android&dev=true&hot=false&lazy=true&transform.engine=hermes&transform.bytecode=true&transform.routerRoot=app:86349:40)
+    at flushSyncWorkAcrossRoots_impl (http://bjubt34-anonymous-8081.exp.direct/node_modules%5Cexpo-router%5Centry.bundle//&platform=android&dev=true&hot=false&lazy=true&transform.engine=hermes&transform.bytecode=true&transform.routerRoot=app:73954:40)
+    at flushSyncWorkOnLegacyRootsOnly (http://bjubt34-anonymous-8081.exp.direct/node_modules%5Cexpo-router%5Centry.bundle//&platform=android&dev=true&hot=false&lazy=true&transform.engine=hermes&transform.bytecode=true&transform.routerRoot=app:73925:38)
+    at scheduleUpdateOnFiber (http://bjubt34-anonymous-8081.exp.direct/node_modules%5Cexpo-router%5Centry.bundle//&platform=android&dev=true&hot=false&lazy=true&transform.engine=hermes&transform.bytecode=true&transform.routerRoot=app:86006:45)
+    at dispatchSetState (http://bjubt34-anonymous-8081.exp.direct/node_modules%5Cexpo-router%5Centry.bundle//&platform=android&dev=true&hot=false&lazy=true&transform.engine=hermes&transform.bytecode=true&transform.routerRoot=app:77976:34)
+    at anonymous (http://bjubt34-anonymous-8081.exp.direct/node_modules%5Cexpo-router%5Centry.bundle//&platform=android&dev=true&hot=false&lazy=true&transform.engine=hermes&transform.bytecode=true&transform.routerRoot=app:134980:25)
+    at anonymous (http://bjubt34-anonymous-8081.exp.direct/node_modules%5Cexpo-router%5Centry.bundle//&platform=android&dev=true&hot=false&lazy=true&transform.engine=hermes&transform.bytecode=true&transform.routerRoot=app:137101:22)
+    at anonymous (http://bjubt34-anonymous-8081.exp.direct/node_modules%5Cexpo-router%5Centry.bundle//&platform=android&dev=true&hot=false&lazy=true&transform.engine=hermes&transform.bytecode=true&transform.routerRoot=app:138202:21)
+    at dispatch (http://bjubt34-anonymous-8081.exp.direct/node_modules%5Cexpo-router%5Centry.bundle//&platform=android&dev=true&hot=false&lazy=true&transform.engine=hermes&transform.bytecode=true&transform.routerRoot=app:138090:31)
+    at anonymous (http://bjubt34-anonymous-8081.exp.direct/node_modules%5Cexpo-router%5Centry.bundle//&platform=android&dev=true&hot=false&lazy=true&transform.engine=hermes&transform.bytecode=true&transform.routerRoot=app:133039:37)
+    at anonymous (http://bjubt34-anonymous-8081.exp.direct/node_modules%5Cexpo-router%5Centry.bundle//&platform=android&dev=true&hot=false&lazy=true&transform.engine=hermes&transform.bytecode=true&transform.routerRoot=app:137972:27)
+    at anonymous (http://bjubt34-anonymous-8081.exp.direct/node_modules%5Cexpo-router%5Centry.bundle//&platform=android&dev=true&hot=false&lazy=true&transform.engine=hermes&transform.bytecode=true&transform.routerRoot=app:133038:27)
+    at linkTo (http://bjubt34-anonymous-8081.exp.direct/node_modules%5Cexpo-router%5Centry.bundle//&platform=android&dev=true&hot=false&lazy=true&transform.engine=hermes&transform.bytecode=true&transform.routerRoot=app:149383:34)
+    at push (http://bjubt34-anonymous-8081.exp.direct/node_modules%5Cexpo-router%5Centry.bundle//&platform=android&dev=true&hot=false&lazy=true&transform.engine=hermes&transform.bytecode=true&transform.routerRoot=app:149286:23)
+    at ?anon_0_ (http://bjubt34-anonymous-8081.exp.direct/node_modules%5Cexpo-router%5Centry.bundle//&platform=android&dev=true&hot=false&lazy=true&transform.engine=hermes&transform.bytecode=true&transform.routerRoot=app:232292:22)
+    at next (native)
+    at asyncGeneratorStep (http://bjubt34-anonymous-8081.exp.direct/node_modules%5Cexpo-router%5Centry.bundle//&platform=android&dev=true&hot=false&lazy=true&transform.engine=hermes&transform.bytecode=true&transform.routerRoot=app:5844:19)
+    at _next (http://bjubt34-anonymous-8081.exp.direct/node_modules%5Cexpo-router%5Centry.bundle//&platform=android&dev=true&hot=false&lazy=true&transform.engine=hermes&transform.bytecode=true&transform.routerRoot=app:5858:29)
+    at tryCallOne (address at InternalBytecode.js:1:1180)
+    at anonymous (address at InternalBytecode.js:1:1874)
+    at apply (native)
+    at anonymous (http://bjubt34-anonymous-8081.exp.direct/node_modules%5Cexpo-router%5Centry.bundle//&platform=android&dev=true&hot=false&lazy=true&transform.engine=hermes&transform.bytecode=true&transform.routerRoot=app:14840:26)
+    at _callTimer (http://bjubt34-anonymous-8081.exp.direct/node_modules%5Cexpo-router%5Centry.bundle//&platform=android&dev=true&hot=false&lazy=true&transform.engine=hermes&transform.bytecode=true&transform.routerRoot=app:14719:17)
+    at _callReactNativeMicrotasksPass (http://bjubt34-anonymous-8081.exp.direct/node_modules%5Cexpo-router%5Centry.bundle//&platform=android&dev=true&hot=false&lazy=true&transform.engine=hermes&transform.bytecode=true&transform.routerRoot=app:14764:17)
+    at callReactNativeMicrotasks (http://bjubt34-anonymous-8081.exp.direct/node_modules%5Cexpo-router%5Centry.bundle//&platform=android&dev=true&hot=false&lazy=true&transform.engine=hermes&transform.bytecode=true&transform.routerRoot=app:14970:44)
+    at __callReactNativeMicrotasks (http://bjubt34-anonymous-8081.exp.direct/node_modules%5Cexpo-router%5Centry.bundle//&platform=android&dev=true&hot=false&lazy=true&transform.engine=hermes&transform.bytecode=true&transform.routerRoot=app:2637:48)
+    at anonymous (http://bjubt34-anonymous-8081.exp.direct/node_modules%5Cexpo-router%5Centry.bundle//&platform=android&dev=true&hot=false&lazy=true&transform.engine=hermes&transform.bytecode=true&transform.routerRoot=app:2410:45)
+    at __guard (http://bjubt34-anonymous-8081.exp.direct/node_modules%5Cexpo-router%5Centry.bundle//&platform=android&dev=true&hot=false&lazy=true&transform.engine=hermes&transform.bytecode=true&transform.routerRoot=app:2609:15)
+    at flushedQueue (http://bjubt34-anonymous-8081.exp.direct/node_modules%5Cexpo-router%5Centry.bundle//&platform=android&dev=true&hot=false&lazy=true&transform.engine=hermes&transform.bytecode=true&transform.routerRoot=app:2409:21)
+    at invokeCallbackAndReturnFlushedQueue (http://bjubt34-anonymous-8081.exp.direct/node_modules%5Cexpo-router%5Centry.bundle//&platform=android&dev=true&hot=false&lazy=true&transform.engine=hermes&transform.bytecode=true&transform.routerRoot=app:2403:33)
+{
+  "url": "No URL",
+  "method": "No method",
+  "ip": "::ffff:172.18.0.9"
+}
+
+------------------------------------------------------------------------------------------------
+

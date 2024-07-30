@@ -1,22 +1,32 @@
 import React from 'react';
 import { View, StyleSheet, StatusBar } from 'react-native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
-import AppNavigationContainer from './NavigationContainer'; // Assurez-vous de fournir le bon chemin
+import { Provider as PaperProvider } from 'react-native-paper';
+import { GlobalProvider } from './app/context/GlobalContext';
+import AppNavigationContainer from './NavigationContainer';
+import MenuWrapper from './app/components/menu/MenuWrapper'; 
 
-export default function App() {
+const App = () => {
+
   return (
     <SafeAreaProvider>
-      <StatusBar barStyle="light-content" backgroundColor="#1e3a8a" />
-      <View style={styles.container}>
-        <AppNavigationContainer />
-      </View>
+      <GlobalProvider>
+        <PaperProvider>
+          <StatusBar barStyle="light-content" backgroundColor="#1e3a8a" />
+          <View style={styles.container}>
+            <AppNavigationContainer />
+          </View>
+          <MenuWrapper />
+        </PaperProvider>
+      </GlobalProvider>
     </SafeAreaProvider>
   );
-}
+};
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#1e3a8a', // Optionnel: si vous souhaitez que le fond global soit aussi bleu
   },
 });
+
+export default App;

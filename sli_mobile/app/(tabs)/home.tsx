@@ -10,19 +10,11 @@ import MainHome from '../components/home/MainHome';
 const HomeScreen: React.FC = () => {
   const router = useRouter();
 
-  const handleLogout = async () => {
-    await AsyncStorage.removeItem('userToken');
-    await AsyncStorage.removeItem('user');
-    router.push('/login');
-  };
-
 
   return (
     <View className='h-screen w-screen items-center justify-start'>
-
       <Dashboard />
       <MainHome/>
-      {/*<Button title="LOGOUT" onPress={handleLogout} />*/}
     </View>
   );
 };

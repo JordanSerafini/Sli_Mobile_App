@@ -1,5 +1,12 @@
 import React from "react";
-import { Modal, TextInput, Portal, Dialog, Button } from "react-native-paper";
+import {
+  Modal,
+  TextInput,
+  Portal,
+  Dialog,
+  Button,
+  HelperText,
+} from "react-native-paper";
 import {
   TouchableOpacity,
   View,
@@ -14,6 +21,7 @@ import Icon_2 from "react-native-vector-icons/FontAwesome6";
 import ButtonPerso from "../../../components/UI/ButtonPerso";
 import { theme } from "../../../utils/theme";
 import { createCustomer } from "../../../utils/functions/customer_functions";
+import { nameRegex } from "../../../utils/regex";
 
 interface AddClientModalProps {
   visible: boolean;
@@ -63,39 +71,52 @@ const AddClientModal: React.FC<AddClientModalProps> = ({
 
   const handleCreateCustomer = async (customer: Client) => {
     let customerData: any = {
-        Name: customer.name,
-        NotesClear: customer.note,
+      Name: customer.name,
+      NotesClear: customer.note,
     };
 
     if (customer.addressType === "Livraison") {
-        customerData.MainDeliveryContact_Email = customer.email;
-        customerData.MainDeliveryContact_CellPhone = customer.phone;
-        customerData.MainDeliveryAddress_Address1 = customer.address;
-        customerData.MainDeliveryAddress_ZipCode = customer.postalCode;
-        customerData.MainDeliveryAddress_City = customer.city;
+      customerData.MainDeliveryContact_Email = customer.email;
+      customerData.MainDeliveryContact_CellPhone = customer.phone;
+      customerData.MainDeliveryAddress_Address1 = customer.address;
+      customerData.MainDeliveryAddress_ZipCode = customer.postalCode;
+      customerData.MainDeliveryAddress_City = customer.city;
     } else {
-        customerData.MainInvoicingContact_Email = customer.email;
-        customerData.MainInvoicingContact_CellPhone = customer.phone;
-        customerData.MainInvoicingAddress_Address1 = customer.address;
-        customerData.MainInvoicingAddress_ZipCode = customer.postalCode;
-        customerData.MainInvoicingAddress_City = customer.city;
+      customerData.MainInvoicingContact_Email = customer.email;
+      customerData.MainInvoicingContact_CellPhone = customer.phone;
+      customerData.MainInvoicingAddress_Address1 = customer.address;
+      customerData.MainInvoicingAddress_ZipCode = customer.postalCode;
+      customerData.MainInvoicingAddress_City = customer.city;
     }
 
     try {
-        const response = await createCustomer(customerData);
-        setCreatedClient({ name: response.Name, id: response.Id });
-        setSuccessMessageVisible(true);
-        setConfirmationVisible(false);
-        onDismiss();
+      const response = await createCustomer(customerData);
+      setCreatedClient({ name: response.Name, id: response.Id });
+      setSuccessMessageVisible(true);
+      setConfirmationVisible(false);
+      onDismiss();
     } catch (error) {
-        console.error("Failed to add customer:", error);
+      console.error("Failed to add customer:", error);
     }
-};
-
+  };
 
   const showConfirmation = () => setConfirmationVisible(true);
   const hideConfirmation = () => setConfirmationVisible(false);
   const hideSuccessMessage = () => setSuccessMessageVisible(false);
+
+
+  const hasErrorsName = () => {
+    if (client.name.trim() === "") {
+      return true;
+    }
+      const hasLetter = /[A-Za-zÀ-ÿ]/.test(client.name);
+    const isValidName = nameRegex(client.name);
+  
+    return !hasLetter || !isValidName;
+  };
+  
+  
+  
 
   return (
     <>
@@ -116,21 +137,26 @@ const AddClientModal: React.FC<AddClientModalProps> = ({
               </TouchableOpacity>
               <SafeAreaView className="h-9/10 w-full items-center pt-4">
                 {/*---------------------------------------- Nom du client -----------------------------*/}
-                <View className="flex-row h-10 w-full justify-evenly items-center mb-6 mt-6">
-                  <Icon
-                    name="person"
-                    size={30}
-                    color={`${theme.accent}`}
-                    className="w-2/10"
-                  />
-                  <TextInput
-                    placeholder="Nom du client"
-                    className="justify-center w-8/10 rounded-xl  bg-white border border-gray-300 focus:border-blue-800 focus:ring-2 focus:ring-blue-800"
-                    value={client.name}
-                    onChangeText={(text) =>
-                      setClient({ ...client, name: text })
-                    }
-                  />
+                <View className="w-full mt-6">
+                  <View className="flex-row h-10 w-full justify-evenly items-center">
+                    <Icon
+                      name="person"
+                      size={30}
+                      color={`${theme.accent}`}
+                      className="w-2/10"
+                    />
+                    <TextInput
+                      placeholder="Nom du client"
+                      className="justify-center w-8/10 rounded-xl  bg-white border border-gray-300 focus:border-blue-800 focus:ring-2 focus:ring-blue-800"
+                      value={client.name}
+                      onChangeText={(text) =>
+                        setClient({ ...client, name: text })
+                      }
+                    />
+                  </View>
+                  <HelperText type="error" visible={hasErrorsName()}>
+                    Le nom du client ne peut pas contenir de chiffres
+                  </HelperText>
                 </View>
                 {/*---------------------------------------- Tel du client -----------------------------*/}
                 <View className="flex-row h-10 w-full justify-evenly items-center mb-6">
@@ -171,18 +197,34 @@ const AddClientModal: React.FC<AddClientModalProps> = ({
                   <TouchableOpacity
                     className={`w-4.5/10 items-center h-20 justify-center rounded-xl ${
                       client.addressType === "Livraison"
-                      ? "border-2 border-blue-800 bg-gray-100"
-                      : "bg-white"
+                        ? "border-2 border-blue-800 bg-gray-100"
+                        : "bg-white"
                     }`}
                     onPress={() => handleAddressTypeChange("Livraison")}
                   >
-                    <Icon_2 name="truck" size={30} color={`${client.addressType === "Livraison" ? "#1e3a8a" : "#e5e7eb"  }`} />
-                    <Text className={`text-lg ${client.addressType === "Livraison" ? "text-blue-800" : "opacity-10"}`}>Livraison</Text>
+                    <Icon_2
+                      name="truck"
+                      size={30}
+                      color={`${
+                        client.addressType === "Livraison"
+                          ? "#1e3a8a"
+                          : "#e5e7eb"
+                      }`}
+                    />
+                    <Text
+                      className={`text-lg ${
+                        client.addressType === "Livraison"
+                          ? "text-blue-800"
+                          : "opacity-10"
+                      }`}
+                    >
+                      Livraison
+                    </Text>
                   </TouchableOpacity>
                   <TouchableOpacity
                     className={`w-4.5/10 items-center h-20 justify-center rounded-xl ${
                       client.addressType === "Facturation"
-                      ? "border-2 border-blue-800 bg-gray-100"
+                        ? "border-2 border-blue-800 bg-gray-100"
                         : "bg-white"
                     }`}
                     onPress={() => handleAddressTypeChange("Facturation")}
@@ -190,16 +232,28 @@ const AddClientModal: React.FC<AddClientModalProps> = ({
                     <Icon_2
                       name="file-invoice-dollar"
                       size={30}
-                      color={`${client.addressType === "Facturation" ? "#1e3a8a" : "#e5e7eb"   }`}
+                      color={`${
+                        client.addressType === "Facturation"
+                          ? "#1e3a8a"
+                          : "#e5e7eb"
+                      }`}
                     />
-                    <Text className={`text-lg ${client.addressType === "Facturation" ? "text-blue-800" : "opacity-10"}`}>Facturation</Text>
+                    <Text
+                      className={`text-lg ${
+                        client.addressType === "Facturation"
+                          ? "text-blue-800"
+                          : "opacity-10"
+                      }`}
+                    >
+                      Facturation
+                    </Text>
                   </TouchableOpacity>
                 </View>
                 {/*---------------------------------------- adresse -----------------------------*/}
                 <View className="w-full justify-center gap-1 ">
                   {/*---------------------------------------- Selection type adresse -----------------------------*/}
                   <View className="flex-row h-10 w-full justify-evenly items-center mb-6">
-                  <Icon
+                    <Icon
                       name="home"
                       size={30}
                       color={`${theme.accent}`}
@@ -235,7 +289,7 @@ const AddClientModal: React.FC<AddClientModalProps> = ({
                   </View>
                 </View>
                 {/*---------------------------------------- Note -----------------------------*/}
-                  <View className="flex-row w-full h-24 justify-evenly items-center">
+                <View className="flex-row w-full h-24 justify-evenly items-center">
                   <Icon
                     name="note"
                     size={30}
