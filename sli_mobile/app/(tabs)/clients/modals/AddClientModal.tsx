@@ -21,7 +21,7 @@ import Icon_2 from "react-native-vector-icons/FontAwesome6";
 import ButtonPerso from "../../../components/UI/ButtonPerso";
 import { theme } from "../../../utils/theme";
 import { createCustomer } from "../../../utils/functions/customer_functions";
-import { nameRegex } from "../../../utils/regex";
+import { nameRegex, phoneNumberRegex, emailRegex, addressRegex, postalCodeRegex, cityRegex, notesRegex } from "../../../utils/regex";
 
 interface AddClientModalProps {
   visible: boolean;
@@ -105,37 +105,86 @@ const AddClientModal: React.FC<AddClientModalProps> = ({
   const hideSuccessMessage = () => setSuccessMessageVisible(false);
 
 
+  //? ----------------------------------------------------------------------------------- Regex validation ---------------------------------------------------------------------------------------- */
   const hasErrorsName = () => {
     const name = client.name.trim();
     if (name === "") {
-      return false; 
+      return false;
     }
     const hasLetter = /[A-Za-zÀ-ÿ]/.test(name);
-    const isValidName = /^[A-Za-zÀ-ÿ\s'-]+$/.test(name);
+    const isValidName = nameRegex(name);
     return !(hasLetter && isValidName);
   };
-  
+
   const hasErrorsPhone = () => {
     const phone = client.phone.trim();
     if (phone === "") {
       return false;
     }
-    const isValidPhone = /^[0-9]{10}$/.test(phone);
+    const isValidPhone = phoneNumberRegex(phone);
     return !isValidPhone;
-  }
+  };
 
   const hasErrorsEmail = () => {
     const email = client.email ? client.email.trim() : "";
-  
+
     if (email === "") {
       return false;
     }
-  
-    const isValidEmail = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(email);
+
+    const isValidEmail = emailRegex(email);
     return !isValidEmail;
   };
-  
 
+  const hasErrorsAddress = () => {
+    const address = client.address.trim();
+    if (address === "") {
+      return false;
+    }
+    const isValidAddress = addressRegex(address);
+    return !isValidAddress;
+  };
+
+  const hasErrorsPostalCode = () => {
+    const postalCode = client.postalCode.trim();
+    if (postalCode === "") {
+      return false;
+    }
+    const isValidPostalCode = postalCodeRegex(postalCode);
+    return !isValidPostalCode;
+  };
+
+  const hasErrorsCity = () => {
+    const city = client.city.trim();
+    if (city === "") {
+      return false;
+    }
+    const isValidCity = cityRegex(city);
+    return !isValidCity;
+  };
+
+  const hasErrorsNotes = () => {
+    const note = client.note.trim();
+    if (note === "") {
+      return false;
+    }
+    const isValidNote = notesRegex(note);
+    return !isValidNote;
+  };
+
+  const handleClose = () => {
+    setClient({
+      name: "",
+      email: "",
+      phone: "",
+      addressType: "Livraison",
+      address: "",
+      postalCode: "",
+      city: "",
+      note: "",
+    });
+    onDismiss();
+  }
 
   return (
     <>
@@ -150,7 +199,7 @@ const AddClientModal: React.FC<AddClientModalProps> = ({
             <View className="h-9.5/10 w-9.5/10 bg-white self-center rounded-lg items-center">
               <TouchableOpacity
                 className="absolute top-0 right-0 p-2 z-10"
-                onPress={onDismiss}
+                onPress={handleClose}
               >
                 <Icon name="close" size={25} color="#e11d48" />
               </TouchableOpacity>
@@ -174,26 +223,26 @@ const AddClientModal: React.FC<AddClientModalProps> = ({
                     />
                   </View>
                   <HelperText type="error" visible={hasErrorsName()}>
-                    Le nom du client ne peut pas contenir de chiffres
+                    Le nom du client est invalide
                   </HelperText>
                 </View>
                 {/*---------------------------------------- Tel du client -----------------------------*/}
                 <View className="w-full ">
-                <View className="flex-row h-10 w-full justify-evenly items-center">
-                  <Icon
-                    name="contact-phone"
-                    size={30}
-                    color={`${theme.accent}`}
-                    className="w-2/10"
-                  />
-                  <TextInput
-                    placeholder="Téléphone"
-                    className="justify-center w-8/10 rounded-xl  bg-white border border-gray-300 focus:border-blue-800 focus:ring-2 focus:ring-blue-800"
-                    value={client.phone}
-                    onChangeText={(text) =>
-                      setClient({ ...client, phone: text })
-                    }
-                  />
+                  <View className="flex-row h-10 w-full justify-evenly items-center">
+                    <Icon
+                      name="contact-phone"
+                      size={30}
+                      color={`${theme.accent}`}
+                      className="w-2/10"
+                    />
+                    <TextInput
+                      placeholder="Téléphone"
+                      className="justify-center w-8/10 rounded-xl  bg-white border border-gray-300 focus:border-blue-800 focus:ring-2 focus:ring-blue-800"
+                      value={client.phone}
+                      onChangeText={(text) =>
+                        setClient({ ...client, phone: text })
+                      }
+                    />
                   </View>
                   <HelperText type="error" visible={hasErrorsPhone()}>
                     Le numéro de téléphone doit comporter 10 chiffres
@@ -201,31 +250,30 @@ const AddClientModal: React.FC<AddClientModalProps> = ({
                 </View>
                 {/*---------------------------------------- Email du client -----------------------------*/}
                 <View className="w-full ">
-
-                <View className="flex-row h-10 w-full justify-evenly items-center">
-                  <Icon
-                    name="email"
-                    size={30}
-                    color={`${theme.accent}`}
-                    className="w-2/10"
-                  />
-                  <TextInput
-                    placeholder="Email"
-                    className="justify-center w-8/10 rounded-xl  bg-white border border-gray-300 focus:border-blue-800 focus:ring-2 focus:ring-blue-800"
-                    value={client.email}
-                    onChangeText={(text) =>
-                      setClient({ ...client, email: text })
-                    }
-                  />
-                </View>
-                < HelperText type="error" visible={hasErrorsEmail()}>
-                  L'email n'est pas valide
-                </HelperText>
+                  <View className="flex-row h-10 w-full justify-evenly items-center">
+                    <Icon
+                      name="email"
+                      size={30}
+                      color={`${theme.accent}`}
+                      className="w-2/10"
+                    />
+                    <TextInput
+                      placeholder="Email"
+                      className="justify-center w-8/10 rounded-xl  bg-white border border-gray-300 focus:border-blue-800 focus:ring-2 focus:ring-blue-800"
+                      value={client.email}
+                      onChangeText={(text) =>
+                        setClient({ ...client, email: text })
+                      }
+                    />
+                  </View>
+                  <HelperText type="error" visible={hasErrorsEmail()}>
+                    L'email n'est pas valide
+                  </HelperText>
                 </View>
                 {/*---------------------------------------- Selection type adresse -----------------------------*/}
-                <View className="flex-row w-10/10 gap-1 mb-6 justify-center">
+                <View className="flex-row w-10/10 gap-1 mb-5 justify-center">
                   <TouchableOpacity
-                    className={`w-4.5/10 items-center h-20 justify-center rounded-xl ${
+                    className={`w-4.5/10 items-center h-14 justify-center rounded-xl ${
                       client.addressType === "Livraison"
                         ? "border-2 border-blue-800 bg-gray-100"
                         : "bg-white"
@@ -234,7 +282,7 @@ const AddClientModal: React.FC<AddClientModalProps> = ({
                   >
                     <Icon_2
                       name="truck"
-                      size={30}
+                      size={20}
                       color={`${
                         client.addressType === "Livraison"
                           ? "#1e3a8a"
@@ -252,7 +300,7 @@ const AddClientModal: React.FC<AddClientModalProps> = ({
                     </Text>
                   </TouchableOpacity>
                   <TouchableOpacity
-                    className={`w-4.5/10 items-center h-20 justify-center rounded-xl ${
+                    className={`w-4.5/10 items-center h-14 justify-center rounded-xl ${
                       client.addressType === "Facturation"
                         ? "border-2 border-blue-800 bg-gray-100"
                         : "bg-white"
@@ -261,7 +309,7 @@ const AddClientModal: React.FC<AddClientModalProps> = ({
                   >
                     <Icon_2
                       name="file-invoice-dollar"
-                      size={30}
+                      size={20}
                       color={`${
                         client.addressType === "Facturation"
                           ? "#1e3a8a"
@@ -280,9 +328,10 @@ const AddClientModal: React.FC<AddClientModalProps> = ({
                   </TouchableOpacity>
                 </View>
                 {/*---------------------------------------- adresse -----------------------------*/}
-                <View className="w-full justify-center gap-1 ">
+                <View className="w-full ">
                   {/*---------------------------------------- Selection type adresse -----------------------------*/}
-                  <View className="flex-row h-10 w-full justify-evenly items-center mb-6">
+                  <View className="w-full ">
+                  <View className="flex-row h-10 w-full justify-evenly items-center">
                     <Icon
                       name="home"
                       size={30}
@@ -298,27 +347,42 @@ const AddClientModal: React.FC<AddClientModalProps> = ({
                       }
                     />
                   </View>
+                  <HelperText type="error" visible={hasErrorsAddress()}>
+                    L'adresse est invalide
+                  </HelperText>
+                  </View>
                   {/*---------------------------------------- CP + ville -----------------------------*/}
-                  <View className="flex-row h-10 w-full justify-evenly items-center mb-6">
+                  <View className="flex-row h-10 w-full justify-evenly  mb-10">
+                    <View className="w-3/10">
                     <TextInput
                       placeholder="Code postal"
-                      className="justify-center w-3/10 rounded-xl  bg-white border border-gray-300 focus:border-blue-800 focus:ring-2 focus:ring-blue-800"
+                      className="justify-center w-full rounded-xl  bg-white border border-gray-300 focus:border-blue-800 focus:ring-2 focus:ring-blue-800"
                       value={client.postalCode}
                       onChangeText={(text) =>
                         setClient({ ...client, postalCode: text })
                       }
                     />
+                    <HelperText type="error" visible={hasErrorsPostalCode()}>
+                      CP invalide
+                    </HelperText>
+                    </View>
+                    <View className="w-6/10">
                     <TextInput
                       placeholder="Ville"
-                      className="justify-center w-6/10 rounded-xl  bg-white border border-gray-300 focus:border-blue-800 focus:ring-2 focus:ring-blue-800"
+                      className="justify-center w-full rounded-xl  bg-white border border-gray-300 focus:border-blue-800 focus:ring-2 focus:ring-blue-800"
                       value={client.city}
                       onChangeText={(text) =>
                         setClient({ ...client, city: text })
                       }
                     />
+                    <HelperText type="error" visible={hasErrorsCity()}>
+                      La ville est invalide
+                    </HelperText>
+                    </View>
                   </View>
-                </View>
+                                 </View>
                 {/*---------------------------------------- Note -----------------------------*/}
+                <View className="w-full ">
                 <View className="flex-row w-full h-24 justify-evenly items-center">
                   <Icon
                     name="note"
@@ -336,6 +400,10 @@ const AddClientModal: React.FC<AddClientModalProps> = ({
                       setClient({ ...client, note: text })
                     }
                   />
+                </View>
+                < HelperText type="error" visible={hasErrorsNotes()}>
+                  La note est invalide
+                </HelperText>
                 </View>
               </SafeAreaView>
               {/*---------------------------------------- Bouton ajouter -----------------------------*/}

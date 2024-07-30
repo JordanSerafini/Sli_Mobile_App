@@ -43,9 +43,10 @@ export function postalCodeRegex(postalCode: number | string) {
 }
 
 export function cityRegex(city: string) {
-    const regex = /^[A-Za-z'-]+$/;
+    const regex = /^[A-Za-zÀ-ÿ\s'-]+$/;
     return regex.test(city);
 }
+
 
 export function countryRegex(country: string) {
     const regex = /^[A-Za-z'-]+$/;
