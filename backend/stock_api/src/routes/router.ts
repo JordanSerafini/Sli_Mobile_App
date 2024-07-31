@@ -8,5 +8,7 @@ router.get('/stockdocFull' , stock_controller.getStockDocDetails);
 router.get('/stockdocline', stock_controller.getStockDocLine);
 router.get('/storehouse' , stock_controller.getStorehouse);
 
+router.get('/stockdocdetails/:DocumentId', stock_controller.getStockWithDetailsByDocumentId);
+
 
 export default router;

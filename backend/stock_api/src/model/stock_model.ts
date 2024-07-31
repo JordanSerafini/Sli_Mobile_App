@@ -155,7 +155,7 @@ const stock_model = {
   },
 
   async getStockWithDetailsByDocumentId(req: Request, res: Response) {
-    const { documentId } = req.params; 
+    const { DocumentId } = req.params; 
   
     try {
       const query = `
@@ -173,7 +173,7 @@ const stock_model = {
           sd."Id" = $1
       `;
   
-      const result = await pgClient.query(query, [documentId]);
+      const result = await pgClient.query(query, [DocumentId]);
   
       // Transformer les données pour les structurer comme vous le souhaitez
       const stockDocuments = result.rows.reduce((acc: any, row: any) => {
@@ -187,10 +187,10 @@ const stock_model = {
             StockDocumentLines: [],
             Storehouse: {
               Id: row.StorehouseId,
-              Name: row.StorehouseCaption,
-              Address: row.StorehouseAddress_Address1,
-              city: row.StorehouseAddress_City,
-              zipCode: row.StorehouseAddress_ZipCode,
+              Name: row.Caption,
+              Address: row.Address_Address1,
+              city: row.Address_City,
+              zipCode: row.Address_ZipCode,
             }
           };
           acc.push(stockDocument);
@@ -201,7 +201,7 @@ const stock_model = {
           stockDocument.StockDocumentLines.push({
             Id: row.StockMovementId,
             ItemId: row.ItemId,
-            Description: row.ItemDescriptionClear,
+            Description: row.DescriptionClear,
           });
         }
   
