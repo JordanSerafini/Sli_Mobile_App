@@ -15,17 +15,19 @@
         "foregroundImage": "./app/assets/sli.jpg",
         "backgroundColor": "#ffffff"
       },
-      "permissions": [
-        "READ_CALENDAR",
-        "WRITE_CALENDAR"
-      ]
+      "permissions": ["READ_CALENDAR", "WRITE_CALENDAR"]
     },
     "web": {
       "favicon": "./app/assets/sli.jpg",
       "bundler": "metro"
     },
     "plugins": [
-      "expo-router",
+      [
+        "expo-font",
+        {
+          "fonts": ["./app/assets/fonts/Poppins-Black.ttf", "./app/assets/fonts/NotoSerifKhitanSmallScript-Regular.ttf"]
+        }
+      ],
       [
         "expo-calendar",
         {

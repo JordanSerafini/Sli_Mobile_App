@@ -1,4 +1,5 @@
 services:
+
   api_gateway:
     container_name: api_gateway
     build: ./api_gateway
@@ -164,7 +165,5 @@ networks:
     driver: bridge
 
 volumes:
-  pgdata:
-    driver: local
   client_redis_data:
     driver: local

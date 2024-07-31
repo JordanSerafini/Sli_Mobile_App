@@ -5,7 +5,7 @@ const router = express.Router();
 
 router.get('/paginated' , stock_controller.getStockPaginated);
 router.get('/stockdoc' , stock_controller.getStockDocDetails);
-
+router.get('/stockdocline', stock_controller.getStockDocLine);
 router.get('/storehouse' , stock_controller.getStorehouse);
 
 

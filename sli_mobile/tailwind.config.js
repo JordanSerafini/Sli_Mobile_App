@@ -221,6 +221,7 @@ module.exports = {
       fontFamily: {
         'merriweather': ['Merriweather', 'serif'],
         'Poppins': ['Poppins', 'sans-serif'],
+        'Noto': ['Noto', 'serif'],
       },
       fontWeight: {
         'light': '300',

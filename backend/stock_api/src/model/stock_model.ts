@@ -110,7 +110,7 @@ const stock_model = {
         FROM 
           "StockDocument" sd
         LEFT JOIN 
-          "StockDocumentLine" sdl ON sd."Id"::text = sdl."StockMovementId"::text
+          "StockDocumentLine" sdl ON sd."DocumentId" = sdl."Id"
         LEFT JOIN 
           "Storehouse" sh ON sd."StorehouseId" = sh."Id"
       `;
