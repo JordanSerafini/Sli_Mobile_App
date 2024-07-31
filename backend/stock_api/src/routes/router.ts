@@ -4,7 +4,7 @@ import stock_controller from "../controller/stock_controller";
 const router = express.Router();
 
 router.get('/paginated' , stock_controller.getStockPaginated);
-router.get('/stockdoc' , stock_controller.getStockDocDetails);
+router.get('/stockdocFull' , stock_controller.getStockDocDetails);
 router.get('/stockdocline', stock_controller.getStockDocLine);
 router.get('/storehouse' , stock_controller.getStorehouse);
 

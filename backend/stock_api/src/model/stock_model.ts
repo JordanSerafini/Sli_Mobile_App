@@ -110,12 +110,11 @@ const stock_model = {
         FROM 
           "StockDocument" sd
         LEFT JOIN 
-          "StockDocumentLine" sdl ON sd."DocumentId" = sdl."Id"
+          "StockDocumentLine" sdl ON sd."Id" = sdl."DocumentId"
         LEFT JOIN 
           "Storehouse" sh ON sd."StorehouseId" = sh."Id"
       `;
       const result = await pgClient.query(query);
-      console.log(result.rows);
 
       // Transformer les données pour les structurer comme vous le souhaitez
       const stockDocuments = result.rows.reduce((acc: any, row: any) => {
@@ -153,7 +152,70 @@ const stock_model = {
         res.status(500).json({ message: "Internal server error" });
       }
     }
-  }
+  },
+
+  async getStockWithDetailsByDocumentId(req: Request, res: Response) {
+    const { documentId } = req.params; 
+  
+    try {
+      const query = `
+        SELECT 
+          sd.*,
+          sdl.*,
+          sh.*
+        FROM 
+          "StockDocument" sd
+        LEFT JOIN 
+          "StockDocumentLine" sdl ON sd."Id" = sdl."DocumentId"
+        LEFT JOIN 
+          "Storehouse" sh ON sd."StorehouseId" = sh."Id"
+        WHERE 
+          sd."Id" = $1
+      `;
+  
+      const result = await pgClient.query(query, [documentId]);
+  
+      // Transformer les données pour les structurer comme vous le souhaitez
+      const stockDocuments = result.rows.reduce((acc: any, row: any) => {
+        // Chercher l'objet StockDocument dans le tableau d'accumulation
+        let stockDocument = acc.find((doc: any) => doc.Id === row.Id);
+        
+        // Si le document n'existe pas encore dans l'accumulation, on le crée
+        if (!stockDocument) {
+          stockDocument = {
+            ...row,
+            StockDocumentLines: [],
+            Storehouse: {
+              Id: row.StorehouseId,
+              Name: row.StorehouseCaption,
+              Address: row.StorehouseAddress_Address1,
+              city: row.StorehouseAddress_City,
+              zipCode: row.StorehouseAddress_ZipCode,
+            }
+          };
+          acc.push(stockDocument);
+        }
+  
+        // Ajouter la ligne de document de stock à l'objet stockDocument
+        if (row.StockMovementId) {
+          stockDocument.StockDocumentLines.push({
+            Id: row.StockMovementId,
+            ItemId: row.ItemId,
+            Description: row.ItemDescriptionClear,
+          });
+        }
+  
+        return acc;
+      }, []);
+  
+      res.json(stockDocuments);
+    } catch (err) {
+      console.error("Erreur lors de la récupération des données :", err);
+      if (!res.headersSent) {
+        res.status(500).json({ message: "Internal server error" });
+      }
+    }
+  },
 
 };
 
