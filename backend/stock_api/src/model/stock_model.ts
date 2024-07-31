@@ -1,15 +1,14 @@
-import { Request, Response } from 'express';
-import { pgClient } from '../client/client';
-import * as fs from 'fs';
+import { Request, Response } from "express";
+import { pgClient } from "../client/client";
+import * as fs from "fs";
 import path from "path";
-import { fileURLToPath } from 'url';
+import { fileURLToPath } from "url";
 
 // Get the directory name
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 const stock_model = {
-
   async getStockPaginated(req: Request, res: Response) {
     try {
       const limit = parseInt(req.query.limit as string, 10) || 25;
@@ -33,7 +32,9 @@ const stock_model = {
       queryParams.push(limit);
       queryParams.push(offset);
 
-      query += ` ORDER BY "DocumentDate" ASC LIMIT $${queryParams.length - 1} OFFSET $${queryParams.length}`;
+      query += ` ORDER BY "DocumentDate" ASC LIMIT $${
+        queryParams.length - 1
+      } OFFSET $${queryParams.length}`;
       countQuery += `;`;
 
       // Exécution des requêtes en parallèle pour plus d'efficacité
@@ -120,7 +121,7 @@ const stock_model = {
       const stockDocuments = result.rows.reduce((acc: any, row: any) => {
         // Chercher l'objet StockDocument dans le tableau d'accumulation
         let stockDocument = acc.find((doc: any) => doc.Id === row.Id);
-        
+
         // Si le document n'existe pas encore dans l'accumulation, on le crée
         if (!stockDocument) {
           stockDocument = {
@@ -129,7 +130,7 @@ const stock_model = {
             Storehouse: {
               Id: row.StorehouseId,
               Name: row.StorehouseName,
-            }
+            },
           };
           acc.push(stockDocument);
         }
@@ -155,31 +156,44 @@ const stock_model = {
   },
 
   async getStockWithDetailsByDocumentId(req: Request, res: Response) {
-    const { DocumentId } = req.params; 
-  
+    const { DocumentId } = req.params;
+
     try {
       const query = `
         SELECT 
           sd.*,
           sdl.*,
-          sh.*
+          sh."Id" as "StorehouseId",
+          sh."Caption" as "StorehouseCaption",
+          sh."Address_Address1" as "StorehouseAddress",
+          sh."Address_City" as "StorehouseCity",
+          sh."Address_ZipCode" as "StorehouseZipCode",
+          i."Id" as "ItemId",
+          i."Caption" as "ItemCaption",
+          i."SalePriceVatExcluded" as "ItemSalePriceVatExcluded",
+          i."SalePriceVatIncluded" as "ItemSalePriceVatIncluded",
+          i."PurchasePrice" as "ItemPurchasePrice",
+          i."SupplierID" as "ItemSupplierID"
         FROM 
           "StockDocument" sd
         LEFT JOIN 
           "StockDocumentLine" sdl ON sd."Id" = sdl."DocumentId"
         LEFT JOIN 
           "Storehouse" sh ON sd."StorehouseId" = sh."Id"
+        LEFT JOIN 
+          "Item" i ON sdl."ItemId" = i."Id"
         WHERE 
           sd."Id" = $1
+
       `;
-  
+
       const result = await pgClient.query(query, [DocumentId]);
-  
+
       // Transformer les données pour les structurer comme vous le souhaitez
       const stockDocuments = result.rows.reduce((acc: any, row: any) => {
         // Chercher l'objet StockDocument dans le tableau d'accumulation
         let stockDocument = acc.find((doc: any) => doc.Id === row.Id);
-        
+
         // Si le document n'existe pas encore dans l'accumulation, on le crée
         if (!stockDocument) {
           stockDocument = {
@@ -191,23 +205,31 @@ const stock_model = {
               Address: row.Address_Address1,
               city: row.Address_City,
               zipCode: row.Address_ZipCode,
-            }
+            },
           };
           acc.push(stockDocument);
         }
-  
+
         // Ajouter la ligne de document de stock à l'objet stockDocument
         if (row.StockMovementId) {
           stockDocument.StockDocumentLines.push({
             Id: row.StockMovementId,
             ItemId: row.ItemId,
             Description: row.DescriptionClear,
+            Item: {
+              Id: row.ItemId,
+              Name: row.Caption,
+              Prix_HT: row.SalePriceVatExcluded,
+              Prix_TTC: row.SalePriceVatIncluded,
+              prix_achat: row.PurchasePrice,
+              supplier: row.SupplierID,
+            },
           });
         }
-  
+
         return acc;
       }, []);
-  
+
       res.json(stockDocuments);
     } catch (err) {
       console.error("Erreur lors de la récupération des données :", err);
@@ -216,7 +238,6 @@ const stock_model = {
       }
     }
   },
-
 };
 
 // Fonction pour écrire les données de l'item dans un fichier CSV
@@ -225,20 +246,22 @@ function writeItemToCSV(filePath: string, item: any): void {
   const columns = Object.keys(item).join(";");
 
   // Préparer les valeurs pour le CSV, en utilisant ';' comme délimiteur
-  const values = Object.values(item).map((value) => {
-    let outputValue = "";
+  const values = Object.values(item)
+    .map((value) => {
+      let outputValue = "";
 
-    // Gérer correctement les chaînes, les valeurs nulles ou undefined et les objets
-    if (typeof value === 'string') {
-      outputValue = value.replace(/"/g, '""'); // Escaper les guillemets doubles pour le format CSV
-    } else if (value === null || value === undefined) {
-      outputValue = "";
-    } else {
-      outputValue = JSON.stringify(value).replace(/"/g, '""');
-    }
+      // Gérer correctement les chaînes, les valeurs nulles ou undefined et les objets
+      if (typeof value === "string") {
+        outputValue = value.replace(/"/g, '""'); // Escaper les guillemets doubles pour le format CSV
+      } else if (value === null || value === undefined) {
+        outputValue = "";
+      } else {
+        outputValue = JSON.stringify(value).replace(/"/g, '""');
+      }
 
-    return `"${outputValue}"`; // Encapsuler chaque valeur entre guillemets doubles
-  }).join(";");
+      return `"${outputValue}"`; // Encapsuler chaque valeur entre guillemets doubles
+    })
+    .join(";");
 
   // Construire une ligne de données complète pour le CSV
   const dataLine = `${values}\n`;
@@ -246,9 +269,9 @@ function writeItemToCSV(filePath: string, item: any): void {
   // Vérifier l'existence du fichier et ajouter les données
   if (!fs.existsSync(filePath)) {
     const header = `${columns}\n`; // Ajouter l'en-tête si le fichier est nouveau
-    fs.writeFileSync(filePath, header + dataLine, 'utf8');
+    fs.writeFileSync(filePath, header + dataLine, "utf8");
   } else {
-    fs.appendFileSync(filePath, dataLine, 'utf8');
+    fs.appendFileSync(filePath, dataLine, "utf8");
   }
 }
 
