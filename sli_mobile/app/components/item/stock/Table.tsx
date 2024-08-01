@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import { View, Text, TouchableOpacity, Alert, FlatList } from 'react-native';
 import Icon from "react-native-vector-icons/AntDesign";
 import { StockDocument } from '../../../@types/item.type';
@@ -18,7 +18,6 @@ function Table({ tableHead, Data, colWidth, columnTitle, onEndReached }: TablePr
 
     const [columnWidths, setColumnWidths] = useState(defaultColumnWidths);
     const [columnTitles, setColumnTitles] = useState(defaultColumnTitle);
-    // const [storehouseNames, setStorehouseNames] = useState<{ [key: string]: string }>({});
 
     useEffect(() => {
         if (colWidth) {
@@ -28,21 +27,6 @@ function Table({ tableHead, Data, colWidth, columnTitle, onEndReached }: TablePr
             setColumnTitles(columnTitle);
         }
     }, [colWidth, columnTitle]);
-
-    // En attente utilisation, pour performance
-    // useEffect(() => {
-    //     const fetchStorehouseNames = async () => {
-    //         const names: { [key: string]: string } = {};
-    //         for (const doc of Data || []) {
-    //             if (!names[doc.StorehouseId]) {
-    //                 names[doc.StorehouseId] = await getStorehouseNameById(doc.StorehouseId);
-    //             }
-    //         }
-    //         setStorehouseNames(names);
-    //     };
-
-    //     fetchStorehouseNames();
-    // }, [Data]);
 
     const getStorehouseName = (id: string) => {
         switch (id) {
@@ -59,7 +43,7 @@ function Table({ tableHead, Data, colWidth, columnTitle, onEndReached }: TablePr
         Alert.alert(`Info clicked for document number ${documentNumber}`);
     };
 
-    const renderItem = ({ item }: { item: StockDocument }) => (
+    const renderItem = useCallback(({ item }: { item: StockDocument }) => (
         <View className='flex-row bg-white py-4 border-b border-gray-500'>
             <View className={`${columnWidths[0]} max-h-14`}>
                 <Text className='text-center'>{item.NumberSuffix}</Text>
@@ -76,7 +60,9 @@ function Table({ tableHead, Data, colWidth, columnTitle, onEndReached }: TablePr
                 </TouchableOpacity>
             </View>
         </View>
-    );
+    ), [columnWidths]);
+
+    const keyExtractor = useCallback((item: StockDocument, index: number) => `${item.Id}_${index}`, []);
 
     return (
         <View className='w-full'>
@@ -93,13 +79,18 @@ function Table({ tableHead, Data, colWidth, columnTitle, onEndReached }: TablePr
                 className='max-h-8.5/10'
                 data={Data}
                 renderItem={renderItem}
-                keyExtractor={(item, index) => item.Id.toString() + index}
+                keyExtractor={keyExtractor}
                 ListEmptyComponent={<Text className='text-center'>No data available</Text>}
                 onEndReached={onEndReached}
                 onEndReachedThreshold={0.5} 
+                initialNumToRender={10}
+                maxToRenderPerBatch={10}
+                getItemLayout={(data, index) => (
+                    { length: 50, offset: 50 * index, index }
+                )}
             />
         </View>
     )
 }
 
-export default Table;
+export default React.memo(Table);
