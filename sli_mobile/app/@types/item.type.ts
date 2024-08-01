@@ -264,10 +264,11 @@ export interface Item {
   StorehouseId: string;
   TotalWeight?: number | string;
   TotalVolume?: number | string;
-  DocumentLines: Lines[];
+  StockDocumentLines: StockDocumentLine[];
  }
 
- export interface Lines {
+ export interface StockDocumentLine {
+  [x: string]: any;
   id: number;
   ItemId: string;
   DocumentId: string;

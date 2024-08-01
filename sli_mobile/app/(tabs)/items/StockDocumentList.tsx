@@ -20,7 +20,9 @@ function StockDocumentList() {
   const [BlDocument, setBlDocument] = useState<StockDocument[]>([]);
   const [showBl, setShowBl] = useState(false);
 
-  const [InventoryDocument, setInventoryDocument] = useState<StockDocument[]>([]);
+  const [InventoryDocument, setInventoryDocument] = useState<StockDocument[]>(
+    []
+  );
   const [showInventory, setShowInventory] = useState(false);
 
   useEffect(() => {

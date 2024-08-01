@@ -53,6 +53,14 @@ const stock_controller = {
       res.status(500).json({ message: "Internal server error" });
     }
   },
+
+  getStockDocLineByDocumentId(req: Request, res: Response) {
+    try {
+      stock_model.getStockDocumentLineByDocId(req, res);
+    } catch (err) {
+      res.status(500).json({ message: "Internal server error" });
+    }
+  },
 };
 
 export default stock_controller;

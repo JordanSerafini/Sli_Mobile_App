@@ -20,3 +20,7 @@ export const getStorehouseNameById = async (id: string) => {
   const data = await response.json();
   return data.Caption; }
   
+export const getStockDocLine = async (DocumentId: string) => {
+  const response = await fetch(`${url.api_gateway}/stock/stockdocline/${DocumentId}`);
+  return response.json();
+}

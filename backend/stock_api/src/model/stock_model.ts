@@ -315,6 +315,27 @@ const stock_model = {
     }
   },
 
+  async getStockDocumentLineByDocId(req: Request, res: Response) {
+    const { DocumentId } = req.params;
+
+    try {
+        const query = `
+            SELECT sdl.*, i.*
+            FROM "StockDocumentLine" sdl
+            LEFT JOIN "Item" i ON sdl."ItemId" = i."Id"
+            WHERE sdl."DocumentId" = $1;
+        `;
+        const result = await pgClient.query(query, [DocumentId]);
+
+        res.json(result.rows);
+    } catch (err) {
+        console.error("Erreur lors de la récupération des données :", err);
+        if (!res.headersSent) {
+            res.status(500).json({ message: "Internal server error" });
+        }
+    }
+}
+
 };
 
 // Fonction pour écrire les données de l'item dans un fichier CSV
