@@ -70,7 +70,7 @@ function Table({ tableHead, Data, colWidth, columnTitle, onEndReached }: TablePr
     return (
         <View className='w-full'>
             {/* ----------------------------------------------------------------------------------------- Table Header ----------------------------------------------------------------------------- */}
-            <View className='flex-row bg-white-perso'>
+            <View className='flex-row bg-white-perso rounded-t-xl py-2'>
                 {columnTitles.map((item, index) => (
                     <View key={index} className={columnWidths[index]}>
                         <Text className='font-bold text-center'>{item}</Text>
@@ -79,12 +79,13 @@ function Table({ tableHead, Data, colWidth, columnTitle, onEndReached }: TablePr
             </View>
             {/* ----------------------------------------------------------------------------------------- Table Data ----------------------------------------------------------------------------- */}
             <FlatList
+                className='max-h-8.5/10'
                 data={Data}
                 renderItem={renderItem}
-                keyExtractor={(item) => item.id.toString()}
+                keyExtractor={(item, index) => item.Id.toString() + index}
                 ListEmptyComponent={<Text className='text-center'>No data available</Text>}
                 onEndReached={onEndReached}
-                onEndReachedThreshold={0.5} // Trigger the event when scrolled 50% from the bottom
+                onEndReachedThreshold={0.5} 
             />
         </View>
     )
