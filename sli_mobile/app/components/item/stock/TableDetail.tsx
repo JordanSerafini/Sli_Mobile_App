@@ -12,13 +12,16 @@ const TableDetail: React.FC<TableProps> = ({ tableHead, DataLine }) => {
         return <Text>Loading...</Text>;
     }
 
+    const colWidht = ['w-6/10', 'w-2/10', 'w-2/10'];
 
     return (
-        <View className='w-full p-4'>
+        <View className='w-full'>
             {/* Table Header */}
-            <View className='flex-row justify-between border-b-2 border-gray-500 py-2'>
+            <View className='flex-row bg-white-perso rounded-t-xl py-2'>
                 {tableHead.map((head, index) => (
-                    <Text key={index} className='w-1/3 text-center font-bold'>{head}</Text>
+                    <View key={index} className={`${colWidht[index]}`}>
+                        <Text className='font-bold text-center'>{head}</Text>
+                    </View>
                 ))}
             </View>
             {/* Table Rows */}
@@ -26,10 +29,16 @@ const TableDetail: React.FC<TableProps> = ({ tableHead, DataLine }) => {
                 data={DataLine}
                 keyExtractor={(item) => item.id.toString()}
                 renderItem={({ item }) => (
-                    <View className='flex flex-row justify-between border-b-2 border-gray-200 py-2'>
-                        <Text className='w-1/3 text-center'>{item.Caption}</Text>
-                        <Text className='w-1/3 text-center'>{item.Quantity}</Text>
-                        <Text className='w-1/3 text-center'>{item.SalePriceVatExcluded}</Text>
+                    <View className='flex-row bg-white py-4 border-b border-gray-500'>
+                        <View className='w-6/10 max-h-14'>
+                            <Text className='text-center text-xs'>{item.Caption}</Text>
+                        </View>
+                        <View className='w-2/10 max-h-14'>
+                            <Text className='text-center text-xs'>{item.Quantity}</Text>
+                        </View>
+                        <View className='w-2/10 max-h-14'>
+                            <Text className='text-center text-xs'>{item.SalePriceVatExcluded}</Text>
+                        </View>
                     </View>
                 )}
             />
