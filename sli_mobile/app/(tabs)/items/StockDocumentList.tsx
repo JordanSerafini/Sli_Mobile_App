@@ -37,6 +37,8 @@ function StockDocumentList() {
   const [BlDocument, setBlDocument] = useState<StockDocument[]>([]);
   const [showBl, setShowBl] = useState(false);
 
+  const [searchQuery, setSearchQuery] = useState("");
+
   const [InventoryDocument, setInventoryDocument] = useState<StockDocument[]>(
     []
   );
@@ -46,14 +48,27 @@ function StockDocumentList() {
   const [showDatePicker, setShowDatePicker] = useState(false);
 
   useEffect(() => {
-    fetchStockDoc(0); // Initial load
+    setPage(0);
+    setBeDocument([]);
+    setBsDocument([]);
+    setBlDocument([]);
+    setInventoryDocument([]);
+    fetchStockDoc(50, 0, searchQuery);
+  }, [searchQuery]);
+  
+  useEffect(() => {
+    fetchStockDoc(50, 0, searchQuery);
   }, []);
-
-  const fetchStockDoc = async (page: number) => {
+  
+  const fetchStockDoc = async (
+    limit: number,
+    page: number,
+    searchQuery: string
+  ) => {
     if (loading) return;
     setLoading(true);
 
-    const data = await getStockDocPaginated(50, page, "");
+    const data = await getStockDocPaginated(limit, page, searchQuery);
     const BeDoc = data.StockDoc.filter(
       (line: { NumberPrefix: string }) => line.NumberPrefix == "BE"
     );
@@ -113,7 +128,7 @@ function StockDocumentList() {
     if (!loading) {
       const nextPage = page + 1;
       setPage(nextPage);
-      fetchStockDoc(nextPage);
+      fetchStockDoc(50, nextPage, searchQuery);
     }
   };
 
@@ -136,7 +151,7 @@ function StockDocumentList() {
             onPress={() => handleShow("BE")}
           >
             <Text className="text-blue-800 font-bold">Bons entrées :</Text>
-            <Icon name="caretdown" size={20} color="#1e40af" />
+            <Icon name={`${showBe ? "caretup" : "caretdown"}`} size={20} color="#1e40af" />
           </TouchableOpacity>
           {showBe && (
             <View>
@@ -146,9 +161,9 @@ function StockDocumentList() {
                   label="recherche..."
                   mode="outlined"
                   placeholder="Search"
+                  value={searchQuery}
                   onChangeText={(text) => {
-                    setBeDocument([]);
-                    fetchStockDoc(0);
+                    setSearchQuery(text);
                   }}
                 />
                 <TextInput
@@ -157,10 +172,10 @@ function StockDocumentList() {
                   mode="outlined"
                   placeholder="Search"
                   onChangeText={(text) => {
-                    setBeDocument([]);
-                    fetchStockDoc(0);
+                    setSearchQuery(text);
                   }}
                 />
+
                 <TouchableOpacity onPress={showDatepicker} className="w-1/10">
                   <Icon name="calendar" size={28} color="#1e40af" />
                 </TouchableOpacity>
@@ -186,7 +201,7 @@ function StockDocumentList() {
             onPress={() => handleShow("BS")}
           >
             <Text className="text-blue-800 font-bold">Bons Sorties :</Text>
-            <Icon name="caretdown" size={20} color="#1e40af" />
+             <Icon name={`${showBs ? "caretup" : "caretdown"}`} size={20} color="#1e40af" />
           </TouchableOpacity>
           {showBs && <Table Data={BsDocument} onEndReached={handleLoadMore} />}
         </View>
@@ -198,7 +213,7 @@ function StockDocumentList() {
             onPress={() => handleShow("BL")}
           >
             <Text className="text-blue-800 font-bold">Bons livraisons :</Text>
-            <Icon name="caretdown" size={20} color="#1e40af" />
+             <Icon name={`${showInventory ? "caretup" : "caretdown"}`} size={20} color="#1e40af" />
           </TouchableOpacity>
           {showBl && <Table Data={BlDocument} onEndReached={handleLoadMore} />}
         </View>
@@ -210,7 +225,7 @@ function StockDocumentList() {
             onPress={() => handleShow("INV")}
           >
             <Text className="text-blue-800 font-bold">Inventaire :</Text>
-            <Icon name="caretdown" size={20} color="#1e40af" />
+             <Icon name={`${showBe ? "caretup" : "caretdown"}`} size={20} color="#1e40af" />
           </TouchableOpacity>
           {showInventory && (
             <Table Data={InventoryDocument} onEndReached={handleLoadMore} />
