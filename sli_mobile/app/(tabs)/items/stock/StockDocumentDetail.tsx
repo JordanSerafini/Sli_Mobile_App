@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { View, StyleSheet, Text, ScrollView, TouchableOpacity } from 'react-native';
+import { View,  Text, ScrollView, TouchableOpacity } from 'react-native';
 import { getStockDocPaginated } from '../../../utils/functions/stock_function';
 import Icon from "react-native-vector-icons/AntDesign";
 
@@ -51,6 +51,7 @@ function StockDocumentDetail() {
     setShowBe(!showBe);
   }
 
+  console.log(BeDocument);
   
   return (
     <ScrollView className='h-screen w-screen '>
@@ -60,7 +61,7 @@ function StockDocumentDetail() {
         < Icon name="caretdown" size={20} color="black" />
         </TouchableOpacity>
         {showBe && (
-          < Table  />
+          < Table  Data={BeDocument} />
         )}  
         
       </View>
