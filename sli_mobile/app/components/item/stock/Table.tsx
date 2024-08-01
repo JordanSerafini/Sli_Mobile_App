@@ -61,8 +61,8 @@ function Table({ tableHead, Data, colWidth, columnTitle, onEndReached }: TablePr
                 <Text className='text-center text-xs'>{getStorehouseName(item.StorehouseId)}</Text>
             </View>
             <View className={`${columnWidths[3]} flex items-center justify-center`}>
-                <TouchableOpacity onPress={() => handleIconPress(item.Id)}>
-                    <Icon name="infocirlceo" size={15} color="blue" style={{ textAlign: 'center' }} />
+                <TouchableOpacity onPress={() => handleIconPress(item.Id)} className='bg-blue-800 rounded-full'>
+                    <Icon name="infocirlceo" size={18} color="white" style={{ textAlign: 'center' }} />
                 </TouchableOpacity>
             </View>
         </View>
@@ -74,7 +74,7 @@ function Table({ tableHead, Data, colWidth, columnTitle, onEndReached }: TablePr
             <View className='flex-row bg-white-perso rounded-t-xl py-2'>
                 {columnTitles.map((item, index) => (
                     <View key={index} className={columnWidths[index]}>
-                        <Text className='font-bold text-center'>{item}</Text>
+                        <Text className='font-bold text-center text-blue-800'>{item}</Text>
                     </View>
                 ))}
             </View>
