@@ -295,3 +295,48 @@
 
 --------------------------------------------------------------
 
+01-08-2024 12:08:32 [authentification_api] info: Login successful for email: jordan@solution-logique.fr
+{
+  "ip": "172.18.0.9",
+  "url": "/",
+  "method": "POST"
+}
+
+--------------------------------------------------------------
+
+01-08-2024 12:09:32 [authentification_api] info: Login successful for email: jordan@solution-logique.fr
+{
+  "ip": "172.18.0.9",
+  "url": "/",
+  "method": "POST"
+}
+
+--------------------------------------------------------------
+
+01-08-2024 12:10:03 [authentification_api] info: Login successful for email: jordan@solution-logique.fr
+{
+  "ip": "172.18.0.9",
+  "url": "/",
+  "method": "POST"
+}
+
+--------------------------------------------------------------
+
+01-08-2024 12:14:52 [authentification_api] info: Login successful for email: jordan@solution-logique.fr
+{
+  "ip": "172.18.0.9",
+  "url": "/",
+  "method": "POST"
+}
+
+--------------------------------------------------------------
+
+01-08-2024 12:17:00 [authentification_api] info: Login successful for email: jordan@solution-logique.fr
+{
+  "ip": "172.18.0.9",
+  "url": "/",
+  "method": "POST"
+}
+
+--------------------------------------------------------------
+

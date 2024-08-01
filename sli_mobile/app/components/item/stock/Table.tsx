@@ -81,7 +81,7 @@ function Table({ tableHead, Data, colWidth, columnTitle, onEndReached }: TablePr
             <FlatList
                 data={Data}
                 renderItem={renderItem}
-                keyExtractor={(item) => item.Id}
+                keyExtractor={(item) => item.id.toString()}
                 ListEmptyComponent={<Text className='text-center'>No data available</Text>}
                 onEndReached={onEndReached}
                 onEndReachedThreshold={0.5} // Trigger the event when scrolled 50% from the bottom

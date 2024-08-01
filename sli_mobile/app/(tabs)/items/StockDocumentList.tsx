@@ -9,6 +9,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 function StockDocumentDetail() {
   const [stockDoc, setStockDoc] = useState<StockDocument[]>([]);
   const [page, setPage] = useState(0);
+  const [loading, setLoading] = useState(false);
 
   const [BeDocument, setBeDocument] = useState<StockDocument[]>([]);
   const [showBe, setShowBe] = useState(false);
@@ -27,6 +28,9 @@ function StockDocumentDetail() {
   }, []);
 
   const fetchStockDoc = async (page: number) => {
+    if (loading) return;
+    setLoading(true);
+
     const data = await getStockDocPaginated(50, page, "");
     const BeDoc = data.StockDoc.filter(
       (line: { NumberPrefix: string }) => line.NumberPrefix == "BE"
@@ -47,6 +51,8 @@ function StockDocumentDetail() {
       (line: { NumberPrefix: string }) => line.NumberPrefix == "INV"
     );
     setInventoryDocument((prev) => [...prev, ...InventoryDoc]);
+
+    setLoading(false);
   };
 
   const handleShow = (documentType: string) => {
@@ -69,9 +75,11 @@ function StockDocumentDetail() {
   };
 
   const handleLoadMore = () => {
-    const nextPage = page + 1;
-    setPage(nextPage);
-    fetchStockDoc(nextPage);
+    if (!loading) {
+      const nextPage = page + 1;
+      setPage(nextPage);
+      fetchStockDoc(nextPage);
+    }
   };
 
   return (
