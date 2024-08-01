@@ -100,6 +100,22 @@ const stock_model = {
     }
   },
 
+  async getStorehouseNameById(req: Request, res: Response) {
+    const { id } = req.params;
+
+    try {
+      const query = `SELECT "Caption" FROM "Storehouse" WHERE "Id" = $1`;
+      const result = await pgClient.query(query, [id]);
+
+      res.json(result.rows[0]);
+    } catch (err) {
+      console.error("Erreur lors de la récupération des données :", err);
+      if (!res.headersSent) {
+        res.status(500).json({ message: "Internal server error" });
+      }
+    }
+  },
+
   async getAllStockWithDetails(req: Request, res: Response) {
     try {
       const query = `

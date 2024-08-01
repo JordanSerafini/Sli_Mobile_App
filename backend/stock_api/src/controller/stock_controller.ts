@@ -30,6 +30,14 @@ const stock_controller = {
     }
   },
 
+  getStorehouseNameById(req: Request, res: Response) {
+    try {
+      stock_model.getStorehouseNameById(req, res);
+    } catch (err) {
+      res.status(500).json({ message: "Internal server error" });
+    }
+  },
+
   getStockDocLine(req: Request, res: Response) {
     try {
       stock_model.getAllStockDocLines(req, res);
