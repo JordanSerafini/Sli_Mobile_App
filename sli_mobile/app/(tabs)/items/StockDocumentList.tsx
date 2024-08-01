@@ -1,13 +1,25 @@
 import React, { useEffect, useState } from "react";
-import { View, Text, TouchableOpacity, LayoutAnimation, UIManager, Platform } from "react-native";
+import {
+  View,
+  Text,
+  TouchableOpacity,
+  LayoutAnimation,
+  UIManager,
+  Platform,
+} from "react-native";
 import { getStockDocPaginated } from "../../utils/functions/stock_function";
 import Icon from "react-native-vector-icons/AntDesign";
 import { StockDocument } from "../../@types/item.type";
 import Table from "../../components/item/stock/Table";
 import { SafeAreaView } from "react-native-safe-area-context";
+import { TextInput } from "react-native-paper";
+import DateTimePicker from "@react-native-community/datetimepicker";
 
 // Enable LayoutAnimation for Android
-if (Platform.OS === 'android' && UIManager.setLayoutAnimationEnabledExperimental) {
+if (
+  Platform.OS === "android" &&
+  UIManager.setLayoutAnimationEnabledExperimental
+) {
   UIManager.setLayoutAnimationEnabledExperimental(true);
 }
 
@@ -29,6 +41,9 @@ function StockDocumentList() {
     []
   );
   const [showInventory, setShowInventory] = useState(false);
+
+  const [date, setDate] = useState(new Date());
+  const [showDatePicker, setShowDatePicker] = useState(false);
 
   useEffect(() => {
     fetchStockDoc(0); // Initial load
@@ -102,57 +117,105 @@ function StockDocumentList() {
     }
   };
 
+  const onChange = (event: any, selectedDate?: Date | undefined) => {
+    const currentDate = selectedDate || date;
+    setShowDatePicker(Platform.OS === "ios");
+    setDate(currentDate);
+  };
+
+  const showDatepicker = () => {
+    setShowDatePicker(true);
+  };
+
   return (
-    <SafeAreaView className="w-screen">
+    <SafeAreaView className="w-screen h-10/10">
       {!showBs && !showBl && !showInventory && (
-      <View className="w-9.5/10 self-center pb-2 mb-5 border-b border-blue-800">
-        <TouchableOpacity
-          className="flex-row w-full justify-between pb-4"
-          onPress={() => handleShow("BE")}
-        >
-          <Text className="text-blue-800 font-bold">Bons entrées :</Text>
-          <Icon name="caretdown" size={20} color="#1e40af" />
-        </TouchableOpacity>
-        {showBe && <Table Data={BeDocument} onEndReached={handleLoadMore} />}
-      </View>
+        <View className="w-9.5/10 self-center pb-2 mb-5 border-b border-blue-800">
+          <TouchableOpacity
+            className="flex-row w-full justify-between pb-4"
+            onPress={() => handleShow("BE")}
+          >
+            <Text className="text-blue-800 font-bold">Bons entrées :</Text>
+            <Icon name="caretdown" size={20} color="#1e40af" />
+          </TouchableOpacity>
+          {showBe && (
+            <View>
+              <View className="pb-4 w-full flex-row justify-between items-center">
+                <TextInput
+                  className="w-4/10 h-8 bg-white"
+                  label="recherche..."
+                  mode="outlined"
+                  placeholder="Search"
+                  onChangeText={(text) => {
+                    setBeDocument([]);
+                    fetchStockDoc(0);
+                  }}
+                />
+                <TextInput
+                  className="w-4/10 h-8 bg-white"
+                  label="catégories"
+                  mode="outlined"
+                  placeholder="Search"
+                  onChangeText={(text) => {
+                    setBeDocument([]);
+                    fetchStockDoc(0);
+                  }}
+                />
+                <TouchableOpacity onPress={showDatepicker} className="w-1/10">
+                  <Icon name="calendar" size={28} color="#1e40af" />
+                </TouchableOpacity>
+              </View>
+              {showDatePicker && (
+                <DateTimePicker
+                  testID="dateTimePicker"
+                  value={date}
+                  mode="date"
+                  display="default"
+                  onChange={onChange}
+                />
+              )}
+              <Table Data={BeDocument} onEndReached={handleLoadMore} />
+            </View>
+          )}
+        </View>
       )}
-       {!showBe && !showBl && !showInventory && (
-      <View className="w-9.5/10 self-center pb-2 mb-5 border-b border-blue-800">
-        <TouchableOpacity
-          className="flex-row w-full justify-between pb-4"
-          onPress={() => handleShow("BS")}
-        >
-          <Text className="text-blue-800 font-bold">Bons Sorties :</Text>
-          <Icon name="caretdown" size={20} color="#1e40af" />
-        </TouchableOpacity>
-        {showBs && <Table Data={BsDocument} onEndReached={handleLoadMore} />}
-      </View>
+      {!showBe && !showBl && !showInventory && (
+        <View className="w-9.5/10 self-center pb-2 mb-5 border-b border-blue-800">
+          <TouchableOpacity
+            className="flex-row w-full justify-between pb-4"
+            onPress={() => handleShow("BS")}
+          >
+            <Text className="text-blue-800 font-bold">Bons Sorties :</Text>
+            <Icon name="caretdown" size={20} color="#1e40af" />
+          </TouchableOpacity>
+          {showBs && <Table Data={BsDocument} onEndReached={handleLoadMore} />}
+        </View>
       )}
-       {!showBe && !showBs && !showInventory && (
-      <View className="w-9.5/10 self-center pb-2 mb-5 border-b border-blue-800">
-        <TouchableOpacity
-          className="flex-row w-full justify-between pb-4"
-          onPress={() => handleShow("BL")}
-        >
-          <Text className="text-blue-800 font-bold">Bons livraisons :</Text>
-          <Icon name="caretdown" size={20} color="#1e40af" />
-        </TouchableOpacity>
-        {showBl && <Table Data={BlDocument} onEndReached={handleLoadMore} />}
-      </View>
+      {!showBe && !showBs && !showInventory && (
+        <View className="w-9.5/10 self-center pb-2 mb-5 border-b border-blue-800">
+          <TouchableOpacity
+            className="flex-row w-full justify-between pb-4"
+            onPress={() => handleShow("BL")}
+          >
+            <Text className="text-blue-800 font-bold">Bons livraisons :</Text>
+            <Icon name="caretdown" size={20} color="#1e40af" />
+          </TouchableOpacity>
+          {showBl && <Table Data={BlDocument} onEndReached={handleLoadMore} />}
+        </View>
       )}
-       {!showBe && !showBs && !showBl && (
-      <View className="w-9.5/10 self-center pb-2 mb-5 border-b border-blue-800">
-        <TouchableOpacity
-          className="flex-row w-full justify-between pb-4"
-          onPress={() => handleShow("INV")}
-        >
-          <Text className="text-blue-800 font-bold">Inventaire :</Text>
-          <Icon name="caretdown" size={20} color="#1e40af" />
-        </TouchableOpacity>
-        {showInventory && (
-          <Table Data={InventoryDocument} onEndReached={handleLoadMore} />
-        )}
-      </View>
+      {!showBe && !showBs && !showBl && (
+        <View className="w-9.5/10 self-center pb-2 mb-5 border-b border-blue-800">
+          <TouchableOpacity
+            className="flex-row w-full justify-between pb-4"
+            onPress={() => handleShow("INV")}
+          >
+            <Text className="text-blue-800 font-bold">Inventaire :</Text>
+            <Icon name="caretdown" size={20} color="#1e40af" />
+          </TouchableOpacity>
+          {showInventory && (
+            <Table Data={InventoryDocument} onEndReached={handleLoadMore} />
+          )}
+        </View>
       )}
     </SafeAreaView>
   );

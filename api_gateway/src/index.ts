@@ -27,56 +27,61 @@ Object.keys(services).forEach(service => {
   }
 });
 
-console.log('User Service URL:', services.userService);
-console.log('Auth Service URL:', services.authService);
-console.log('Client Service URL:', services.clientService);
-console.log('Item Service URL:', services.itemService);
-
 // Proxy pour le service de logs
-app.use('/logs', createProxyMiddleware({
-  target: services.logsService,
-  changeOrigin: true,
-  pathRewrite: {'^/logs': ''},
-}));
+if (services.logsService) {
+  app.use('/logs', createProxyMiddleware({
+    target: services.logsService,
+    changeOrigin: true,
+    pathRewrite: {'^/logs': ''},
+  }));
+}
 
 // Proxy pour le service des utilisateurs
-app.use('/users', createProxyMiddleware({
-  target: services.userService,
-  changeOrigin: true,
-  pathRewrite: {'^/users': ''},
-}));
+if (services.userService) {
+  app.use('/users', createProxyMiddleware({
+    target: services.userService,
+    changeOrigin: true,
+    pathRewrite: {'^/users': ''},
+  }));
+}
 
 // Proxy pour le service d'authentification
-app.use('/auth', createProxyMiddleware({
-  target: services.authService,
-  changeOrigin: true,
-  pathRewrite: {'^/auth': ''},
-}));
+if (services.authService) {
+  app.use('/auth', createProxyMiddleware({
+    target: services.authService,
+    changeOrigin: true,
+    pathRewrite: {'^/auth': ''},
+  }));
+}
 
 // Proxy pour le service des clients
-app.use('/clients', createProxyMiddleware({
-  target: services.clientService,
-  changeOrigin: true,
-  pathRewrite: {'^/clients': ''},
-  logLevel: 'debug',
-}));
+if (services.clientService) {
+  app.use('/clients', createProxyMiddleware({
+    target: services.clientService,
+    changeOrigin: true,
+    pathRewrite: {'^/clients': ''},
+    logLevel: 'debug',
+  }));
+}
 
 // Proxy pour le service des items
-app.use('/items', createProxyMiddleware({
-  target: services.itemService,
-  changeOrigin: true,
-  pathRewrite: {'^/items': ''},
-}));
+if (services.itemService) {
+  app.use('/items', createProxyMiddleware({
+    target: services.itemService,
+    changeOrigin: true,
+    pathRewrite: {'^/items': ''},
+  }));
+}
 
 // Proxy pour le service de stock
-app.use('/stock', createProxyMiddleware({
-  target: services.stockService,
-  changeOrigin: true,
-  pathRewrite: {'^/stock': ''},
-}));
+if (services.stockService) {
+  app.use('/stock', createProxyMiddleware({
+    target: services.stockService,
+    changeOrigin: true,
+    pathRewrite: {'^/stock': ''},
+  }));
+}
 
 app.listen(PORT, () => {
   console.log(`API Gateway is running on port ${PORT}`);
 });
-
-

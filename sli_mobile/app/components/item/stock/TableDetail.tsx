@@ -29,11 +29,11 @@ const TableDetail: React.FC<TableProps> = ({ tableHead, DataLine }) => {
                 data={DataLine}
                 keyExtractor={(item) => item.id.toString()}
                 renderItem={({ item }) => (
-                    <View className='flex-row bg-white py-4 border-b border-gray-500'>
-                        <View className='w-6/10 max-h-14'>
-                            <Text className='text-center text-xs'>{item.Caption}</Text>
+                    <View className='flex-row bg-white py-4 border-b border-gray-500 items-center'>
+                        <View className='w-6/10 max-h-14 min-h-full border-gray-700  border-r '>
+                            <Text className='text-center text-xs px-2'>{item.Caption}</Text>
                         </View>
-                        <View className='w-2/10 max-h-14'>
+                        <View className='w-2/10 max-h-14 min-h-full border-r border-gray-700'>
                             <Text className='text-center text-xs'>{item.Quantity}</Text>
                         </View>
                         <View className='w-2/10 max-h-14'>
