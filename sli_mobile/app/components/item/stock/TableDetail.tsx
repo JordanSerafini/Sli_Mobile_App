@@ -20,7 +20,7 @@ const TableDetail: React.FC<TableProps> = ({ tableHead, DataLine }) => {
             <View className='flex-row bg-white-perso rounded-t-xl py-2'>
                 {tableHead.map((head, index) => (
                     <View key={index} className={`${colWidht[index]}`}>
-                        <Text className='font-bold text-center'>{head}</Text>
+                        <Text className='font-bold text-center text-blue-800'>{head}</Text>
                     </View>
                 ))}
             </View>
