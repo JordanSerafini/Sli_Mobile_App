@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { View, Text, TouchableOpacity, Alert, FlatList } from 'react-native';
 import Icon from "react-native-vector-icons/AntDesign";
 import { StockDocument } from '../../../@types/item.type';
-import { getStorehouseNameById } from '../../../utils/functions/stock_function';
 
 interface TableProps {
     tableHead?: string[]
@@ -19,7 +18,7 @@ function Table({ tableHead, Data, colWidth, columnTitle, onEndReached }: TablePr
 
     const [columnWidths, setColumnWidths] = useState(defaultColumnWidths);
     const [columnTitles, setColumnTitles] = useState(defaultColumnTitle);
-    const [storehouseNames, setStorehouseNames] = useState<{ [key: string]: string }>({});
+    // const [storehouseNames, setStorehouseNames] = useState<{ [key: string]: string }>({});
 
     useEffect(() => {
         if (colWidth) {
@@ -30,19 +29,31 @@ function Table({ tableHead, Data, colWidth, columnTitle, onEndReached }: TablePr
         }
     }, [colWidth, columnTitle]);
 
-    useEffect(() => {
-        const fetchStorehouseNames = async () => {
-            const names: { [key: string]: string } = {};
-            for (const doc of Data || []) {
-                if (!names[doc.StorehouseId]) {
-                    names[doc.StorehouseId] = await getStorehouseNameById(doc.StorehouseId);
-                }
-            }
-            setStorehouseNames(names);
-        };
+    // En attente utilisation, pour performance
+    // useEffect(() => {
+    //     const fetchStorehouseNames = async () => {
+    //         const names: { [key: string]: string } = {};
+    //         for (const doc of Data || []) {
+    //             if (!names[doc.StorehouseId]) {
+    //                 names[doc.StorehouseId] = await getStorehouseNameById(doc.StorehouseId);
+    //             }
+    //         }
+    //         setStorehouseNames(names);
+    //     };
 
-        fetchStorehouseNames();
-    }, [Data]);
+    //     fetchStorehouseNames();
+    // }, [Data]);
+
+    const getStorehouseName = (id: string) => {
+        switch (id) {
+            case '3b7fa0c3-1f64-449f-9277-cb8d8ccb9663':
+                return 'Principal';
+            case '105f5db2-e1b0-46e7-a6dd-c3c6516c746f':
+                return 'Stock voiture technique';
+            default:
+                return 'Inconnue';
+        }
+    };
 
     const handleIconPress = (documentNumber: string) => {
         Alert.alert(`Info clicked for document number ${documentNumber}`);
@@ -57,7 +68,7 @@ function Table({ tableHead, Data, colWidth, columnTitle, onEndReached }: TablePr
                 <Text className='text-center'>{new Date(item.DocumentDate).toLocaleDateString()}</Text>
             </View>
             <View className={`${columnWidths[2]} max-h-14`}>
-                <Text className='text-center text-xs'>{storehouseNames[item.StorehouseId]}</Text>
+                <Text className='text-center text-xs'>{getStorehouseName(item.StorehouseId)}</Text>
             </View>
             <View className={`${columnWidths[3]} flex items-center justify-center`}>
                 <TouchableOpacity onPress={() => handleIconPress(item.NumberSuffix)}>

@@ -97,48 +97,48 @@ function StockDocumentList() {
   return (
     <SafeAreaView className="w-screen">
       {!showBs && !showBl && !showInventory && (
-        <View className="w-9.5/10 self-center pb-4">
+        <View className="w-9.5/10 self-center pb-2 mb-5 border-b border-blue-800">
           <TouchableOpacity
             className="flex-row w-full justify-between pb-4"
             onPress={() => handleShow("BE")}
           >
-            <Text className="text-gray-800 font-bold">Bons entrées :</Text>
+            <Text className="text-blue-800 font-bold">Bons entrées :</Text>
             <Icon name="caretdown" size={20} color="#1e40af" />
           </TouchableOpacity>
           {showBe && <Table Data={BeDocument} onEndReached={handleLoadMore} />}
         </View>
       )}
       {!showBe && !showBl && !showInventory && (
-        <View className="w-9.5/10 self-center pb-4">
+        <View className="w-9.5/10 self-center pb-2 mb-5 border-b border-blue-800">
           <TouchableOpacity
             className="flex-row w-full justify-between pb-4"
             onPress={() => handleShow("BS")}
           >
-            <Text className="text-gray-800 font-bold">Bons Sorties :</Text>
+            <Text className="text-blue-800 font-bold">Bons Sorties :</Text>
             <Icon name="caretdown" size={20} color="#1e40af" />
           </TouchableOpacity>
           {showBs && <Table Data={BsDocument} onEndReached={handleLoadMore} />}
         </View>
       )}
       {!showBe && !showBs && !showInventory && (
-        <View className="w-9.5/10 self-center pb-4">
+        <View className="w-9.5/10 self-center pb-2 mb-5 border-b border-blue-800">
           <TouchableOpacity
             className="flex-row w-full justify-between pb-4"
             onPress={() => handleShow("BL")}
           >
-            <Text className="text-gray-800 font-bold">Bons livraisons :</Text>
+            <Text className="text-blue-800 font-bold">Bons livraisons :</Text>
             <Icon name="caretdown" size={20} color="#1e40af" />
           </TouchableOpacity>
           {showBl && <Table Data={BlDocument} onEndReached={handleLoadMore} />}
         </View>
       )}
       {!showBe && !showBs && !showBl && (
-        <View className="w-9.5/10 self-center pb-4">
+        <View className="w-9.5/10 self-center pb-2 mb-5 border-b border-blue-800">
           <TouchableOpacity
             className="flex-row w-full justify-between pb-4"
             onPress={() => handleShow("INV")}
           >
-            <Text className="text-gray-800 font-bold">Inventaire :</Text>
+            <Text className="text-blue-800 font-bold">Inventaire :</Text>
             <Icon name="caretdown" size={20} color="#1e40af" />
           </TouchableOpacity>
           {showInventory && (
