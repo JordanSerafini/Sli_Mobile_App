@@ -37,18 +37,18 @@ const stock_model = {
       countQuery += `;`;
 
       // Exécution des requêtes en parallèle pour plus d'efficacité
-      const [itemResult, totalResult] = await Promise.all([
+      const [StockDocResult, totalResult] = await Promise.all([
         pgClient.query(query, queryParams),
         pgClient.query(countQuery, countParams),
       ]);
 
-      const totalItems = parseInt(totalResult.rows[0].count, 10);
-      const totalPages = Math.ceil(totalItems / limit);
+      const totalStockDoc = parseInt(totalResult.rows[0].count, 10);
+      const totalPages = Math.ceil(totalStockDoc / limit);
 
       res.json({
-        totalItems,
+        totalStockDoc,
         totalPages,
-        items: itemResult.rows,
+        StockDoc: StockDocResult.rows,
       });
     } catch (err) {
       console.error("Erreur lors de la récupération des données :", err);

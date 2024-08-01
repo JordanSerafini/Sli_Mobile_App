@@ -1,4 +1,4 @@
-31-07-2024 11:08:39 [authentification_api] info: Login successful for email: jordan@solution-logique.fr
+01-08-2024 06:37:36 [authentification_api] info: Login successful for email: jordan@solution-logique.fr
 {
   "ip": "172.18.0.9",
   "url": "/",
@@ -7,7 +7,7 @@
 
 --------------------------------------------------------------
 
-31-07-2024 11:23:43 [authentification_api] info: Login successful for email: jordan@solution-logique.fr
+01-08-2024 06:37:42 [authentification_api] info: Login successful for email: jordan@solution-logique.fr
 {
   "ip": "172.18.0.9",
   "url": "/",
@@ -16,7 +16,7 @@
 
 --------------------------------------------------------------
 
-31-07-2024 11:23:45 [authentification_api] info: Login successful for email: jordan@solution-logique.fr
+01-08-2024 06:37:46 [authentification_api] info: Login successful for email: jordan@solution-logique.fr
 {
   "ip": "172.18.0.9",
   "url": "/",
@@ -25,7 +25,7 @@
 
 --------------------------------------------------------------
 
-31-07-2024 11:25:12 [authentification_api] info: Login successful for email: jordan@solution-logique.fr
+01-08-2024 06:56:16 [authentification_api] info: Login successful for email: jordan@solution-logique.fr
 {
   "ip": "172.18.0.9",
   "url": "/",
@@ -34,7 +34,7 @@
 
 --------------------------------------------------------------
 
-31-07-2024 11:26:49 [authentification_api] info: Login successful for email: jordan@solution-logique.fr
+01-08-2024 07:01:46 [authentification_api] info: Login successful for email: jordan@solution-logique.fr
 {
   "ip": "172.18.0.9",
   "url": "/",
@@ -43,7 +43,7 @@
 
 --------------------------------------------------------------
 
-31-07-2024 11:26:50 [authentification_api] info: Login successful for email: jordan@solution-logique.fr
+01-08-2024 07:02:33 [authentification_api] info: Login successful for email: jordan@solution-logique.fr
 {
   "ip": "172.18.0.9",
   "url": "/",
@@ -52,7 +52,7 @@
 
 --------------------------------------------------------------
 
-31-07-2024 11:35:37 [authentification_api] info: Login successful for email: jordan@solution-logique.fr
+01-08-2024 08:46:24 [authentification_api] info: Login successful for email: jordan@solution-logique.fr
 {
   "ip": "172.18.0.9",
   "url": "/",
@@ -61,7 +61,7 @@
 
 --------------------------------------------------------------
 
-31-07-2024 11:47:12 [authentification_api] info: Login successful for email: jordan@solution-logique.fr
+01-08-2024 08:49:36 [authentification_api] info: Login successful for email: jordan@solution-logique.fr
 {
   "ip": "172.18.0.9",
   "url": "/",
@@ -70,7 +70,7 @@
 
 --------------------------------------------------------------
 
-31-07-2024 11:52:03 [authentification_api] info: Login successful for email: jordan@solution-logique.fr
+01-08-2024 08:52:45 [authentification_api] info: Login successful for email: jordan@solution-logique.fr
 {
   "ip": "172.18.0.9",
   "url": "/",
@@ -79,7 +79,7 @@
 
 --------------------------------------------------------------
 
-31-07-2024 11:57:08 [authentification_api] info: Login successful for email: jordan@solution-logique.fr
+01-08-2024 08:54:08 [authentification_api] info: Login successful for email: jordan@solution-logique.fr
 {
   "ip": "172.18.0.9",
   "url": "/",
@@ -88,7 +88,7 @@
 
 --------------------------------------------------------------
 
-31-07-2024 12:58:57 [authentification_api] info: Login successful for email: jordan@solution-logique.fr
+01-08-2024 08:55:10 [authentification_api] info: Login successful for email: jordan@solution-logique.fr
 {
   "ip": "172.18.0.9",
   "url": "/",
@@ -97,7 +97,7 @@
 
 --------------------------------------------------------------
 
-31-07-2024 12:59:05 [authentification_api] info: Login successful for email: jordan@solution-logique.fr
+01-08-2024 08:58:31 [authentification_api] info: Login successful for email: jordan@solution-logique.fr
 {
   "ip": "172.18.0.9",
   "url": "/",
@@ -106,7 +106,7 @@
 
 --------------------------------------------------------------
 
-31-07-2024 12:59:08 [authentification_api] info: Login successful for email: jordan@solution-logique.fr
+01-08-2024 09:02:09 [authentification_api] info: Login successful for email: jordan@solution-logique.fr
 {
   "ip": "172.18.0.9",
   "url": "/",
@@ -115,7 +115,7 @@
 
 --------------------------------------------------------------
 
-31-07-2024 12:59:10 [authentification_api] info: Login successful for email: jordan@solution-logique.fr
+01-08-2024 09:06:21 [authentification_api] info: Login successful for email: jordan@solution-logique.fr
 {
   "ip": "172.18.0.9",
   "url": "/",
@@ -124,7 +124,16 @@
 
 --------------------------------------------------------------
 
-31-07-2024 14:14:33 [authentification_api] info: Login successful for email: jordan@solution-logique.fr
+01-08-2024 09:08:33 [authentification_api] info: Login successful for email: jordan@solution-logique.fr
+{
+  "ip": "172.18.0.9",
+  "url": "/",
+  "method": "POST"
+}
+
+--------------------------------------------------------------
+
+01-08-2024 09:14:03 [authentification_api] info: Login successful for email: jordan@solution-logique.fr
 {
   "ip": "172.18.0.9",
   "url": "/",

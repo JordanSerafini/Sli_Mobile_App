@@ -11,6 +11,10 @@ const IndexScreen: React.FC = () => {
     router.push('/items/itemList');
   };
 
+  const stockClick = () => {
+    router.push('/items/stock/StockDocumentDetail');
+  };
+
   const theme = {
     ...DefaultTheme,
     colors: {
@@ -25,7 +29,7 @@ const IndexScreen: React.FC = () => {
     <PaperProvider theme={theme}>
       <SafeAreaView className='flex items-center justify-center w-full h-full '>
       <ButtonPerso mode={"outlined"} icon={"account"} text={"Liste des articles"} css="w-4.5/10 self-center" onPress={itemClick} />
-      <ButtonPerso mode={"outlined"} icon={"account"} text={"Liste des articles"} css="w-4.5/10 self-center" onPress={itemClick} />
+      <ButtonPerso mode={"outlined"} icon={"account"} text={"STOCK"} css="w-4.5/10 self-center" onPress={stockClick} />
 
 
       </SafeAreaView>
