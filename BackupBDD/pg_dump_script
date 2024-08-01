@@ -1,4 +1,4 @@
-pg_dump -U jordans -d SLI -f "C:\Users\j.serafini\Desktop\Jordan\Code\Sli_Mobile_App\BackupBDD\backupNew.sql"
+pg_dump -U jordans -d SLI -f "C:\Users\j.serafini\Desktop\Jordan\Code\Sli_Mobile_App\backupNew.sql"
 
 ---------------------------------------------------------------------------------------------------------------------------------------
 
