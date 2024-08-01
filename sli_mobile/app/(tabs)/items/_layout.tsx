@@ -1,16 +1,17 @@
 import { Stack } from 'expo-router';
 
-export default function ItemsLayout() {
+export default function ItemLayout() {
   return (
     <Stack>
-      <Stack.Screen name="index" options={{ headerShown: false, title: 'Article' }} />
-      <Stack.Screen name="itemList" options={{ headerShown: false, title: 'Liste article' }} />
-      <Stack.Screen
-        name="itemDetail"
-        options={{ headerShown: true, title: 'Client Details' }}
-      />
-      <Stack.Screen name="stock/StockDocumentList" options={{ headerShown: false, title: 'Liste article' }} />
-
+      <Stack.Screen name="index" options={{ headerShown: false, title: 'Stock Documents' }} />
+      <Stack.Screen name="StockDocumentList" options={{ 
+          headerShown: true, 
+          title: 'Liste article', 
+          headerStyle: {
+            backgroundColor: '#1e3a8a',
+          },
+          headerTintColor: '#fff',
+        }} />
     </Stack>
   );
 }

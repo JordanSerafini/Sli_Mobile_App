@@ -12,7 +12,7 @@ const IndexScreen: React.FC = () => {
   };
 
   const stockClick = () => {
-    router.push('/items/stock/StockDocumentList');
+    router.push('/items/StockDocumentList');
   };
 
   const theme = {
