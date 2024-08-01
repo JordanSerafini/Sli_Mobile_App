@@ -1,16 +1,16 @@
 import React, { useEffect, useState } from "react";
-import { View, Text, FlatList } from "react-native";
+import { View, Text } from "react-native";
 import { getStockDocLine } from "../../utils/functions/stock_function";
-import { StockDocument, StockDocumentLine } from "../../@types/item.type";
-import { useRoute, useNavigation } from "@react-navigation/native";
+import { StockDocumentLine } from "../../@types/item.type";
 import TableDetail from "../../components/item/stock/TableDetail";
+import { useRoute, useNavigation } from "@react-navigation/native";
 
 interface StockDocDetailRouteParams {
   DocumentId: string;
 }
 
 const StockDocDetail: React.FC = () => {
-  const [docLine, setDocLine] = useState<StockDocumentLine[]>([]);
+  const [stockDocLines, setStockDocLines] = useState<StockDocumentLine[]>([]);
   const navigation = useNavigation();
   const route = useRoute();
 
@@ -24,7 +24,11 @@ const StockDocDetail: React.FC = () => {
     const fetchStockDoc = async () => {
       try {
         const data = await getStockDocLine(DocumentId);
-        setDocLine(data); 
+        if (data && data.length > 0) {
+          setStockDocLines(data); 
+        } else {
+          console.error("No StockDocumentLines found in the data");
+        }
       } catch (error) {
         console.error("Error fetching stock document:", error);
       }
@@ -33,13 +37,12 @@ const StockDocDetail: React.FC = () => {
     fetchStockDoc();
   }, [DocumentId]);
 
-  if (!docLine) {
-    return <Text>Loading...</Text>;
-  }
-
   return (
-    <View>
-      <TableDetail tableHead={["Article", "Quantité", "Prix", "Total"]} DataLine={docLine} />
+    <View className="w-full p-4">
+      <TableDetail 
+        tableHead={["Article", "Quantité", "Prix HT"]} 
+        DataLine={stockDocLines} 
+      />
     </View>
   );
 };

@@ -8,26 +8,31 @@ interface TableProps {
 }
 
 const TableDetail: React.FC<TableProps> = ({ tableHead, DataLine }) => {
+    if (!DataLine || !Array.isArray(DataLine)) {
+        return <Text>Loading...</Text>;
+    }
 
-    console.log(DataLine);
 
     return (
         <View className='w-full p-4'>
-            {/* Affichage de l'en-tête de la table */}
+            {/* Table Header */}
             <View className='flex-row justify-between border-b-2 border-gray-500 py-2'>
                 {tableHead.map((head, index) => (
-                    <Text key={index} className='w-1/4 text-center font-bold'>{head}</Text>
+                    <Text key={index} className='w-1/3 text-center font-bold'>{head}</Text>
                 ))}
             </View>
-            {/* Affichage des données de la ligne */}
-            {DataLine && DataLine.map((data, index) => (
-                <View key={index} className='flex flex-row justify-between border-b-2 border-gray-200 py-2'>
-                    <Text className='w-1/4 text-center'>{data.Item.Name}</Text>
-                    <Text className='w-1/4 text-center'>{data.Quantity}</Text>
-                    <Text className='w-1/4 text-center'>{data.Item.Prix_HT}</Text>
-                    <Text className='w-1/4 text-center'>{data.Item.Prix_TTC}</Text>
-                </View>
-            ))}
+            {/* Table Rows */}
+            <FlatList
+                data={DataLine}
+                keyExtractor={(item) => item.id.toString()}
+                renderItem={({ item }) => (
+                    <View className='flex flex-row justify-between border-b-2 border-gray-200 py-2'>
+                        <Text className='w-1/3 text-center'>{item.Caption}</Text>
+                        <Text className='w-1/3 text-center'>{item.Quantity}</Text>
+                        <Text className='w-1/3 text-center'>{item.SalePriceVatExcluded}</Text>
+                    </View>
+                )}
+            />
         </View>
     );
 };
