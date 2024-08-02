@@ -1,8 +1,10 @@
-import React from 'react'
+import { View } from "react-native"
 
 function itemList() {
   return (
-    <div>itemList</div>
+    <View>
+      
+    </View>
   )
 }
 
