@@ -60,23 +60,28 @@ function StockDocumentList() {
     fetchStockDoc(50, 0, searchQuery);
   }, []);
 
-  const fetchStockDoc = async (limit: number, page: number, searchQuery: string) => {
+  const fetchStockDoc = async (
+    limit: number,
+    page: number,
+    searchQuery: string
+  ) => {
     if (loading) return;
     setLoading(true);
 
     const data = await getStockDocPaginated(limit, page * limit, searchQuery);
     const BeDoc = data.StockDoc.filter(
-      (line: { NumberPrefix: string }) => line.NumberPrefix === "BE"
+      (line: { NumberPrefix: string }) => line.NumberPrefix == "BE"
     );
     setBeDocument((prev) => [...prev, ...BeDoc]);
 
     const BsDoc = data.StockDoc.filter(
-      (line: { NumberPrefix: string }) => line.NumberPrefix === "BS"
+      
+      (line: { NumberPrefix: string }) => line.NumberPrefix == "BS"
     );
     setBsDocument((prev) => [...prev, ...BsDoc]);
 
     const BlDoc = data.StockDoc.filter(
-      (line: { NumberPrefix: string }) => line.NumberPrefix === "BL"
+      (line: { NumberPrefix: string }) => line.NumberPrefix == "BL"
     );
     setBlDocument((prev) => [...prev, ...BlDoc]);
 
@@ -89,7 +94,24 @@ function StockDocumentList() {
   };
 
   const handleShow = (documentType: string) => {
-    LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
+    const customAnimation = {
+      duration: 500,
+      update: {
+        type: LayoutAnimation.Types.easeInEaseOut,
+        property: LayoutAnimation.Properties.opacity,
+      },
+      create: {
+        type: LayoutAnimation.Types.easeInEaseOut,
+        property: LayoutAnimation.Properties.opacity,
+      },
+      delete: {
+        type: LayoutAnimation.Types.easeInEaseOut,
+        property: LayoutAnimation.Properties.opacity,
+      },
+    };
+  
+    LayoutAnimation.configureNext(customAnimation);
+
     switch (documentType) {
       case "BE":
         setShowBe(!showBe);
@@ -119,7 +141,6 @@ function StockDocumentList() {
         break;
     }
   };
-
   const handleLoadMore = () => {
     if (!loading) {
       const nextPage = page + 1;
@@ -138,17 +159,22 @@ function StockDocumentList() {
     setShowDatePicker(true);
   };
 
+
   return (
-    <SafeAreaView className="w-screen h-10/10 justify-start gap-y-10">
+    <SafeAreaView className="w-screen h-10/10 justify-start pt-2 gap-y-10">
       {/* ----------------------------------------------------------------------------- BON ENTREE ------------------------------------------------------------------------------------------- */}
       {!showBs && !showBl && !showInventory && (
-        <View className="w-9.5/10 self-center border-b border-blue-800">
+        <View className="w-9.5/10 max-h-10/10 self-center border-b border-blue-800">
           <TouchableOpacity
             className="flex-row w-full justify-between"
             onPress={() => handleShow("BE")}
           >
             <Text className="text-blue-800 font-bold">Bons entrées :</Text>
-            <Icon name={`${showBe ? "caretup" : "caretdown"}`} size={20} color="#1e40af" />
+            <Icon
+              name={`${showBe ? "caretup" : "caretdown"}`}
+              size={20}
+              color="#1e40af"
+            />
           </TouchableOpacity>
           {showBe && (
             <View>
@@ -183,39 +209,54 @@ function StockDocumentList() {
       )}
       {/* ----------------------------------------------------------------------------------- BON SORTI ------------------------------------------------------------------------------------------- */}
       {!showBe && !showBl && !showInventory && (
-        <View className="w-9.5/10 self-center border-b border-blue-800">
+        <View className="w-9.5/10 max-h-9/10 self-center border-b border-blue-800">
           <TouchableOpacity
             className="flex-row w-full justify-between"
             onPress={() => handleShow("BS")}
           >
             <Text className="text-blue-800 font-bold">Bons Sorties :</Text>
-             <Icon name={`${showBs ? "caretup" : "caretdown"}`} size={20} color="#1e40af" />
+            <Icon
+              name={`${showBs ? "caretup" : "caretdown"}`}
+              size={20}
+              color="#1e40af"
+            />
           </TouchableOpacity>
           {showBs && <Table Data={BsDocument} onEndReached={handleLoadMore} />}
         </View>
       )}
       {/* ----------------------------------------------------------------------------- BON LIVRAISON ------------------------------------------------------------------------------------------- */}
+      {/*
       {!showBe && !showBs && !showInventory && (
-        <View className="w-9.5/10 self-center border-b border-blue-800">
+        <View className="w-9.5/10 max-h-9/10 self-center border-b border-blue-800">
           <TouchableOpacity
             className="flex-row w-full justify-between"
             onPress={() => handleShow("BL")}
           >
             <Text className="text-blue-800 font-bold">Bons livraisons :</Text>
-             <Icon name={`${showBl ? "caretup" : "caretdown"}`} size={20} color="#1e40af" />
+            <Icon
+              name={`${showBl ? "caretup" : "caretdown"}`}
+              size={20}
+              color="#1e40af"
+            />
           </TouchableOpacity>
           {showBl && <Table Data={BlDocument} onEndReached={handleLoadMore} />}
         </View>
       )}
+       
+       */}
       {/* ----------------------------------------------------------------------------- INVENTAIRE ------------------------------------------------------------------------------------------- */}
       {!showBe && !showBs && !showBl && (
-        <View className="w-9.5/10 self-center border-b border-blue-800">
+        <View className="w-9.5/10 max-h-9/10 self-center border-b border-blue-800">
           <TouchableOpacity
             className="flex-row w-full justify-between"
             onPress={() => handleShow("INV")}
           >
             <Text className="text-blue-800 font-bold">Inventaire :</Text>
-             <Icon name={`${showInventory ? "caretup" : "caretdown"}`} size={20} color="#1e40af" />
+            <Icon
+              name={`${showInventory ? "caretup" : "caretdown"}`}
+              size={20}
+              color="#1e40af"
+            />
           </TouchableOpacity>
           {showInventory && (
             <Table Data={InventoryDocument} onEndReached={handleLoadMore} />
@@ -227,4 +268,3 @@ function StockDocumentList() {
 }
 
 export default StockDocumentList;
-

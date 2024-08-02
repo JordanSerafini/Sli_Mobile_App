@@ -1,9 +1,10 @@
 import { router } from 'expo-router';
 import React from 'react';
-import { SafeAreaView, Text } from 'react-native';
+import { SafeAreaView, StyleSheet } from 'react-native';
 import { DefaultTheme, Provider as PaperProvider } from 'react-native-paper';
-
+import FabItem from './FAB/FabItem';
 import ButtonPerso from '../../components/UI/ButtonPerso';
+import Icon from "react-native-vector-icons/AntDesign";
 
 const IndexScreen: React.FC = () => {
 
@@ -19,7 +20,7 @@ const IndexScreen: React.FC = () => {
     ...DefaultTheme,
     colors: {
       ...DefaultTheme.colors,
-      primary: '#3B82F6', 
+      primary: '#1e40af', 
       secondary: '#BFDBFE',
       accent: '#1E3A8A', 
     },
@@ -27,14 +28,25 @@ const IndexScreen: React.FC = () => {
 
   return (
     <PaperProvider theme={theme}>
-      <SafeAreaView className='flex items-center justify-center w-full h-full '>
-      <ButtonPerso mode={"outlined"} icon={"account"} text={"Liste des articles"} css="w-4.5/10 self-center" onPress={itemClick} />
-      <ButtonPerso mode={"outlined"} icon={"account"} text={"STOCK"} css="w-4.5/10 self-center" onPress={stockClick} />
-
-
+      <SafeAreaView style={styles.container}>
+        <ButtonPerso mode="outlined" icon="account" text="Liste des articles" css="w-4.5/10 self-center" onPress={itemClick} />
+        <ButtonPerso mode="outlined" icon="account" text="STOCK" css="w-4.5/10 self-center" onPress={stockClick} />
+        <FabItem 
+          showAddModal={() => {}} 
+          showEditItemModal={() => {}} 
+          showAddItemModal={() => {}} 
+        />
       </SafeAreaView>
     </PaperProvider>
   );
 };
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+});
 
 export default IndexScreen;

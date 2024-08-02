@@ -10,7 +10,7 @@ export default function ItemLayout() {
       <Stack.Screen
         name="StockDocumentList"
         options={{
-          headerShown: true,
+          headerShown: false,
           title: "Liste article",
           headerStyle: {
             backgroundColor: "#1e3a8a",
