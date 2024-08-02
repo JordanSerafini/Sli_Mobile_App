@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { View, Text, Dimensions, ActivityIndicator } from "react-native";
+import { View, Text, Dimensions, ActivityIndicator, Touchable, TouchableOpacity } from "react-native";
 import Carousel from "react-native-reanimated-carousel";
 import ButtonPerso from "../../components/UI/ButtonPerso";
 import { getStockDocWithinDateRange } from "../../utils/functions/stock_function";
 import { StockDocument } from "../../@types/item.type";
+import Icon from "react-native-vector-icons/AntDesign";
 
 
 interface HomeItemProps {
@@ -15,6 +16,7 @@ interface HomeItemProps {
 const HomeItem: React.FC<HomeItemProps> = ({ onItemClick, onStockClick }) => {
   const [stockDocuments, setStockDocuments] = useState<StockDocument[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
+  const [dateRange, setDateRange] = useState<{ startDate: string, endDate: string }>({ startDate: '', endDate: '' });
   const width = Dimensions.get("window").width;
 
   const formatDateToMidnight = (date: Date): string => {
@@ -63,7 +65,12 @@ const HomeItem: React.FC<HomeItemProps> = ({ onItemClick, onStockClick }) => {
       </View>
 
       <View className="h-1/3 w-9/10 ">
-        <Text className="text-lg font-bold text-sky-900 pb-3">Derniers documents de stock :</Text>
+      <View className="flex-row w-full justify-between items-center pb-3">
+        <Text className="text-lg font-bold text-sky-900">Documents de stock :</Text>
+        <TouchableOpacity onPress={onStockClick}>
+          < Icon name="calendar" size={30} color="#1e40af" />
+        </TouchableOpacity>
+        </View>
         <Carousel
           loop
           width={width}
