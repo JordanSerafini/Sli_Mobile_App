@@ -3,9 +3,9 @@ import React, { useEffect, useState } from 'react';
 import { SafeAreaView, StyleSheet } from 'react-native';
 import { DefaultTheme, Provider as PaperProvider } from 'react-native-paper';
 import FabItem from './FAB/FabItem';
-import ButtonPerso from '../../components/UI/ButtonPerso';
 import StockDocumentList from './StockDocumentList';
 import ItemList from './itemList';
+import HomeItem from './HomeItem'; // Import du nouveau composant
 
 const IndexScreen: React.FC = () => {
   const [content, setContent] = useState<React.ReactNode>(null);
@@ -37,11 +37,7 @@ const IndexScreen: React.FC = () => {
   return (
     <PaperProvider theme={theme}>
       {!content ? (
-        <SafeAreaView style={styles.container}>
-          <ButtonPerso mode="outlined" icon="account" text="Liste des articles" css="w-4.5/10 self-center" onPress={itemClick} />
-          <ButtonPerso mode="outlined" icon="account" text="STOCK" css="w-4.5/10 self-center" onPress={stockClick} />
-          
-        </SafeAreaView>
+        <HomeItem onItemClick={itemClick} onStockClick={stockClick} /> // Utilisation du nouveau composant
       ) : (
         <SafeAreaView style={styles.container}>
           {content}

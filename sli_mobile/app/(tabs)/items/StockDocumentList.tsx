@@ -164,7 +164,7 @@ function StockDocumentList() {
     <SafeAreaView className="w-screen h-10/10 justify-start pt-2 gap-y-10">
       {/* ----------------------------------------------------------------------------- BON ENTREE ------------------------------------------------------------------------------------------- */}
       {!showBs && !showBl && !showInventory && (
-        <View className="w-9.5/10 max-h-10/10 self-center border-b border-blue-800">
+        <View className="w-9.5/10 max-h-9/10 self-center border-b border-blue-800">
           <TouchableOpacity
             className="flex-row w-full justify-between"
             onPress={() => handleShow("BE")}
