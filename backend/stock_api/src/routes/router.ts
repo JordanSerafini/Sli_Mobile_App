@@ -10,7 +10,8 @@ router.get('/stockdocline', stock_controller.getStockDocLine);
 router.get('/storehouse' , stock_controller.getStorehouse);
 
 router.get('/storehouse/:id' , stock_controller.getStorehouseNameById);
-router.get('/stockdocdetails/:DocumentId', stock_controller.getStockWithDetailsByDocumentId);
+router.get('/stockdocdetailsjoin/:DocumentId', stock_controller.getStockWithDetailsByDocumentId);
+router.get('/stockdocdetails/:DocumentId', stock_controller.getStocByDocId);
 router.get('/stockdocline/:DocumentId', stock_controller.getStockDocLineByDocumentId);
 
 export default router;

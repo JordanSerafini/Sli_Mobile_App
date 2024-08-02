@@ -335,7 +335,27 @@ const stock_model = {
             res.status(500).json({ message: "Internal server error" });
         }
     }
-}
+},
+
+  async getStockByDocId(req: Request, res: Response) {
+    const { DocumentId } = req.params;
+
+    try {
+        const query = `
+            SELECT *
+            FROM "StockDocument"
+            WHERE "Id" = $1;
+        `;
+        const result = await pgClient.query(query, [DocumentId]);
+
+        res.json(result.rows);
+    } catch (err) {
+        console.error("Erreur lors de la récupération des données :", err);
+        if (!res.headersSent) {
+            res.status(500).json({ message: "Internal server error" });
+        }
+    }
+  },
 
 };
 

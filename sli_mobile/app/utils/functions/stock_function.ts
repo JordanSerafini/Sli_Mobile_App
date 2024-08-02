@@ -1,5 +1,10 @@
 import { url } from "../url";
 
+export const getStockDocByIDFull = async (DocumentId: string) => {
+  const response = await fetch(`${url.api_gateway}/stock/stockdocdetailsjoin/${DocumentId}`);
+  return response.json();
+}
+
 export const getStockDocByID = async (DocumentId: string) => {
   const response = await fetch(`${url.api_gateway}/stock/stockdocdetails/${DocumentId}`);
   return response.json();
