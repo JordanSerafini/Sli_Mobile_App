@@ -15,36 +15,36 @@ const stock_model = {
       const limit = parseInt(req.query.limit as string, 10) || 25;
       const offset = parseInt(req.query.offset as string, 10) || 0;
       const searchQuery = (req.query.searchQuery as string) || "";
-
+  
       let query = `SELECT * FROM "StockDocument"`;
       let countQuery = `SELECT COUNT(*) FROM "StockDocument"`;
       let queryParams: (string | number)[] = [];
       let countParams: (string | number)[] = [];
-
+  
       // Si un terme de recherche est fourni, ajustez la requête et les paramètres
       if (searchQuery) {
-        query += ` WHERE "Name" ILIKE $1`;
-        countQuery += ` WHERE "Name" ILIKE $1`;
+        query += ` WHERE "DocumentNumber" ILIKE $1 OR "Reference" ILIKE $1 OR "NotesClear" ILIKE $1`;
+        countQuery += ` WHERE "DocumentNumber" ILIKE $1 OR "Reference" ILIKE $1 OR "NotesClear" ILIKE $1`;
         queryParams.push(`%${searchQuery}%`);
         countParams.push(`%${searchQuery}%`);
       }
-
+  
       // Ajout des paramètres pour la limite et le décalage
       queryParams.push(limit);
       queryParams.push(offset);
-
+  
       query += ` ORDER BY "DocumentDate" ASC LIMIT $${queryParams.length - 1} OFFSET $${queryParams.length}`;
       countQuery += `;`;
-
+  
       // Exécution des requêtes en parallèle pour plus d'efficacité
       const [StockDocResult, totalResult] = await Promise.all([
         pgClient.query(query, queryParams),
         pgClient.query(countQuery, countParams),
       ]);
-
+  
       const totalStockDoc = parseInt(totalResult.rows[0].count, 10);
       const totalPages = Math.ceil(totalStockDoc / limit);
-
+  
       res.json({
         totalStockDoc,
         totalPages,
@@ -57,6 +57,7 @@ const stock_model = {
       }
     }
   },
+  
 
   async getAllStock(req: Request, res: Response) {
     try {

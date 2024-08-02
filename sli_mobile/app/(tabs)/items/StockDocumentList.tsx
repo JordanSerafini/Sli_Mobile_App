@@ -37,12 +37,12 @@ function StockDocumentList() {
   const [BlDocument, setBlDocument] = useState<StockDocument[]>([]);
   const [showBl, setShowBl] = useState(false);
 
-  const [searchQuery, setSearchQuery] = useState("");
-
   const [InventoryDocument, setInventoryDocument] = useState<StockDocument[]>(
     []
   );
   const [showInventory, setShowInventory] = useState(false);
+
+  const [searchQuery, setSearchQuery] = useState("");
 
   const [date, setDate] = useState(new Date());
   const [showDatePicker, setShowDatePicker] = useState(false);
@@ -55,37 +55,33 @@ function StockDocumentList() {
     setInventoryDocument([]);
     fetchStockDoc(50, 0, searchQuery);
   }, [searchQuery]);
-  
+
   useEffect(() => {
     fetchStockDoc(50, 0, searchQuery);
   }, []);
-  
-  const fetchStockDoc = async (
-    limit: number,
-    page: number,
-    searchQuery: string
-  ) => {
+
+  const fetchStockDoc = async (limit: number, page: number, searchQuery: string) => {
     if (loading) return;
     setLoading(true);
 
-    const data = await getStockDocPaginated(limit, page, searchQuery);
+    const data = await getStockDocPaginated(limit, page * limit, searchQuery);
     const BeDoc = data.StockDoc.filter(
-      (line: { NumberPrefix: string }) => line.NumberPrefix == "BE"
+      (line: { NumberPrefix: string }) => line.NumberPrefix === "BE"
     );
     setBeDocument((prev) => [...prev, ...BeDoc]);
 
     const BsDoc = data.StockDoc.filter(
-      (line: { NumberPrefix: string }) => line.NumberPrefix == "BS"
+      (line: { NumberPrefix: string }) => line.NumberPrefix === "BS"
     );
     setBsDocument((prev) => [...prev, ...BsDoc]);
 
     const BlDoc = data.StockDoc.filter(
-      (line: { NumberPrefix: string }) => line.NumberPrefix == "BL"
+      (line: { NumberPrefix: string }) => line.NumberPrefix === "BL"
     );
     setBlDocument((prev) => [...prev, ...BlDoc]);
 
     const InventoryDoc = data.StockDoc.filter(
-      (line: { NumberPrefix: string }) => line.NumberPrefix == "INV"
+      (line: { NumberPrefix: string }) => line.NumberPrefix === "INV"
     );
     setInventoryDocument((prev) => [...prev, ...InventoryDoc]);
 
@@ -143,13 +139,12 @@ function StockDocumentList() {
   };
 
   return (
-    <SafeAreaView className="w-screen h-10/10">
-
+    <SafeAreaView className="w-screen h-10/10 justify-start gap-y-10">
       {/* ----------------------------------------------------------------------------- BON ENTREE ------------------------------------------------------------------------------------------- */}
       {!showBs && !showBl && !showInventory && (
-        <View className="w-9.5/10 self-center pb-2 mb-5 border-b border-blue-800">
+        <View className="w-9.5/10 self-center border-b border-blue-800">
           <TouchableOpacity
-            className="flex-row w-full justify-between pb-4"
+            className="flex-row w-full justify-between"
             onPress={() => handleShow("BE")}
           >
             <Text className="text-blue-800 font-bold">Bons entrées :</Text>
@@ -177,7 +172,6 @@ function StockDocumentList() {
                     setSearchQuery(text);
                   }}
                 />
-
                 <TouchableOpacity onPress={showDatepicker} className="w-1/10">
                   <Icon name="calendar" size={28} color="#1e40af" />
                 </TouchableOpacity>
@@ -196,11 +190,11 @@ function StockDocumentList() {
           )}
         </View>
       )}
-{/* ----------------------------------------------------------------------------- BON SORTI ------------------------------------------------------------------------------------------- */}
+      {/* ----------------------------------------------------------------------------------- BON SORTI ------------------------------------------------------------------------------------------- */}
       {!showBe && !showBl && !showInventory && (
-        <View className="w-9.5/10 self-center pb-2 mb-5 border-b border-blue-800">
+        <View className="w-9.5/10 self-center border-b border-blue-800">
           <TouchableOpacity
-            className="flex-row w-full justify-between pb-4"
+            className="flex-row w-full justify-between"
             onPress={() => handleShow("BS")}
           >
             <Text className="text-blue-800 font-bold">Bons Sorties :</Text>
@@ -211,26 +205,26 @@ function StockDocumentList() {
       )}
       {/* ----------------------------------------------------------------------------- BON LIVRAISON ------------------------------------------------------------------------------------------- */}
       {!showBe && !showBs && !showInventory && (
-        <View className="w-9.5/10 self-center pb-2 mb-5 border-b border-blue-800">
+        <View className="w-9.5/10 self-center border-b border-blue-800">
           <TouchableOpacity
-            className="flex-row w-full justify-between pb-4"
+            className="flex-row w-full justify-between"
             onPress={() => handleShow("BL")}
           >
             <Text className="text-blue-800 font-bold">Bons livraisons :</Text>
-             <Icon name={`${showInventory ? "caretup" : "caretdown"}`} size={20} color="#1e40af" />
+             <Icon name={`${showBl ? "caretup" : "caretdown"}`} size={20} color="#1e40af" />
           </TouchableOpacity>
           {showBl && <Table Data={BlDocument} onEndReached={handleLoadMore} />}
         </View>
       )}
       {/* ----------------------------------------------------------------------------- INVENTAIRE ------------------------------------------------------------------------------------------- */}
       {!showBe && !showBs && !showBl && (
-        <View className="w-9.5/10 self-center pb-2 mb-5 border-b border-blue-800">
+        <View className="w-9.5/10 self-center border-b border-blue-800">
           <TouchableOpacity
-            className="flex-row w-full justify-between pb-4"
+            className="flex-row w-full justify-between"
             onPress={() => handleShow("INV")}
           >
             <Text className="text-blue-800 font-bold">Inventaire :</Text>
-             <Icon name={`${showBe ? "caretup" : "caretdown"}`} size={20} color="#1e40af" />
+             <Icon name={`${showInventory ? "caretup" : "caretdown"}`} size={20} color="#1e40af" />
           </TouchableOpacity>
           {showInventory && (
             <Table Data={InventoryDocument} onEndReached={handleLoadMore} />
@@ -242,3 +236,4 @@ function StockDocumentList() {
 }
 
 export default StockDocumentList;
+

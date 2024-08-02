@@ -15,7 +15,7 @@ const TableDetail: React.FC<TableProps> = ({ tableHead, DataLine }) => {
     const colWidht = ['w-6/10', 'w-2/10', 'w-2/10'];
 
     return (
-        <View className='w-full h-10/10'>
+        <View className='w-full h-7.5/10 '>
             {/* Table Header */}
             <View className='flex-row bg-white-perso rounded-t-xl py-2'>
                 {tableHead.map((head, index) => (

@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { View, Text } from "react-native";
+import { View, Text, TouchableOpacity } from "react-native";
 import { getStockDocLine, getStockDocByID } from "../../utils/functions/stock_function";
 import { StockDocumentLine } from "../../@types/item.type";
 import TableDetail from "../../components/item/stock/TableDetail";
 import { useRoute, useNavigation } from "@react-navigation/native";
+import Icon from "react-native-vector-icons/AntDesign";
 
 interface StockDocDetailRouteParams {
   DocumentId: string;
@@ -12,6 +13,8 @@ interface StockDocDetailRouteParams {
 const StockDocDetail: React.FC = () => {
   const [stockDocLines, setStockDocLines] = useState<StockDocumentLine[]>([]);
   const [stockDocName, setStockDocName] = useState<string>("");
+  const [showInfo, setShowInfo] = useState(false);
+
   const navigation = useNavigation();
   const route = useRoute();
 
@@ -47,13 +50,25 @@ const StockDocDetail: React.FC = () => {
     fetchDocName();
     fetchStockDoc();
   }, [DocumentId]);
-
+console.log(showInfo);
   return (
-    <View className="w-full p-4">
-      <TableDetail 
-        tableHead={["Article", "Quantité", "Prix HT"]} 
-        DataLine={stockDocLines} 
-      />
+    <View className="w-screen h-screen p-4">
+      {!showInfo ? (
+        <TableDetail 
+          tableHead={["Article", "Quantité", "Prix HT"]} 
+          DataLine={stockDocLines} 
+        />
+      ) : (
+        <View className="flex-1 justify-center items-center">
+          <Text>Stock Document Note: {DocumentId}</Text>
+          <Text>Stock Document Name: {stockDocName}</Text>
+        </View>
+      )}
+      <View className="">
+        <TouchableOpacity onPress={() => setShowInfo(!showInfo)}>
+          <Icon name="infocirlce" size={48} color="#1e40af" />
+        </TouchableOpacity>
+      </View>
     </View>
   );
 };
