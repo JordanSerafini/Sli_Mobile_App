@@ -48,7 +48,7 @@ const HomeItem: React.FC<HomeItemProps> = ({ onItemClick, onStockClick }) => {
   }
 
   return (
-    <SafeAreaView className="h-9.5/10 w-9.5/10 justify-center">
+    <SafeAreaView className="h-9.5/10 w-9.5/10 justify-center items-center">
             <View className="h-1/3">
 </View>
       <View className="h-1/3">
@@ -62,8 +62,8 @@ const HomeItem: React.FC<HomeItemProps> = ({ onItemClick, onStockClick }) => {
         />
       </View>
 
-      <View className="h-1/3">
-        <Text className="text-lg font-bold text-sky-900">Derniers documents de stock :</Text>
+      <View className="h-1/3 w-9/10 ">
+        <Text className="text-lg font-bold text-sky-900 pb-3">Derniers documents de stock :</Text>
         <Carousel
           loop
           width={width}
