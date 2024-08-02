@@ -292,3 +292,12 @@ Error: Error during login: secretOrPrivateKey must have a value
 
 --------------------------------------------------------------
 
+02-08-2024 14:17:30 [authentification_api] info: Login successful for email: jordan@solution-logique.fr
+{
+  "ip": "172.18.0.9",
+  "url": "/",
+  "method": "POST"
+}
+
+--------------------------------------------------------------
+
