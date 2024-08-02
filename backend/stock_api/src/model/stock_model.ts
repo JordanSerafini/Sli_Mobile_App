@@ -357,6 +357,25 @@ const stock_model = {
     }
   },
 
+  async getStockWithinDateRange(req: Request, res: Response) {
+    const { startDate, endDate } = req.params;
+
+    try {
+        const query = `
+            SELECT *
+            FROM "StockDocument"
+            WHERE "DocumentDate" BETWEEN $1 AND $2;
+        `;
+        const result = await pgClient.query(query, [startDate, endDate]);
+
+        res.json(result.rows);
+    } catch (err) {
+        console.error("Erreur lors de la récupération des données :", err);
+        if (!res.headersSent) {
+            res.status(500).json({ message: "Internal server error" });
+        }
+    }
+  }
 };
 
 // Fonction pour écrire les données de l'item dans un fichier CSV

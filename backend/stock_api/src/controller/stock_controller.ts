@@ -68,7 +68,15 @@ getStocByDocId(req: Request, res: Response) {
     } catch (err) {
       res.status(500).json({ message: "Internal server error" });
     }
-  }
+  },
+
+  getStockWithinDateRange(req: Request, res: Response) {
+    try {
+      stock_model.getStockWithinDateRange(req, res);
+    } catch (err) {
+      res.status(500).json({ message: "Internal server error" });
+    }
+  },
 };
 
 export default stock_controller;

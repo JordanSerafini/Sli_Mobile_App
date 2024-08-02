@@ -72,29 +72,47 @@ const StockDocDetail: React.FC = () => {
       ) : (
         <View className="w-full h-7.5/10 ">
           {stockDoc && stockDoc.NotesClear && (
-            <View className="flex-row items-start  h-full">
-              <Text className="font-bold text-base">Notes du document :</Text>
-              <Text className="bg-white h-full w-">{stockDoc.NotesClear}</Text>
+            <View className="flex-row items-start  h-full w-10/10">
+              <Text className="font-bold text-sm w-2.5/10 text-blue-800">
+                Notes du document :
+              </Text>
+              <Text className="bg-white min-h-4/10 w-7.5/10 rounded-xl p-2 border border-gray-300">
+                {stockDoc.NotesClear}
+              </Text>
             </View>
           )}
           {stockDoc && stockDoc.DescriptionClear && (
-            <View className="flex-row items-start  h-full">
-              <Text className="font-bold text-base">Stock Description :</Text>
-              <Text className="bg-white h-full w-">{stockDoc.DescriptionClear}</Text>
+            <View className="flex-row items-start  h-full w-10/10">
+              <Text className="font-bold text-sm w-2.5/10 text-blue-800">
+                Stock Description :
+              </Text>
+              <Text className="bg-white min-h-4/10 w-7.5/10 rounded-xl p-2 border border-gray-300">
+                {stockDoc.DescriptionClear}
+              </Text>
             </View>
           )}
           {stockDoc && stockDoc.Reference && (
             <View className="flex-row items-start  h-full w-10/10">
-              <Text className="font-bold text-sm w-2.5/10">Référence :</Text>
-              <Text className="bg-white min-h-4/10 w-7.5/10 rounded-xl p-2 border border-gray-300">{stockDoc.Reference}</Text>
+              <Text className="font-bold text-sm w-2.5/10 text-blue-800">
+                Référence :
+              </Text>
+              <Text className="bg-white min-h-4/10 w-7.5/10 rounded-xl p-2 border border-gray-300">
+                {stockDoc.Reference}
+              </Text>
             </View>
           )}
         </View>
       )}
-      <View className="items-center pt-3">
-        <TouchableOpacity onPress={() => setShowInfo(!showInfo)}>
-          <Icon name="infocirlce" size={55} color="#1e40af" className="" />
-        </TouchableOpacity>
+      <View className="items-center pt-5">
+        {stockDoc.NotesClear ||
+        stockDoc.DescriptionClear ||
+        stockDoc.Reference ? (
+          <TouchableOpacity onPress={() => setShowInfo(!showInfo)}>
+            <Icon name="infocirlce" size={45} color="#1e40af" className="" />
+          </TouchableOpacity>
+        ) : (
+          <Text className="text-gray-400 font-bold">Pas de notes ou info supplémentaires</Text>
+        )}
       </View>
     </View>
   );

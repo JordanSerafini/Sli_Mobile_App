@@ -29,3 +29,11 @@ export const getStockDocLine = async (DocumentId: string) => {
   const response = await fetch(`${url.api_gateway}/stock/stockdocline/${DocumentId}`);
   return response.json();
 }
+
+export const getStockDocWithinDateRange = async (startDate: string, endDate: string) => {
+  const response = await fetch(`${url.api_gateway}/stock/${startDate}/${endDate}`);
+  if (!response.ok) {
+    throw new Error('Erreur lors de la récupération des documents de stock');
+  }
+  return response.json();
+}

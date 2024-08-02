@@ -20,7 +20,6 @@ const IndexScreen: React.FC = () => {
   };
 
   useEffect(() => {
-    // Reset content when the segments change (i.e., navigation changes)
     setContent(null);
   }, [segments]);
 
@@ -37,7 +36,7 @@ const IndexScreen: React.FC = () => {
   return (
     <PaperProvider theme={theme}>
       {!content ? (
-        <HomeItem onItemClick={itemClick} onStockClick={stockClick} /> // Utilisation du nouveau composant
+        <HomeItem onItemClick={itemClick} onStockClick={stockClick} /> 
       ) : (
         <SafeAreaView style={styles.container}>
           {content}
