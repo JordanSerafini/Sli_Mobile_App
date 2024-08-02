@@ -144,6 +144,8 @@ function StockDocumentList() {
 
   return (
     <SafeAreaView className="w-screen h-10/10">
+
+      {/* ----------------------------------------------------------------------------- BON ENTREE ------------------------------------------------------------------------------------------- */}
       {!showBs && !showBl && !showInventory && (
         <View className="w-9.5/10 self-center pb-2 mb-5 border-b border-blue-800">
           <TouchableOpacity
@@ -194,6 +196,7 @@ function StockDocumentList() {
           )}
         </View>
       )}
+{/* ----------------------------------------------------------------------------- BON SORTI ------------------------------------------------------------------------------------------- */}
       {!showBe && !showBl && !showInventory && (
         <View className="w-9.5/10 self-center pb-2 mb-5 border-b border-blue-800">
           <TouchableOpacity
@@ -206,6 +209,7 @@ function StockDocumentList() {
           {showBs && <Table Data={BsDocument} onEndReached={handleLoadMore} />}
         </View>
       )}
+      {/* ----------------------------------------------------------------------------- BON LIVRAISON ------------------------------------------------------------------------------------------- */}
       {!showBe && !showBs && !showInventory && (
         <View className="w-9.5/10 self-center pb-2 mb-5 border-b border-blue-800">
           <TouchableOpacity
@@ -218,6 +222,7 @@ function StockDocumentList() {
           {showBl && <Table Data={BlDocument} onEndReached={handleLoadMore} />}
         </View>
       )}
+      {/* ----------------------------------------------------------------------------- INVENTAIRE ------------------------------------------------------------------------------------------- */}
       {!showBe && !showBs && !showBl && (
         <View className="w-9.5/10 self-center pb-2 mb-5 border-b border-blue-800">
           <TouchableOpacity

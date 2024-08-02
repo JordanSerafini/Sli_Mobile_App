@@ -1,0 +1,24 @@
+02-08-2024 08:10:36 [authentification_api] error: secretOrPrivateKey must have a value
+Error: secretOrPrivateKey must have a value
+    at module.exports [as sign] (/app/node_modules/jsonwebtoken/sign.js:111:20)
+    at login (/app/src/controller/auth_controller.ts:21:31)
+{
+  "url": "/",
+  "method": "POST",
+  "ip": "172.18.0.9",
+  "email": "jordan@solution-logique.fr"
+}
+
+--------------------------------------------------------------
+
+02-08-2024 08:10:36 [authentification_api] error: Error during login: secretOrPrivateKey must have a value
+Error: Error during login: secretOrPrivateKey must have a value
+    at login (/app/src/controller/auth_controller.ts:52:12)
+{
+  "url": "/",
+  "method": "POST",
+  "ip": "172.18.0.9"
+}
+
+--------------------------------------------------------------
+
