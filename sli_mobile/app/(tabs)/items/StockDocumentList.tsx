@@ -154,20 +154,11 @@ function StockDocumentList() {
             <View>
               <View className="pb-4 w-full flex-row justify-between items-center">
                 <TextInput
-                  className="w-4/10 h-8 bg-white"
+                  className="w-8.5/10 h-8 bg-white"
                   label="recherche..."
                   mode="outlined"
                   placeholder="Search"
                   value={searchQuery}
-                  onChangeText={(text) => {
-                    setSearchQuery(text);
-                  }}
-                />
-                <TextInput
-                  className="w-4/10 h-8 bg-white"
-                  label="catégories"
-                  mode="outlined"
-                  placeholder="Search"
                   onChangeText={(text) => {
                     setSearchQuery(text);
                   }}
