@@ -1,13 +1,17 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { DefaultTheme, Provider as PaperProvider, Portal } from "react-native-paper";
+import { View, LayoutAnimation, UIManager, Platform } from "react-native";
 import ButtonPerso from "../../components/UI/ButtonPerso";
 import FabPerso from "../../components/UI/Fab/client/FabGroupClient";
-import { View } from "react-native";
 import ClientScreen from "./clientList";
 import MapClientScreen from "./clientMapAll";
 import AddClientModal from "./modals/AddClientModal"; 
 import EditClientModal from "./modals/EditClientModal";
+
+if (Platform.OS === 'android' && UIManager.setLayoutAnimationEnabledExperimental) {
+  UIManager.setLayoutAnimationEnabledExperimental(true);
+}
 
 const IndexScreen: React.FC = () => {
   const [content, setContent] = useState("Liste" || "Carte");
@@ -21,11 +25,32 @@ const IndexScreen: React.FC = () => {
     city: "Ville",
     note: "Note Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus dolorum, voluptate id corrupti reiciendis nihil unde rerum numquam quibusdam recusandae, odio cumque quos dolor at. Quas ipsa sed eum voluptate?",
   }
+
   // États pour chaque modal
   const [showAddModal, setShowAddModal] = useState(false);
   const [showEmailModal, setShowEmailModal] = useState(false);
   const [showEditClientModal, setShowEditClientModal] = useState(false);
   const [showAddClientModal, setShowAddClientModal] = useState(false);
+
+  const customAnimation = {
+    duration: 500,
+    update: {
+      type: LayoutAnimation.Types.easeInEaseOut,
+      property: LayoutAnimation.Properties.opacity,
+    },
+    create: {
+      type: LayoutAnimation.Types.easeInEaseOut,
+      property: LayoutAnimation.Properties.opacity,
+    },
+    delete: {
+      type: LayoutAnimation.Types.easeInEaseOut,
+      property: LayoutAnimation.Properties.opacity,
+    },
+  };
+
+  useEffect(() => {
+    LayoutAnimation.configureNext(customAnimation);
+  }, [showAddClientModal, showEditClientModal]);
 
   const theme = {
     ...DefaultTheme,
@@ -65,17 +90,35 @@ const IndexScreen: React.FC = () => {
         {showAddClientModal || showEditClientModal ? (null) : (
         <FabPerso
           showAddModal={() => {
-            setShowAddModal(true);
+            LayoutAnimation.configureNext(customAnimation);
+            setShowAddClientModal(true);
           }}
-          showEmailModal={() => setShowEmailModal(true)}
-          showEditClientModal={() => setShowEditClientModal(true)}
-          showAddClientModal={() => setShowAddClientModal(true)}
+          showEmailModal={() => {
+            LayoutAnimation.configureNext(customAnimation);
+            setShowEmailModal(true);
+          }}
+          showEditClientModal={() => {
+            LayoutAnimation.configureNext(customAnimation);
+            setShowEditClientModal(true);
+          }}
+          showAddClientModal={() => {
+            LayoutAnimation.configureNext(customAnimation);
+            setShowAddClientModal(true);
+          }}
         />
         )}
         {/*---------------------------------------- Modals -----------------------------*/}
         <Portal>
-          <AddClientModal visible={showAddClientModal} onDismiss={() => setShowAddClientModal(false)} />
-          <EditClientModal visible={showEditClientModal} onDismiss={() => setShowEditClientModal(false)} customer={customer} />
+          {showAddClientModal && (
+            <View style={{ position: 'absolute', bottom: 0, width: '100%' }}>
+              <AddClientModal visible={showAddClientModal} onDismiss={() => setShowAddClientModal(false)} />
+            </View>
+          )}
+          {showEditClientModal && (
+            <View style={{ position: 'absolute', bottom: 0, width: '100%' }}>
+              <EditClientModal visible={showEditClientModal} onDismiss={() => setShowEditClientModal(false)} customer={customer} />
+            </View>
+          )}
         </Portal>
       </SafeAreaView>
     </PaperProvider>
