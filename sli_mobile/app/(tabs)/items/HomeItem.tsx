@@ -53,9 +53,9 @@ const HomeItem: React.FC<HomeItemProps> = ({ onItemClick, onStockClick }) => {
   }
 
   return (
-    <SafeAreaView className="flex-1 p-4">
-      <View className="mb-4">
-        <Text className="text-lg font-bold mb-2">Articles:</Text>
+    <SafeAreaView className="">
+      <View className="">
+        <Text className="text-lg font-bold text-sky-900">Articles:</Text>
         <ButtonPerso
           mode="outlined"
           icon="account"
@@ -65,34 +65,35 @@ const HomeItem: React.FC<HomeItemProps> = ({ onItemClick, onStockClick }) => {
         />
       </View>
 
-      <View className="mb-4">
-        <Text className="text-lg font-bold mb-2">Derniers documents de stock :</Text>
+      <View className="">
+        <Text className="text-lg font-bold text-sky-900">Derniers documents de stock :</Text>
         <Carousel
           loop
           width={width}
-          height={width / 2}
+          height={width / 5}
           autoPlay
           data={stockDocuments}
           scrollAnimationDuration={1000}
           renderItem={({ item, index }) => (
             <View
               key={index}
-              className="rounded-lg p-4 mb-2"
+              className="rounded-lg"
             >
               
               <Text className="text-gray-600">{new Date(item.DocumentDate).toLocaleDateString()}</Text>
             </View>
           )}
         />
-      </View>
-
-      <ButtonPerso
+        <ButtonPerso
         mode="outlined"
         icon="account"
         text="STOCK"
-        css="w-4.5/10 self-center"
+        css="w-4.5/10"
         onPress={onStockClick}
       />
+      </View>
+
+      
     </SafeAreaView>
   );
 };
