@@ -4,13 +4,8 @@ import { View, Text, Dimensions, ActivityIndicator } from "react-native";
 import Carousel from "react-native-reanimated-carousel";
 import ButtonPerso from "../../components/UI/ButtonPerso";
 import { getStockDocWithinDateRange } from "../../utils/functions/stock_function";
+import { StockDocument } from "../../@types/item.type";
 
-interface StockDocument {
-  id: string;
-  name: string;
-  DocumentDate: string;
-  urgency?: string;
-}
 
 interface HomeItemProps {
   onItemClick: () => void;
@@ -53,8 +48,10 @@ const HomeItem: React.FC<HomeItemProps> = ({ onItemClick, onStockClick }) => {
   }
 
   return (
-    <SafeAreaView className="">
-      <View className="">
+    <SafeAreaView className="h-9.5/10 w-9.5/10 justify-center">
+            <View className="h-1/3">
+</View>
+      <View className="h-1/3">
         <Text className="text-lg font-bold text-sky-900">Articles:</Text>
         <ButtonPerso
           mode="outlined"
@@ -65,22 +62,23 @@ const HomeItem: React.FC<HomeItemProps> = ({ onItemClick, onStockClick }) => {
         />
       </View>
 
-      <View className="">
+      <View className="h-1/3">
         <Text className="text-lg font-bold text-sky-900">Derniers documents de stock :</Text>
         <Carousel
           loop
           width={width}
-          height={width / 5}
+          height={width / 2}
           autoPlay
           data={stockDocuments}
           scrollAnimationDuration={1000}
           renderItem={({ item, index }) => (
             <View
               key={index}
-              className="rounded-lg"
+              className="rounded-lg w-6/10 h-20 items-center border"
             >
               
               <Text className="text-gray-600">{new Date(item.DocumentDate).toLocaleDateString()}</Text>
+              <Text className="text-lg font-bold text-sky-900">{item.NumberPrefix}</Text>
             </View>
           )}
         />
