@@ -118,4 +118,5 @@ const StockDocDetail: React.FC = () => {
   );
 };
 
+
 export default StockDocDetail;

@@ -47,6 +47,8 @@ function StockDocumentList() {
   const [date, setDate] = useState(new Date());
   const [showDatePicker, setShowDatePicker] = useState(false);
 
+  console.log(BeDocument);
+
   useEffect(() => {
     setPage(0);
     setBeDocument([]);
