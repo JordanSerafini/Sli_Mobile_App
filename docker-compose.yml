@@ -12,6 +12,7 @@ services:
       - CLIENT_SERVICE_URL=http://client_api:5003
       - ITEM_SERVICE_URL=http://item_api:5004
       - LOGS_SERVICE_URL=http://logs_api:5050
+      - STOCK_SERVICE_URL=http://stock_api:5008
     networks:
       - app-network
     depends_on:
