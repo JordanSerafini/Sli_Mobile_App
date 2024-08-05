@@ -159,7 +159,6 @@ function StockDocumentList() {
     setShowDatePicker(true);
   };
 
-
   return (
     <SafeAreaView className="w-screen h-10/10 justify-start pt-2 gap-y-10">
       {/* ----------------------------------------------------------------------------- BON ENTREE ------------------------------------------------------------------------------------------- */}
