@@ -11,9 +11,7 @@ function Carrousel() {
     <Carousel className="w-full max-w-xs" opts={{ loop:true }}>
       <CarouselContent>
           <CarouselItem >
-            <div className="p-1">
-              test
-            </div>
+            
           </CarouselItem>
           <CarouselItem >
             <div className="p-1">
