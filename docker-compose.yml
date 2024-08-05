@@ -159,6 +159,17 @@ services:
     networks:
       - app-network
 
+  landing_page:
+    container_name: landing_page
+    build: ./sli_app_landingPage
+    ports:
+      - "8080:80"
+    volumes:
+      - ./vite-react-ts:/app
+    networks:
+      - app-network
+    depends_on:
+      - api_gateway
 
 networks:
   app-network:
