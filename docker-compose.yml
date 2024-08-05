@@ -160,16 +160,19 @@ services:
       - app-network
 
   landing_page:
+    image: node:20-alpine
     container_name: landing_page
-    build: ./sli_app_landingPage
     ports:
-      - "8080:80"
+      - 5173:5173
     volumes:
-      - ./vite-react-ts:/app
+      - ./landing_page:/app
+    working_dir: /app
     networks:
       - app-network
     depends_on:
       - api_gateway
+    command: npm run setup
+
 
 networks:
   app-network:
