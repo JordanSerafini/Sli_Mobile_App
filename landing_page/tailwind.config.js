@@ -231,7 +231,9 @@ export const theme = {
       '10/10': '100%',
       '120': '30rem',
       '180': '45rem',
-    },
+      '240': '60rem',
+      '300': '75rem',
+      '360': '90rem',},
     fontSize: {
       'xxs': '.5rem',
       'xxxs': '.4rem',
