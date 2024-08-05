@@ -43,3 +43,21 @@
 
 --------------------------------------------------------------
 
+05-08-2024 07:23:34 [authentification_api] info: Login successful for email: jordan@solution-logique.fr
+{
+  "ip": "172.18.0.9",
+  "url": "/",
+  "method": "POST"
+}
+
+--------------------------------------------------------------
+
+05-08-2024 07:23:36 [authentification_api] info: Login successful for email: jordan@solution-logique.fr
+{
+  "ip": "172.18.0.9",
+  "url": "/",
+  "method": "POST"
+}
+
+--------------------------------------------------------------
+

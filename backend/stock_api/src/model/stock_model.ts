@@ -318,27 +318,39 @@ const stock_model = {
   async getStockDocumentLineByDocId(req: Request, res: Response) {
     const { DocumentId } = req.params;
 
+
+
+    // Vérification de la validité de DocumentId (optionnel mais recommandé)
+    if (!DocumentId || !/^[a-fA-F0-9\-]{36}$/.test(DocumentId)) {
+        console.error("Invalid Document ID format:", DocumentId);
+        return res.status(400).json({ message: "Invalid Document ID format" });
+    }
+
     try {
-      const query = `
+        const query = `
             SELECT sdl.*, i.*
             FROM "StockDocumentLine" sdl
             LEFT JOIN "Item" i ON sdl."ItemId" = i."Id"
             WHERE sdl."DocumentId" = $1;
         `;
-      const result = await pgClient.query(query, [DocumentId]);
 
-      res.json(result.rows);
+
+
+        const result = await pgClient.query(query, [DocumentId]);
+
+
+        res.json(result.rows);
     } catch (err) {
-      console.error("Erreur lors de la récupération des données :", err);
-      if (!res.headersSent) {
-        res.status(500).json({ message: "Internal server error" });
-      }
+        console.error("Erreur lors de la récupération des données :", err);
+        if (!res.headersSent) {
+            res.status(500).json({ message: "Internal server error" });
+        }
     }
-  },
+},
+
 
   async getStockByDocId(req: Request, res: Response) {
     const { DocumentId } = req.params;
-    console.log("DocumentId", DocumentId);
     try {
       const query = `
             SELECT *
