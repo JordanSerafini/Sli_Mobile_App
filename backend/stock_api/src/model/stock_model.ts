@@ -1,26 +1,25 @@
-import { Request, Response } from 'express';
-import { pgClient } from '../client/client';
-import * as fs from 'fs';
+import { Request, Response } from "express";
+import { pgClient } from "../client/client";
+import * as fs from "fs";
 import path from "path";
-import { fileURLToPath } from 'url';
+import { fileURLToPath } from "url";
 
 // Get the directory name
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 const stock_model = {
-
   async getStockPaginated(req: Request, res: Response) {
     try {
       const limit = parseInt(req.query.limit as string, 10) || 25;
       const offset = parseInt(req.query.offset as string, 10) || 0;
       const searchQuery = (req.query.searchQuery as string) || "";
-  
+
       let query = `SELECT * FROM "StockDocument"`;
       let countQuery = `SELECT COUNT(*) FROM "StockDocument"`;
       let queryParams: (string | number)[] = [];
       let countParams: (string | number)[] = [];
-  
+
       // Si un terme de recherche est fourni, ajustez la requête et les paramètres
       if (searchQuery) {
         query += ` WHERE "DocumentNumber" ILIKE $1 OR "Reference" ILIKE $1 OR "NotesClear" ILIKE $1`;
@@ -28,23 +27,25 @@ const stock_model = {
         queryParams.push(`%${searchQuery}%`);
         countParams.push(`%${searchQuery}%`);
       }
-  
+
       // Ajout des paramètres pour la limite et le décalage
       queryParams.push(limit);
       queryParams.push(offset);
-  
-      query += ` ORDER BY "DocumentDate" ASC LIMIT $${queryParams.length - 1} OFFSET $${queryParams.length}`;
+
+      query += ` ORDER BY "DocumentDate" ASC LIMIT $${
+        queryParams.length - 1
+      } OFFSET $${queryParams.length}`;
       countQuery += `;`;
-  
+
       // Exécution des requêtes en parallèle pour plus d'efficacité
       const [StockDocResult, totalResult] = await Promise.all([
         pgClient.query(query, queryParams),
         pgClient.query(countQuery, countParams),
       ]);
-  
+
       const totalStockDoc = parseInt(totalResult.rows[0].count, 10);
       const totalPages = Math.ceil(totalStockDoc / limit);
-  
+
       res.json({
         totalStockDoc,
         totalPages,
@@ -57,7 +58,6 @@ const stock_model = {
       }
     }
   },
-  
 
   async getAllStock(req: Request, res: Response) {
     try {
@@ -137,7 +137,7 @@ const stock_model = {
       const stockDocuments = result.rows.reduce((acc: any, row: any) => {
         // Chercher l'objet StockDocument dans le tableau d'accumulation
         let stockDocument = acc.find((doc: any) => doc.Id === row.Id);
-        
+
         // Si le document n'existe pas encore dans l'accumulation, on le crée
         if (!stockDocument) {
           stockDocument = {
@@ -146,7 +146,7 @@ const stock_model = {
             Storehouse: {
               Id: row.StorehouseId,
               Name: row.StorehouseName,
-            }
+            },
           };
           acc.push(stockDocument);
         }
@@ -172,8 +172,8 @@ const stock_model = {
   },
 
   async getStockWithDetailsByDocumentId(req: Request, res: Response) {
-    const { DocumentId } = req.params; 
-  
+    const { DocumentId } = req.params;
+
     try {
       const query = `
         SELECT 
@@ -193,14 +193,14 @@ const stock_model = {
         WHERE 
           sd."Id" = $1
       `;
-  
+
       const result = await pgClient.query(query, [DocumentId]);
-  
+
       // Transformer les données pour les structurer comme vous le souhaitez
       const stockDocuments = result.rows.reduce((acc: any, row: any) => {
         // Chercher l'objet StockDocument dans le tableau d'accumulation
         let stockDocument = acc.find((doc: any) => doc.Id === row.Id);
-        
+
         // Si le document n'existe pas encore dans l'accumulation, on le crée
         if (!stockDocument) {
           stockDocument = {
@@ -209,12 +209,11 @@ const stock_model = {
             Storehouse: {
               Id: row.StorehouseId,
               Name: row.StorehouseCaption,
-              
-            }
+            },
           };
           acc.push(stockDocument);
         }
-  
+
         // Ajouter la ligne de document de stock à l'objet stockDocument
         if (row.StockMovementId) {
           stockDocument.StockDocumentLines.push({
@@ -227,13 +226,13 @@ const stock_model = {
               Prix_HT: row.SalePriceVatExcluded,
               Prix_TTC: row.SalePriceVatIncluded,
               prix_achat: row.PurchasePrice,
-            }
+            },
           });
         }
-  
+
         return acc;
       }, []);
-  
+
       res.json(stockDocuments);
     } catch (err) {
       console.error("Erreur lors de la récupération des données :", err);
@@ -244,8 +243,8 @@ const stock_model = {
   },
 
   async COPIEgetStockWithDetailsByDocumentId(req: Request, res: Response) {
-    const { DocumentId } = req.params; 
-  
+    const { DocumentId } = req.params;
+
     try {
       const query = `
         SELECT 
@@ -264,14 +263,14 @@ const stock_model = {
         WHERE 
           sd."Id" = $1
       `;
-  
+
       const result = await pgClient.query(query, [DocumentId]);
-  
+
       // Transformer les données pour les structurer comme vous le souhaitez
       const stockDocuments = result.rows.reduce((acc: any, row: any) => {
         // Chercher l'objet StockDocument dans le tableau d'accumulation
         let stockDocument = acc.find((doc: any) => doc.Id === row.Id);
-        
+
         // Si le document n'existe pas encore dans l'accumulation, on le crée
         if (!stockDocument) {
           stockDocument = {
@@ -283,11 +282,11 @@ const stock_model = {
               Address: row.Address_Address1,
               city: row.Address_City,
               zipCode: row.Address_ZipCode,
-            }
+            },
           };
           acc.push(stockDocument);
         }
-  
+
         // Ajouter la ligne de document de stock à l'objet stockDocument
         if (row.StockMovementId) {
           stockDocument.StockDocumentLines.push({
@@ -300,13 +299,13 @@ const stock_model = {
               Prix_HT: row.SalePriceVatExcluded,
               Prix_TTC: row.SalePriceVatIncluded,
               prix_achat: row.PurchasePrice,
-            }
+            },
           });
         }
-  
+
         return acc;
       }, []);
-  
+
       res.json(stockDocuments);
     } catch (err) {
       console.error("Erreur lors de la récupération des données :", err);
@@ -320,40 +319,40 @@ const stock_model = {
     const { DocumentId } = req.params;
 
     try {
-        const query = `
+      const query = `
             SELECT sdl.*, i.*
             FROM "StockDocumentLine" sdl
             LEFT JOIN "Item" i ON sdl."ItemId" = i."Id"
             WHERE sdl."DocumentId" = $1;
         `;
-        const result = await pgClient.query(query, [DocumentId]);
+      const result = await pgClient.query(query, [DocumentId]);
 
-        res.json(result.rows);
+      res.json(result.rows);
     } catch (err) {
-        console.error("Erreur lors de la récupération des données :", err);
-        if (!res.headersSent) {
-            res.status(500).json({ message: "Internal server error" });
-        }
+      console.error("Erreur lors de la récupération des données :", err);
+      if (!res.headersSent) {
+        res.status(500).json({ message: "Internal server error" });
+      }
     }
-},
+  },
 
   async getStockByDocId(req: Request, res: Response) {
     const { DocumentId } = req.params;
-
+    console.log("DocumentId", DocumentId);
     try {
-        const query = `
+      const query = `
             SELECT *
             FROM "StockDocument"
             WHERE "Id" = $1;
         `;
-        const result = await pgClient.query(query, [DocumentId]);
+      const result = await pgClient.query(query, [DocumentId]);
 
-        res.json(result.rows);
+      res.json(result.rows);
     } catch (err) {
-        console.error("Erreur lors de la récupération des données :", err);
-        if (!res.headersSent) {
-            res.status(500).json({ message: "Internal server error" });
-        }
+      console.error("Erreur lors de la récupération des données :", err);
+      if (!res.headersSent) {
+        res.status(500).json({ message: "Internal server error" });
+      }
     }
   },
 
@@ -361,21 +360,21 @@ const stock_model = {
     const { startDate, endDate } = req.params;
 
     try {
-        const query = `
+      const query = `
             SELECT *
             FROM "StockDocument"
             WHERE "DocumentDate" BETWEEN $1 AND $2;
         `;
-        const result = await pgClient.query(query, [startDate, endDate]);
+      const result = await pgClient.query(query, [startDate, endDate]);
 
-        res.json(result.rows);
+      res.json(result.rows);
     } catch (err) {
-        console.error("Erreur lors de la récupération des données :", err);
-        if (!res.headersSent) {
-            res.status(500).json({ message: "Internal server error" });
-        }
+      console.error("Erreur lors de la récupération des données :", err);
+      if (!res.headersSent) {
+        res.status(500).json({ message: "Internal server error" });
+      }
     }
-  }
+  },
 };
 
 // Fonction pour écrire les données de l'item dans un fichier CSV
@@ -384,20 +383,22 @@ function writeItemToCSV(filePath: string, item: any): void {
   const columns = Object.keys(item).join(";");
 
   // Préparer les valeurs pour le CSV, en utilisant ';' comme délimiteur
-  const values = Object.values(item).map((value) => {
-    let outputValue = "";
+  const values = Object.values(item)
+    .map((value) => {
+      let outputValue = "";
 
-    // Gérer correctement les chaînes, les valeurs nulles ou undefined et les objets
-    if (typeof value === 'string') {
-      outputValue = value.replace(/"/g, '""'); // Escaper les guillemets doubles pour le format CSV
-    } else if (value === null || value === undefined) {
-      outputValue = "";
-    } else {
-      outputValue = JSON.stringify(value).replace(/"/g, '""');
-    }
+      // Gérer correctement les chaînes, les valeurs nulles ou undefined et les objets
+      if (typeof value === "string") {
+        outputValue = value.replace(/"/g, '""'); // Escaper les guillemets doubles pour le format CSV
+      } else if (value === null || value === undefined) {
+        outputValue = "";
+      } else {
+        outputValue = JSON.stringify(value).replace(/"/g, '""');
+      }
 
-    return `"${outputValue}"`; // Encapsuler chaque valeur entre guillemets doubles
-  }).join(";");
+      return `"${outputValue}"`; // Encapsuler chaque valeur entre guillemets doubles
+    })
+    .join(";");
 
   // Construire une ligne de données complète pour le CSV
   const dataLine = `${values}\n`;
@@ -405,9 +406,9 @@ function writeItemToCSV(filePath: string, item: any): void {
   // Vérifier l'existence du fichier et ajouter les données
   if (!fs.existsSync(filePath)) {
     const header = `${columns}\n`; // Ajouter l'en-tête si le fichier est nouveau
-    fs.writeFileSync(filePath, header + dataLine, 'utf8');
+    fs.writeFileSync(filePath, header + dataLine, "utf8");
   } else {
-    fs.appendFileSync(filePath, dataLine, 'utf8');
+    fs.appendFileSync(filePath, dataLine, "utf8");
   }
 }
 
