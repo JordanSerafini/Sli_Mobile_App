@@ -1,4 +1,3 @@
-import { Button } from "../ui/button";
 import Navbar from "./Navbar";
 
 import sli from "../../assets/sli.png";
@@ -14,8 +13,8 @@ function Header() {
         <Navbar />
       </div>
       <div className="flex gap-4">
-        < img src={phone} alt="phone_icon" className="h-10" />
-        <Button variant="outline" className="rounded-xl border-blue-800 text-blue-800 bg-gray-50">Essayer</Button>
+        < img src={phone} alt="phone_icon" className="h-10 hover:scale-110 cursor-pointer" />
+        <div className="rounded-xl text-white bg-blue-800 flex items-center justify-center px-4 py-2 cursor-pointer hover:scale-105 ">Essaie</div>
       </div>
     </div>
   );
