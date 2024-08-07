@@ -160,6 +160,20 @@ services:
     networks:
       - app-network
 
+  landing_page:
+    image: node:20-alpine
+    container_name: landing_page
+    ports:
+      - 5173:5173
+    volumes:
+      - ./landing_page:/app
+    working_dir: /app
+    networks:
+      - app-network
+    depends_on:
+      - api_gateway
+    command: npm run setup
+
 
 networks:
   app-network:

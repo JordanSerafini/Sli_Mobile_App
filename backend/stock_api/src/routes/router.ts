@@ -9,11 +9,12 @@ router.get('/stockdocline', stock_controller.getStockDocLine);
 
 router.get('/storehouse' , stock_controller.getStorehouse);
 
-router.get('/:startDate/:endDate' , stock_controller.getStockWithinDateRange);
 
-router.get('/storehouse/:id' , stock_controller.getStorehouseNameById);
-router.get('/stockdocdetailsjoin/:DocumentId', stock_controller.getStockWithDetailsByDocumentId);
 router.get('/stockdocdetails/:DocumentId', stock_controller.getStocByDocId);
-router.get('/stockdocline/:DocumentId', stock_controller.getStockDocLineByDocumentId);
+router.get('/stockdocdetailsjoin/:DocumentId', stock_controller.getStockWithDetailsByDocumentId);
+router.get('/storehouse/:id' , stock_controller.getStorehouseNameById);
+router.get('/stockdocline/:DocumentId', stock_controller.getStockDocLineByDocumentId); 
+
+router.get('/:startDate/:endDate' , stock_controller.getStockWithinDateRange);
 
 export default router;

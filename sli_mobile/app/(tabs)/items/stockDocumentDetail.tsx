@@ -23,7 +23,6 @@ const StockDocDetail: React.FC = () => {
   const route = useRoute();
 
   const { DocumentId } = route.params as StockDocDetailRouteParams;
-
   useEffect(() => {
     const fetchStockDoc = async () => {
       try {
