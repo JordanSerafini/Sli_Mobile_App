@@ -33,13 +33,13 @@ const items = [
 
 function Carrousel() {
   return (
-    <Carousel className="w-full max-w-9/10" opts={{ loop: true }}>
+    <Carousel className="w-full max-w-9/10 pt-44" opts={{ loop: true }}>
       <CarouselContent className="">
         {items.map((item, index) => (
           <CarouselItem key={index} className="flex items-center justify-center mb-28">
             <div className="flex-col flex gap-8 w-5/10 items-center">
               <h2 className="text-6xl text-center font-bold">{item.title}</h2>
-              <p className="text-xl text-center w-9/10">{item.text}</p>
+              <p className="text-xl text-center w-7.5/10">{item.text}</p>
               <div className="flex gap-8 w-full justify-evenly mt-8">
                 <img src={item.images[0]} alt="" className="h-96" />
                 <img src={item.images[1]} alt="" className="h-96" />

@@ -25,7 +25,7 @@ function Pricing() {
               badge="Pro"
               describe="Des outils avancés pour les entreprises en croissance. Ajoutez des modules selon vos besoins."
               price="$39 / mois"
-              features={["Gestion de projet", "Suivi des tâches", "Intégration de base", "Gestion avancée des clients", "Rapports détaillés", "Intégrations supplémentaires"]}
+              features={["Gestion de projet", "Suivi des tâches", "Intégration de base", "Gestion avancée des clients", "Rapports détaillés", "Support téléphonique"]}
               onClick={() => alert("Plan Pro sélectionné")}
             />
           </div>
