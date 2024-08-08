@@ -20,6 +20,7 @@ const services = {
   stockService: process.env.STOCK_SERVICE_URL,
 };
 
+
 // Vérifiez les URLs des services
 Object.keys(services).forEach(service => {
   if (!services[service]) {
