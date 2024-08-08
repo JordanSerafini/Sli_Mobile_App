@@ -38,8 +38,8 @@ function Carrousel() {
         {items.map((item, index) => (
           <CarouselItem key={index} className="flex items-center justify-center mb-28">
             <div className="flex-col flex gap-8 w-5/10 items-center">
-              <h2 className="text-6xl text-center font-bold">{item.title}</h2>
-              <p className="text-xl text-center w-7.5/10">{item.text}</p>
+              <h2 className="text-6xl text-center font-bold font-edu">{item.title}</h2>
+              <p className="text-xl text-center w-7.5/10 font-poppins">{item.text}</p>
               <div className="flex gap-8 w-full justify-evenly mt-8">
                 <img src={item.images[0]} alt="" className="h-96" />
                 <img src={item.images[1]} alt="" className="h-96" />

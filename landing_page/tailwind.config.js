@@ -238,6 +238,12 @@ export const theme = {
       'xxs': '.5rem',
       'xxxs': '.4rem',
     },
+    fontFamily: {
+      edu: ['"Edu AU VIC WA NT Hand"', 'sans-serif'],
+      merriweather: ['"Merriweather"', 'serif'],
+      noto: ['"Noto Serif Khitan Small Script"', 'serif'],
+      poppins: ['"Poppins"', 'sans-serif'],
+    },
   },
 };
 import tailwindcssAnimate from "tailwindcss-animate";
