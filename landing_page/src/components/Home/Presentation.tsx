@@ -1,6 +1,12 @@
-import  { useState, useEffect } from "react";
 import mobilePic1 from "@/assets/mobilePic1.jpg";
 import mobilePic2 from "../../assets/mobilePic2.jpg";
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from "@/components/ui/carousel";
 
 const items = [
   {
@@ -20,49 +26,27 @@ const items = [
   },
 ];
 
-function Presentation() {
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const [entering, setEntering] = useState(true);
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setEntering(false);
-      setTimeout(() => {
-        setCurrentIndex((prevIndex) => (prevIndex + 1) % items.length);
-        setEntering(true);
-      }, 3000); // Transition time
-    }, 8000); // Display time + transition time
-
-    return () => clearInterval(interval);
-  }, []);
-
+function Carrousel() {
   return (
-      <div className="w-5.5/10 flex flex-col items-center relative overflow-hidden h-240 ">
+    <Carousel className="w-full max-w-9/10" opts={{ loop: true }}>
+      <CarouselContent className="">
         {items.map((item, index) => (
-          <div
-            key={index}
-            className={`absolute transition-transform duration-3000 ease-in-out ${
-              index === currentIndex
-                ? entering
-                  ? "translate-x-0"
-                  : "-translate-x-full"
-                : entering
-                ? "translate-x-full"
-                : "-translate-x-full"
-            }`}
-          >
-            <div className="flex-col flex gap-8">
+          <CarouselItem key={index} className="flex items-center justify-center">
+            <div className="flex-col flex gap-8 w-5/10">
               <h2 className="text-6xl text-center font-bold">{item.title}</h2>
-              <p className="text-xl text-center">{item.text}</p>
+              <p className="text-base text-center">{item.text}</p>
+              <div className="flex gap-8 w-full justify-evenly mt-8">
+                <img src={item.images[0]} alt="" className="h-32" />
+                <img src={item.images[1]} alt="" className="h-32" />
+              </div>
             </div>
-            <div className="flex gap-8 w-full justify-evenly mt-8">
-              <img src={item.images[0]} alt="" className="h-120" />
-              <img src={item.images[1]} alt="" className="h-120" />
-            </div>
-          </div>
+          </CarouselItem>
         ))}
-      </div>
+      </CarouselContent>
+      <CarouselPrevious />
+      <CarouselNext />
+    </Carousel>
   );
 }
 
-export default Presentation;
+export default Carrousel;
