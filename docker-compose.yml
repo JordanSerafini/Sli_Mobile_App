@@ -49,10 +49,10 @@ services:
     ports:
       - "5002:5002"
     environment:
-      - DB_USER=sjordan
+      - DB_USER=jordans
       - DB_HOST=host.docker.internal
       - DB_NAME=SLI
-      - DB_PASSWORD=mdp
+      - DB_PASSWORD=slitest
       - DB_PORT=5432
     depends_on:
       - client_redis
@@ -71,10 +71,10 @@ services:
     ports:
       - "5001:5001"
     environment:
-      - DB_USER=sjordan
+      - DB_USER=jordans
       - DB_HOST=host.docker.internal
       - DB_NAME=SLI
-      - DB_PASSWORD=mdp
+      - DB_PASSWORD=slitest
       - DB_PORT=5432
     depends_on:
       - client_redis
@@ -93,10 +93,10 @@ services:
     ports:
       - "5003:5003"
     environment:
-      - DB_USER=sjordan
+      - DB_USER=jordans
       - DB_HOST=host.docker.internal
       - DB_NAME=SLI
-      - DB_PASSWORD=mdp
+      - DB_PASSWORD=slitest
       - DB_PORT=5432
       - REDIS_URL=redis://client_redis:6379
     volumes:
@@ -116,10 +116,10 @@ services:
     ports:
       - "5004:5004"
     environment:
-      - DB_USER=sjordan
+      - DB_USER=jordans
       - DB_HOST=host.docker.internal
       - DB_NAME=SLI
-      - DB_PASSWORD=mdp
+      - DB_PASSWORD=slitest
       - DB_PORT=5432
     depends_on:
       - client_redis
@@ -138,10 +138,10 @@ services:
     ports:
       - "5008:5008"
     environment:
-      - DB_USER=sjordan
+      - DB_USER=jordans
       - DB_HOST=host.docker.internal
       - DB_NAME=SLI
-      - DB_PASSWORD=mdp
+      - DB_PASSWORD=slitest
       - DB_PORT=5432
     depends_on:
       - client_redis
