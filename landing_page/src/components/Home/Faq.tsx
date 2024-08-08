@@ -7,7 +7,8 @@ import {
 
 function Faq() {
   return (
-    <Accordion type="single" collapsible className="w-full">
+    <div className="flex items-center justify-center w-full">
+    <Accordion type="single" collapsible className="w-6.5/10">
       <AccordionItem value="item-1">
         <AccordionTrigger>Is it accessible?</AccordionTrigger>
         <AccordionContent>
@@ -29,6 +30,7 @@ function Faq() {
         </AccordionContent>
       </AccordionItem>
     </Accordion>
+    </div>
   );
 }
 
