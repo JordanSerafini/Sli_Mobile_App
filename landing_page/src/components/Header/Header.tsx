@@ -10,10 +10,8 @@ function Header() {
   const handleScroll = () => {
     if (typeof window !== "undefined") {
       if (window.scrollY > lastScrollY) {
-        // scroll down
         setShowHeader(false);
       } else {
-        // scroll up
         setShowHeader(true);
       }
       setLastScrollY(window.scrollY);
